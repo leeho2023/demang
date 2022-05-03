@@ -5,7 +5,7 @@
 <mapper namespace="org.pro.demang.mapper.TestMapper">
 
 	<insert id="testInsert">
-		INSERT INTO testDB (name, file) VALUES(#(name), #(file))
+		INSERT INTO testDB (name, file) VALUES(#{name}, #{bytes})
 	</insert>
 	
 </mapper>

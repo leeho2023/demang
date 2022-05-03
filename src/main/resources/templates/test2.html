@@ -5,14 +5,16 @@
 <title>글 작성22</title>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
+		<!-- 파일과 텍스트 동시 저장확인용 페이지 -->
 	<form action="/testInsert" method="post" enctype="multipart/form-data">
 		텍스트 : <input type="text" name="name"> <br>
 		파일 : <input type="file" name="file"> <br>
 		<input type="submit" value="전송">
 	</form>
-
-<script src="/js/write.js"></script>
+	
+	<a href="/postInsert">게시글 입력</a> <br>
+	<a href="/postView">게시글 상세보기</a>
+	
 </body>
 </html>

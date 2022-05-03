@@ -1,7 +1,6 @@
 package org.pro.demang.service;
 
 import org.pro.demang.mapper.TestMapper;
-import org.pro.demang.model.testDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +11,11 @@ public class TestServiceImpl implements TestService{
 	private TestMapper mapper;
 
 	@Override
-	public void testInsert(testDTO dto) {
-		mapper.testInsert(dto);
+	public void testInsert(String name, byte[] bytes) {
+		System.out.println("매퍼 받아오기");
+		mapper.testInsert(name, bytes);
+		System.out.println("매퍼 받아오기 끝");
 	}
+
 	
 }

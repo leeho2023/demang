@@ -13,10 +13,12 @@ public class PostServiceImpl implements PostService{
 	private PostMapper mapper;
 
 	@Override
-	public void postInsert(Map<String, Object> hmap) {
-		mapper.postInsert(hmap);
+	public void postInsert(String p_content, byte[] bytes) {
+		
+		mapper.postInsert(p_content, bytes);
 		
 	}
+
 
 	
 	

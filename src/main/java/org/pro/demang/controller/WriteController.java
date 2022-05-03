@@ -1,9 +1,5 @@
 package org.pro.demang.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.pro.demang.model.testDTO;
 import org.pro.demang.service.PostService;
 import org.pro.demang.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +19,34 @@ public class WriteController {
 		
 	@GetMapping("/")
 	public String index() {
-		return "/test";
+		return "/test2";
+	}
+	
+	@GetMapping("/postInsert")
+	public String postInsertRoute() {
+		System.out.println("게시글 입력페이지로 전송");
+		return "/PostInsert";
+	}
+	
+	@GetMapping("/postView")
+	public String postViewRoute() {
+		System.out.println("게시글 상세보기 페이지로 전송");
+		return "/PostView";
 	}
 	
 	@PostMapping("/postInsert")
 	   public String postInsert(
-			   @RequestParam("file") MultipartFile file,
+			   @RequestParam(value="p_image", required=false) MultipartFile file,
 	         @RequestParam("p_content")String p_content) {
 	      try {
-	         Map<String, Object> hmap = new HashMap<String, Object>();
-	         System.out.println("입력 시작");
-	         hmap.put("p_image", file.getBytes());
-	         hmap.put("p_content", p_content);
-	         postService.postInsert(hmap);
+	    	  System.out.println("postInsert() 컨트롤러 시작");
+	    	  System.out.println("입력값 확인 : 내용 = " + p_content + " 파일 = " + file);
+	         postService.postInsert(p_content, file.getBytes());
+	        System.out.println("postInsert() 컨트롤러 입력완료");
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-	      return "redirect:/";
+	      return "/PostInsert";
 	   }
 	
 	@GetMapping("/test2")
@@ -50,11 +57,17 @@ public class WriteController {
 	@PostMapping("/testInsert")
 	public String testInsert(
 			@RequestParam("name")String name, 
-			@RequestParam("file")MultipartFile file) {
+			@RequestParam("file")MultipartFile file) { 
 			System.out.println(name + " ///////////////////// " + file);
 			
-			testDTO dto = new testDTO();
-			testService.testInsert(dto);
+			try {
+				System.out.println("Controller단에서 testInsert() 시작");
+				System.out.println(file.getBytes());
+				testService.testInsert(name, file.getBytes());
+				System.out.println("Controller단에서 testInsert() 완료");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		return "redirect:/test2"; 
 	}

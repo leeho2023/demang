@@ -1,11 +1,11 @@
 package org.pro.demang.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.pro.demang.model.testDTO;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface TestMapper {
 
-	void testInsert(testDTO dto);
+	void testInsert( @Param("name")String name, byte[] bytes);
 
 }
