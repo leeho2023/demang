@@ -1,5 +1,5 @@
 $(function(){
 
-    alert('테스트');
+    alert('PostView.js 작동 중 입니다');
 
 });
