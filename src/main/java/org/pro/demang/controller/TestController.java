@@ -18,7 +18,7 @@ public class TestController {
 	private MemberService memberService;
 	
 	@GetMapping("/")
-	public String test() {
+	public String home() {
 		
 		return "other/footer";
 	}

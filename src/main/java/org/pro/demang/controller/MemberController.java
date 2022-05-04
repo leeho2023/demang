@@ -16,10 +16,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/")
-	public String home() {
-		return "member/login";
-	}
 	
 	@PostMapping("/signUp")
 	public String signUp(MemberDTO dto) {

@@ -45,7 +45,7 @@ public class YoungsunController {
 				"commentList",
 				service.getCommentList( no )
 				);
-		return "feed/post";
+		return "post/post";
 	}
 	
 	//// 개인 페이지

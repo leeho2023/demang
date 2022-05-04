@@ -13,11 +13,7 @@ public class WriteController {
 	
 	@Autowired
 	PostService postService;
-		
-	@GetMapping("/")
-	public String index() {
-		return "/test2";
-	}
+	
 	
 	@GetMapping("/postInsert")
 	public String postInsertRoute() {
