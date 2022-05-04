@@ -18,13 +18,13 @@ public class WriteController {
 	@GetMapping("/postInsert")
 	public String postInsertRoute() {
 		System.out.println("게시글 입력페이지로 전송");
-		return "/PostInsert";
+		return "/post/PostInsert";
 	}
 	
 	@GetMapping("/postView")
 	public String postViewRoute() {
 		System.out.println("게시글 상세보기 페이지로 전송");
-		return "/PostView";
+		return "/post/PostView";
 	}
 	
 	@PostMapping("/postInsert")
@@ -39,7 +39,7 @@ public class WriteController {
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-	      return "/PostInsert";
+	      return "/post/PostInsert";
 	   }
 	
 }
