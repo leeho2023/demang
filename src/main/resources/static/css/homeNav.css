@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#homeNav{
+    border: 2px solid blueviolet;
+    width: 100vw;
+    height: 20vh;
+}
+
+.blank{
+    border: 1px solid red;
+    height: 4vh;
+}
+
+.blankNav{
+    height: 11vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.box{
+    border: 1px solid brown;
+    width: 25vw;
+}
+
+.searchBox{
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuBox{
+    display: flex;
+    align-items: center;
+}
+
+.menu{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    width: 20vw;
+}

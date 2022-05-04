@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.sideBox{
+    /* border: 2px solid red; */
+    width: 19.5vw;
+    height: 99vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sideNav{
+    border: 2px solid red;
+    width: 13vw;
+    height: 85vh;
+}
+
+.mainBox{
+    /* border: 2px solid blue; */
+    width: 80vw;
+    height: 99vh;
+    display: flex;
+    align-items: center;
+}
+
+.mainShow{
+    border: 2px solid blue;
+    width: 73.5vw;
+    height: 85vh;
+
+}

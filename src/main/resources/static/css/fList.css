@@ -1,0 +1,44 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    width: 0;
+    height: 0;
+    display: none;
+    background-color: aqua;
+}
+
+.modal_body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15vw;
+    height: 45vh;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px 1px rgba(34, 36, 38, 0.5);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.close {
+    position:relative;
+    float: right;
+    display: inline-block;
+    display:inline;
+    width:50px;
+    height:50px;
+    text-align:center;
+}
+
+.close2:after {
+    content: "\00d7";
+    font-size:25pt;
+    line-height:45px;
+}
+
+#fList{
+    border: 1px solid black;
+}
