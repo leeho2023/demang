@@ -20,18 +20,18 @@ public class TestController {
 	@GetMapping("/")
 	public String test() {
 		
-		return "footer";
+		return "other/footer";
 	}
 	
 	@GetMapping("/fList")
 	public String homeNav() {
 		
-		return "member/fList";
+		return "other/fList";
 	}
 
 	@GetMapping("/homeNav")
 	public String homeNav2(){
-		return "homeNav";
+		return "other/homeNav";
 	}
 
 	@GetMapping("/admindex")
@@ -49,7 +49,7 @@ public class TestController {
 		model.addAttribute("list",list);
 		
 		
-		return "member/fListList";
+		return "other/fListList";
 	}
 	
 	

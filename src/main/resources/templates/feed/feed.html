@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>DeMang</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/youngsunTest.css">
+</head>
+<body>
+<header>메인메뉴</header>
+<nav>팔로목록</nav>
+<main>메인
+
+
+
+</main><hr id="endOfMainPosCheck">
+<footer>푸터</footer>
+
+
+<script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
+<script th:inline="javascript" th:src="@{js/postFromListByScrolling.js}"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<article class="post">
+	<h1>
+		<img class="propic" alt="프로필 사진" src="images/propicTest.png">
+		<span>[[${writer.m_nickname}]]</span>
+	</h1>
+	<div class="content">[[${dto.p_content}]]</div>
+	
+	<div>
+		<button>관심</button>
+		<button>답글</button>
+		<button>&hellip;</button>
+	</div>
+	<ul th:each="comment: ${commentList}" class="commentPreview">
+		<li>[[${comment.c_writer}]]: [[${comment.c_content}]] ([[${comment.c_regDate}]])</li>
+	</ul>
+</article>
