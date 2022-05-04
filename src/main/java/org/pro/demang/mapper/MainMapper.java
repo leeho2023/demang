@@ -9,7 +9,7 @@ import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 
 @Mapper
-public interface TestMapper {
+public interface MainMapper {
 
 	List<MemberDTO> fList(int follower); // 회원 코드로 해당 친구 찾기
 	
