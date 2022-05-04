@@ -8,6 +8,7 @@ import lombok.Data;
 public class MemberDTO {
 
 	private int m_id;
+	private String m_code;
 	private String m_email;
 	private String m_nickname;
 	private String m_password;
@@ -24,6 +25,12 @@ public class MemberDTO {
 	}
 	public void setM_id(int m_id) {
 		this.m_id = m_id;
+	}
+	public String getM_code() {
+		return m_code;
+	}
+	public void setM_code(String m_code) {
+		this.m_code = m_code;
 	}
 	public String getM_email() {
 		return m_email;

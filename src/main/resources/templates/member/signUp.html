@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/signUp.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+ <header>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    
+ </header>
+ 
+  <form action="/signUp" method="POST" id="signUp">
+   <div class="div1">
+        <div id="wrapper">
+             <img src="img/Dimang.jpg"class="img1"><br><br>
+            
+             <input type="text" name="m_email" id="m_email"class="ID"placeholder="email"><br>
+            <div class="email regex"></div>
+
+				<input type="text" name="m_nickname" id="m_nickname"class="Name"placeholder="NAME"><br>
+            <div class="name regex"></div>
+
+            <input type="password" name="m_password" id="m_password"class="PW"placeholder="PASSWORD"><br>
+            <div class="pw regex"></div>
+            
+            <input type="password" id="m_re_password"class="PW" placeholder="RE_PASSWORD"><br>
+            <div class="repw regex"></div>
+            <br>
+            
+           BirthDay : <input type="date" id="m_birth" class="birth" min="1900-01-01" max="2009-12-31"><br>
+            <div class="birth regex"></div>
+            <br>
+            <br>
+ 
+          <div id="signup">
+            <input type="button" name="signup" value="회원가입" id="signupbtn">
+            <input type="reset" value="다시입력" id="resignupbtn">
+            </div>
+        </div>
+  	</div>
+</form>
+ 
+ 
+
+	
+	
+	
+   <!-- <div class="frame1">
+   <a href="login"><button class="custom-btn btn-1"><span>JOIN</span></button></a><br>
+  </div> -->
+
+  
+   <div class="div2">
+   <div class="frame2">
+    <a href="/loginMove"><button class="custom-btn btn-2">
+      <span>Let's login!</span><span>Do you have an account?
+    </span></button></a>
+ </div>
+</div> 
+<!--   <a href="/loginMove">로그인하러가기</a> -->
+
+
+
+
+ 
+
+<script type="text/javascript" src="js/signUp.js"></script>
+</body>
+</html>

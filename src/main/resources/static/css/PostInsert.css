@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+body{
+    margin: 0px;
+}
+
+.imsi{
+    border: 1px dotted black;
+    width: 80vw;
+    height: 10vh;
+}
+
+.imsi2{
+    border: 1px dotted black;
+    width: 80vw;
+    height: 20vh;
+}
+
+.wrap{
+    border: 1px solid black;
+    height: 70vh;
+    width: 80vw;
+}
+
+.write{
+    border: 1px solid red;
+    height: 60vh;
+    width: 70vw;
+    margin: 5vh;
+    margin-left: 5vw;
+}
+
+.write_main{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid black;
+    height: 55vh;
+    text-align: center;
+}
+
+.write_imgBtn{
+    display: none;
+}
+
+.textInput{
+    height: 55vh;
+    width: 70vw;
+}
+
+.write_img{
+    height: 30vh;
+    width: 30vw;
+    background-color: white;
+}
+
+.write_img:hover{
+    background-color: lightgrey;
+}
+
+.textInputBtn{
+    height: 4vh;
+    width: 70vw;
+}
+
+.write_foot{
+    border: 1px solid purple;
+    height: 5vh;
+    text-align: center;
+}
+
+label {
+    line-height: 30vh;
+    display: inline-block; 
+    height: 30vh;
+    width: 30vw;
+    background-color: #fdfdfd; 
+    cursor: auto;
+    border: 1px solid black; 
+} 
+
+input[type="file"] { 
+    /* 파일 필드 숨기기 */ 
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; }
+
+.label:hover{
+    background-color: lightgrey;
+}
+
+.innerImg{
+    line-height: 30vh;
+    width: 30vw;
+    height: 30vh;
+    object-fit: contain;
+}

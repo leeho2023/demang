@@ -3,6 +3,7 @@ package org.pro.demang.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
@@ -12,6 +13,11 @@ public interface TestMapper {
 
 	List<MemberDTO> fList(int follower); // 회원 코드로 해당 친구 찾기
 	
+	public void memberInsert(MemberDTO dto); // 회원가입
+
+	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
+	void commentInsert(CommentDTO dto); // 댓글 입력하기
+	void postInsert(String p_content, @Param("p_image")byte[] bytes); // post작성
 	public MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	public MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
 	public MemberDTO getMember_code(String code);// 회원코드로 회원 찾기

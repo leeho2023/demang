@@ -8,6 +8,6 @@ public interface MemberService {
 
 	List<MemberDTO> fList(int follower);
 
-	
+	void memberInsert(MemberDTO dto);
 	
 }

@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+body{
+    margin: 0px;
+}
+
+.imsi{
+    border: 1px dotted black;
+    width: 80vw;
+    height: 10vh;
+}
+
+.imsi2{
+    border: 1px dotted black;
+    width: 80vw;
+    height: 20vh;
+}
+
+.wrap{
+	display:flex;
+   border: 1px solid black;
+   height: 70vh;
+   width: 80vw;
+}
+
+.contentWrap > div{
+	margin-left: 5vw;
+}
+
+.title{
+	border: 1px dotted blue;
+	height: 5vh;
+	width: 60vw;
+	margin-top:2vw;
+}
+
+.content{
+    border: 1px solid red;
+    height: 50vh;
+    width: 60vw;
+}
+
+.p_image{
+	border: 1px dotted orange;
+	height: 30vh;
+	width: 60vw;
+}
+
+.tag{
+	border: 1px solid lightgrey;
+	height: 3vh;
+	width: 60vw;
+}
+
+.commentRead{
+	margin-top: 2vw;
+	border: 1px solid green;
+	height: 75%;
+	width: 12vw;
+}
+
+.commentInsert{
+	display: flex;
+	border: 1px solid purple;
+	height: 5vh;
+	width: 12vw;
+}
+
+.commentWrite{
+	height: 100%;
+	width: 100%;
+}

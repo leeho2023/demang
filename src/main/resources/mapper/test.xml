@@ -14,6 +14,23 @@
 
 	</select>
 
+	<!-- 댓글 목록 불러오는 쿼리문 -->
+	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
+		Select * FROM commentTBL WHERE c_postNo = #{p_id}
+	</select>
+
+	<!-- post 작성 쿼리문 -->
+	<insert id="postInsert">
+		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content, p_image) VALUES(null, 'N', 1, #{p_content}, #{p_image})
+	</insert>
+
+
+	<!-- 이것은 회원가입 쿼리문입니다. -->
+	<insert id="memberInsert">
+		INSERT INTO memberTBL(m_email, m_nickname, m_password, m_birth )
+		 VALUES(#{m_email},#{m_nickname},#{m_password},#{m_birth})
+	</insert>
+
 	<!-- 회원 번호로 회원 찾기 -->
 	<select id="getMember_no"
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};</select>
