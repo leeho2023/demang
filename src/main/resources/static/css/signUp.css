@@ -7,7 +7,7 @@ body{
     border: 2px solid black;
     text-align: center;
     width: 500px;
-    height: 570px;
+    height: 640px;
     margin-left: 38%;
     margin-top: 4%;
 
@@ -18,7 +18,7 @@ body{
     width: 500px;
     height: 100px;
     margin-left: 38%;
-    margin-top: 30px;
+    margin-top: 15px;
 
 }
 .ID{
@@ -57,12 +57,17 @@ body{
     width: 90%;
     margin: 18px auto;
     text-align: center;
-    margin-top: 0px
+    margin-top: -30px
   }
+  
+  .birth{
+	margin-top: 18px;
+}
 .frame2 {
     width: 90%;
     margin: 10px auto;
     text-align: center;
+    margin-left:35% ;
   }
   button {
     margin: 20px;
@@ -94,6 +99,7 @@ body{
     border: none;
     background: rgb(255, 255, 255);
   background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+  margin-top: -5px;
   }
   .btn-1:hover {
     color: #000000;
@@ -197,68 +203,373 @@ body{
   }
  
  
-  .switch {
+
+
+
+
+
+
+/* 스타일 */
+p {
+position:relative; 
+width:250px; 
+height:50px; 
+display:inline-block;
+margin-top: 5px;
+
+} /* 기본세팅 */
+p input {
+
+box-sizing:border-box; 
+padding:20px 0 0; 
+width:100%;
+height:100%; 
+border:0 none; 
+color:#595f63; 
+outline:none; 
+}
+p label { 
+position:absolute; 
+left:0%; 
+bottom:0; 
+width:250px; 
+height:100%; 
+border-bottom:1px solid #000; 
+text-align:left; 
+pointer-events:none; 
+   }
+   p label:after { 
+content:""; 
+position:absolute; 
+left:0; 
+bottom:-1px;
+width:0;
+ height:100%; 
+ border-bottom:3px solid rgb(0, 0, 0);
+ transition:all .6s ease; 
+ } /* 파란색 가로줄 */
+p label span { 
+position:absolute; 
+left:0; bottom:5px; 
+transition:all .2s ease; 
+   }
+p input:focus + label span, 
+p input:valid + label span { 
+transform:translateY(-150%); 
+font-size:14px; 
+color:rgb(0, 0, 0); }  /* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
+/* 포커스 될 때 label span(name)이 위로 올라감 */
+p input:focus + label::after,
+p input:valid + label::after { 
+width:250px; 
+transform:translateX(0); } 
+/* 포커스 될 때 파란색 가로줄이 생김 */
+
+
+
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600);
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'codropsicons';
+  src: url("../fonts/codropsicons/codropsicons.eot");
+  src: url("../fonts/codropsicons/codropsicons.eot?#iefix") format("embedded-opentype"), url("../fonts/codropsicons/codropsicons.woff") format("woff"), url("../fonts/codropsicons/codropsicons.ttf") format("truetype"), url("../fonts/codropsicons/codropsicons.svg#codropsicons") format("svg");
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.cf:before,
+.cf:after {
+  content: '';
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+
+.support {
+  font-weight: bold;
+  padding: 2em 0 0 0;
+  font-size: 1.4em;
+  color: #ee2563;
+  display: none;
+}
+a {
+  color: #7986cb;
+  text-decoration: none;
+  outline: none;
+}
+a:hover,
+a:focus {
+  color: #3f51b5;
+}
+.hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.container {
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+.content {
+  padding: 2em 1em 5em;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.content h2 {
+  margin: 0 0 2em;
+}
+.content p {
+  margin: 1em 0;
+  padding: 0 0 2em;
+  font-size: 0.85em;
+}
+.box {
+  padding: 4.5em 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 250px;
+}
+
+/* Header */
+.codrops-header {
+  padding: 3em 190px 4em;
+  letter-spacing: -1px;
+}
+.codrops-header h1 {
+  font-weight: 200;
+  font-size: 4em;
+  line-height: 1;
+  margin-bottom: 0;
+}
+.codrops-header h1 span {
+  display: block;
+  font-size: 40%;
+  letter-spacing: 0;
+  padding: 0.5em 0 1em 0;
+  color: rgb(204, 0, 0);
+}
+
+/* Top Navigation Style */
+.codrops-links {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
-  vertical-align:middle;
+  white-space: nowrap;
+  font-size: 1.25em;
+  text-align: center;
+}
+.codrops-links::after {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  content: '';
+  -webkit-transform: rotate3d(0, 0, 1, 22.5deg);
+  transform: rotate3d(0, 0, 1, 22.5deg);
+}
+.codrops-icon {
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0em 0;
+  width: 1.5em;
+  text-decoration: none;
+}
+.codrops-icon:before {
+  margin: 0 5px;
+  text-transform: none;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-family: 'codropsicons';
+  line-height: 1;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+}
+.codrops-icon span {
+  display: none;
+}
+.codrops-icon--drop:before {
+  content: "\e001";
+}
+.codrops-icon--prev:before {
+  content: "\e004";
 }
 
-/* Hide default HTML checkbox */
-.switch input {display:none;}
+/* Related demos */
+.content--related {
+  text-align: center;
+  font-weight: 600;
+}
+.media-item {
+  display: inline-block;
+  padding: 1em;
+  margin: 1em 0 0 0;
+  vertical-align: top;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.media-item__img {
+  opacity: 0.8;
+  max-width: 100%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.media-item:hover .media-item__img,
+.media-item:focus .media-item__img {
+  opacity: 1;
+}
+.media-item__title {
+  font-size: 0.85em;
+  margin: 0;
+  padding: 0.5em;
+}
+@media screen and (max-width:50em) {
+  .codrops-header {
+    padding: 3em 10% 4em;
+  }
+}
+@media screen and (max-width:40em) {
+  .codrops-header h1 {
+    font-size: 2.8em;
+  }
+}
 
-/* The slider */
-.slider {
+/* Box colors */
+
+
+/* Common button styles */
+.button {
+	
+  float: left;
+  min-width: 150px;
+  max-width: 250px;
+  display: block;
+  margin: 1em;
+  padding: 1em 2em;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.button:focus {
+  outline: none;
+}
+.button > span {
+  vertical-align: middle;
+}
+
+/* Text color adjustments (we could stick to the "inherit" but that does not work well in Safari) */
+
+
+/* Sizes */
+.button--size-s {
+  font-size: 14px;
+}
+.button--size-m {
+  font-size: 16px;
+}
+.button--size-l {
+  font-size: 18px;
+}
+
+/* Typography and Roundedness */
+.button--text-upper {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.button--text-thin {
+  font-weight: 300;
+}
+.button--text-medium {
+  font-weight: 500;
+}
+.button--text-thick {
+  font-weight: 600;
+}
+.button--round-s {
+  border-radius: 5px;
+}
+.button--round-m {
+  border-radius: 15px;
+}
+.button--round-l {
+  border-radius: 40px;
+}
+
+/* Borders */
+.button--border-thin {
+  border: 1px solid;
+}
+.button--border-medium {
+  border: 2px solid;
+}
+.button--border-thick {
+  border: 3px solid;
+}
+
+/* Individual button styles */
+.button--rayen {
+  overflow: hidden;
+  padding: 0;
+  width: 230px;
+}
+.button--rayen.button--inverted {
+  color:black;
+}
+.button--rayen::before {
+  content: attr(data-text);
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: blue;
-  -webkit-transition: .4s;
-  transition: .4s;
+  width: 100%;
+  height: 100%;
+  background:white;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
 }
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+.button--rayen.button--inverted::before {
+  background: rgb(0, 0, 0);
+  color: white;
 }
-
-input:checked + .slider {
-  background-color: pink;
+.button--rayen > span {
+  display: block;
 }
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.button--rayen::before,
+.button--rayen > span {
+  padding: 1em 2em;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+.button--rayen:hover::before {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-p {
-	margin:0px;
-	display:inline-block;
-	font-size:15px;
-	font-weight:bold;
+.button--rayen:hover > span {
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
 }

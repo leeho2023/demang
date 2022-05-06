@@ -46,5 +46,6 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 
 	
-
+	public MemberDTO login(MemberDTO dto);//로그인 
+	public String getRealPassword(String m_email);//로그인관련
 }
