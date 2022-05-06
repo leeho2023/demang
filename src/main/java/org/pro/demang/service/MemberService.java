@@ -12,5 +12,5 @@ public interface MemberService {
 	public MemberDTO getMember_no( String no );
 	public MemberDTO getMember_no( int no );
 	public MemberDTO_ext getMember_ext( String code );
-	
+	String login(MemberDTO dto);
 }

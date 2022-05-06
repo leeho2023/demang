@@ -65,4 +65,12 @@
 	<select id="getCommentList"
 		resultType="org.pro.demang.model.CommentDTO">select * from commentTBL WHERE c_postNo = #{no};</select>
 
+	<!-- 로그인할때 쓰는 쿼리문 -->
+	<select id="login" resultType="org.pro.demang.model.MemberDTO" >
+	 select * from memberTBL where m_email = #{m_email} and m_password = #{m_password}
+	</select>
+	<!-- 로그인관련 -->
+	<select id="getRealPassword" resultType="String">
+		select m_password from memberTBL where m_email = #{m_email}
+	</select>
 </mapper>

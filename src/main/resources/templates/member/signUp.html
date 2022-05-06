@@ -20,27 +20,28 @@
         <div id="wrapper">
              <img src="img/Dimang.jpg"class="img1"><br><br>
             
-             <input type="text" name="m_email" id="m_email"class="ID"placeholder="email"><br>
-            <div class="email regex"></div>
-
-				<input type="text" name="m_nickname" id="m_nickname"class="Name"placeholder="NAME"><br>
+             <p class="p1"><input type="text" name="m_email" id="m_email" autocomplete="off" required><label for="user_name"><span>E-MAIL</span></label></p>
+          <div class="email regex"></div>
+				
+				<p class="p1"><input type="text" name="m_nickname" id="m_nickname" autocomplete="off" required><label for="user_name"><span>NAME</span></label></p>
             <div class="name regex"></div>
+          
+				<p class="p1"><input type="password" name="m_password" id="m_password" autocomplete="off" required><label for="user_name"><span>PASSWORD</span></label></p>
+				<div class="pw regex"></div>
+      			<p class="p1"><input type="password" name="m_re_password" id="m_re_password" autocomplete="off" required><label for="user_name"><span>PASSWORD</span></label></p>
 
-            <input type="password" name="m_password" id="m_password"class="PW"placeholder="PASSWORD"><br>
-            <div class="pw regex"></div>
-            
-            <input type="password" id="m_re_password"class="PW" placeholder="RE_PASSWORD"><br>
             <div class="repw regex"></div>
-            <br>
-            
-           BirthDay : <input type="date" id="m_birth" class="birth" min="1900-01-01" max="2009-12-31"><br>
+       
+           
+           BirthDay : <input type="date" id="m_birth" class="birth" min="1900-01-01" max="2009-12-31" value="2000-01-01"required="required"><br>
             <div class="birth regex"></div>
             <br>
             <br>
  
           <div id="signup">
-            <input type="button" name="signup" value="회원가입" id="signupbtn">
-            <input type="reset" value="다시입력" id="resignupbtn">
+            <div class="frame1">
+   			<button type="button" class ="custom-btn btn-1" name="signup" id="signupbtn"><span>JOIN</span></button><br>
+  		</div> 
             </div>
         </div>
   	</div>
@@ -48,25 +49,30 @@
  
  
 
+
 	
 	
-	
-   <!-- <div class="frame1">
-   <a href="login"><button class="custom-btn btn-1"><span>JOIN</span></button></a><br>
-  </div> -->
+  <!--  <div class="frame1">
+   <button class="custom-btn btn-1"><span>JOIN</span></button></a><br>
+  </div>  -->
 
   
    <div class="div2">
    <div class="frame2">
-    <a href="/loginMove"><button class="custom-btn btn-2">
-      <span>Let's login!</span><span>Do you have an account?
-    </span></button></a>
+   <div class="box bg-2">
+          <a href="/loginMove"><button class="button button--rayen button--border-medium button--text-thin button--size-l button--inverted" data-text="Send Message"><span>Send Message</span></button></a>
+			</div>
+
+     
+  
  </div>
 </div> 
 <!--   <a href="/loginMove">로그인하러가기</a> -->
 
 
-
+<div class="box bg-2">
+          <a href="/loginMove"><button class="button button--rayen button--border-medium button--text-thin button--size-l button--inverted" data-text="Send Message"><span>Send Message</span></button></a>
+			</div>
 
  
 

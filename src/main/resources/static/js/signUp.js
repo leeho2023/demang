@@ -1,6 +1,6 @@
 
 
-  $(function(){
+ $(function(){
                 //email유효성 검사
                 $("#m_email").on("input",function(){
                      var regex = /.+@[a-z]+(\.[a-z]+){1,2}$/;
@@ -15,26 +15,26 @@
                 
                  //이름 유효성검사
                 $("#m_nickname").on("input",function(){
-                    var regex = /^[a-z][a-z\d]{2,20}$/;
+                    var regex = /^[a-zA-Zㄱ-힣0-9-_.]{2,20}$/;
                     var result = regex.exec($("#m_nickname").val());
                     
                     if(result != null){
                        $(".name.regex").html("");  
                     }else{
-                        $(".name.regex").html("영어만 입력 가능합니다.");
+                        $(".name.regex").html("최소 2 자,한글과 영문,숫자만 입력가능합니다.");
                     }
                     
                 })
            
            	//비밀번호 유효성검사
             $("#m_password").on("input",function(){
-                var regex = /^[A-Za-z\d]{8,12}$/;
+                var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
                 var result = regex.exec($("#m_password").val())
                 
                 if(result != null){
                     $(".pw.regex").html("");
                 }else{
-                    $(".pw.regex").html("영어대소문자,숫자 8-11자리");
+                    $(".pw.regex").html("최소 8 자, 하나 이상의 대문자, 하나의 소문자 및 하나의 숫자 ");
                     $(".pw.regex").css("color","red")
                 }
             });
@@ -48,13 +48,13 @@
                     }
                })
               $("#m_password").on("input",function(){
-                var regex = /^[A-Za-z\d]{8,12}$/;
+                var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
                 var result = regex.exec($("#m_password").val())
                 
                 if(result != null){
                     $(".pw.regex").html("");
                 }else{
-                    $(".pw.regex").html("영어대소문자,숫자 8-11자리");
+                    $(".pw.regex").html("최소 8 자,하나 이상의 대문자,소문자 및 숫자 ");
                     $(".pw.regex").css("color","red")
                 }
             });
@@ -67,14 +67,14 @@
         	   var email = $("#m_email").val();
         	   var name = $("#m_nickname").val();
         	   var pw = $("#m_password").val();
-        	  
+        	  	var re_pw = $("#m_re_password").val();
         	  
         	  
         	   
         	   var emailregex = /.+@[a-z]+(\.[a-z]+){1,2}$/;
-        	   var nameregex = /^[a-z][a-z\d]{2,20}$/;
-        	   var pwregex = /^[A-Za-z\d]{8,12}$/;
-        	   
+        	   var nameregex = /^[a-zA-Zㄱ-힣0-9-_.]{2,20}$/;
+        	   var pwregex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+        	    var repwregex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
         	  
         	   
         	  var emailregex = emailregex.exec(email);
@@ -92,6 +92,11 @@
         		   alert("비밀번호양식을 다시 확인해주세요");
         		   retrun;
         	   }
+        	   var repwregex = repwregex.exec(re_pw);
+        	   if(repwregex == null){
+        		   alert("비밀번호확인양식을 다시 확인해주세요");
+        		   retrun;
+        	   }
         	   
         	   
         	  
@@ -102,11 +107,5 @@
            
            })
         })
-
-            
-            
-            
-            
-      
             
             

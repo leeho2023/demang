@@ -12,27 +12,29 @@
         	
      </header>
      
-   <form action="/loginGo" method="post">
+   <form action="/login" method="post">
 		<div class="div1">
-			<img src="img/Dimang.jpg" class="img1"><br>
-			<br> <input type="text" id="m_email" name="m_email" class="ID"placeholder="ID"><br> 
-				<input type="password"id="m_password" name="m_password" class="PW" placeholder="PASSWORD"><br>
-			<br>
-			<br>
-			<br> <input type="submit" value="로그인">
-			
 		
+			 <img src="img/Dimang.jpg" class="img1"> <br>
+			<br> <p><input type="text" name="m_email" id="m_email" autocomplete="off" required><label for="user_name"><span>ID</span></label></p><br> 
+				<p><input type="password" name="m_password" id="m_password" autocomplete="off" required><label for="user_name"><span>PASSWORD</span></label></p><br>
+			
+			<br> <button class="custom-btn btn-1" type="submit"><span>LOGIN</span></button>
+			<!-- 새버튼 -->
+			
         
-		</div>
-	</form>
-	<!-- <button class="custom-btn btn-1" type="submit" ><span>LOGIN</span></button><br> -->
-         <div>
-        <div class="frame">
-        <a href="/signUp"><button class="custom-btn btn-1" ><span>Sign Up</span></button></a> 
+        
          </div>
-        </div> 
+		
+	</form>
+	
+       <div class="div2">
+        <div class="frame">
         
-      
+        <a href="/signUp"><button class="custom-btn btn-1" ><span>Sign Up</span></button></a>
+         </div>
+        </div >
+     
         
        <script type="text/javascript">
 
