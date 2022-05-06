@@ -25,6 +25,7 @@ public interface MainMapper {
 	int followingCount(int no);// 내가 팔로우한 사람 수
 	int followerCount(int no);// 나를 팔로우한 사람 수
 	void doFollow( String m1, String m2 );// m1이 m2를 팔로우하기
+	int followCheck( String m1, String m2);// 팔로우 여부 체크
 	
 	List<Integer> getPostList_writer( String no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_writer( int no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)

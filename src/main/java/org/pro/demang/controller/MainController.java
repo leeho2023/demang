@@ -129,7 +129,7 @@ public class MainController {
     //// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
-		String testLogin = "1";// ???test 1번 회원으로 로그인했다 치고 시작하기
+		String testLogin = "6";// ???test 1번 회원으로 로그인했다 치고 시작하기
 		session.setAttribute("login", testLogin);
 		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
 				"PostList", 

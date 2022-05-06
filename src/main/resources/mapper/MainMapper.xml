@@ -42,6 +42,8 @@
 	SELECT COUNT(followee) from followTBL WHERE followee = #{no}</select>
 	<!-- 팔로우하기 -->
 	<insert id="doFollow">INSERT INTO followTBL (follower, followee) VALUES(#{m1}, #{m2})</insert>
+	<select id="followCheck" resultType="Integer">
+	SELECT COUNT(*)  FROM followTBL WHERE follower=#{m1} AND followee=#{m2}</select>
 
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_writer" resultType="Integer">SELECT * FROM postTBL

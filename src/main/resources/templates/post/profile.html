@@ -3,28 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <title>[[${dto.m_nickname}]]님의 페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/test.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
 <script th:inline="javascript" src="js/postFromListByScrolling.js"></script>
+<script th:inline="javascript">m_id = [[${dto.m_id}]];/* 현재 페이지 계정 주인 */</script>
 <script th:inline="javascript" src="js/doFollow.js"></script>
+<script>
+$(function(){
+	followCheck( m_id );// 팔로우 되어있나 확인 ~~ js/doFollow.js
+});
+</script>
 </head>
 <body>
+[[${session.login}]]
+[[${dto.m_id}]]
 <header>헤더</header>
 <nav>친구목록</nav> 
 
 
 <main>
 <section><!-- 회원 정보 -->
-	<div class="propicDiv">프사 자리</div>
+	<div class="propicDiv"><img alt="프사"></div>
 	<div>
 		<div>
 			<span>[[${dto.m_nickname}]]</span><span>#[[${dto.m_code}]]</span>
-				??? 로그인 기능 생기면 여기 조건문으로 버튼 둘 중 하나만 생기게 하기
-				??? 팔로우 된 상태이면 버튼 빼고 표시
-			<div id="followDiv">
-				<button th:onclick="doFollow([[${dto.m_id}]])">팔로우</button>
-				<button >개인정보수정</button>
+			<div th:if="${session.login != null}" id="followDiv">
+				<button th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우</button><!-- js/doFollow.js에서 팔로우 여부 확인 후 내용 바꿈  -->
+				<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn">개인정보수정</button>
 			</div>
 		</div>
 		<div>

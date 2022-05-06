@@ -1,5 +1,7 @@
 package org.pro.demang.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.service.MemberService;
@@ -54,11 +56,27 @@ public class KysController {
 	}
 	
 	//// 팔로우 하기
-	@GetMapping("/func/doFollow")
+	@PostMapping("/func/doFollow")
 	@ResponseBody
-	public String doFollow( String m1, String m2 ) {
-		mapper.doFollow(m1,m2);
+	public String doFollow( String m2, HttpSession session ) {
+		mapper.doFollow(
+				(String)session.getAttribute("login"),
+				m2);
 		return "";
+	}
+	
+	//// 팔로우 확인
+	////???test 무조건 팔로우 돼있다고 함
+	@GetMapping("/func/followCheck")
+	@ResponseBody
+	public String followCheck( String m2, HttpSession session ) {
+		if( mapper.followCheck(
+				(String)session.getAttribute("login"), 
+				m2
+				) != 0 ) {
+			return "O";
+		}
+		return "X";
 	}
 	
 }

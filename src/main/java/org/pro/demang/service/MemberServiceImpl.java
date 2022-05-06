@@ -36,9 +36,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO getMember_no( String no ) {
 		MemberDTO dto = mapper.getMember_no(no);
-		if( dto.getM_profilePic() == null ) {// 프사가 없으면 기본프사로 지정???
-			
-		}
 		return dto;
 	}
 	@Override
