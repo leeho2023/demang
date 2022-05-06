@@ -11,6 +11,6 @@
 		<button>&hellip;</button>
 	</div>
 	<ul th:each="comment: ${commentList}" class="commentPreview">
-		<li>[[${comment.c_writer}]]: [[${comment.c_content}]] ([[${comment.c_regDate}]])</li>
+		<li>[[${comment.m_nickname}]]: [[${comment.c_content}]] ([[${comment.c_regDate}]])</li>
 	</ul>
 </article>

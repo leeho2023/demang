@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>[[${dto.member.m_nickname}]]님의 페이지</title>
+<title>[[${dto.m_nickname}]]님의 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/youngsunTest.css">
+<link rel="stylesheet" href="css/test.css">
+<script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
+<script th:inline="javascript" src="js/postFromListByScrolling.js"></script>
+<script th:inline="javascript" src="js/doFollow.js"></script>
 </head>
 <body>
 <header>헤더</header>
-<nav>친구목록</nav>
+<nav>친구목록</nav> 
 
 
 <main>
@@ -16,14 +19,19 @@
 	<div class="propicDiv">프사 자리</div>
 	<div>
 		<div>
-			<span>[[${dto.member.m_nickname}]]</span><span>@[[${dto.member.m_code}]]</span>
-			<button>팔로우</button><!-- 본인일 경우 정보수정 -->
+			<span>[[${dto.m_nickname}]]</span><span>#[[${dto.m_code}]]</span>
+				??? 로그인 기능 생기면 여기 조건문으로 버튼 둘 중 하나만 생기게 하기
+				??? 팔로우 된 상태이면 버튼 빼고 표시
+			<div id="followDiv">
+				<button th:onclick="doFollow([[${dto.m_id}]])">팔로우</button>
+				<button >개인정보수정</button>
+			</div>
 		</div>
 		<div>
-			<span>[[${dto.followingCount}]]명을 팔로우 중</span>
-			<span>[[${dto.followerCount}]]명에게 팔로되는 중</span>
+			<span><span id="following_count"></span>명을 팔로우 중</span>
+			<span><span id="follower_count"></span>명에게 팔로되는 중</span>
 		</div>
-		<div>자기소개: [[${dto.member.m_introduce}]]</div>
+		<div>자기소개: [[${dto.m_introduce}]]</div>
 	</div>
 </section>
 
@@ -35,7 +43,31 @@
 
 <footer>푸터</footer>
 
-<script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
-<script th:inline="javascript" src="js/postFromListByScrolling.js"></script>
+<script th:inline="javascript">
+//// 팔로잉 수 가져오기
+$.ajax({
+	type: 'get',
+	url: 'func/followingNum',
+	async: true,
+	data:{ m_id: [[${dto.m_id}]] },
+	success: function( data ){
+		$('#following_count').text(data);
+	},error: function( data ){
+		$('#following_count').text('?');
+	}
+});
+//// 팔로워 수 가져오기
+$.ajax({
+	type: 'get',
+	url: 'func/followerNum',
+	async: true,
+	data:{ m_id: [[${dto.m_id}]] },
+	success: function( data ){
+		$('#follower_count').text(data);
+	},error: function( data ){
+		$('#follower_count').text('?');
+	}
+});
+</script>
 </body>
 </html>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.MemberDTO;
-import org.pro.demang.model.MemberDTO_ext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,26 +35,15 @@ public class MemberServiceImpl implements MemberService {
 	//// 회원번호로 회원 찾기
 	@Override
 	public MemberDTO getMember_no( String no ) {
-		return mapper.getMember_no(no);
+		MemberDTO dto = mapper.getMember_no(no);
+		if( dto.getM_profilePic() == null ) {// 프사가 없으면 기본프사로 지정???
+			
+		}
+		return dto;
 	}
 	@Override
 	public MemberDTO getMember_no( int no ) {
-		return mapper.getMember_no(no);
-	}
-	//// 회원코드로 회원 찾기 +추가정보(팔로잉, 팔로워 수)
-	//// 못 찾으면 null
-	@Override
-	public MemberDTO_ext getMember_ext( String code ) {
-		try{MemberDTO member = mapper.getMember_code( code );
-			return new MemberDTO_ext(
-					member,// 찾는 멤버
-					mapper.followingCount( member.getM_id()),// 팔로잉 수
-					mapper.followerCount( member.getM_id())// 팔로워 수
-					);
-		}catch(Exception e) {
-			System.out.println("no found");
-			return null;
-		}
+		return getMember_no(""+no);
 	}
 
 

@@ -34,15 +34,14 @@
 	<!-- 회원 번호로 회원 찾기 -->
 	<select id="getMember_no"
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};</select>
-	<!-- 회원코드로 회원 찾기 -->
-	<select id="getMember_code"
-		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_code = #{code};</select>
-
+	
 	<!-- 팔로잉 수, 팔로워 수 (회원번호로) -->
-	<select id="followingCount" resultType="Integer">SELECT COUNT(follower)
-		from followTBL WHERE follower = #{no}</select>
-	<select id="followerCount" resultType="Integer">SELECT COUNT(followee)
-		from followTBL WHERE followee = #{no}</select>
+	<select id="followingCount" resultType="Integer">
+	SELECT COUNT(follower) from followTBL WHERE follower = #{no}</select>
+	<select id="followerCount" resultType="Integer">
+	SELECT COUNT(followee) from followTBL WHERE followee = #{no}</select>
+	<!-- 팔로우하기 -->
+	<insert id="doFollow">INSERT INTO followTBL (follower, followee) VALUES(#{m1}, #{m2})</insert>
 
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_writer" resultType="Integer">SELECT * FROM postTBL
@@ -61,8 +60,22 @@
 	<!-- 게시글 번호로 게시글 찾기 -->
 	<select id="getPost" resultType="org.pro.demang.model.PostDTO">select * from postTBL WHERE p_id
 		= #{no};</select>
-	<!-- 게시글 번호로 댓글들 찾기 -->
-	<select id="getCommentList"
-		resultType="org.pro.demang.model.CommentDTO">select * from commentTBL WHERE c_postNo = #{no};</select>
+	<!-- 게시글 번호로 댓글들 찾기 최신순 -->
+	<select id="getCommentList" resultType="org.pro.demang.model.CommentDTO">
+		select m.m_nickname, m.m_profilePic , m.m_code , c.*
+		   from commentTBL c
+		   join memberTBL m 
+		   on c.c_writer = m.m_id
+		   WHERE c_postNo = #{no}
+		   ORDER BY c.c_id DESC;</select>
+	<!-- 게시글 번호로 댓글들 찾기. 최신 세 개만 -->
+	<select id="getCommentList_recent" resultType="org.pro.demang.model.CommentDTO">
+		select m.m_nickname, m.m_profilePic , m.m_code , c.*
+		   from commentTBL c
+		   join memberTBL m 
+		   on c.c_writer = m.m_id
+		   WHERE c_postNo = #{no}
+		   ORDER BY c.c_id DESC
+		   LIMIT 3;</select>
 
 </mapper>
