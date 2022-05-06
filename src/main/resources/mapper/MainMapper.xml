@@ -46,6 +46,7 @@
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_writer" resultType="Integer">SELECT * FROM postTBL
 		WHERE p_writer=#{no} ORDER BY p_id DESC</select>
+		
 	<!-- 해당 번호의 회원이 팔로우한 회원들이 쓴 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_followee" resultType="Integer">
 		SELECT p.p_id

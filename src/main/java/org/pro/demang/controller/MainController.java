@@ -31,11 +31,11 @@ public class MainController {
 
 
     //로그인 페이지
-    @GetMapping("/")
-	public String home() {
+    // @GetMapping("/")
+	// public String home() {
 		
-		return "member/login";
-	}
+	// 	return "member/login";
+	// }
 
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
