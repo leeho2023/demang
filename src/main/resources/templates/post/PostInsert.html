@@ -13,11 +13,12 @@
     <main>
         <div class="wrap">
             <form action="/postInsert" id="post" method="Post" enctype="multipart/form-data">
+            <input type="hidden" name="p_writer" value="${sessionScope.m_id}">
             <div class="write">
                 <div class="radio">
-                    <input type="radio" name="write_type" value="N" checked="checked">일반
-                    <input type="radio" name="write_type" value="S">판매
-                    <input type="radio" name="write_type" value="R">리뷰
+                    <input type="radio" name="p_type" value="N" checked="checked">일반
+                    <input type="radio" name="p_type" value="S">판매
+                    <input type="radio" name="p_type" value="R">리뷰
                 </div>
                 <div class="write_main" id="imgWrap">
                     <input type="text" name="p_content" class="textInput" id="textInput"> <!-- 글 내용 작성 input -->

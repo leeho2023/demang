@@ -17,7 +17,10 @@ public interface MainMapper {
 
 	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
 	void commentInsert(CommentDTO dto); // 댓글 입력하기
-	void postInsert(String p_content, @Param("p_image")byte[] bytes); // post작성
+	
+	void postInsert(int p_origin, String p_type, String p_writer, String p_content); // 게시글 작성
+	void postinsertImg(@Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
+	
 	public MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	public MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
 	public MemberDTO getMember_code(String code);// 회원코드로 회원 찾기
@@ -33,6 +36,9 @@ public interface MainMapper {
 	public PostDTO getPost( int no );// 게시글 번호로 게시글 찾기
 	public List<CommentDTO> getCommentList(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	public List<CommentDTO> getCommentList(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
+
+
+	
 	
 
 }
