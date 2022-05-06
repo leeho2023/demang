@@ -15,7 +15,7 @@ $('.fListBtn').click(function(){
         type: "post",
         url: "fList",
         data: {
-            follower : 4
+            follower : 1
 		},
         success: function (data) {
             $('#fList').html("");

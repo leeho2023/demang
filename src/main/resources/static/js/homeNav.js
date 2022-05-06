@@ -5,25 +5,25 @@ $('#searchBtn').click(function (e) {
 
     $.ajax({
         type: "get",
-        url: "url",
-        data: "data",
-        dataType: "dataType",
-        success: function (response) {
+        url: "userSearch",
+        data: {
+            searchVal : searchVal
+        },
+        success: function (data) {
             
         }
     });
 
     $.ajax({
         type: "get",
-        url: "url",
-        data: "data",
-        dataType: "dataType",
-        success: function (response) {
+        url: "boardSearch",
+        data: {
+            searchVal : searchVal
+        },
+        success: function (data) {
             
         }
     });
-
-
-
     
 });
+

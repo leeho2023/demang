@@ -3,15 +3,16 @@ body{
     padding: 0;
 }
 
+/* homeNav css 부분 */
 #homeNav{
     border: 2px solid blueviolet;
     width: 100vw;
-    height: 20vh;
+    height: 16vh;
 }
 
 .blank{
     border: 1px solid red;
-    height: 4vh;
+    height: 2vh;
 }
 
 .blankNav{
@@ -43,3 +44,115 @@ body{
     justify-content: space-around;
     width: 20vw;
 }
+
+/* 검색 후 유저정보와 post 정보 css 부분 */
+.contentBox{
+    border: 2px solid red;
+    width: 100%;
+    height: 81vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content1{
+    border: 2px solid blueviolet;
+    width: 60vw;
+    height: 25vh;
+}
+
+.content2{
+    border: 2px solid cadetblue;
+    width: 60vw;
+    height: 55vh;
+}
+
+.userBoxLine{
+    border: 1px solid coral;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+}
+
+.userBox{
+    border: 1px solid blue;
+    width: 25%;
+    height: 8vh;
+}
+
+.postBoxLine{
+    border: 1px solid coral;
+    width: 100%;
+    height: 40vh;
+    display: flex;
+}
+
+.postImg{
+    border: 2px solid darkblue;
+    width: 100%;
+    height: 40vh;
+}
+
+.postBlank{
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 20vw;
+    height: 40vh;
+    display: flex;
+}
+
+img{
+    width: 345px;
+}
+
+
+.postBox{
+    border: 1px solid blue;
+    width: 33%;
+    height: 40vh;
+    display: flex;
+    align-items: flex-end;
+    float: left;
+}
+
+.hoverBox{
+    border: 3px solid black;
+}
+
+
+.userInfo{
+    /* border: 1px solid red; */
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-top: 1%;
+    padding-left: 1%;
+    width: 19vw;
+    height: 8vh;
+    display: flex;
+}
+
+.email_nickName{
+    padding-top: 1%;
+    padding-left: 7%;
+    display: flex;
+    flex-direction: column;
+}
+
+.nickName{
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.email{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.profileImg{
+    border: 1px dotted blue;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
