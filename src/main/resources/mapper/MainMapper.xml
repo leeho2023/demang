@@ -16,12 +16,16 @@
 
 	<!-- 댓글 목록 불러오는 쿼리문 -->
 	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
-		Select * FROM commentTBL WHERE c_postNo = #{p_id}
+		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join membertbl on c.c_writer = m.m_id WHERE c_postNo = #{p_id}
 	</select>
 
 	<!-- post 작성 쿼리문 -->
 	<insert id="postInsert">
-		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content, p_image) VALUES(null, 'N', 1, #{p_content}, #{p_image})
+		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
+	</insert>
+	
+	<insert id="postInsertImg" useGeneratedKeys="true" keyProperty="p_id">
+		Insert into postImgTBL (i_image) values (#{i_image})
 	</insert>
 
 

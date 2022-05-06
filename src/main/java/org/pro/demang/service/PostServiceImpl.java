@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
-import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +16,14 @@ public class PostServiceImpl implements PostService{
 
 	//게시글 등록하기
 	@Override
-	public void postInsert(String p_content, byte[] bytes) {
-		
-		mapper.postInsert(p_content, bytes);
-		
+	public void postInsert(int p_origin, String p_type, String p_writer, String p_content) {
+		mapper.postInsert(p_origin, p_type, p_writer, p_content);
+	}
+	
+	//게시글 이미지 등록하기
+	@Override
+	public void postImgInsert(byte[] bytes) {
+		mapper.postinsertImg(bytes);
 	}
 
 	//댓글 불러오기
@@ -71,7 +74,5 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<CommentDTO> getCommentList(int no) {
 		return mapper.getCommentList(no);
-	}
-	
-	
+	}	
 }

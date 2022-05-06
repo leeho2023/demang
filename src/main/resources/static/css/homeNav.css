@@ -97,7 +97,6 @@ body{
     background-color: rgba(0, 0, 0, 0.7);
     width: 20vw;
     height: 40vh;
-    display: flex;
 }
 
 img{
@@ -116,6 +115,7 @@ img{
 
 .hoverBox{
     border: 3px solid black;
+    height: 40vh;
 }
 
 
@@ -124,6 +124,8 @@ img{
     background-color: rgba(255, 255, 255, 0.5);
     padding-top: 1%;
     padding-left: 1%;
+    position: absolute;
+    float: left;
     width: 19vw;
     height: 8vh;
     display: flex;

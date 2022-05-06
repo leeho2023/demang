@@ -7,7 +7,8 @@ import org.pro.demang.model.PostDTO;
 
 public interface PostService {
 
-	void postInsert(String p_content, byte[] bytes); // 게시물 등록
+	void postImgInsert(byte[] bytes); // 게시물에 달릴 이미지 등록
+	void postInsert(int p_origin, String p_type, String p_writer, String p_content); // 게시글 등록
 	List<CommentDTO> commentShow(String p_id); // 댓글 불러오기
 	void commentInsert(CommentDTO dto); // 댓글 등록하기
 	public PostDTO getPost( String no );

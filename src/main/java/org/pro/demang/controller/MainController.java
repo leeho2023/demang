@@ -113,18 +113,18 @@ public class MainController {
 	}
 	
 	//게시글 등록
-	@PostMapping("/postInsert")
-	public String postInsert(
-            @RequestParam(value="p_image", required=false) MultipartFile file,
-	        @RequestParam("p_content")String p_content) {
-	    try {
-	        postService.postInsert(p_content, file.getBytes());
-	        
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-	      return "post/PostInsert";
-	}
+//	@PostMapping("/postInsert")
+//	public String postInsert(
+//            @RequestParam(value="p_image", required=false) MultipartFile file,
+//	        @RequestParam("p_content")String p_content) {
+//	    try {
+//	        postService.postInsert(p_content, file.getBytes());
+//	        
+//	      } catch (Exception e) {
+//	         e.printStackTrace();
+//	      }
+//	      return "post/PostInsert";
+//	}
 
     //// 개인 피드
 	@GetMapping("/feed")
