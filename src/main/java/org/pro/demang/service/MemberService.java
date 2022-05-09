@@ -10,7 +10,7 @@ public interface MemberService {
 	void memberInsert(MemberDTO dto);
 	public MemberDTO getMember_no( String no );
 	public MemberDTO getMember_no( int no );
-	String login(MemberDTO dto);
+	MemberDTO login(MemberDTO dto);
 	
 
 }

@@ -24,7 +24,24 @@ public class KysController {
 
     @Autowired
 	PostService postService;
-    
+
+    //// 개인 피드
+	@GetMapping("/feed")
+	public String feed( Model model, HttpSession session ) {
+		//// 로그인 안 되어있으면 로그인 페이지로 이동
+		System.out.println(session.getAttribute("login")+"번 회원으로 로그인 ~ kysController.feed");
+		if( session.getAttribute("login") == null ) {
+			return "redirect:/loginMove";
+		}
+		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
+		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
+				"PostList", 
+				postService.getPostList_followee( 
+						session.getAttribute("login")+""// 정수를 문자열로 바꾸려고 +""
+						)
+				);
+		return "post/feed";
+	}
 
 	//// 개인 페이지
 	@GetMapping("/vip")
@@ -66,7 +83,6 @@ public class KysController {
 	}
 	
 	//// 팔로우 확인
-	////???test 무조건 팔로우 돼있다고 함
 	@GetMapping("/func/followCheck")
 	@ResponseBody
 	public String followCheck( String m2, HttpSession session ) {

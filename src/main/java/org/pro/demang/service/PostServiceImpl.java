@@ -54,6 +54,10 @@ public class PostServiceImpl implements PostService{
 	public List<Integer> getPostList_followee( String no ){
 		return mapper.getPostList_followee(no);
 	}
+	@Override
+	public List<Integer> getPostList_followee( int no ){
+		return getPostList_followee(""+no);
+	}
 
 	
 	//// 번호로 게시글 찾기

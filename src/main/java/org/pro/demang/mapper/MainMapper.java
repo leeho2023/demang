@@ -24,7 +24,7 @@ public interface MainMapper {
 	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
-	MemberDTO getMember_code(String code);// 회원코드로 회원 찾기
+	MemberDTO getMember_email(String m_email);
 	
 	
 	
@@ -44,8 +44,4 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList_recent(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-
-	
-	public MemberDTO login(MemberDTO dto);//로그인 
-	public String getRealPassword(String m_email);//로그인관련
 }

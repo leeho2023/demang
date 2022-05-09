@@ -16,21 +16,23 @@ public class LwkController {
 	@Autowired
 	private MemberService MemberService;
 	
+	//// 로그인
+	//// 로그인 성공시 세션 login 속성에 회원번호가 들어간다. 
 	@PostMapping("/login")
 	public String login(MemberDTO dto, HttpServletRequest request,RedirectAttributes rttr) {
-		
-		String result = MemberService.login(dto);
-		if(result.equals("Success")) {
-		HttpSession session = request.getSession();
-		session.setAttribute("login",dto.getM_id());
-		return "post/feed";
-	}else {
-		rttr.addFlashAttribute("msg", false);
-		return "redirect:/";
-		
+		MemberDTO member = MemberService.login(dto);// 입력된 정보(dto)로 디비에서 회원정보 찾아오기
+		if( member != null ) {// 일치하는 회원 있음: 로그인 성공
+			HttpSession session = request.getSession();
+			session.setAttribute("login", member.getM_id());
+			return "redirect:/feed";
+		}else {// 로그인 실패
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/loginMove";
+		}
 	}
-}
 	
+	//// 로그아웃
+	//// 세션을 삭제한다.
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		

@@ -46,16 +46,17 @@ public class MemberServiceImpl implements MemberService {
 		return getMember_no(""+no);
 	}
 	
+	//// 로그인
+	//// 이메일, 비밀번호만 들어있는 dto를 받아서 그에 해당하는 회원이 있는 경우 해당 회원의 dto반환, 아니면 null.
 	@Override
-	public String login(MemberDTO dto) {
-		
-		String resultPW = mapper.getRealPassword(dto.getM_email());
-		System.out.println("resultPW 값 : "+resultPW);
-		boolean loginFilter = pwEncoder.matches(dto.getM_password(),resultPW);
-		if(loginFilter) {
-			return "Success";
-		}else {
-			return "Fail";
+	public MemberDTO login(MemberDTO dto) {
+		MemberDTO member = mapper.getMember_email( dto.getM_email() );// 입력된 이메일로 회원정보 찾기
+		if( member == null ) {return null;}// 해당 이메일이 디비에 없는 경우: 찾는 회원 없음.
+		if( pwEncoder.matches(// 비밀번호가 일치하는 경우
+				dto.getM_password(), member.getM_password())) {
+			return member;
+		}else {// 일치하지 않으면 null
+			return null;
 		}
 	}
 

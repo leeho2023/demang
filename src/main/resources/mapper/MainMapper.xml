@@ -31,13 +31,18 @@
 
 	<!-- 이것은 회원가입 쿼리문입니다. -->
 	<insert id="memberInsert">
-		INSERT INTO memberTBL(m_email, m_nickname, m_password, m_birth )
-		 VALUES(#{m_email},#{m_nickname},#{m_password},#{m_birth})
+		INSERT INTO memberTBL(m_code, m_email, m_nickname, m_password, m_birth )
+		 VALUES(1, #{m_email},#{m_nickname},#{m_password},#{m_birth})
 	</insert>
 
 	<!-- 회원 번호로 회원 찾기 -->
 	<select id="getMember_no"
-		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};</select>
+		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};
+	</select>
+	<!-- 이메일로 회원 찾기 -->
+	<select id="getMember_email"
+		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_email = #{m_email};
+	</select>
 	
 	<!-- 팔로잉 수, 팔로워 수 (회원번호로) -->
 	<select id="followingCount" resultType="Integer">
@@ -84,13 +89,4 @@
 		   WHERE c_postNo = #{no}
 		   ORDER BY c.c_id DESC
 		   LIMIT 3;</select>
-
-	<!-- 로그인할때 쓰는 쿼리문 -->
-	<select id="login" resultType="org.pro.demang.model.MemberDTO" >
-	 select * from memberTBL where m_email = #{m_email} and m_password = #{m_password}
-	</select>
-	<!-- 로그인관련 -->
-	<select id="getRealPassword" resultType="String">
-		select m_password from memberTBL where m_email = #{m_email}
-	</select>
 </mapper>
