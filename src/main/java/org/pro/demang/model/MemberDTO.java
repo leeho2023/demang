@@ -1,5 +1,6 @@
 package org.pro.demang.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -10,7 +11,7 @@ public class MemberDTO {
 	private String m_email;
 	private String m_nickname;
 	private String m_password;
-	private Timestamp m_birth;
+	private Date m_birth;
 	private String m_introduce;
 	private String m_profilePic;
 	private String m_gender;
@@ -48,10 +49,10 @@ public class MemberDTO {
 	public void setM_password(String m_password) {
 		this.m_password = m_password;
 	}
-	public Timestamp getM_birth() {
+	public Date getM_birth() {
 		return m_birth;
 	}
-	public void setM_birth(Timestamp m_birth) {
+	public void setM_birth(Date m_birth) {
 		this.m_birth = m_birth;
 	}
 	public String getM_introduce() {

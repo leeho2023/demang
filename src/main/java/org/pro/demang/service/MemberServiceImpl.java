@@ -46,5 +46,13 @@ public class MemberServiceImpl implements MemberService {
 		return getMember_no(""+no);
 	}
 
+	@Override
+	public List<MemberDTO> memberSearch(String searchVal) {
+		
+
+
+		return mapper.memberSearch(searchVal);
+	}
+
 
 }

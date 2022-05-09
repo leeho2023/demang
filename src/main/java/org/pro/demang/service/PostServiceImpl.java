@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
-import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
