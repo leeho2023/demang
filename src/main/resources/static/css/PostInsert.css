@@ -79,8 +79,8 @@ label {
     border: 1px solid black; 
 } 
 
+
 input[type="file"] { 
-    /* 파일 필드 숨기기 */ 
     position: absolute; 
     width: 1px; 
     height: 1px; 
@@ -89,6 +89,7 @@ input[type="file"] {
     overflow: hidden; 
     clip:rect(0,0,0,0); 
     border: 0; }
+    
 
 .label:hover{
     background-color: lightgrey;

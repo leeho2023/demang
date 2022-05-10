@@ -1,5 +1,7 @@
 package org.pro.demang.controller;
 
+import java.util.List;
+
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,9 @@ public class SjhController {
 	        @RequestParam("p_content")String p_content,
 	        @RequestParam("p_type")String p_type,
 	        @RequestParam("p_writer")int p_writer,
-	        @RequestParam(value="p_image", required = false)MultipartFile file) {
+	        @RequestParam(value="p_image", required = false)MultipartFile[] files) {
 		try {
-			int p_origin = 2;// 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
+			int p_origin = 2; // 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
 			PostDTO dto = new PostDTO(p_origin, p_type, p_writer, p_content);
 			postService.postInsert( dto );
 			System.out.println(dto.getP_id()+"번 게시글로 작성된 거 확인하세요. ~ sjh controller ###########################");

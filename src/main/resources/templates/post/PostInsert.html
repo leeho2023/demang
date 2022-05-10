@@ -3,26 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/PostInsert.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>글 작성</title>
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<!-- 
+
+
 	<header></header>
     <nav class="imsi"></nav>
     <main>
         <div class="wrap">
-        <!-- /postInsert 게시글 작성,, /imgInsert 이미지 전송(테스트)
+        <!-- /postInsert 게시글 작성,, /imgInsert 이미지 전송(테스트) -->
             <form action="/postInsert" id="post" method="Post" enctype="multipart/form-data">
-            <input type="hidden" name="p_writer" th:value="${sessionScope.m_id}">
+            <input type="hidden" name="p_writer" th:value="${session.login}">
             <div class="write">
                 <div class="radio">
                     <input type="radio" name="p_type" value="N" checked="checked">일반
                     <input type="radio" name="p_type" value="S">판매
                 </div>
                 	<div class="write_main" id="imgWrap">
-                    <input type="text" name="p_content" class="textInput" id="textInput"> <!-- 글 내용 작성 input
-                    <label for="input-file" id="fileLabel" class="label">업로드</label> <input type="file" id="ex_file"> <!-- 이미지 업로드가 보여지는 label
+                    <input type="text" name="p_content" class="textInput" id="textInput"> <!-- 글 내용 작성 input -->
+                    <label for="input-file" id="fileLabel" class="label">업로드</label> <input type="file" id="ex_file"> <!-- 이미지 업로드가 보여지는 label -->
                     <input type="file" id="input-file" class="upload-hidden" name="p_image">
                     <ul class="imgPreview" id="imgPreview">
                     </ul>
@@ -33,14 +35,7 @@
             </div>
         </form>
         </div>
-    </main> -->
-
-<div class="insert">
-    <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
-        <input type="file" onchange="addFile(this);" multiple />
-        <div class="file-list"></div>
-    </form>
-</div>
+    </main>
 
     <footer class="imsi2"></footer>
 <script src="/js/PostInsert.js"></script>
