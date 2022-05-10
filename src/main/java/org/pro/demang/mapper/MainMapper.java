@@ -22,7 +22,7 @@ public interface MainMapper {
 	
 	@Options(useGeneratedKeys = true, keyProperty = "p_id")
 	int postInsert(int p_origin, String p_type, String p_writer, String p_content); // 게시글 작성
-	void postinsertImg(@Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
+	void postInsertImg(@Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
 	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기

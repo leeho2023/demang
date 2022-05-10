@@ -23,8 +23,8 @@ public class PostServiceImpl implements PostService{
 	
 	//게시글 이미지 등록하기
 	@Override
-	public void postImgInsert(byte[] bytes) {
-		mapper.postinsertImg(bytes);
+	public void postInsertImg(byte[] bytes) {
+		mapper.postInsertImg(bytes);
 	}
 
 	//댓글 불러오기

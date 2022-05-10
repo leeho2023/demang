@@ -1,8 +1,7 @@
 package org.pro.demang.controller;
 
-import java.util.List;
-
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,10 +23,16 @@ public class SjhController {
 	        @RequestParam(value="p_image", required = false)MultipartFile[] files) {
 		try {
 			int p_origin = 2; // 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
-			PostDTO dto = new PostDTO(p_origin, p_type, p_writer, p_content);
-			postService.postInsert( dto );
+			PostDTO dto = new PostDTO(p_origin, p_type, p_writer, p_content); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
+			postService.postInsert( dto ); // 작동
+			
+			for(int i = 0; i < files.length; i++) {
+				PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
+				imgDTO.setI_image(files[i].getBytes()); // DTO안에 이미지를 byte변환하여 넘겨줌
+				postService.postInsertImg(imgDTO.getI_image()); // 작동
+				System.out.println(i + "번째 이미지 입력됨");
+			}
 			System.out.println(dto.getP_id()+"번 게시글로 작성된 거 확인하세요. ~ sjh controller ###########################");
-//			postService.postImgInsert(file.getBytes());// 등록 될 글 내용
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
