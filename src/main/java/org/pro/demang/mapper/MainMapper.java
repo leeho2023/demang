@@ -49,4 +49,8 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList_recent(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 
+	public MemberDTO memberRead(String m_id);
+
+	void memberUpdate(MemberDTO dto);
+	
 }

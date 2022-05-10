@@ -60,4 +60,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public void memberUpdate(MemberDTO dto) {
+		String encodedPassword = passwordEncoder.encode(dto.getM_password());
+		dto.setM_password(encodedPassword);
+		mapper.memberUpdate(dto);
+		
+	}
+
+	
+
 }

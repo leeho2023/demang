@@ -97,4 +97,14 @@
 		   WHERE c_postNo = #{no}
 		   ORDER BY c.c_id DESC
 		   LIMIT 3;</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="memberUpdate">
+		UPDATE memberTBL
+		SET m_nickname=#{m_nickname}, m_password=#{m_password}, m_birth=#{m_birth},
+		 m_introduce=#{m_introduce}, m_gender=#{m_gender}
+		   WHERE m_id=#{m_id};
+	</update>
+		   
+		   
 </mapper>

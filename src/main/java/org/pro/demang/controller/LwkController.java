@@ -7,6 +7,7 @@ import org.pro.demang.model.MemberDTO;
 import org.pro.demang.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,6 +41,30 @@ public class LwkController {
 		session.invalidate();
 		
 		return "redirect:/";
+	}
+	
+	// 회원 정보보기창
+	@GetMapping("/memberRead")
+	public String memberRead(Model model, HttpSession session) {
+		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
+		System.out.println("lwkController.memberRead "+dto);
+		model.addAttribute("dto",dto);
+		return "member/memberRead";
+	}
+	
+	// 회원 업데이트창
+	@GetMapping("/memberUpdate")
+	public String memberUpdate(Model model, HttpSession session) {
+		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
+		model.addAttribute("dto",dto);
+		return "member/memberUpdate";
+	}
+	// 회원정보 업데이트 하기
+	@PostMapping("/memberUpdate")
+	public String memberUpdate2(MemberDTO dto, HttpSession session) {
+		dto.setM_id( (int)session.getAttribute("login") );
+		MemberService.memberUpdate(dto);
+		return "redirect:/memberRead";
 	}
 }
 
