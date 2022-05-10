@@ -2,6 +2,7 @@ package org.pro.demang.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Base64;
 
 
 public class MemberDTO {
@@ -13,7 +14,7 @@ public class MemberDTO {
 	private String m_password;
 	private Date m_birth;
 	private String m_introduce;
-	private String m_profilePic;
+	private byte[] m_profilePic;
 	private String m_gender;
 	private boolean m_licensed;
 	private int m_warnCount;
@@ -61,10 +62,15 @@ public class MemberDTO {
 	public void setM_introduce(String m_introduce) {
 		this.m_introduce = m_introduce;
 	}
-	public String getM_profilePic() {
+	public byte[] getM_profilePic() {
 		return m_profilePic;
 	}
-	public void setM_profilePic(String m_profilePic) {
+	//// 뷰에서 이미지 불러오기용: 바이트 배열의 이미지를 Base64를 통해 인코딩한 뒤 문자열로 반환. 타임리프에서 ${dto.m_profilePicString} 등으로 쓰면 된다.
+	//// CommentDTO에서와 같은 방식이다.
+	public String getM_profilePicString() {
+		return new String(Base64.getEncoder().encodeToString(m_profilePic));
+	}
+	public void setM_profilePic(byte[] m_profilePic) {
 		this.m_profilePic = m_profilePic;
 	}
 	public String getM_gender() {

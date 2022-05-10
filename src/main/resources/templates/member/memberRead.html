@@ -8,12 +8,11 @@
 <body>
 test
  	<h1>회원상세보기</h1>
-	 회원 아이디 : [[${dto.m_id}]] <br>
-<!-- 	 <div th:text="${dto.m_id}"></div> -->
-<!-- <input type="hidden" th:value="${dto.m_id}"/> -->
+ 	프사: <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"><br>
+	회원 아이디 : [[${dto.m_id}]] <br>
 	회원 이름 : [[${dto.m_nickname}]]<br>
 	회원 비밀번호 : [[${dto.m_password}]]<br>
-	 회원 생일 : [[${dto.m_birth}]]<br>
+	회원 생일 : [[${dto.m_birth}]]<br>
 	자기소개 : [[${dto.m_introduce}]]<br>
 	성별 : [[${dto.m_gender}]]<br>
 	판매자 등록여부 : [[${dto.m_licensed}]]<br>

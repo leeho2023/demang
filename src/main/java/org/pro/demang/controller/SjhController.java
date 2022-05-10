@@ -22,7 +22,6 @@ public class SjhController {
 	        @RequestParam("p_type")String p_type,
 	        @RequestParam("p_writer")int p_writer,
 	        @RequestParam(value="p_image", required = false)MultipartFile file) {
-		int p_id;
 		try {
 			int p_origin = 1;// 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
 			PostDTO dto = new PostDTO(p_origin, p_type, p_writer, p_content);

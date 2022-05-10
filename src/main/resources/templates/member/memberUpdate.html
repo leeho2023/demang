@@ -6,10 +6,8 @@
 </head>
 <body>
 <h1>회원정보수정</h1>
-	test
-	
-	[[${dto}]]
- <form action="/memberUpdate" method="post">
+ <form action="/memberUpdate" method="post" enctype="multipart/form-data">
+ 	프로필사진: <input type="file" name="propic">
 	이름: <input type="text"name="m_nickname" th:value="${dto.m_nickname}"><br>
 	비밀번호: <input type="text"name="m_password"><br>
 	생일 <input type="date"name="m_birth" th:value="${dto.m_birth}"><br>

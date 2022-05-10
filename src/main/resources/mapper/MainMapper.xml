@@ -102,8 +102,9 @@
 	<update id="memberUpdate">
 		UPDATE memberTBL
 		SET m_nickname=#{m_nickname}, m_password=#{m_password}, m_birth=#{m_birth},
-		 m_introduce=#{m_introduce}, m_gender=#{m_gender}
-		   WHERE m_id=#{m_id};
+		m_profilePic=#{m_profilePic},
+		m_introduce=#{m_introduce}, m_gender=#{m_gender}
+		WHERE m_id=#{m_id};
 	</update>
 		   
 		   
