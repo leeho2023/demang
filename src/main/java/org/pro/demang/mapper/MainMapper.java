@@ -3,6 +3,7 @@ package org.pro.demang.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
@@ -17,9 +18,10 @@ public interface MainMapper {
 
 	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
 	void commentInsert(CommentDTO dto); // 댓글 입력하기
-	void postInsert(String p_content, @Param("p_image")byte[] bytes); // post작성
+	void postInsert( PostDTO dto ); // post작성
 	
-	void postInsert(int p_origin, String p_type, String p_writer, String p_content); // 게시글 작성
+	@Options(useGeneratedKeys = true, keyProperty = "p_id")
+	int postInsert(int p_origin, String p_type, String p_writer, String p_content); // 게시글 작성
 	void postinsertImg(@Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
 	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기

@@ -7,18 +7,17 @@
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 	<header></header>
     <nav class="imsi"></nav>
     <main>
         <div class="wrap">
             <form action="/postInsert" id="post" method="Post" enctype="multipart/form-data">
-            <input type="hidden" name="p_writer" value="${sessionScope.m_id}">
+            <input type="hidden" name="p_writer" th:value="${session.login}">
             <div class="write">
                 <div class="radio">
-                    <input type="radio" name="p_type" value="N" checked="checked">일반
-                    <input type="radio" name="p_type" value="S">판매
-                    <input type="radio" name="p_type" value="R">리뷰
+                    <input type="radio" name="p_type" id="p_type_N" value="N" checked="checked">일반
+                    <input type="radio" name="p_type" id="p_type_S" value="S">판매
+                    <input type="radio" name="p_type" id="p_type_R" value="R">리뷰
                 </div>
                 <div class="write_main" id="imgWrap">
                     <input type="text" name="p_content" class="textInput" id="textInput"> <!-- 글 내용 작성 input -->

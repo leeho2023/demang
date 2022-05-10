@@ -49,6 +49,13 @@ public class PostDTO {
 		this.p_regDate = p_regDate;
 	}
 	
+	public PostDTO(int p_origin, String p_type, int p_writer, String p_content) {
+		this.p_origin = p_origin;
+		this.p_type = p_type;
+		this.p_writer = p_writer;
+		this.p_content = p_content;
+	}
+	
 	
 	
 }
