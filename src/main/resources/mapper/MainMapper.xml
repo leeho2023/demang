@@ -19,9 +19,17 @@
 		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL on c.c_writer = m.m_id WHERE c_postNo = #{p_id}
 	</select>
 
-	<!-- post 작성 쿼리문 -->
+	<!-- post 작성 -->
 	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id">
 		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
+	</insert>
+	<!-- 새 해시태그 등록 -->
+	<insert id="hashtagInsert">
+		CALL INSERT_HashtagOnPostTBL(#{hashtag})
+	</insert>
+	<!-- 게시글에 해시태그 등록 -->
+	<insert id="hashtagOnTableInsert">
+		INSERT INTO tagOnPostTBL (t_tag, t_postNo) VALUES(#{hashtag}, #{p_id})
 	</insert>
 	
 	<insert id="postInsertImg" useGeneratedKeys="true" keyProperty="p_id">

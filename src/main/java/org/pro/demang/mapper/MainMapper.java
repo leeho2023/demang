@@ -22,6 +22,8 @@ public interface MainMapper {
 	
 	@Options(useGeneratedKeys = true, keyProperty = "p_id")
 	int postInsert(int p_origin, String p_type, String p_writer, String p_content); // 게시글 작성
+	void hashtagInsert( String hashtag );// 해시태그 등록
+	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
 	void postinsertImg(@Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
 	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
@@ -46,4 +48,5 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList_recent(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
+
 }

@@ -19,6 +19,12 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void postInsert( PostDTO dto ) {
 		mapper.postInsert(dto);
+		//// 해시태그 등록하기
+		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
+			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
+			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
+			System.out.println(dto.getP_id()+"번 게시글에 해시태그 "+temp+" 등록 ~ PostServiceImpl");
+		}
 	}
 	
 	//게시글 이미지 등록하기
@@ -82,7 +88,7 @@ public class PostServiceImpl implements PostService{
 	}
 	
 	////문자열에서 해시태그 찾아내기 (문자열 배열로 반환)
-	private static String[] findHashTags( String inputString ) {
+	private static String[] findHashtags( String inputString ) {
 		byte[] bytes = inputString.getBytes();// 바이트 배열로 만들어서 분석
 		int tagsNMax = 10;// 태그 개수 최대치
 		
@@ -95,8 +101,7 @@ public class PostServiceImpl implements PostService{
 				byte[] tagBuild = new byte[20];
 				int tagBuildLength = 0;
 				for( ; i<bytes.length; i++ ) {
-					if( 
-							   bytes[i] != 32// 띄어쓰기
+					if(       bytes[i] != 32// 띄어쓰기
 							&& bytes[i] != 35// #
 							&& bytes[i] != 46// .
 							&& bytes[i] != 44// ,
