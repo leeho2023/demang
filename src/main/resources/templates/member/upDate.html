@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>시바 스프링 조낸 어렵네</h1>
+<div th:fragment="mySideBar">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a>마이페이지</a>
+            </li>
+            <li>
+                <a th:href="@{/board/myBoard}">내 게시물</a>
+            </li>
+            <li>
+                <a th:href="@{/board/myOldBoard}">오래된 게시물</a>
+            </li>
+            <li>
+                <a th:href="@{/memberUpdate}">내 정보 수정</a>
+            </li>
+            <li>
+                <a th:href="@{/account/password}">패스워드 변경</a>
+            </li>
+            <li>
+                <a th:href="@{/account/withdrawal}">회원 탈퇴</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<script>  </script>
+</body>
+</html>

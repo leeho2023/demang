@@ -11,6 +11,10 @@ public interface MemberService {
 	public MemberDTO getMember_no( String no );
 	public MemberDTO getMember_no( int no );
 	String login(MemberDTO dto);
-	
+
+	MemberDTO memberRead(String m_id);
+
+
+
 
 }

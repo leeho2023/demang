@@ -48,4 +48,5 @@ public interface MainMapper {
 	
 	public MemberDTO login(MemberDTO dto);//로그인 
 	public String getRealPassword(String m_email);//로그인관련
+	public MemberDTO memberRead(String m_id);
 }

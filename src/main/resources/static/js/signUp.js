@@ -34,7 +34,7 @@
                 if(result != null){
                     $(".pw.regex").html("");
                 }else{
-                    $(".pw.regex").html("최소 8 자, 하나 이상의 대문자, 하나의 소문자 및 하나의 숫자 ");
+                    $(".pw.regex").html("최소 8 자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요. ");
                     $(".pw.regex").css("color","red")
                 }
             });
@@ -45,6 +45,7 @@
                        $(".repw.regex").html("비밀번호가 일치합니다"); 
                     }else{
                      $(".repw.regex").html("비밀번호가 일치하지않습니다"); 
+                     
                     }
                })
               $("#m_password").on("input",function(){
@@ -54,8 +55,8 @@
                 if(result != null){
                     $(".pw.regex").html("");
                 }else{
-                    $(".pw.regex").html("최소 8 자,하나 이상의 대문자,소문자 및 숫자 ");
-                    $(".pw.regex").css("color","red")
+                    $(".pw.regex").html("최소 8 자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요. ");
+                    $(".pw.regex").css("color","red");
                 }
             });
             
@@ -98,7 +99,7 @@
         		   retrun;
         	   }
         	   
-        	   
+        	   alert("회원가입 완료");
         	  
         	   
              //빈칸 없을 때 제출.

@@ -30,11 +30,14 @@
 
 
 	<!-- 이것은 회원가입 쿼리문입니다. -->
-	<insert id="memberInsert">
+	<!-- <insert id="memberInsert">
+		INSERT INTO memberTBL(m_email, m_nickname, m_password, m_birth )
+		 VALUES(#{m_email},#{m_nickname},#{m_password},#{m_birth})
+	</insert> -->
+<insert id="memberInsert">
 		INSERT INTO memberTBL(m_email, m_nickname, m_password, m_birth )
 		 VALUES(#{m_email},#{m_nickname},#{m_password},#{m_birth})
 	</insert>
-
 	<!-- 회원 번호로 회원 찾기 -->
 	<select id="getMember_no"
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};</select>
@@ -93,4 +96,15 @@
 	<select id="getRealPassword" resultType="String">
 		select m_password from memberTBL where m_email = #{m_email}
 	</select>
+	<select id="memberRead" resultType="org.pro.demang.model.MemberDTO">
+		SELECT * FROM memberTBL WHERE m_id = #{m_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

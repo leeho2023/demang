@@ -59,4 +59,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	
+	@Override
+	public MemberDTO memberRead(String m_id) {
+		
+		return mapper.memberRead(m_id);
+	}
+
+	
+	
+
 }
