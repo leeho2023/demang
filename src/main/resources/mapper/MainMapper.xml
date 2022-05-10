@@ -10,10 +10,8 @@
 		f.follower = #{follower};
 	</select>
 	<!-- 검색 기능 쿼리문 -->
-	<select id="">
-
-	</select>
-
+	
+	
 	<!-- 댓글 목록 불러오는 쿼리문 -->
 	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
 		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL on c.c_writer = m.m_id WHERE c_postNo = #{p_id}
