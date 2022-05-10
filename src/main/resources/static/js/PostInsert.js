@@ -44,7 +44,7 @@ $(function(){
                 
                 reader.onload = function(e){ // 순서상 마지막에 작동함
                     var src = e.target.result; // 이미지 주소 가져오기
-                    parent.prepend('<li><img onclick="deleteImg(this)" src="'+src+'" class="innerImg" id="innerImg'+fileNum+'"></li>'); 
+                    $(parent).html('<li><img onclick="deleteImg(this)" src="'+src+'" class="innerImg" id="innerImg'+fileNum+'"></li>'); 
                     // ul내부에 li생성
                     fileNum += 1; // 다음에 추가 될 이미지 번호 늘려주기
                 }
@@ -62,8 +62,6 @@ $(function(){
 		function deleteImg(a){ // 이미지를 누르면 삭제
 			$(a).parent().remove();
 		};
-
-
 
 /*
 //다중파일 업로드 복붙
