@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -46,6 +48,7 @@ public class LwkController {
 	// 회원 정보보기창
 	@GetMapping("/memberRead")
 	public String memberRead(Model model, HttpSession session) {
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
 		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
 		System.out.println("lwkController.memberRead "+dto);
 		model.addAttribute("dto",dto);
@@ -55,13 +58,14 @@ public class LwkController {
 	// 회원 업데이트창
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model, HttpSession session) {
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
 		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
 		model.addAttribute("dto",dto);
 		return "member/memberUpdate";
 	}
 	// 회원정보 업데이트 하기
 	@PostMapping("/memberUpdate")
-	public String memberUpdate2(MemberDTO dto, HttpSession session) {
+	public String memberUpdate2(MemberDTO dto, @RequestParam("file") MultipartFile file, HttpSession session) {
 		dto.setM_id( (int)session.getAttribute("login") );
 		MemberService.memberUpdate(dto);
 		return "redirect:/memberRead";

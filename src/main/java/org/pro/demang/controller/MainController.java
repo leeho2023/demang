@@ -102,7 +102,8 @@ public class MainController {
 
     // 게시글 입력페이지 이동
 	@GetMapping("/postInsert")
-	public String postInsertRoute() {
+	public String postInsertRoute(HttpSession session) {
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
 		return "post/PostInsert";
 	}
 	

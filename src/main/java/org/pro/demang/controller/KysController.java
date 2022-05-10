@@ -28,11 +28,8 @@ public class KysController {
     //// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
-		//// 로그인 안 되어있으면 로그인 페이지로 이동
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
 		System.out.println(session.getAttribute("login")+"번 회원으로 로그인 ~ kysController.feed");
-		if( session.getAttribute("login") == null ) {
-			return "redirect:/loginMove";
-		}
 		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
 		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
 				"PostList", 
