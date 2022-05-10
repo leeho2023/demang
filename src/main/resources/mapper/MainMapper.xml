@@ -20,11 +20,11 @@
 	</select>
 
 	<!-- post 작성 쿼리문 -->
-	<insert id="postInsert">
+	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id">
 		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
 	</insert>
 	
-	<insert id="postInsertImg" useGeneratedKeys="true" keyProperty="p_id">
+	<insert id="postInsertImg">
 		Insert into postImgTBL (i_image) values (#{i_image})
 	</insert>
 

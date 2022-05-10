@@ -74,5 +74,5 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<CommentDTO> getCommentList(int no) {
 		return mapper.getCommentList(no);
-	}	
+	}
 }

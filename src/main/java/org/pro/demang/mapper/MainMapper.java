@@ -36,8 +36,6 @@ public interface MainMapper {
 	public PostDTO getPost( int no );// 게시글 번호로 게시글 찾기
 	public List<CommentDTO> getCommentList(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	public List<CommentDTO> getCommentList(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-
-
 	
 	
 

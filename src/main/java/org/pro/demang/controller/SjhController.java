@@ -1,7 +1,5 @@
 package org.pro.demang.controller;
 
-import java.io.IOException;
-
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ public class SjhController {
     @Autowired
 	PostService postService;
 	
+    // 이미지 여러개 등록하는건 구현완료, 지정된 이미지 다수를 넘겨줄(form) 방법이 필요함
 	@PostMapping("/postInsert")
 	public String postInsert(
 	        @RequestParam("p_content")String p_content,
