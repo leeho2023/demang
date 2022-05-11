@@ -31,8 +31,6 @@ body{
 }
 
 .write_main{
-    display: flex;
-    justify-content: space-around;
     align-items: center;
     border: 1px solid black;
     height: 55vh;
@@ -49,8 +47,8 @@ body{
 }
 
 .write_img{
-    height: 30vh;
-    width: 30vw;
+    height: 15vh;
+    width: 15vw;
     background-color: white;
 }
 
@@ -70,33 +68,48 @@ body{
 }
 
 label {
-    line-height: 30vh;
+    line-height: 15vh;
     display: inline-block; 
-    height: 30vh;
-    width: 30vw;
+    height: 15vh;
+    width: 15vw;
     background-color: #fdfdfd; 
     cursor: auto;
     border: 1px solid black; 
 } 
 
 input[type="file"] { 
-    /* 파일 필드 숨기기 */ 
     position: absolute; 
-    width: 1px; 
-    height: 1px; 
+    width: 0px; 
+    height: 0px; 
     padding: 0; 
-    margin: -1px; 
     overflow: hidden; 
     clip:rect(0,0,0,0); 
     border: 0; }
+    
 
 .label:hover{
     background-color: lightgrey;
 }
 
 .innerImg{
-    line-height: 30vh;
-    width: 30vw;
-    height: 30vh;
-    object-fit: contain;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 150px;
+    max-height: 150px;
+    margin-right: 5px;
+}
+
+li{
+	list-style: none;
+	margin-right: 3vh;
+}
+
+.imgPreview{
+	display: flex;
+	justify-content: flex-start;
+}
+
+.imgDelete{
+	height: 15vh;
+	width: 15vw; 
 }

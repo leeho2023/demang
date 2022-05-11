@@ -3,6 +3,9 @@
                   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.pro.demang.mapper.MainMapper">
 
+
+
+
 	<!-- 친구목록 불러오는 쿼리문 -->
 	<select id="fList" resultType="org.pro.demang.model.MemberDTO">
 		select m.m_email, m.m_nickname
@@ -10,10 +13,8 @@
 		f.follower = #{follower};
 	</select>
 	<!-- 검색 기능 쿼리문 -->
-	<select id="">
-
-	</select>
-
+	
+	
 	<!-- 댓글 목록 불러오는 쿼리문 -->
 	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
 		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL on c.c_writer = m.m_id WHERE c_postNo = #{p_id}
@@ -23,6 +24,12 @@
 	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id">
 		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
 	</insert>
+	
+	<!-- 이미지 등록 -->
+	<insert id="postInsertImg">
+		Insert into postImgTBL (p_id, i_image) values (#{p_id}, #{i_image})
+	</insert>
+	
 	<!-- 새 해시태그 등록 -->
 	<insert id="hashtagInsert">
 		CALL INSERT_HashtagOnPostTBL(#{hashtag})
@@ -32,8 +39,9 @@
 		INSERT INTO tagOnPostTBL (t_tag, t_postNo) VALUES(#{hashtag}, #{p_id})
 	</insert>
 	
-	<insert id="postInsertImg" useGeneratedKeys="true" keyProperty="p_id">
-		Insert into postImgTBL (i_image) values (#{i_image})
+	<!-- 게시글 작성 -->
+	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id" parameterType="org.pro.demang.model.PostDTO">
+		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
 	</insert>
 
 
@@ -47,6 +55,7 @@
 	<select id="getMember_no"
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};
 	</select>
+	
 	<!-- 이메일로 회원 찾기 -->
 	<select id="getMember_email"
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_email = #{m_email};
@@ -57,6 +66,7 @@
 	SELECT COUNT(follower) from followTBL WHERE follower = #{no}</select>
 	<select id="followerCount" resultType="Integer">
 	SELECT COUNT(followee) from followTBL WHERE followee = #{no}</select>
+	
 	<!-- 팔로우하기 -->
 	<insert id="doFollow">INSERT INTO followTBL (follower, followee) VALUES(#{m1}, #{m2})</insert>
 	<select id="followCheck" resultType="Integer">
@@ -96,7 +106,8 @@
 		   on c.c_writer = m.m_id
 		   WHERE c_postNo = #{no}
 		   ORDER BY c.c_id DESC
-		   LIMIT 3;</select>
+		   LIMIT 3
+	</select>
 	
 	<!-- 회원정보수정 -->
 	<update id="memberUpdate">
