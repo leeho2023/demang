@@ -108,7 +108,7 @@ body{
     background-color: rgba(0, 0, 0, 0.7);
     width: 20vw;
     height: 40vh;
-
+}
 .contentImg{
     width: 100%;
     height: 100%;
@@ -131,6 +131,7 @@ body{
 .hoverBox{
     border: 3px solid black;
     height: 40vh;
+}
 
 .post:hover > .userInfoBox{
     opacity: 1;
