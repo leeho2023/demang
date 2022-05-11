@@ -1,0 +1,13 @@
+<div class="content1">
+    <div class="userBox" th:each="list : ${list}">
+        <div class="userProfile">
+            <div class="profileImg">
+                <img src="img/defaultPropic.png">
+            </div>
+            <div class="email_nickName">
+                <span class="nickName">[[${list.m_nickname}]]<span class="nickCode"> #[[${list.m_code}]]</span></span>
+                <span class="email">[[${list.m_email}]]</span>
+            </div>
+        </div>
+    </div>
+</div>

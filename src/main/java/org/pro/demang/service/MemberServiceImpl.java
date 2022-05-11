@@ -60,6 +60,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+
 	@Override
 	public void memberUpdate(MemberDTO dto) {
 		String encodedPassword = passwordEncoder.encode(dto.getM_password());
@@ -69,5 +70,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
+
+	// 유저 검색
+	@Override
+	public List<MemberDTO> memberSearch(String reSearchVal) {
+		return mapper.memberSearch(reSearchVal);
+	}
+
+
 
 }

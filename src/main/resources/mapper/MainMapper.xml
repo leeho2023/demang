@@ -10,11 +10,32 @@
 	<select id="fList" resultType="org.pro.demang.model.MemberDTO">
 		select m.m_email, m.m_nickname
 		from followTBL f join memberTBL m where f.followee = m.m_id and
-		f.follower = #{follower};
+		f.follower = #{follower}
 	</select>
-	<!-- 검색 기능 쿼리문 -->
 	
-	
+	<!-- 유저 검색 기능 쿼리문 -->
+	<select id="memberSearch" resultType="org.pro.demang.model.MemberDTO">
+		select * from membertbl m where m_email like '%' #{reSearchVal} '%' or m_nickname like '%' #{reSearchVal} '%'
+	</select>
+
+	<!-- 게시글 검색 기능 쿼리문 -->
+	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
+		<result column="m_code" property="m_code"/>
+		<result column="m_email" property="m_email"/>
+		<result column="m_nickname" property="m_nickname"/>
+	</resultMap>
+	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
+		<result column="p_content" property="p_content"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
+	<select id="postSearch" parameterType="org.pro.demang.model.PostDTO" resultMap="postDTO">
+		select m.*, p.*
+		from membertbl m
+		inner join posttbl p
+		on p.p_writer = m.m_id
+		where p.p_content like '%' #{searchVal} '%'
+	</select>
+
 	<!-- 댓글 목록 불러오는 쿼리문 -->
 	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
 		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL on c.c_writer = m.m_id WHERE c_postNo = #{p_id}

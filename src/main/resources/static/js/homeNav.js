@@ -1,29 +1,47 @@
 
-
-$('#searchBtn').click(function (e) { 
+function search() {
     var searchVal = $('#search').val();
 
-    $.ajax({
-        type: "get",
-        url: "userSearch",
-        data: {
-            searchVal : searchVal
-        },
-        success: function (data) {
-            
-        }
-    });
+    let first_char = searchVal.charAt(0);
+    let reSearchVal = searchVal.substring(1, searchVal.length);
+
+    if(first_char === '@'){
+        $.ajax({
+            type: "get",
+            url: "userSearch",
+            data: {
+                reSearchVal : reSearchVal
+            },
+            success: function (data) {
+                $('.contentBox').html("");
+                $('.contentBox').append(data);
+            }
+        });
+    }
+
 
     $.ajax({
         type: "get",
-        url: "boardSearch",
+        url: "postSearch",
         data: {
             searchVal : searchVal
         },
         success: function (data) {
-            
+            $('.contentBox').html("");
+            $('.contentBox').append(data);
         }
     });
+
     
+}
+
+
+
+$('#searchBtn').click(function (e) { 
+    search(); 
 });
+
+
+
+
 
