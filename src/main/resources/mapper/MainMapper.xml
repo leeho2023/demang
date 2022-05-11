@@ -104,7 +104,8 @@
 
 
 	<!-- 게시글 번호로 게시글 찾기 -->
-	<select id="getPost" resultType="org.pro.demang.model.PostDTO">select * from postTBL WHERE p_id = #{no};</select>
+	<select id="getPost" resultType="org.pro.demang.model.PostDTO" resultMap="postDTO">
+	SELECT m.*, p.* from postTBL p JOIN memberTBL m ON p.p_writer = m.m_id WHERE p_id = #{no}</select>
 	<!-- 게시글 번호로 댓글들 찾기 최신순 -->
 	<select id="getCommentList" resultType="org.pro.demang.model.CommentDTO">
 		select m.m_nickname, m.m_profilePic , m.m_code , c.*
