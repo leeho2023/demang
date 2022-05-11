@@ -1,6 +1,10 @@
 
 function search() {
-    var searchVal = $('#search').val();
+	
+	location.href = "searchResult?searchVal="+$('#search').val();
+	
+    /*var searchVal = $('#search').val();*/
+
 
     let first_char = searchVal.charAt(0);
     let reSearchVal = searchVal.substring(1, searchVal.length);

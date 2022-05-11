@@ -1,6 +1,5 @@
 package org.pro.demang.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.pro.demang.model.MemberDTO;
@@ -28,6 +27,12 @@ public class LhhController {
 		return "other/searchResult";
 	}
 
+    @GetMapping("/searchResult")
+	public String searchResult() {
+		
+		return "other/searchResult";
+	}
+    
 	@GetMapping("/fList")
 	public String fList() {
 		
@@ -56,17 +61,7 @@ public class LhhController {
 
 		List<PostDTO> postList = postService.postSearch(searchVal);
 		
-		List<MemberDTO> memList = new ArrayList<MemberDTO>();
-		
-		for(PostDTO dto : postList){
-			MemberDTO memdto = new MemberDTO();
-			memdto.setM_code(dto.getMemberDTO().getM_code());
-			memdto.setM_email(dto.getMemberDTO().getM_email());
-			memdto.setM_nickname(dto.getMemberDTO().getM_nickname());
-			memList.add(memdto);
-		}
 		model.addAttribute("postList", postList);
-		model.addAttribute("memList", memList);
 
 		return "other/searchPost";
 	}
