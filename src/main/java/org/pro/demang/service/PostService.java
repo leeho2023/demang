@@ -17,5 +17,6 @@ public interface PostService {
 	public List<Integer> getPostList_writer( String no );
 	public List<Integer> getPostList_writer( int no );
 	public List<Integer> getPostList_followee( String no );
+    List<PostDTO> postSearch(String searchVal);
 	
 }

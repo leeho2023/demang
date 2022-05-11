@@ -11,7 +11,25 @@
 	</select>
 	<!-- 유저 검색 기능 쿼리문 -->
 	<select id="memberSearch" resultType="org.pro.demang.model.MemberDTO">
-		select * from membertbl m where m_email like %"#{searchVal}"% or m_nickname like %"#{searchVal}"%
+		select * from membertbl m where m_email like '%' #{searchVal} '%' or m_nickname like '%' #{searchVal} '%'
+	</select>
+
+	<!-- 게시글 검색 기능 쿼리문 -->
+	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
+		<result column="m_code" property="m_code"/>
+		<result column="m_email" property="m_email"/>
+		<result column="m_nickname" property="m_nickname"/>
+	</resultMap>
+	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
+		<result column="p_content" property="p_content"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
+	<select id="postSearch" parameterType="org.pro.demang.model.PostDTO" resultMap="postDTO">
+		select m.*, p.*
+		from membertbl m
+		inner join posttbl p
+		on p.p_writer = m.m_id
+		where p.p_content like '%' #{searchVal} '%'
 	</select>
 
 	<!-- 댓글 목록 불러오는 쿼리문 -->

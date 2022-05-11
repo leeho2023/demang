@@ -1,9 +1,10 @@
 package org.pro.demang.model;
 
-import java.io.File;
 import java.sql.Timestamp;
 
+import lombok.Data;
 
+@Data
 public class PostDTO {
 
 	private int p_id;
@@ -12,6 +13,9 @@ public class PostDTO {
 	private int p_writer;
 	private String p_content;
 	private Timestamp p_regDate;
+
+	private MemberDTO memberDTO;
+
 	public int getP_id() {
 		return p_id;
 	}

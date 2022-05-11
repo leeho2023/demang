@@ -38,6 +38,8 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 
     List<MemberDTO> memberSearch(String searchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
+
+	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
 	
 
 }

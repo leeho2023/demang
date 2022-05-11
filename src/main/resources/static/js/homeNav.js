@@ -1,18 +1,18 @@
 
-
-$('#searchBtn').click(function (e) { 
+function search() {
     var searchVal = $('#search').val();
 
-    $.ajax({
-        type: "get",
-        url: "userSearch",
-        data: {
-            searchVal : searchVal
-        },
-        success: function (data) {
-            
-        }
-    });
+    // $.ajax({
+    //     type: "get",
+    //     url: "userSearch",
+    //     data: {
+    //         searchVal : searchVal
+    //     },
+    //     success: function (data) {
+    //         $('.content1').html("");
+    //         $('.content1').append(data);
+    //     }
+    // });
 
     $.ajax({
         type: "get",
@@ -21,9 +21,19 @@ $('#searchBtn').click(function (e) {
             searchVal : searchVal
         },
         success: function (data) {
-            
+            $('.content2').html("");
+            $('.content2').append(data);
         }
     });
-    
+}
+
+
+
+$('#searchBtn').click(function (e) { 
+    search(); 
 });
+
+
+
+
 

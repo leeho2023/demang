@@ -71,6 +71,12 @@ public class PostServiceImpl implements PostService{
 	public List<CommentDTO> getCommentList(int no) {
 		return mapper.getCommentList(no);
 	}
+	// 게시글 검색
+	@Override
+	public List<PostDTO> postSearch(String searchVal) {
+		
+		return mapper.postSearch(searchVal);
+	}
 	
 	
 }

@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-
+[[${list}]]
     <nav id="homeNav">
         <div class="blank"></div>
         <div class="blank blankNav">
@@ -17,7 +17,8 @@
             <div class="box logoBox"></div>
             <div class="box searchBox">
 
-                <input type="text" id="search"> <button id="searchBtn">검색</button>
+                <input type="text" id="search" onkeyup="if(window.event.keyCode==13){search()}"> 
+                <button id="searchBtn">검색</button>
                 
             </div>
             <div class="box menuBox">
@@ -36,7 +37,7 @@
     <body>
         <div class="contentBox">
             <div class="content1">
-                <div class="userBoxLine">
+                
                     <div class="userBox">
                         <div class="userProfile">
                             <div class="profileImg">
@@ -51,20 +52,8 @@
                     <div class="userBox"></div>
                     <div class="userBox"></div>
                     <div class="userBox"></div>
-                </div>
-                <div class="userBoxLine">
-                    <div class="userBox"></div>
-                    <div class="userBox"></div>
-                    <div class="userBox"></div>
-                    <div class="userBox"></div>
-                </div>
-                <div class="userBoxLine">
-                    <div class="userBox"></div>
-                    <div class="userBox"></div>
-                    <div class="userBox"></div>
-                    <div class="userBox"></div>
-                </div>
             </div>
+        
             <hr>
             <div class="content2">
                 <div class="postLine">
