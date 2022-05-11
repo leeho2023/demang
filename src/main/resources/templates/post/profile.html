@@ -17,21 +17,20 @@ $(function(){
 </script>
 </head>
 <body>
-[[${session.login}]]
-[[${dto.m_id}]]
+[[${session.login}]]번 회원 로그인, [[${dto.m_id}]]번 회원의 페이지
 <header>헤더</header>
 <nav>친구목록</nav> 
 
 
 <main>
 <section><!-- 회원 정보 -->
-	<div class="propicDiv">프사</div>
+	<div class="propicDiv"><img th:src="'data:image/png;base64,'+${dto.m_profilePicString}" height=100></div>
 	<div>
 		<div>
 			<span>[[${dto.m_nickname}]]</span><span>#[[${dto.m_code}]]</span>
 			<div th:if="${session.login != null}" id="followDiv">
 				<button th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우</button><!-- js/doFollow.js에서 팔로우 여부 확인 후 내용 바꿈  -->
-				<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn">개인정보수정</button>
+				<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberUpdate'">개인정보수정</button>
 			</div>
 		</div>
 		<div>

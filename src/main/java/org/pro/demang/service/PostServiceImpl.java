@@ -23,7 +23,6 @@ public class PostServiceImpl implements PostService{
 		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
 			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
 			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
-			System.out.println(dto.getP_id()+"번 게시글에 해시태그 "+temp+" 등록 ~ PostServiceImpl");
 		}
 	}
 	
@@ -70,7 +69,6 @@ public class PostServiceImpl implements PostService{
 	//// 번호로 게시글 찾기
 	@Override
 	public PostDTO getPost( String no ) {
-		System.out.println(mapper.getPost(no));
 		return mapper.getPost(no);
 	}
 	@Override

@@ -40,14 +40,12 @@ public class MainController {
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
 	public String loginMove() {
-		
 		return "member/login";
 	}
 
 	// 회원가입 페이지로 이동
 	@GetMapping("/signUp")
 	public String signup() {
-		
 		return "member/signUp";
 	}
 
@@ -60,11 +58,8 @@ public class MainController {
     // 친구 목록 불러오기(해당 유저의 회원코드 사용) 
 	@PostMapping("/fList")
 	public String fList(@RequestParam("follower")int follower, Model model) {
-		
 		List<MemberDTO> list = memberService.fList(follower);
-		
 		model.addAttribute("list",list);
-		
 		return "other/fListList";
 	}
 
@@ -72,10 +67,7 @@ public class MainController {
 	@PostMapping("/CommentShow")
 	@ResponseBody
 	public List<CommentDTO> commentShow(@RequestParam("p_id")String p_id){
-		
-		System.out.println("댓글 보기 Controller 작동시작");
 		List<CommentDTO> list = postService.commentShow(p_id);
-		System.out.println("댓글 보기 Controller 작동 끝");
 		return list;
 		
 	}
@@ -84,18 +76,13 @@ public class MainController {
 	@PostMapping("/CommentInsert")
 	@ResponseBody
 	public String commentInsert(CommentDTO dto) {
-		System.out.println("댓글 작성 Controller 시작");
 		postService.commentInsert(dto);
-		System.out.println("댓글 작성 Controller 끝");
 		return "OK";
 	}
 
     // 회원가입
     @PostMapping("/signUp")
 	public String signUp(MemberDTO dto) {
-		
-		System.out.println("dto 값 확인 : " + dto);
-		
 		memberService.memberInsert(dto);
 		return "member/login";
 	}
