@@ -11,7 +11,7 @@
 	</select>
 	<!-- 유저 검색 기능 쿼리문 -->
 	<select id="memberSearch" resultType="org.pro.demang.model.MemberDTO">
-		select * from membertbl m where m_email like '%' #{searchVal} '%' or m_nickname like '%' #{searchVal} '%'
+		select * from membertbl m where m_email like '%' #{reSearchVal} '%' or m_nickname like '%' #{reSearchVal} '%'
 	</select>
 
 	<!-- 게시글 검색 기능 쿼리문 -->

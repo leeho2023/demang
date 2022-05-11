@@ -25,7 +25,7 @@ public class LhhController {
     @GetMapping("/")
 	public String home() {
 		
-		return "other/homeNav";
+		return "other/searchResult";
 	}
 
 	@GetMapping("/fList")
@@ -35,10 +35,10 @@ public class LhhController {
 	}
 
 	@GetMapping("/userSearch")
-	public String userSearch(@RequestParam("searchVal")String searchVal, Model model) {
-		System.out.println(searchVal);
+	public String userSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
+		System.out.println(reSearchVal);
 
-		List<MemberDTO> memList = memberService.memberSearch(searchVal);
+		List<MemberDTO> memList = memberService.memberSearch(reSearchVal);
 
 		for(MemberDTO dto : memList){
 			System.out.println(dto.toString());
@@ -50,7 +50,7 @@ public class LhhController {
 		return "other/searchUser";
 	}
 
-	@GetMapping("/boardSearch")
+	@GetMapping("/postSearch")
 	public String boardSearch(@RequestParam("searchVal")String searchVal, Model model) {
 		System.out.println(searchVal);
 
