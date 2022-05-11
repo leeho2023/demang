@@ -38,11 +38,6 @@
 	<insert id="hashtagOnTableInsert">
 		INSERT INTO tagOnPostTBL (t_tag, t_postNo) VALUES(#{hashtag}, #{p_id})
 	</insert>
-	
-	<!-- 게시글 작성 -->
-	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id" parameterType="org.pro.demang.model.PostDTO">
-		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
-	</insert>
 
 
 	<!-- 이것은 회원가입 쿼리문입니다. -->
