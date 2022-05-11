@@ -11,6 +11,6 @@
 		<button>&hellip;</button>
 	</div>
 	<ul th:each="comment: ${commentList}" class="commentPreview">
-		<li>[[${comment.m_nickname}]]: [[${comment.c_content}]] ([[${comment.c_regDate}]])</li>
+		<li><img th:src="'data:image/png;base64,'+${dto.m_profilePicString}" height=50>[[${comment.m_nickname}]]: [[${comment.c_content}]] ([[${comment.c_regDate}]])</li>
 	</ul>
 </article>

@@ -74,7 +74,7 @@ public class KysController {
 	@ResponseBody
 	public String doFollow( String m2, HttpSession session ) {
 		mapper.doFollow(
-				(String)session.getAttribute("login"),
+				session.getAttribute("login")+"", // +""의 뜻: 문자열로 바꿈
 				m2);
 		return "";
 	}
@@ -84,7 +84,7 @@ public class KysController {
 	@ResponseBody
 	public String followCheck( String m2, HttpSession session ) {
 		if( mapper.followCheck(
-				(String)session.getAttribute("login"), 
+				session.getAttribute("login")+"", // +""의 뜻: 문자열로 바꿈
 				m2
 				) != 0 ) {
 			return "O";

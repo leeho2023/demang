@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostDTO {
 
 	private int p_id;
@@ -26,21 +26,5 @@ public class PostDTO {
 		this.p_writer = p_writer;
 		this.p_content = p_content;
 	}
-
-	
-
-	public int getP_id() {
-		return p_id;
-	}
-	public void setP_id(int p_id) {
-		this.p_id = p_id;
-	}
-	public int getP_origin() {
-		return p_origin;
-	}
-	public void setP_origin(int p_origin) {
-	}
-	
-	
 	
 }

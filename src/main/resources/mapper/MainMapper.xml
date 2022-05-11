@@ -89,8 +89,8 @@
 	SELECT COUNT(*)  FROM followTBL WHERE follower=#{m1} AND followee=#{m2}</select>
 
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
-	<select id="getPostList_writer" resultType="Integer">SELECT * FROM postTBL
-		WHERE p_writer=#{no} ORDER BY p_id DESC</select>
+	<select id="getPostList_writer" resultType="Integer">
+	SELECT * FROM postTBL WHERE p_writer=#{no} ORDER BY p_id DESC</select>
 		
 	<!-- 해당 번호의 회원이 팔로우한 회원들이 쓴 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_followee" resultType="Integer">
@@ -104,8 +104,7 @@
 
 
 	<!-- 게시글 번호로 게시글 찾기 -->
-	<select id="getPost" resultType="org.pro.demang.model.PostDTO">select * from postTBL WHERE p_id
-		= #{no};</select>
+	<select id="getPost" resultType="org.pro.demang.model.PostDTO">select * from postTBL WHERE p_id = #{no};</select>
 	<!-- 게시글 번호로 댓글들 찾기 최신순 -->
 	<select id="getCommentList" resultType="org.pro.demang.model.CommentDTO">
 		select m.m_nickname, m.m_profilePic , m.m_code , c.*
@@ -129,8 +128,9 @@
 	<update id="memberUpdate">
 		UPDATE memberTBL
 		SET m_nickname=#{m_nickname}, m_password=#{m_password}, m_birth=#{m_birth},
-		 m_introduce=#{m_introduce}, m_gender=#{m_gender}
-		   WHERE m_id=#{m_id};
+		m_profilePic=#{m_profilePic},
+		m_introduce=#{m_introduce}, m_gender=#{m_gender}
+		WHERE m_id=#{m_id};
 	</update>
 		   
 		   

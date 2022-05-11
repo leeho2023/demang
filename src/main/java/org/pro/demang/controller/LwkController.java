@@ -1,5 +1,8 @@
 package org.pro.demang.controller;
 
+import java.io.IOException;
+import java.util.Base64;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -50,7 +53,9 @@ public class LwkController {
 	public String memberRead(Model model, HttpSession session) {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
 		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
-		System.out.println("lwkController.memberRead "+dto);
+		// 프사 인코딩
+//		String temp = Base64.getEncoder().encodeToString(dto.getM_profilePic());
+		System.out.println("lwkController.memberRead ~ "+dto);
 		model.addAttribute("dto",dto);
 		return "member/memberRead";
 	}
@@ -65,8 +70,9 @@ public class LwkController {
 	}
 	// 회원정보 업데이트 하기
 	@PostMapping("/memberUpdate")
-	public String memberUpdate2(MemberDTO dto, @RequestParam("file") MultipartFile file, HttpSession session) {
-		dto.setM_id( (int)session.getAttribute("login") );
+	public String memberUpdate2(MemberDTO dto, @RequestParam("propic") MultipartFile propic, HttpSession session) {
+		dto.setM_id( (int)session.getAttribute("login") );// 정보 수정할 회원 번호 정보: 세션에서 가져오기
+		try {dto.setM_profilePic( propic.getBytes() );} catch (IOException e) {}// 프사
 		MemberService.memberUpdate(dto);
 		return "redirect:/memberRead";
 	}
