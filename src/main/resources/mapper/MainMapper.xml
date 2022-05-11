@@ -4,12 +4,13 @@
 <mapper namespace="org.pro.demang.mapper.MainMapper">
 
 	
-	<!-- 게시글 & 회원 조인용 -->
+	<!-- 게시글 & 회원 조인용 (PostDTO 안에 MemberDTO 있다) -->
 	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
 		<result column="m_id" property="m_id"/>
 		<result column="m_code" property="m_code"/>
 		<result column="m_email" property="m_email"/>
 		<result column="m_nickname" property="m_nickname"/>
+		<result column="m_profilePic" property="m_profilePic"/>
 	</resultMap>
 	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
 		<result column="p_id" property="p_id"/>
@@ -17,6 +18,15 @@
 		<result column="p_type" property="p_type"/>
 		<result column="p_writer" property="p_writer"/>
 		<result column="p_content" property="p_content"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
+	
+	<resultMap id="commentDTO" type="org.pro.demang.model.CommentDTO">
+		<result column="c_id" property="c_id"/>
+		<result column="c_writer" property="c_writer"/>
+		<result column="c_content" property="c_content"/>
+		<result column="c_postNo" property="c_postNo"/>
+		<result column="c_regDate" property="c_regDate"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 	</resultMap>
 
@@ -113,22 +123,23 @@
 	<select id="getPost" resultType="org.pro.demang.model.PostDTO" resultMap="postDTO">
 	SELECT m.*, p.* from postTBL p JOIN memberTBL m ON p.p_writer = m.m_id WHERE p_id = #{no}</select>
 	<!-- 게시글 번호로 댓글들 찾기 최신순 -->
-	<select id="getCommentList" resultType="org.pro.demang.model.CommentDTO">
-		select m.m_nickname, m.m_profilePic , m.m_code , c.*
-		   from commentTBL c
-		   join memberTBL m 
-		   on c.c_writer = m.m_id
-		   WHERE c_postNo = #{no}
-		   ORDER BY c.c_id DESC;</select>
+	<select id="getCommentList" resultType="org.pro.demang.model.CommentDTO" resultMap="commentDTO">
+	SELECT m.*, c.*
+	   from commentTBL c
+	   join memberTBL m 
+	   on c.c_writer = m.m_id
+	   WHERE c_postNo = #{no}
+	   ORDER BY c.c_id DESC
+	</select>
 	<!-- 게시글 번호로 댓글들 찾기. 최신 세 개만 -->
-	<select id="getCommentList_recent" resultType="org.pro.demang.model.CommentDTO">
-		select m.m_nickname, m.m_profilePic , m.m_code , c.*
-		   from commentTBL c
-		   join memberTBL m 
-		   on c.c_writer = m.m_id
-		   WHERE c_postNo = #{no}
-		   ORDER BY c.c_id DESC
-		   LIMIT 3
+	<select id="getCommentList_recent" resultType="org.pro.demang.model.CommentDTO" resultMap="commentDTO">
+	SELECT m.*, c.*
+	   from commentTBL c
+	   join memberTBL m 
+	   on c.c_writer = m.m_id
+	   WHERE c_postNo = #{no}
+	   ORDER BY c.c_id DESC
+		LIMIT 3
 	</select>
 	<!-- 게시글 번호로 해당 게시글의 이미지들 찾기 -->
 	<select id="getImageList" resultType="org.pro.demang.model.PostImgDTO">

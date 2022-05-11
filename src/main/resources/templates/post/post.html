@@ -1,11 +1,11 @@
 <article class="post">
 	<div class="postView">
-		<a th:href="'/vip?p='+${dto.memberDTO.m_id}" style="display: block">
-			<h1 class="writerInfo">
-				<img class="propic" alt="프로필 사진" th:src="'data:image/png;base64,'+${dto.memberDTO.m_profilePicString}" height=30>
-				<span>[[${dto.memberDTO.m_nickname}]]</span>
-			</h1>
-		</a>
+		<h1 class="writerInfo">
+			<a th:href="'/vip?p='+${post.memberDTO.m_id}" style="display: block">
+				<img class="propic" alt="프로필 사진" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
+				<span>[[${post.memberDTO.m_nickname}]]</span>
+			</a>
+		</h1>
 		<div class="postImgBox">
 			<div class="postImgs" th:each="postImg: ${imageList}">
 				<img th:src="'data:image/png;base64,'+${postImg.m_profilePicString}" height=300>
@@ -13,7 +13,7 @@
 			<button>&lt;</button>
 			<button>&gt;</button>
 		</div>
-		<div class="content">[[${dto.p_content}]]</div>
+		<div class="content">[[${post.p_content}]]</div>
 		
 		<div class="menubar">
 			<button>관심</button>
@@ -26,8 +26,10 @@
 		</form>
 		<ul class="commentList">
 			<li th:each="comment: ${commentList}">
-				<img th:src="'data:image/png;base64,'+${comment.m_profilePicString}" height=25>
-				<span>[[${comment.m_nickname}]]</span>
+				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
+					<img th:src="'data:image/png;base64,'+${comment.memberDTO.m_profilePicString}" height=30>
+					<span>[[${comment.memberDTO.m_nickname}]]</span>
+				</a>
 				<span>[[${comment.c_content}]]</span>
 				<span>[[${comment.c_regDate}]]</span>
 			</li>

@@ -118,12 +118,12 @@ public class MainController {
 //	      return "post/PostInsert";
 //	}
 	
-	//// 게시글 한 개
+	//// 게시글 한 개 가져오기(ajax용)
 	@PostMapping("/postItem")
 	public String feedItem( @RequestParam("no") String no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
 		PostDTO dto = postService.getPost( no );
-		model.addAttribute("dto", dto);
+		model.addAttribute("post", dto);
 		//// 게시글의 이미지 정보
 		model.addAttribute(
 				"imageList",
