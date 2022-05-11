@@ -3,7 +3,22 @@
                   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.pro.demang.mapper.MainMapper">
 
-
+	
+	<!-- 게시글 & 회원 조인용 -->
+	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
+		<result column="m_id" property="m_id"/>
+		<result column="m_code" property="m_code"/>
+		<result column="m_email" property="m_email"/>
+		<result column="m_nickname" property="m_nickname"/>
+	</resultMap>
+	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
+		<result column="p_id" property="p_id"/>
+		<result column="p_origin" property="p_origin"/>
+		<result column="p_type" property="p_type"/>
+		<result column="p_writer" property="p_writer"/>
+		<result column="p_content" property="p_content"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
 
 
 	<!-- 친구목록 불러오는 쿼리문 -->
@@ -19,15 +34,6 @@
 	</select>
 
 	<!-- 게시글 검색 기능 쿼리문 -->
-	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
-		<result column="m_code" property="m_code"/>
-		<result column="m_email" property="m_email"/>
-		<result column="m_nickname" property="m_nickname"/>
-	</resultMap>
-	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
-		<result column="p_content" property="p_content"/>
-		<collection property="memberDTO" resultMap="memberDTO"/>
-	</resultMap>
 	<select id="postSearch" parameterType="org.pro.demang.model.PostDTO" resultMap="postDTO">
 		select m.*, p.*
 		from membertbl m
@@ -123,6 +129,10 @@
 		   WHERE c_postNo = #{no}
 		   ORDER BY c.c_id DESC
 		   LIMIT 3
+	</select>
+	<!-- 게시글 번호로 해당 게시글의 이미지들 찾기 -->
+	<select id="getImageList" resultType="org.pro.demang.model.PostImgDTO">
+	SELECT * FROM postImgTBL WHERE p_id = #{p_id}
 	</select>
 	
 	<!-- 회원정보수정 -->

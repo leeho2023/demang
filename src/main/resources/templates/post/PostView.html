@@ -3,44 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/PostView.css">
-<title>글 작성</title>
+<title>글 보기</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<header th:include="other/homeNav"></header>
+<nav></nav>
 
-	<header></header>
-    <nav class="imsi"></nav>
-    <main>
-        <div class="wrap">
-        	<div class="contentWrap">
-            <div class="title" id="profile">이름+프사 뜨는 곳(ajax)</div>
-            <div class="content">
-            	<div class="p_image">${dto.p_image} 사진 들어가는 곳</div>
-            <div class="p_content">${dto.p_content}내용(게시글 번호 호출)</div>
-            </div>
-        	  <div class="tag">
-        	  <input type="button" name="like" value="좋아요"> 
-        	  <input type="button" name="follow" value="팔로우">
-        	  <input type="text" readonly="readonly" value="태그 나오는 곳">
-        	  </div>
-     		</div>
-     		
-        	  <div>  
-        	  <!-- 댓글 나오는 곳 -->
-        	  <div class="commentRead" id="commentRead">댓글 나오는 곳(게시글 번호 연동 + ajax)</div>
-        	  
-        	  <!-- 댓글 작성란 -->
-           <div class="commentInsert">
-           <div>프사</div>
-           <input type="text" class="commentWrite" name="commentWrite" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
-           <div><input type="button" value="작성"></div>
-           </div>
-           
-           </div>
+<main>
+    <div class="wrap">
+    	<div class="contentWrap">
+        <div class="title" id="profile">[[${post.memberDTO.m_nickname}]]</div>
+        <div class="content">
+        	<div class="p_image">${dto.p_image} 사진 들어가는 곳</div>
+        <div class="p_content">[[${post.p_content}]]</div>
         </div>
-    </main>
+    	  <div class="tag">
+    	  <input type="button" name="like" value="좋아요"> 
+    	  <input type="button" name="follow" value="팔로우">
+    	  <input type="text" readonly="readonly" value="태그 나오는 곳">
+    	  </div>
+ 		</div>
+ 		
+    	  <div>  
+    	  <!-- 댓글 나오는 곳 -->
+    	  <div class="commentRead" id="commentRead">댓글 나오는 곳(게시글 번호 연동 + ajax)</div>
+    	  
+    	  <!-- 댓글 작성란 -->
+       <div class="commentInsert">
+       <div>프사</div>
+       <input type="text" class="commentWrite" name="commentWrite" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
+       <div><input type="button" value="작성"></div>
+       </div>
+       
+       </div>
+    </div>
+</main>
 
-    <footer class="imsi2"></footer>
+<footer th:include="other/footer"></footer>
 
 <script src="/js/PostView.js"></script>
 </body>

@@ -96,7 +96,11 @@ public class MainController {
 	
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
-	public String postViewRoute() {
+	public String postViewRoute( @RequestParam("p_id") String p_id, Model model ) {
+		model.addAttribute(
+				"post",
+				mapper.getPost(p_id)
+				);
 		return "post/PostView";
 	}
 	
@@ -114,12 +118,17 @@ public class MainController {
 //	      return "post/PostInsert";
 //	}
 	
-	//// 게시글 한 개 불러오기
+	//// 게시글 한 개
 	@PostMapping("/postItem")
 	public String feedItem( @RequestParam("no") String no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
 		PostDTO dto = postService.getPost( no );
 		model.addAttribute("dto", dto);
+		//// 게시글의 이미지 정보
+		model.addAttribute(
+				"imageList",
+				mapper.getImageList( no )
+				);
 		//// 게시글의 댓글 정보
 		model.addAttribute(
 				"commentList",

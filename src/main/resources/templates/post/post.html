@@ -1,16 +1,37 @@
 <article class="post">
-	<h1>
-		<img class="propic" alt="프로필 사진" th:src="'data:image/png;base64,'+${dto.memberDTO.m_profilePicString}" height=30>
-		<span>[[${dto.memberDTO.m_nickname}]]</span>
-	</h1>
-	<div class="content">[[${dto.p_content}]]</div>
-	
-	<div>
-		<button>관심</button>
-		<button>답글</button>
-		<button>&hellip;</button>
+	<div class="postView">
+		<a th:href="'/vip?p='+${dto.memberDTO.m_id}" style="display: block">
+			<h1 class="writerInfo">
+				<img class="propic" alt="프로필 사진" th:src="'data:image/png;base64,'+${dto.memberDTO.m_profilePicString}" height=30>
+				<span>[[${dto.memberDTO.m_nickname}]]</span>
+			</h1>
+		</a>
+		<div class="postImgBox">
+			<div class="postImgs" th:each="postImg: ${imageList}">
+				<img th:src="'data:image/png;base64,'+${postImg.m_profilePicString}" height=300>
+			</div>
+			<button>&lt;</button>
+			<button>&gt;</button>
+		</div>
+		<div class="content">[[${dto.p_content}]]</div>
+		
+		<div class="menubar">
+			<button>관심</button>
+			<button>답글</button>
+			<button>&hellip;</button>
+		</div>
+		<form>
+			<input type="text" placeholder="한 마디 남기기">
+			<button type="button" onclick="">댓글쓰기</button>
+		</form>
+		<ul class="commentList">
+			<li th:each="comment: ${commentList}">
+				<img th:src="'data:image/png;base64,'+${comment.m_profilePicString}" height=25>
+				<span>[[${comment.m_nickname}]]</span>
+				<span>[[${comment.c_content}]]</span>
+				<span>[[${comment.c_regDate}]]</span>
+			</li>
+		</ul>
 	</div>
-	<ul th:each="comment: ${commentList}" class="commentPreview">
-		<li><img th:src="'data:image/png;base64,'+${dto.m_profilePicString}" height=50>[[${comment.m_nickname}]]: [[${comment.c_content}]] ([[${comment.c_regDate}]])</li>
-	</ul>
+	<button>펼접</button>
 </article>
