@@ -114,17 +114,12 @@ public class MainController {
 //	      return "post/PostInsert";
 //	}
 	
-	//// 게시글 한 개
+	//// 게시글 한 개 불러오기
 	@PostMapping("/postItem")
 	public String feedItem( @RequestParam("no") String no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
 		PostDTO dto = postService.getPost( no );
 		model.addAttribute("dto", dto);
-		//// 게시글 작성자 정보
-		model.addAttribute(
-				"writer",
-				memberService.getMember_no( dto.getP_writer() )
-				);
 		//// 게시글의 댓글 정보
 		model.addAttribute(
 				"commentList",

@@ -18,7 +18,7 @@ $(function(){
 </head>
 <body>
 [[${session.login}]]번 회원 로그인, [[${dto.m_id}]]번 회원의 페이지
-<header>헤더</header>
+<header th:include="other/homeNav"></header>
 <nav>친구목록</nav> 
 
 
@@ -47,7 +47,7 @@ $(function(){
 </main>
 
 
-<footer>푸터</footer>
+<footer th:include="other/footer"></footer>
 
 <script th:inline="javascript">
 //// 팔로잉 수 가져오기

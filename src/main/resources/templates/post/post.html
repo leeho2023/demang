@@ -1,7 +1,7 @@
 <article class="post">
 	<h1>
-		<img class="propic" alt="프로필 사진" src="images/propicTest.png">
-		<span>[[${writer.m_nickname}]]</span>
+		<img class="propic" alt="프로필 사진" th:src="'data:image/png;base64,'+${dto.memberDTO.m_profilePicString}" height=30>
+		<span>[[${dto.memberDTO.m_nickname}]]</span>
 	</h1>
 	<div class="content">[[${dto.p_content}]]</div>
 	
