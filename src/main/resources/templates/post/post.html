@@ -13,17 +13,17 @@
 			<button>&lt;</button>
 			<button>&gt;</button>
 		</div>
-		<div class="content">[[${post.p_content}]]</div>
+		<div class="content">[[${post.p_content}]]<button>더보기 버튼 아직 아무기능 없음</button></div>
 		
 		<div class="menubar">
 			<button>관심</button>
 			<button>답글</button>
 			<button>&hellip;</button>
 		</div>
-		<form>
+		<div class="myComment">
 			<input type="text" placeholder="한 마디 남기기">
-			<button type="button" onclick="">댓글쓰기</button>
-		</form>
+			<button type="button" th:onclick="'newComment('+${session.login}+', this, '+${post.p_id}+')'">댓글쓰기</button>
+		</div>
 		<ul class="commentList">
 			<li th:each="comment: ${commentList}">
 				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
@@ -35,5 +35,4 @@
 			</li>
 		</ul>
 	</div>
-	<button>펼접</button>
 </article>

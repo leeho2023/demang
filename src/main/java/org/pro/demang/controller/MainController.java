@@ -136,6 +136,4 @@ public class MainController {
 				);
 		return "post/post";
 	}
-	
-
 }

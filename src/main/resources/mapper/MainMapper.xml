@@ -146,6 +146,11 @@
 	SELECT * FROM postImgTBL WHERE p_id = #{p_id}
 	</select>
 	
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert" useGeneratedKeys="true" keyProperty="c_id">
+		INSERT INTO commentTBL (c_writer, c_content, c_postNo) VALUES (#{c_writer}, #{c_content}, #{c_postNo})
+	</insert>
+	
 	<!-- 회원정보수정 -->
 	<update id="memberUpdate">
 		UPDATE memberTBL

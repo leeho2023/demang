@@ -3,6 +3,7 @@ package org.pro.demang.controller;
 import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PostService;
@@ -56,6 +57,13 @@ public class KysController {
 		return "post/profile";
 	}
 	
+	//// 댓글 등록 (ajax용)
+	@PostMapping("func/newComment")
+	@ResponseBody
+	public String newComment( CommentDTO dto ) {
+		return memberService.commentInsert(dto);
+	}
+
 	//// 팔로잉 수 가져오기
 	@GetMapping("/func/followingNum")
 	@ResponseBody

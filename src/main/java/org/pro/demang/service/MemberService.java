@@ -2,6 +2,7 @@ package org.pro.demang.service;
 
 import java.util.List;
 
+import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 
 public interface MemberService {
@@ -15,6 +16,7 @@ public interface MemberService {
 	void memberUpdate(MemberDTO dto);
 
     List<MemberDTO> memberSearch(String reSearchVal);
+	String commentInsert(CommentDTO dto);
 
 	
 	

@@ -17,7 +17,6 @@ public interface MainMapper {
 	void memberInsert(MemberDTO dto); // 회원가입
 
 	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
-	void commentInsert(CommentDTO dto); // 댓글 입력하기
 	void postInsert( PostDTO dto ); // post작성
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
@@ -48,6 +47,7 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<PostImgDTO> getImageList(String no);//게시글 번호로 해당 게시글의 이미지들 찾기
 	List<PostImgDTO> getImageList(int no);//게시글 번호로 해당 게시글의 이미지들 찾기
+	void commentInsert( CommentDTO dto );// 댓글 등록
 
 
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
