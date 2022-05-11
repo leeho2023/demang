@@ -32,7 +32,7 @@ public class CommentDTO {
 	public byte[] getM_profilePic() {
 		return m_profilePic;
 	}
-	//// 뷰에서 이미지 불러오기용: 바이트 배열의 이미지를 Base64를 통해 인코딩한 뒤 문자열로 반환. 타임리프에서 ${dto.m_profilePicString} 등으로 쓰면 된다.
+	//// 뷰에서 이미지 불러오기용: 바이트 배열의 이미지를 Base64를 통해 인코딩한 뒤 문자열로 반환. 뷰에서 타임리프로 <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}">등으로 쓰면 된다.
 	//// MemberDTO에서와 같은 방식이다.
 	public String getM_profilePicString() {
 		return new String(Base64.getEncoder().encodeToString(m_profilePic));

@@ -70,6 +70,7 @@ public class PostServiceImpl implements PostService{
 	//// 번호로 게시글 찾기
 	@Override
 	public PostDTO getPost( String no ) {
+		System.out.println(mapper.getPost(no));
 		return mapper.getPost(no);
 	}
 	@Override
