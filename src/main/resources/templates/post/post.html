@@ -23,6 +23,7 @@
 		<div class="myComment">
 			<input type="text" placeholder="한 마디 남기기">
 			<button type="button" th:onclick="'newComment('+${session.login}+', this, '+${post.p_id}+')'">댓글쓰기</button>
+			<!-- 댓글 작성 하면 ajax로 댓글을 디비에 등록하고 div.myComment의 내용을 비우고 방금 쓴 그 댓글을 표시한다. 표시하는 내용은 MemberServiceImpl에 있다. -->
 		</div>
 		<ul class="commentList">
 			<li th:each="comment: ${commentList}">

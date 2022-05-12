@@ -81,11 +81,11 @@ public class MemberServiceImpl implements MemberService {
 	//// 댓글 등록 후 표시할 html 요소를 반환
 	@Override
 	public String commentInsert(CommentDTO dto) {
-		System.out.println("mem ser 1 ~ "+dto);
+		mapper.commentInsert(dto);
 		dto.setMemberDTO( getMember_no( dto.getC_writer() ) );// 댓글 작성자 번호로 회원 조회하여 정보에 넣기
 		return "<img src=\"data:image/png;base64,"+dto.getMemberDTO().getM_profilePicString()+"\" height=30>"
 				+ "<span>"+dto.getMemberDTO().getM_nickname()+"</span>"
-				+ "<span>"+dto.getC_content()+"</span> 내가 쓴 댓글이 이렇게 표시됩니다. ~ MemberServiceImpl";
+				+ "<span>"+dto.getC_content()+"</span> 내가 쓴 댓글이 이렇게 표시됩니다. ~  MemberServiceImpl";
 	}
 
 
