@@ -7,8 +7,10 @@
 			</a>
 		</h1>
 		<div class="postImgBox">
-			<div class="postImgs" th:each="postImg: ${imageList}">
-				<img th:src="'data:image/png;base64,'+${postImg.m_profilePicString}" height=300>
+			<div class="postImgs">
+				<div class="postImgDiv" th:each="postImg: ${imageList}">
+					<img th:src="'data:image/png;base64,'+${postImg.m_profilePicString}" height=300>
+				</div>
 			</div>
 			<button>&lt;</button>
 			<button>&gt;</button>

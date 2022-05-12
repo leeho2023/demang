@@ -8,14 +8,14 @@
 </head>
 <body>
 [[${session.login}]]번 회원으로 로그인 중
-<header>메인메뉴</header>
+<header th:include="other/homeNav">메인메뉴</header>
 <nav>팔로목록</nav>
 <main>
 
 
 <section id="postList"></section><hr id="endOfPostListPosCheck">
 </main>
-<footer>푸터</footer>
+<footer th:include="other/footer">푸터</footer>
 
 
 <script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
