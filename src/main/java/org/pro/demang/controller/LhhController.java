@@ -1,5 +1,7 @@
 package org.pro.demang.controller;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.pro.demang.model.MemberDTO;
@@ -25,13 +27,7 @@ public class LhhController {
     @GetMapping("/")
 	public String home() {
 		
-		return "other/searchResult";
-	}
-
-    @GetMapping("/searchResult")
-	public String searchResult() {
-		
-		return "other/searchResult";
+		return "other/fList";
 	}
     
 	@GetMapping("/fList")
@@ -57,13 +53,22 @@ public class LhhController {
 		return "other/searchUser";
 	}
 
+
 	//게시글 검색
 	@GetMapping("/postSearch")
 	public String postSearch(@RequestParam("searchVal")String searchVal, Model model) {
 		System.out.println(searchVal);
+		
 
 		List<PostDTO> postList = postService.postSearch(searchVal);
 		
+		// List<String> pImgList = new ArrayList<>();
+		// for(int i = 0;  i < postList.size(); i++){
+		// 	pImgList.add("data:image/;base64," + Base64.getEncoder().encodeToString(postList.get(i).getPostImgDTO().getI_image()));
+		// }
+
+
+		// model.addAttribute("pImgList", pImgList);
 		model.addAttribute("postList", postList);
 
 		return "other/searchPost";

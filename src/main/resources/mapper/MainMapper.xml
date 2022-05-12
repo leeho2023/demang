@@ -19,6 +19,12 @@
 		<result column="p_writer" property="p_writer"/>
 		<result column="p_content" property="p_content"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
+		<collection property="postImgDTO" resultMap="postImgDTO"/>
+	</resultMap>
+	<resultMap id="postImgDTO" type="org.pro.demang.model.PostImgDTO">
+		<result column="i_no" property="i_no"/>
+		<result column="p_id" property="p_id"/>
+		<result column="i_image" property="i_image"/>
 	</resultMap>
 	
 	<resultMap id="commentDTO" type="org.pro.demang.model.CommentDTO">
@@ -28,6 +34,11 @@
 		<result column="c_postNo" property="c_postNo"/>
 		<result column="c_regDate" property="c_regDate"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
+
+	<resultMap id="tagDTO" type="org.pro.demang.model.TagDTO">
+		<result column="t_tag" property="t_tag"/>
+		<collection property="postDTO" resultMap="postDTO"/>
 	</resultMap>
 
 
@@ -45,10 +56,12 @@
 
 	<!-- 게시글 검색 기능 쿼리문 -->
 	<select id="postSearch" parameterType="org.pro.demang.model.PostDTO" resultMap="postDTO">
-		select m.*, p.*
-		from membertbl m
-		inner join posttbl p
+		select m.*, p.*, p2.*
+		from memberTBL m
+		inner join postTBL p
 		on p.p_writer = m.m_id
+		inner join postimgTBL p2 
+		on p2.p_id = p.p_id
 		where p.p_content like '%' #{searchVal} '%'
 	</select>
 
@@ -60,7 +73,7 @@
 		on t.t_postNo = p.p_id
 		inner join memberTBL m 
 		on p.p_writer = m.m_id 
-		where t.t_tag like '#{reSearchVal}'
+		where t.t_tag = '#{reSearchVal}'
 	</select>
 
 	<!-- 댓글 목록 불러오는 쿼리문 -->
