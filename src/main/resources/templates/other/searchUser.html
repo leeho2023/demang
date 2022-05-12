@@ -1,13 +1,32 @@
-<div class="content1">
-    <div class="userBox" th:each="list : ${list}">
-        <div class="userProfile">
-            <div class="profileImg">
-                <img src="img/defaultPropic.png">
-            </div>
-            <div class="email_nickName">
-                <span class="nickName">[[${list.m_nickname}]]<span class="nickCode"> #[[${list.m_code}]]</span></span>
-                <span class="email">[[${list.m_email}]]</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserSearch</title>
+    <link rel="stylesheet" href="css/homeNav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header id="homeNav" th:include="other/homeNav"></header>
+    <div class="contentBox">
+        <div class="content1">
+            <div class="userBox" th:each="list : ${list}">
+                <div class="userProfile">
+                    <div class="profileImg">
+                        <img src="img/defaultPropic.png">
+                    </div>
+                    <div class="email_nickName">
+                        <span class="nickName">[[${list.m_nickname}]]<span class="nickCode"> #[[${list.m_code}]]</span></span>
+                        <span class="email">[[${list.m_email}]]</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <footer th:include="other/footer"></footer>
+    <script src="js/homeNav.js"></script>
+</body>
+</html>

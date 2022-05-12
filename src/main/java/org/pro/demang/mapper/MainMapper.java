@@ -8,6 +8,7 @@ import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
+import org.pro.demang.model.TagDTO;
 
 @Mapper
 public interface MainMapper {
@@ -51,7 +52,6 @@ public interface MainMapper {
 	List<PostImgDTO> getImageList(int no);//게시글 번호로 해당 게시글의 이미지들 찾기
 	void commentInsert( CommentDTO dto );// 댓글 등록
 
-
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 
 	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
@@ -59,5 +59,7 @@ public interface MainMapper {
 	public MemberDTO memberRead(String m_id);
 
 	void memberUpdate(MemberDTO dto);
+
+    List<TagDTO> tagSearch(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
 	
 }
