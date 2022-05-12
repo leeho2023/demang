@@ -9,22 +9,9 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-test
- 	<h1>회원상세보기</h1>
- 	프사: <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"><br>
-	회원 아이디 : [[${dto.m_id}]] <br>
-	회원 이름 : [[${dto.m_nickname}]]<br>
-	회원 비밀번호 : [[${dto.m_password}]]<br>
-	회원 생일 : [[${dto.m_birth}]]<br>
-	자기소개 : [[${dto.m_introduce}]]<br>
-	성별 : [[${dto.m_gender}]]<br>
-	판매자 등록여부 : [[${dto.m_licensed}]]<br>
-	누적경고 횟수 : [[${dto.m_warnCount}]]<br>
-	활동가능 여부 : [[${dto.m_available}]]<br>
-	가입일 : [[${dto.m_regDate}]] <br>
-	<a th:href="@{/memberUpdate}">수정하러가기</a>  
-=======
+
+ 	
+	
 	<div class="div2"><p class="p1"> <a th:href="@{/feed}">DEMANG</a></p>  </div>
      <div class="div4">
      <div class="div3">
@@ -46,6 +33,7 @@ test
 	<div class="input8"><h4 style="display:inline;">활동가능 여부</h4> [[${dto.m_available}]]</div> <br>
 	<div class="input9"> <h4 style="display:inline;">가입일</h4> [[${dto.m_regDate}]]</div>
 	
+	프사: <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"><br>
 	<!-- <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"> -->
 	  <br>
 	<a th:href="@{/memberUpdate}" class="animated-button1">
@@ -57,7 +45,6 @@ test
 </a>
 	</div>
 </div>
->>>>>>> refs/remotes/origin/demang_design
 	<br>
 	
 	<script type="text/javascript" src="js/memberRead.js"></script>
