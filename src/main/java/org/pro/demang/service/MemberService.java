@@ -19,6 +19,7 @@ public interface MemberService {
 	String commentInsert(CommentDTO dto);
 
 	
+	public String emailCheck(String m_email);
 	
 	
 

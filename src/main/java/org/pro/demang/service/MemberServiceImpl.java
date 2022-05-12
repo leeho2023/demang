@@ -69,7 +69,18 @@ public class MemberServiceImpl implements MemberService {
 		mapper.memberUpdate(dto);
 		
 	}
-
+	@Override
+    public String emailCheck(String m_email) {
+       String resultPW =  mapper.emailCheck(m_email);
+       System.out.println("emailCheck 값 : "+resultPW);
+       if(resultPW != null || m_email == "") {
+          System.out.println("22222222");
+          return "useUser_email";
+         }else {
+           System.out.println("111111");
+             return "notUseUser_email";
+       }
+   }
 	
 
 	// 유저 검색

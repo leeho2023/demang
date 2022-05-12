@@ -2,6 +2,7 @@
 $(function(){
                 //email유효성 검사
                 $("#m_email").on("input",function(){
+							var m_email = $("#m_email").val();
                      var regex = /.+@[a-z]+(\.[a-z]+){1,2}$/;
                      var result = regex.exec($("#m_email").val());
                     
@@ -9,7 +10,36 @@ $(function(){
                        $(".email.regex").html("");  
                     }else{
                         $(".email.regex").html("올바른 이메일이 아닙니다");
+                        $(".email.regex").css("color","red");
+                        return;
                     }
+                    
+                    
+                    $.ajax({
+                  url : "/emailCheck",
+                  type : 'post',
+                  data : {
+                     m_email : m_email
+                  },
+                  success : function(data) {
+                     var result = regex.exec(m_email);
+                     if (data == "bad") {
+                        $(".email.regex").html("이메일이 중복됩니다.");
+                           $(".email.regex").css("color", "red");
+                           return;
+                     }
+                     
+                     if(data != "bad"){
+                        $(".email.regex").html("사용가능");
+                           $(".email.regex").css("color", "green");
+                           emailCheck = true;
+                           return;
+                        }
+                     
+                        
+                     }
+                  
+                  })
                 })
                 
                  //이름 유효성검사

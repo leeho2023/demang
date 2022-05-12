@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/memberUpdate.css"type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 </head>
 <body>
+<<<<<<< HEAD
 <h1>회원정보수정</h1>
  <form action="/memberUpdate" method="post" enctype="multipart/form-data">
  	프로필사진: <input type="file" name="propic">
@@ -19,5 +23,55 @@
 	X <input type="radio"name="m_gender" value="X"><br>
  	<input type="submit" value="수정하기">
 	</form> 
+=======
+
+	
+	
+ <form action="/memberUpdate" method="post"id=signUp>
+ <div class="div2"><p class="p1"> <a th:href="@{/feed}">DEMANG</a></p>  </div>
+     <div class="div4">
+     <div class="div3">
+     <br><br>
+     <p class="p2">PERSONNAL<br> PROFILE</p>
+     
+     </div>
+      <div class="div1">
+      <br><br><br>
+       <div class="input1"> <h1 style="display:inline;"> [[${dto.m_nickname}]]</h1><p class="p3" style="display:inline;">님의 개인정보 수정페이지입니다.</p></div><br>
+       <div class="div5">
+       <div class="input2"> <h4 style="display:inline;">이름</h4> <input type="text"id="m_nickname"name="m_nickname" class="input22"th:value="${dto.m_nickname}"></div>
+       <div class="name regex"></div><br>
+       
+     <div class="input3"><h4 style="display:inline;">비밀번호</h4><input type="password"id="m_password" name="m_password" class="input33"></div>
+     <div class="pw regex"></div>
+     <br>
+     <div class="input4"><h4 style="display:inline;">생년월일</h4> <input type="date"name="m_birth" th:value="${dto.m_birth}" class="input44"></div> <br>
+        <div class="input6">
+         <fieldset class="fieldset1">
+         <legend class="legend1"><h4 style="display:inline;">성별</h4></legend>
+        <p style="display:inline;" class="p55">남성</p><input type="radio"name="m_gender" value="M" class="input66">
+	 <p style="display:inline;"class="p55">여성</p> <input type="radio"name="m_gender" value="F"class="input66">
+	 <p style="display:inline;"class="p55">중성</p> <input type="radio"name="m_gender" checked="checked" value="X"class="input66">
+	</fieldset><br>
+	
+         </div>	
+        <div class="input5"> <h4 style="display:inline;"><div>자기소개</div> </h4><textarea name="m_introduce" class="input55">[[${dto.m_introduce}]]</textarea></div><br>
+         </div>
+         
+	
+	<br> 
+	
+ 	
+ 	<div class="wrap">
+  <button type="button" class="button"name="signup" id="signupbtn">APPLY</button>
+</div>
+ 		</div>
+</div>
+ 	</form> 
+ 	
+
+
+	<script type="text/javascript" src="js/memberUpdate.js"></script>
+>>>>>>> refs/remotes/origin/demang_design
 </body>
 </html>

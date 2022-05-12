@@ -57,9 +57,9 @@ public interface MainMapper {
 	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
 
 	public MemberDTO memberRead(String m_id);
-
 	void memberUpdate(MemberDTO dto);
 
     List<TagDTO> tagSearch(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
+	public String emailCheck(String m_email);
 	
 }
