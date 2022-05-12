@@ -24,10 +24,15 @@
                 </div>
                 	<div class="write_main" id="imgWrap">
                     <input type="text" name="p_content" class="textInput" id="textInput"> <!-- 글 내용 작성 input -->
-                    <label for="input-file" id="fileLabel" class="label">업로드</label> <input type="file" id="ex_file"> <!-- 이미지 업로드가 보여지는 label -->
-                    <input type="file" id="input-file" class="upload-hidden" name="p_image" accept="image/*">
-                    <ul class="imgPreview" id="imgPreview">
-                    </ul>
+                    <!-- 이미지 업로드가 보여지는 label -->
+                    <div class="labelWrap">
+                	<ul class="selectedImg">
+                		<li>
+                    	<input type="file" id="input_file" accept="image/*">
+                    	<label for="input_file" class="label" id="file_label"></label>
+                    	</li>
+                	</ul>
+                    </div>
                     </div>
                 <div class="write_foot">
                     <input type="button" value="다음" class="textInputBtn" id="textInputBtn">

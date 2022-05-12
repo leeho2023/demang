@@ -31,10 +31,9 @@ body{
 }
 
 .write_main{
-    align-items: center;
-    border: 1px solid black;
-    height: 55vh;
-    text-align: center;
+   border: 1px solid black;
+   height: 55vh;
+   text-align: center;
 }
 
 .write_imgBtn{
@@ -67,14 +66,24 @@ body{
     text-align: center;
 }
 
+.labelWrap{
+	margin-top: 8vh;
+	margin-left: 10vw;
+	display: flex;
+	align-items:center;
+}
+
 label {
-    line-height: 15vh;
-    display: inline-block; 
-    height: 15vh;
-    width: 15vw;
-    background-color: #fdfdfd; 
-    cursor: auto;
-    border: 1px solid black; 
+	background-image: url(../img/plus.png);
+	background-size: cover;
+   line-height: 15vh;
+   display: inline-block; 
+   min-width: 150px;
+   min-height: 150px;
+   max-width: 150px;
+   max-height: 150px;
+   cursor: auto;
+   border: 1px solid black;
 } 
 
 input[type="file"] { 
@@ -88,7 +97,7 @@ input[type="file"] {
     
 
 .label:hover{
-    background-color: lightgrey;
+   background-color: lightgrey;
 }
 
 .innerImg{
@@ -104,12 +113,19 @@ li{
 	margin-right: 3vh;
 }
 
-.imgPreview{
-	display: flex;
-	justify-content: flex-start;
+.IMG{
+
 }
 
 .imgDelete{
 	height: 15vh;
 	width: 15vw; 
+}
+
+.selectedImg{
+	display: flex;
+}
+
+.selectedImg > li:nth-child(6) {
+	display: none;
 }
