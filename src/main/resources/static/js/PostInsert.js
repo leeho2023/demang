@@ -8,14 +8,15 @@ $(function(){
 		
 		// 글 내용으로 들어갈 문자값
 		var textInput = $('#textInput').val();
-		var imgInput = $('#innerImg').val();
+		var imgInput = $('.innerImg').val();
 		
 		if(imgInput !== null){
-			$('#write_img').hide();
-			$('#write_imgNone').hide();
 			$('#textInput').show();
-			$('#innerImg').hide();
-			$('label').hide();
+			$('.labelWrap').attr('class', 'nextLabel');
+			$('.innerImg').attr('onclick',"").unbind('click');
+			$('.selectedImg > li:nth-child(1) > img').attr('class', 'thumb');
+			$('.innerImg').hide();
+			$('#file_label').hide();
 		}
 		
 		if(textInput == "" && imgInput !== null){
@@ -29,13 +30,14 @@ $(function(){
 
 	});
 
-        
 	$('#input_file').on('change', filechange);
+		
 });
-// 등록 된 이미지를 누르면 삭제하는 function
-function deleteImg(e){
-	$(e).parent().remove();
-};
+
+	// 등록 된 이미지를 누르면 삭제하는 function
+	function deleteImg(e){
+		$(e).parent().remove();
+	};
 
 function filechange(){ // 업로드 버튼에 마우스가 올려지면 요소가 변함(reader로 읽어옴)
 	if( $('.selectedImg > li').length > 5 ){
@@ -56,7 +58,7 @@ function filechange(){ // 업로드 버튼에 마우스가 올려지면 요소�
 		$('#input_file').removeAttr('id');
 		let htmlData = '';
 		htmlData += '<li><input type="file" id="input_file" accept="image/*">';
-		htmlData += '<label for="input_file" class="label" id="file_label">라벨입니다</label>';
+		htmlData += '<label for="input_file" class="label" id="file_label"></label>';
 		htmlData += '</li>';
 		parent.append(htmlData);
 		$('#input_file').on('change', filechange);

@@ -33,7 +33,7 @@ body{
 .write_main{
    border: 1px solid black;
    height: 55vh;
-   text-align: center;
+   display: flex;
 }
 
 .write_imgBtn{
@@ -41,8 +41,8 @@ body{
 }
 
 .textInput{
-    height: 55vh;
-    width: 70vw;
+   height: 55vh;
+   width: 55vw;
 }
 
 .write_img{
@@ -67,9 +67,8 @@ body{
 }
 
 .labelWrap{
-	margin-top: 8vh;
-	margin-left: 10vw;
-	display: flex;
+	height: 50vh;
+	width: 70vw;
 	align-items:center;
 }
 
@@ -100,6 +99,11 @@ input[type="file"] {
    background-color: lightgrey;
 }
 
+.nextLabel{
+	width: 50vw;
+	height: 50vh;
+}
+
 .innerImg{
     min-width: 150px;
     min-height: 150px;
@@ -108,18 +112,25 @@ input[type="file"] {
     margin-right: 5px;
 }
 
-li{
-	list-style: none;
-	margin-right: 3vh;
+ul{
+	padding: 0;
+	margin: 0;
 }
 
-.IMG{
-
+li{
+	list-style: none;
+	overflow: hidden;
+	margin-right: 3vh;
 }
 
 .imgDelete{
 	height: 15vh;
 	width: 15vw; 
+}
+
+.thumb{
+	width: 500px;
+	height: 500px;
 }
 
 .selectedImg{
@@ -128,4 +139,8 @@ li{
 
 .selectedImg > li:nth-child(6) {
 	display: none;
+}
+
+textarea{
+	resize:none;
 }
