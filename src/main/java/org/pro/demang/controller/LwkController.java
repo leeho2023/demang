@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -66,5 +68,22 @@ public class LwkController {
 		MemberService.memberUpdate(dto);
 		return "redirect:/memberRead";
 	}
+	
+	   
+	   @PostMapping("/emailCheck")
+	   @ResponseBody
+	   public String emailCheck(@RequestParam("m_email") String m_email, RedirectAttributes rttr) {
+	      String result = MemberService.emailCheck(m_email);
+	      if (result.equals("useUser_email")) {
+	         System.out.println("user_emailbaaaaaaaaaaaad");
+	         rttr.addFlashAttribute("bad", false);
+	         return "bad";
+	      } else {
+	         System.out.println("user_emailgooooooooooooood");
+	         rttr.addFlashAttribute("good", true);
+	         return "good";
+	      }
+	   }
 }
+
 

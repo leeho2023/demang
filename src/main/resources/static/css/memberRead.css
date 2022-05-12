@@ -1,0 +1,277 @@
+@charset "UTF-8";
+body{
+  margin: 0;
+  padding: 0ch;
+  background-color: rgb(255, 255, 255);
+}
+.div1{
+    border: 1px solid rgb(186, 189, 182);
+    height: 91%;
+    width: 80%;
+    margin-left: 19.9%;
+  border-bottom: none;
+    border-top: none;
+    position: absolute;  
+    display: inline;
+  
+ justify-content: center;
+ 
+     
+    
+}
+a{
+	text-decoration-line: none;
+	color: white;
+}
+.div2{
+	border: 1px solid black;
+	height: 80px;
+	background-color: black;
+	color: white;
+	border-left: none;
+	border-right: none;
+	font-size: 50px;
+}
+*{margin: 0; padding: 0;}
+      button{background: 0 none; border: 0 none;}
+        .buttons{position: relative;margin-top: 5%;  ;}
+      .buttons button{overflow: hidden; position: relative; display: inline-block; vertical-align: top; width: 40.1%; margin-left: 30%; height: 30%; line-height: 100px; border: 1px solid rgb(0, 0, 0); border-bottom: none;transition: all 0.5s;}
+      .buttons button:hover{color: #fff;}
+      .buttons button:before{content: ""; z-index: -1; position: absolute; background: #000000; transition: all 1s;}
+.buttons .button1:before{left: 0; top: 0; width: 100%; height: 0; }
+.buttons .button1:hover:before{height: 200%;}
+
+.div4{
+	display: flex;
+}
+.input1{
+  border: 1px solid rgb(211, 215, 207);
+   border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+       margin-left: 50px;
+        
+}
+.input2{
+  border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+.input3{
+    border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+.input4{
+  border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+       
+}
+.input5{
+   border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+.input6{
+    border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+.input7{
+    border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+.input8{
+    border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+.input9{
+    border: 1px solid rgb(211, 215, 207);
+ border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+         margin-left: 100px;
+}
+
+.h1{
+	font-size: 50px;
+	text-align: center;
+}
+
+.p1{
+	margin-left: 50px;
+	
+}
+.p2{
+	font-size: 35px;
+	margin-top: 50px;
+	margin-left:45%;
+}
+.p3{
+	font-size: 30px;
+}
+
+
+
+
+
+.animated-button1 {
+  background: linear-gradient(-30deg, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgb(255, 255, 255);
+          box-shadow: 0 20px 50px rgb(255, 255, 255);
+          margin-left: 31%;
+          margin-top: 150px;
+}
+
+.animated-button1::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(186, 189, 182);
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.animated-button1:hover::before {
+  opacity: 0.2;
+}
+
+.animated-button1 span {
+  position: absolute;
+}
+
+.animated-button1 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgb(0, 0, 0)), to(rgb(0, 0, 0)));
+  background: linear-gradient(to left, rgb(0, 0, 0), rgb(0, 0, 0));
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.animated-button1 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgb(0, 0, 0)), to(rgb(0, 0, 0)));
+  background: linear-gradient(to top, rgb(0, 0, 0), rgb(0, 0, 0));
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.animated-button1 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgb(0, 0, 0)), rgb(0, 0, 0));
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0));
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.animated-button1 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(0, 0, 0)), to(rgb(0, 0, 0)));
+  background: linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 0, 0));
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+
+
+
+
+

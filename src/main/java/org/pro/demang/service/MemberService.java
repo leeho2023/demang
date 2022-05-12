@@ -12,7 +12,7 @@ public interface MemberService {
 	public MemberDTO getMember_no( int no );
 	MemberDTO login(MemberDTO dto);
 	void memberUpdate(MemberDTO dto);
-	
+	  public String emailCheck(String m_email);
 	
 	
 
