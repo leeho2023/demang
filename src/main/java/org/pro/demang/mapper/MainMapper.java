@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
@@ -59,5 +60,9 @@ public interface MainMapper {
 	public MemberDTO memberRead(String m_id);
 
 	void memberUpdate(MemberDTO dto);
+	
+	//// 채팅 관련
+	void chatSend( ChatDTO dto );
+	
 	
 }

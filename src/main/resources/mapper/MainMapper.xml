@@ -159,6 +159,12 @@
 		m_introduce=#{m_introduce}, m_gender=#{m_gender}
 		WHERE m_id=#{m_id};
 	</update>
+	
+	
+	<!-- 채팅 보내기 -->
+	<insert id="chatSend" useGeneratedKeys="true" keyProperty="h_id">
+		INSERT INTO chatTBL (h_speaker, h_listener, h_content) VALUES( #{h_speaker}, #{h_listener}, #{h_content});
+	</insert>
 		   
 		   
 </mapper>
