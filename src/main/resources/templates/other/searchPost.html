@@ -10,21 +10,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+    
     <header id="homeNav" th:include="other/homeNav"></header>
         <div class="contentBox">
             <div class="content2">
-                <div class="post" th:each="list : ${postList}">
+                <div class="post" th:each="post : ${postList}">
                     <div class="imgBox">
-                        <figure>[[${list.p_content}]]</figure>
+                        <figure><img th:src="'data:image/png;base64,'+${post.postImgDTO.image}"></figure>
                     </div>
+                    
                     <div class="userInfoBox">
                         <div class="userInfo">
                             <div class="profileImg">
-                                    <img src="img/defaultPropic.png"><!-- 이미지 들어갈 공간 --> 
+                                    <!-- <img src="img/defaultPropic.png">  -->
+                                    <img th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}">
                             </div>
                             <div class="email_nickName">
-                                <span class="nickName">[[${list.memberDTO.m_nickname}]]<span class="nickCode"> #[[${list.memberDTO.m_code}]]</span></span>
-                                <span class="email">[[${list.memberDTO.m_email}]]</span>
+                                <span class="nickName">[[${post.memberDTO.m_nickname}]]<span class="nickCode"> #[[${post.memberDTO.m_code}]]</span></span>
+                                <span class="email">[[${post.memberDTO.m_email}]]</span>
                             </div>
                         </div>
                     </div>

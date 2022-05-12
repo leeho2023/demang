@@ -19,6 +19,7 @@ public class PostDTO {
 	private String p_content;
 	private Timestamp p_regDate;
 	private MemberDTO memberDTO;
+	private PostImgDTO postImgDTO;
 	
 	public PostDTO(int p_origin, String p_type, int p_writer, String p_content) {
 		this.p_origin = p_origin;
