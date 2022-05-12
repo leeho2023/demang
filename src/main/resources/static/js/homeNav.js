@@ -12,7 +12,7 @@ function search() {
     }
 
     if(first_char === '#'){
-        location.href = ""
+        location.href = "tagSearch?reSearchVal="+reSearchVal;
     }
 
 	location.href = "postSearch?searchVal="+searchVal;

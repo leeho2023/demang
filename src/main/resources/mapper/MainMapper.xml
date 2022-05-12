@@ -36,6 +36,30 @@
 		where p.p_content like '%' #{searchVal} '%'
 	</select>
 
+	<!-- 해당 태그의 게시물 검색 쿼리문 -->
+	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
+		<result column="m_code" property="m_code"/>
+		<result column="m_email" property="m_email"/>
+		<result column="m_nickname" property="m_nickname"/>
+	</resultMap>
+	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
+		<result column="p_content" property="p_content"/>
+	</resultMap>
+	<resultMap id="tagDTO" type="org.pro.demang.model.TagDTO">
+		<result column="t_tag" property="t_tag"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+		<collection property="postDTO" resultMap="postDTO"/>
+	</resultMap>
+	<select id="tagSearch" parameterType="org.pro.demang.model.TagDTO" resultMap="tagDTO">
+		select t.*, p.*, m.*
+		from tagOnPostTBL t
+		inner join postTBL p
+		on t.t_postNo = p.p_id
+		inner join memberTBL m 
+		on p.p_writer = m.m_id 
+		where t.t_tag like '#{reSearchVal}'
+	</select>
+
 	<!-- 댓글 목록 불러오는 쿼리문 -->
 	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
 		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL on c.c_writer = m.m_id WHERE c_postNo = #{p_id}

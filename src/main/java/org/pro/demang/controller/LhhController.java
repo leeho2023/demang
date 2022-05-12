@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.TagDTO;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class LhhController {
 
 	//게시글 검색
 	@GetMapping("/postSearch")
-	public String boardSearch(@RequestParam("searchVal")String searchVal, Model model) {
+	public String postSearch(@RequestParam("searchVal")String searchVal, Model model) {
 		System.out.println(searchVal);
 
 		List<PostDTO> postList = postService.postSearch(searchVal);
@@ -67,4 +68,21 @@ public class LhhController {
 
 		return "other/searchPost";
 	}
+
+	//태그 검색
+	@GetMapping("/tagSearch")
+	public String tagSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
+		System.out.println(reSearchVal);
+
+		List<TagDTO> postList = postService.tagSearch(reSearchVal);
+		
+		for(TagDTO dto : postList){
+			System.out.println(dto.toString());
+		}
+
+		// model.addAttribute("postList", postList);
+
+		return "other/searchTag";
+	}
+
 }

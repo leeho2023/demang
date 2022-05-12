@@ -6,6 +6,7 @@ import java.util.List;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.TagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -92,6 +93,13 @@ public class PostServiceImpl implements PostService{
 		
 		return mapper.postSearch(searchVal);
 	}
+
+	// 태그 게시물 검색
+	@Override
+	public List<TagDTO> tagSearch(String reSearchVal) {
+		
+		return mapper.tagSearch(reSearchVal);
+	}
 	
 	////문자열에서 해시태그 찾아내기 (문자열 배열로 반환)
 	private static String[] findHashtags( String inputString ) {
@@ -130,4 +138,6 @@ public class PostServiceImpl implements PostService{
 		//// 태그 목록 중 있는 부분까지만 잘라 보내줌
 		return Arrays.copyOfRange(tags, 0, tagsN);
 	}
+
+	
 }

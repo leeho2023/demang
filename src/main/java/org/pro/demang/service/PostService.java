@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.TagDTO;
 
 public interface PostService {
 
@@ -20,5 +21,6 @@ public interface PostService {
 	public List<Integer> getPostList_followee( String no );
 	public List<Integer> getPostList_followee( int no );
     List<PostDTO> postSearch(String searchVal);
+    List<TagDTO> tagSearch(String reSearchVal);
 	
 }
