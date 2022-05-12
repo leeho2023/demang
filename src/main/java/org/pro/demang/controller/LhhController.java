@@ -39,6 +39,7 @@ public class LhhController {
 		return "other/fList";
 	}
 
+	//유저 검색
 	@GetMapping("/userSearch")
 	public String userSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
 		System.out.println(reSearchVal);
@@ -55,6 +56,7 @@ public class LhhController {
 		return "other/searchUser";
 	}
 
+	//게시글 검색
 	@GetMapping("/postSearch")
 	public String boardSearch(@RequestParam("searchVal")String searchVal, Model model) {
 		System.out.println(searchVal);
