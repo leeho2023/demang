@@ -1,8 +1,11 @@
 package org.pro.demang.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.service.ChatService;
@@ -23,22 +26,46 @@ public class KysController {
 	@Autowired private ChatService chatService;
 	@Autowired private MainMapper mapper;
 	
-    @GetMapping("/chat")
-    String chat( HttpSession session, @RequestParam("to") int listener ){
+	//// 채팅 페이지
+	@GetMapping("/chat")
+	String chat( @RequestParam("to") String listener, Model model, HttpSession session ){
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
-    	return "chat";
-    }
-    
-    @PostMapping("/chat/send")
-    @ResponseBody
-    String chat_send( HttpSession ss, @RequestParam("to") String listener, @RequestParam("h_content") String h_content ) {
-    	System.out.println( "kys controller ~ "+listener+"에게: "+h_content );
-    	chatService.chatSend( loginId(ss), listener, h_content );
-    	return "kys controller ~ !!!!!!!!!!!!!!!!!!!!!!!";
-    }
-    
-    //// 현재 로그인한 회원 번호(문자열로) 가져오기
-    private String loginId( HttpSession session ) {
-    	return session.getAttribute("login")+"";
-    }
+		model.addAttribute(// 상대방 정보
+				"listener", 
+				mapper.getMember_no(listener) 
+				);
+		return "chat/chatting";
+	}
+	
+	//// 채팅 보내기 (ajax용)
+	@PostMapping("/chat/send")
+	@ResponseBody
+	String chat_send( @RequestParam("to") String listener, @RequestParam("h_content") String h_content, HttpSession ss ) {
+		chatService.chatSend( 
+				new ChatDTO( loginId(ss), listener, h_content ) );
+		return "";
+	}
+	
+	//// (채팅 내역 새로고침 용) 특정 번호 다음의 채팅만 불러오기
+	@PostMapping("/chat/refresh")
+	String chat_refresh( @RequestParam("to") String listener, @RequestParam("since") int since, HttpSession session, Model model ) {
+		List<ChatDTO> list = null;
+		list = chatService.chatRefresh( loginId(session), listener, since );
+		if( list.size() <= 0 ) {return "empty";}
+		System.out.println(list);
+		model.addAttribute(// 채팅 내역
+				"chatList", 
+				list
+				);
+		model.addAttribute(
+				"lastH_id",
+				list.get( list.size()-1 ).getH_id() );// 가장 최근 메시지의 h_id
+		return "chat/chat";
+	}
+	
+	
+	//// 현재 로그인한 회원 번호(문자열로) 가져오기
+	private static String loginId( HttpSession session ) {
+		return session.getAttribute("login")+"";
+	}
 }

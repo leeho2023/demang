@@ -62,7 +62,11 @@ public interface MainMapper {
 	void memberUpdate(MemberDTO dto);
 	
 	//// 채팅 관련
-	void chatSend( ChatDTO dto );
-	
+	void chatSend( ChatDTO dto );// 메시지 한 개 보내기
+	List<ChatDTO> chatHistory( // 두 회원 사이의 채팅 읽어오기 (from 뒤의 것부터만)
+			@Param("m1") String m1, 
+			@Param("m2") String m2, 
+			@Param("since") int since 
+			);
 	
 }

@@ -29,6 +29,15 @@
 		<result column="c_regDate" property="c_regDate"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 	</resultMap>
+	
+	<resultMap id="chatDTO" type="org.pro.demang.model.ChatDTO">
+		<result column="h_id"       property="h_id"/>
+		<result column="h_speaker"  property="h_speaker"/>
+		<result column="h_listener" property="h_listener"/>
+		<result column="h_content"  property="h_content"/>
+		<result column="h_datetime" property="h_datetime"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
 
 
 	<!-- 친구목록 불러오는 쿼리문 -->
@@ -165,6 +174,15 @@
 	<insert id="chatSend" useGeneratedKeys="true" keyProperty="h_id">
 		INSERT INTO chatTBL (h_speaker, h_listener, h_content) VALUES( #{h_speaker}, #{h_listener}, #{h_content});
 	</insert>
+	<!-- 두 회원 사이 채팅 읽어오기 (오래된 순, since 뒤의 것부터만) -->
+	<select id="chatHistory" resultType="org.pro.demang.model.ChatDTO">
+	SELECT * FROM chatTBL
+	WHERE 
+		(    (h_speaker = #{m1} and h_listener = #{m2}) 
+		  OR (h_speaker = #{m2} and h_listener = #{m1})
+		) AND h_id > #{since}
+	ORDER BY h_id ASC
+	</select>
 		   
 		   
 </mapper>
