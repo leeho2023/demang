@@ -27,7 +27,7 @@ public class SjhController {
 			int p_origin = 3; // 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
 			PostDTO dto = new PostDTO(p_origin, p_type, p_writer, p_content); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
 			postService.postInsert( dto ); // 작동
-			int p_id = dto.getP_id();
+			int p_id = dto.getP_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
 			
 			for(int i = 0; i < files.length; i++) {
 				PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성

@@ -17,10 +17,12 @@ public interface MainMapper {
 	void memberInsert(MemberDTO dto); // 회원가입
 
 	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
+
 	void postInsert( PostDTO dto ); // post작성
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
+
 	void postInsertImg(int p_id, @Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
 	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
