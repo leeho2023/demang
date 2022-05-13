@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.box{
+	height: 500px;
+	width: 500px;
+	border: 1px solid black;
+}
+
+.imgBox{
+	height: 500px;
+	width: 500px;
+	object-fit:scale-down;
+}
