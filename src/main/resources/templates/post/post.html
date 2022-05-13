@@ -9,7 +9,7 @@
 		<div class="postImgBox">
 			<div class="postImgs">
 				<div class="postImgDiv" th:each="postImg: ${imageList}">
-					<img th:src="'data:image/png;base64,'+${postImg.m_profilePicString}" height=300>
+					<img th:src="'data:image/png;base64,'+${postImg.image}" height=300>
 				</div>
 			</div>
 			<button>&lt;</button>

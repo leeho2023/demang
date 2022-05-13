@@ -13,14 +13,21 @@
     <header id="homeNav" th:include="other/homeNav"></header>
     <div class="contentBox">
         <div class="content1">
-            <div class="userBox" th:each="list : ${list}">
+            <div class="userBox" th:each="user : ${list}">
                 <div class="userProfile">
                     <div class="profileImg">
-                        <img src="img/defaultPropic.png">
+                        <img th:src="'data:image/png;base64,'+${user.m_profilePicString}">
                     </div>
                     <div class="email_nickName">
-                        <span class="nickName">[[${list.m_nickname}]]<span class="nickCode"> #[[${list.m_code}]]</span></span>
-                        <span class="email">[[${list.m_email}]]</span>
+                        <span class="nickName">
+                            [[${user.m_nickname}]]
+                            <span class="nickCode">
+                                 #[[${user.m_code}]]
+                            </span>
+                        </span>
+                        <span class="email">
+                            [[${user.m_email}]]
+                        </span>
                     </div>
                 </div>
             </div>
