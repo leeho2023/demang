@@ -13,18 +13,25 @@
     <header id="homeNav" th:include="other/homeNav"></header>
         <div class="contentBox">
             <div class="content2">
-                <div class="post" th:each="list : ${postList}">
+                <div class="post" th:each="post : ${postList}">
                     <div class="imgBox">
-                        <figure>[[${list.p_content}]]</figure>
+                        <figure th:if="${post.postImgDTO.i_image} != null">
+                            <img th:src="'data:image/png;base64,'+${post.postImgDTO.image}">
+                        </figure>
+                        <figure th:unless="${post.postImgDTO.i_image} != null">
+                            <p class="p_content" th:text="${post.postDTO.p_content}"></p>
+                        </figure>
                     </div>
                     <div class="userInfoBox">
                         <div class="userInfo">
                             <div class="profileImg">
-                                    <img src="img/defaultPropic.png"><!-- 이미지 들어갈 공간 --> 
+                                <img th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}">
                             </div>
                             <div class="email_nickName">
-                                <span class="nickName">[[${list.memberDTO.m_nickname}]]<span class="nickCode"> #[[${list.memberDTO.m_code}]]</span></span>
-                                <span class="email">[[${list.memberDTO.m_email}]]</span>
+                                <span class="nickName">[[${post.memberDTO.m_nickname}]]
+                                    <span class="nickCode"> #[[${post.memberDTO.m_code}]]</span>
+                                </span>
+                                <span class="email">[[${post.memberDTO.m_email}]]</span>
                             </div>
                         </div>
                     </div>

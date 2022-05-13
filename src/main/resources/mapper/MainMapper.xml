@@ -38,7 +38,10 @@
 
 	<resultMap id="tagDTO" type="org.pro.demang.model.TagDTO">
 		<result column="t_tag" property="t_tag"/>
+		<result column="t_postNo" property="t_postNo"/>
 		<collection property="postDTO" resultMap="postDTO"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+		<collection property="postImgDTO" resultMap="postImgDTO"/>
 	</resultMap>
 
 
@@ -51,29 +54,34 @@
 	
 	<!-- 유저 검색 기능 쿼리문 -->
 	<select id="memberSearch" resultType="org.pro.demang.model.MemberDTO">
-		select * from membertbl m where m_email like '%' #{reSearchVal} '%' or m_nickname like '%' #{reSearchVal} '%'
+		select * 
+		from membertbl m 
+		where m_email like '%' #{reSearchVal} '%' 
+		or m_nickname like '%' #{reSearchVal} '%'
 	</select>
 
 	<!-- 게시글 검색 기능 쿼리문 -->
 	<select id="postSearch" parameterType="org.pro.demang.model.PostDTO" resultMap="postDTO">
 		select m.*, p.*, p2.*
-		from memberTBL m
-		inner join postTBL p
+		from postTBL p
+		inner join memberTBL m
 		on p.p_writer = m.m_id
-		inner join postimgTBL p2 
+		left join postimgTBL p2 
 		on p2.p_id = p.p_id
 		where p.p_content like '%' #{searchVal} '%'
 	</select>
 
 	<!-- 해당 태그의 게시물 검색 쿼리문 -->
 	<select id="tagSearch" parameterType="org.pro.demang.model.TagDTO" resultMap="tagDTO">
-		select t.*, p.*, m.*
-		from tagOnPostTBL t
-		inner join postTBL p
+		select t.*, p.*, m.*, p2.*
+		from posttbl p
+		left join postimgtbl p2 
+		on p.p_id = p2.p_id
+		inner join membertbl m 
+		on p.p_writer = m.m_id
+		inner join tagOnPostTBL t
 		on t.t_postNo = p.p_id
-		inner join memberTBL m 
-		on p.p_writer = m.m_id 
-		where t.t_tag = '#{reSearchVal}'
+		where t.t_tag = #{reSearchVal}
 	</select>
 
 	<!-- 댓글 목록 불러오는 쿼리문 -->

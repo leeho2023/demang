@@ -9,5 +9,6 @@ public class TagDTO {
 	private int t_postNo;
 	private PostDTO postDTO;
 	private MemberDTO memberDTO;
+	private PostImgDTO postImgDTO;
 	
 }

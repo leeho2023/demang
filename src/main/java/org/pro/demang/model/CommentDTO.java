@@ -1,7 +1,6 @@
 package org.pro.demang.model;
 
 import java.sql.Timestamp;
-import java.util.Base64;
 
 import lombok.Data;
 

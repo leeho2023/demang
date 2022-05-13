@@ -13,6 +13,7 @@ function search() {
 
     if(first_char === '#'){
         location.href = "tagSearch?reSearchVal="+reSearchVal;
+        return;
     }
 
 	location.href = "postSearch?searchVal="+searchVal;
@@ -53,7 +54,8 @@ function search() {
 
 
 $('#searchBtn').click(function (e) { 
-    search(); 
+    search();
+    return;
 });
 
 
