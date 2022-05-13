@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
@@ -61,5 +62,13 @@ public interface MainMapper {
 
     List<TagDTO> tagSearch(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
 	public String emailCheck(String m_email);
+	
+	//// 채팅 관련
+	void chatSend( ChatDTO dto );// 메시지 한 개 보내기
+	List<ChatDTO> chatHistory( // 두 회원 사이의 채팅 읽어오기 (from 뒤의 것부터만)
+			@Param("m1") String m1, 
+			@Param("m2") String m2, 
+			@Param("since") int since 
+			);
 	
 }

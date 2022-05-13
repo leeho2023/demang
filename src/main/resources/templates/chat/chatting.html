@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>채팅</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<style>
+div {
+	border: solid 2px black;
+	margin: 10px;
+}
+#chatHistory {
+	height: 500px;
+	overflow: auto;
+}
+</style>
+</head>
+<body>
+<!--<header th:include="other/homeNav"></header>-->
+
+<div><!--/* 상대 정보 */-->
+	<img th:src="'data:image/png;base64,'+${listener.m_profilePicString}" height=80>
+	<span th:text="${listener.m_nickname}"></span>님과 채팅
+</div>
+
+<div id="chatHistory"><!--/* 여기 채팅 내역 */--></div>
+
+<form>
+	<input type="text" id="chat_content" name="h_content" placeholder="뭐라 칠려고 했더라?">
+	<button type="button" onclick="chat_send()">보내기 버튼</button>
+</form>
+
+<footer th:include="other/footer"></footer>
+<script>
+lastH_id = 0;// 가장 마지막 발언의 h_id // 채팅을 불러오면 가장 최근 채팅의 h_id로 대체된다.
+
+$(function(){
+	chat_refresh();// 최초 한 번 이전 대화내역 모두 불러오기
+	setInterval( chat_refresh, 500 );// 주기적으로 채팅내용 새로고침
+});
+
+function chat_send(){// ajax로 메시지 한 개 보내기
+	$.ajax({
+		type: 'post',
+		url: 'chat/send',
+		data:{
+			to: [[${listener.m_id}]],// 메시지 받을 상대 회원번호
+			h_content: $('#chat_content').val()
+		},
+		success: function(){
+			chat_refresh();// 채팅 내용 새로고침 하기
+			$('#chat_content').val('');// 입력창 비우기
+		},error: function(){console.log('메시지 전송 실패')}
+	});
+}
+
+function chat_refresh(){// 채팅 내용 새로고침
+	$.ajax({
+		type: 'post',
+		url: 'chat/refresh',
+		data:{
+			to: [[${listener.m_id}]],
+			since: lastH_id
+		},
+		success: function( data ){
+			if( data.length > 0 ){// 새 채팅내역 있을 때만 (없는 경우에는 controller에서 empty.html을 반환)
+				$('#lastH_id').remove();// 기존 <span#lastH_id> 삭제
+				$('#chatHistory').append(data);// 새로 받은 채팅 내용 덧붙이기
+				lastH_id = $('#lastH_id').text();// ??? 마지막 메시지의 h_id 정보는 받아올 방법이 없어서 일단 <span#lastH_id>에 넣어놨다.
+			}
+		},error: function(){console.log('불러오기 실패')}
+	});
+}
+</script>
+</body>
+</html>
