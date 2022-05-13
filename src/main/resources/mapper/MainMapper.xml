@@ -60,7 +60,7 @@
 	
 	<!-- 유저 검색 기능 쿼리문 -->
 	<select id="memberSearch" resultType="org.pro.demang.model.MemberDTO">
-		select * from membertbl m where m_email like '%' #{reSearchVal} '%' or m_nickname like '%' #{reSearchVal} '%'
+		select * from memberTBL m where m_email like '%' #{reSearchVal} '%' or m_nickname like '%' #{reSearchVal} '%'
 	</select>
 
 	<!-- 게시글 검색 기능 쿼리문 -->
@@ -69,7 +69,7 @@
 		from memberTBL m
 		inner join postTBL p
 		on p.p_writer = m.m_id
-		inner join postimgTBL p2 
+		inner join postImgTBL p2 
 		on p2.p_id = p.p_id
 		where p.p_content like '%' #{searchVal} '%'
 	</select>
