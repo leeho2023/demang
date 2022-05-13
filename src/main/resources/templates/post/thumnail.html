@@ -2,15 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/thumnail.css">
+<!-- 슬라이더 -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <title>글 작성</title>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-<input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/> 
-<div id="image_container"></div>
-
+  <script>
+  $(document).ready(function(){
+      $('.bxSlider').bxSlider({
+    	  slideWidth: 500,
+    	  captions: true,
+      });
+    });
+  </script>
+  
+  <div class="box">
+  	<ul class="bxSlider">
+		<li><img class="imgBox" src="../img/plus.png" /></li> 
+		<li><img class="imgBox" src="../img/purin.jpg" /></li> 
+		<li><img class="imgBox" src="../img/defaultPropic.png" /></li> 
+		<li><img class="imgBox" src="../img/DEMANG.png" /></li> 
+	</ul>
+  </div>
 
 <script src="/js/thumnail.js"></script>
 </body>
