@@ -3,10 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/PostView.css">
+<!-- 슬라이더 -->
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <title>글 보기</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+
+  <script>
+  $(document).ready(function(){
+      $('.bxSlider').bxSlider({
+    	  captions: true
+      });
+    });
+  </script>
+
 <header th:include="other/homeNav"></header>
 <nav></nav>
 
@@ -17,8 +29,15 @@
     	<div class="contentWrap">
         <div class="title" id="profile">[[${post.memberDTO.m_nickname}]]</div>
         <div class="content">
-        	<div class="p_image">[[${post}]] 사진 들어가는 곳</div>
-        <div class="p_content">[[${post.p_content}]] 내용 나오는 곳</div>
+        	<div>  	
+        	<ul class="bxSlider p_image">
+				<li><img class="imgBox" src="../img/plus.png" /></li> 
+				<li><img class="imgBox" src="../img/purin.jpg" /></li> 
+				<li><img class="imgBox" src="../img/defaultPropic.png" /></li> 
+				<li><img class="imgBox" src="../img/DEMANG.png" /></li> 
+			</ul>
+		</div>
+        <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
     	  <input type="button" name="like" value="좋아요"> 
