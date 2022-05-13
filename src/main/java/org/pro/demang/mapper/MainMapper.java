@@ -70,5 +70,9 @@ public interface MainMapper {
 			@Param("m2") String m2, 
 			@Param("since") int since 
 			);
+	List<ChatDTO> chatHistory_recent( // 두 회원 사이의 채팅 읽어오기 (최신 몇 개만)
+			@Param("m1") String m1, 
+			@Param("m2") String m2
+			);
 	
 }

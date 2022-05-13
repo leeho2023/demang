@@ -208,8 +208,8 @@
 	ORDER BY h_id ASC
 	</select>
 		   
-		   <select id="emailCheck" resultType="String">
-   select m_email from memberTBL where m_email = #{m_email}
+	<select id="emailCheck" resultType="String">
+	select m_email from memberTBL where m_email = #{m_email}
 </select>
 		   
 </mapper>

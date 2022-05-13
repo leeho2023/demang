@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>[[${listener.m_nickname}]]#[[${listener.m_code}]]님과 전체 채팅 내역</title>
+<style>
+#chatHistory > *{
+	margin: 2px;
+}
+#chatHistory > .me {
+	background-color: #fed;
+}
+#chatHistory > .you {
+	background-color: #def;
+}
+</style>
+</head>
+<body>
+<div id="chatHistory" th:include="chat/chat">
+</div>
+<span id="lastH_id" th:text="${lastH_id}" style="display: none !important;"></span><!--/* 마지막 메시지의 h_id 얻어오기용 저장 */-->
+
+</body>
+</html>

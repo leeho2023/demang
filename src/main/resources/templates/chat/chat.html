@@ -2,14 +2,14 @@
 <th:block th:each="chat: ${chatList}" th:switch="${chat.h_speaker}">
 	<!--/* 나의 발언 */-->
 	<div th:case="${session.login}" class="me">
-		나: <p th:text="${chat.h_content}"></p>
+		<p th:text="${chat.h_content}"></p>
 		<span th:text="${chat.h_datetime}"></span>
 	</div>
 	<!--/* 상대의 발언 */-->
 	<div th:case="*" class="you">
-		상대: <p th:text="${chat.h_content}"></p>
+		<p th:text="${chat.h_content}"></p>
 		<span th:text="${chat.h_datetime}"></span>
 	</div>
 	
 </th:block>
-<span id="lastH_id" th:text="${lastH_id}" style="display: none !important;"></span><!--/* 마지막 메시지의 h_id 얻어오기용 저장 */-->
+<span id="lastH_id" th:text="${lastH_id}" style="display: none !important"></span><!--/* 마지막 메시지의 h_id 얻어오기용 저장 */-->

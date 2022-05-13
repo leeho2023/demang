@@ -1,5 +1,6 @@
 package org.pro.demang.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
@@ -19,7 +20,7 @@ public class ChatServiceImpl implements ChatService{
 	
 	//// 지난 채팅 불러오기 (특정번호 다음부터 최신것까지만)
 	@Override
-	public List<ChatDTO> chatRefresh( String m1, String m2, int since ){
+	public List<ChatDTO> chatHistory( String m1, String m2, int since ){
 		return mapper.chatHistory(m1, m2, since);
 	}
 }

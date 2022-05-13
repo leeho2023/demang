@@ -49,10 +49,8 @@ public class KysController {
 	//// (채팅 내역 새로고침 용) 특정 번호 다음의 채팅만 불러오기
 	@PostMapping("/chat/refresh")
 	String chat_refresh( @RequestParam("to") String listener, @RequestParam("since") int since, HttpSession session, Model model ) {
-		List<ChatDTO> list = null;
-		list = chatService.chatRefresh( loginId(session), listener, since );
+		List<ChatDTO> list = chatService.chatHistory( loginId(session), listener, since );
 		if( list.size() <= 0 ) {return "empty";}
-		System.out.println(list);
 		model.addAttribute(// 채팅 내역
 				"chatList", 
 				list
@@ -61,6 +59,21 @@ public class KysController {
 				"lastH_id",
 				list.get( list.size()-1 ).getH_id() );// 가장 최근 메시지의 h_id
 		return "chat/chat";
+	}
+	
+	//// 채팅 전체 내역 확인
+	@GetMapping("/chat/history")
+	String chat_history( @RequestParam("to") String listener, Model model, HttpSession session ){
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
+		model.addAttribute(// 상대방 정보
+				"listener", 
+				mapper.getMember_no(listener) 
+				);
+		model.addAttribute(// 전체 채팅 내역
+				"chatList", 
+				chatService.chatHistory( loginId(session), listener, 0 ) 
+				);
+		return "chat/history";
 	}
 	
 	
