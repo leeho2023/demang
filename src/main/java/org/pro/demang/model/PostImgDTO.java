@@ -15,4 +15,5 @@ public class PostImgDTO {
 	public String getImage() {
 		return new String(Base64.getEncoder().encodeToString(i_image));
 	}
+
 }

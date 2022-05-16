@@ -3,31 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/PostView.css">
+<!-- 슬라이더 -->
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <title>글 보기</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<!-- 슬라이더 작동 Script -->
+  <script>
+  $(document).ready(function(){
+      $('.bxSlider').bxSlider({
+    	  captions: true
+      });
+    });
+  </script>
+
 <header th:include="other/homeNav"></header>
 <nav></nav>
+
+<h1>[[${post.p_id}]]번 글</h1>
 
 <main>
     <div class="wrap">
     	<div class="contentWrap">
-        <div class="title" id="profile">[[${post.memberDTO.m_nickname}]]</div>
+        <div class="title" id="profile">
+        <!-- 프로필 이미지 가져오기 -->
+        <img class="propic" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
+        [[${post.memberDTO.m_nickname}]]
+        <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
+        <p th:if="${post.p_type} == S">판매가격</p>
+        </div>
         <div class="content">
-        	<div class="p_image">${dto.p_image} 사진 들어가는 곳</div>
+        	<div>  	
+        	<ul class="bxSlider p_image">
+        	<!-- 게시글 내 이미지 불러오기 -->
+				<li th:each="image : ${imageList}"><img class="imgBox" th:src="'data:image/png;base64,'+${image.image}" /></li>
+			</ul>
+		</div>
+			<!-- 게시글 내용 불러오기 -->
         <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
-    	  <input type="button" name="like" value="좋아요"> 
+    	  <input type="button" id="like" name="like" value="좋아요"> 
     	  <input type="button" name="follow" value="팔로우">
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
+    	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
+    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">리뷰작성</a>
     	  </div>
  		</div>
  		
     	  <div>  
     	  <!-- 댓글 나오는 곳 -->
-    	  <div class="commentRead" id="commentRead">댓글 나오는 곳(게시글 번호 연동 + ajax)</div>
+    	  <div class="commentRead" id="commentRead">
+    	  		<ul class="commentList">
+			<li th:each="comment: ${commentList}">
+				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
+					<img th:src="'data:image/png;base64,'+${comment.memberDTO.m_profilePicString}" height=30>
+					<span>[[${comment.memberDTO.m_nickname}]]</span>
+				</a>
+				<span>[[${comment.c_content}]]</span>
+				<span>[[${comment.c_regDate}]]</span>
+			</li>
+		</ul></div>
     	  
     	  <!-- 댓글 작성란 -->
        <div class="commentInsert">

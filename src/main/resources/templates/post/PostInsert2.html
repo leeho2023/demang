@@ -9,7 +9,6 @@
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-
 	<header th:include="other/homeNav"></header>
     <nav></nav>
     <main>
@@ -19,8 +18,8 @@
             <input type="hidden" name="p_writer" th:value="${session.login}">
             <div class="write">
                 <div class="radio">
-                    <input type="radio" name="p_type" value="N" checked="checked">일반
-                    <input type="radio" name="p_type" value="S">판매
+                    <input type="radio" name="p_type" value="N" checked="checked">리뷰
+                    [[${post.p_id}]]
                 </div>
                 	<div class="write_main" id="imgWrap">
                   	<div class="labelWrap" id="labelWrap">

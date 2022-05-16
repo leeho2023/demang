@@ -1,10 +1,12 @@
 package org.pro.demang.controller;
 
+import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,8 @@ public class SjhController {
 	
     @Autowired
 	PostService postService;
+	@Autowired
+	private MainMapper mapper;
 	
 	@PostMapping("/postInsert")
 	public String postInsert(
@@ -42,8 +46,14 @@ public class SjhController {
 		return "post/PostInsert";
 		}
 	
-	@GetMapping("thumnail")
-	public String thumnail() {
-		return "post/thumnail";
+	@GetMapping("postInsert2")
+	public String Review(@RequestParam("p_id") String p_id, Model model) {
+		
+		model.addAttribute(
+				"post",
+				mapper.getPost(p_id)
+				);
+		
+		return "post/PostInsert2";
 	}
 }
