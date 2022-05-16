@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<!-- 슬라이더 작동 Script -->
   <script>
   $(document).ready(function(){
       $('.bxSlider').bxSlider({
@@ -24,31 +25,43 @@
 
 <h1>[[${post.p_id}]]번 글</h1>
 
+<ul>
+<li th:each="comment: ${commentList}">
+</li></ul>
+
 <main>
     <div class="wrap">
     	<div class="contentWrap">
-        <div class="title" id="profile">[[${post.memberDTO.m_nickname}]]</div>
+        <div class="title" id="profile">
+        <!-- 프로필 이미지 가져오기 -->
+        <img class="propic" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
+        [[${post.memberDTO.m_nickname}]]
+        </div>
         <div class="content">
         	<div>  	
         	<ul class="bxSlider p_image">
-				<li><img class="imgBox" src="../img/plus.png" /></li> 
-				<li><img class="imgBox" src="../img/purin.jpg" /></li> 
-				<li><img class="imgBox" src="../img/defaultPropic.png" /></li> 
-				<li><img class="imgBox" src="../img/DEMANG.png" /></li> 
+        	<!-- 게시글 내 이미지 불러오기 -->
+				<li th:each="image : ${imageList}"><img class="imgBox" th:src="'data:image/png;base64,'+${image.image}" /></li>
 			</ul>
 		</div>
+			<!-- 게시글 내용 불러오기 -->
         <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
     	  <input type="button" name="like" value="좋아요"> 
     	  <input type="button" name="follow" value="팔로우">
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
+    	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
+    	  <a href="postInsert2" th:if="${post.p_type} == N">리뷰작성</a>
     	  </div>
  		</div>
  		
     	  <div>  
     	  <!-- 댓글 나오는 곳 -->
-    	  <div class="commentRead" id="commentRead">댓글 나오는 곳(게시글 번호 연동 + ajax)</div>
+    	  <div class="commentRead" id="commentRead">
+    	  <ul>
+    	  <li th:each="comment: ${commentList}">
+    	  </ul></div>
     	  
     	  <!-- 댓글 작성란 -->
        <div class="commentInsert">

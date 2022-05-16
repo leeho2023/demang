@@ -97,9 +97,20 @@ public class MainController {
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
 	public String postViewRoute( @RequestParam("p_id") String p_id, Model model ) {
+		// 게시글 정보 받아오기
 		model.addAttribute(
 				"post",
 				mapper.getPost(p_id)
+				);
+		// 게시글의 이미지 정보
+		model.addAttribute(
+				"imageList",
+				mapper.getImageList(p_id)
+				);
+		// 게시글 댓글 받아오기
+		model.addAttribute(
+				"commentList",
+				mapper.getCommentList(p_id)
 				);
 		return "post/PostView";
 	}
