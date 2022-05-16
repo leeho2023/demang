@@ -4,18 +4,6 @@ body{
     margin: 0px;
 }
 
-.imsi{
-    border: 1px dotted black;
-    width: 80vw;
-    height: 10vh;
-}
-
-.imsi2{
-    border: 1px dotted black;
-    width: 80vw;
-    height: 20vh;
-}
-
 .wrap{
     border: 1px solid black;
     height: 70vh;

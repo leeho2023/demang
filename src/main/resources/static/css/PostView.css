@@ -1,23 +1,17 @@
 @charset "UTF-8";
 
-/* li{
+ul{
+	margin: 0px;
+	padding: 0px;
+}
+
+li{
+	margin: 0px;
 	list-style: none;
-} */
+}
 
 body{
     margin: 0px;
-}
-
-.imsi{
-    border: 1px dotted black;
-    width: 80vw;
-    height: 10vh;
-}
-
-.imsi2{
-    border: 1px dotted black;
-    width: 80vw;
-    height: 20vh;
 }
 
 .wrap{

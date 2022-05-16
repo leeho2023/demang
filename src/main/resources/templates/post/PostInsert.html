@@ -9,8 +9,8 @@
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-	<header></header>
-    <nav class="imsi"></nav>
+	<header th:include="other/homeNav"></header>
+    <nav></nav>
     <main>
         <div class="wrap">
         <!-- /postInsert 게시글 작성,, /imgInsert 이미지 전송(테스트) -->
@@ -40,7 +40,7 @@
         </div>
     </main>
 
-    <footer class="imsi2"></footer>
+    <footer th:include="other/footer"></footer>
 <script src="/js/PostInsert.js"></script>
 </body>
 </html>
