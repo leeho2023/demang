@@ -2,8 +2,10 @@ package org.pro.demang.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
@@ -38,7 +40,9 @@ public class MainController {
 
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
-	public String loginMove() {
+	public String loginMove( @Param("red") String red, HttpServletRequest request, Model model ) {
+		model.addAttribute("red", red);
+		System.out.println("Main controller ~ "+request.getHeader("Referer"));
 		return "member/login";
 	}
 
@@ -89,7 +93,7 @@ public class MainController {
     // 게시글 입력페이지 이동
 	@GetMapping("/postInsert")
 	public String postInsertRoute(HttpSession session) {
-		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=postInsert";// 비회원인 경우 로그인하러 가기
 		return "post/PostInsert";
 	}
 	
@@ -139,7 +143,7 @@ public class MainController {
     //// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
-		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=feed";// 비회원인 경우 로그인하러 가기
 		System.out.println(session.getAttribute("login")+"번 회원으로 로그인 ~ kysController.feed");
 		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
 		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)

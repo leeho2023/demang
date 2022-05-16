@@ -29,7 +29,7 @@ public class KysController {
 	//// 채팅 페이지
 	@GetMapping("/chat")
 	String chat( @RequestParam("to") String listener, Model model, HttpSession session ){
-		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=chat?to="+listener;// 비회원인 경우 로그인하러 가기
 		model.addAttribute(// 상대방 정보
 				"listener", 
 				mapper.getMember_no(listener) 
@@ -64,7 +64,7 @@ public class KysController {
 	//// 채팅 전체 내역 확인
 	@GetMapping("/chat/history")
 	String chat_history( @RequestParam("to") String listener, Model model, HttpSession session ){
-		if( session.getAttribute("login") == null ) return "redirect:/loginMove";// 비회원인 경우 로그인하러 가기
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=chat/history?to="+listener;// 비회원인 경우 로그인하러 가기
 		model.addAttribute(// 상대방 정보
 				"listener", 
 				mapper.getMember_no(listener) 
