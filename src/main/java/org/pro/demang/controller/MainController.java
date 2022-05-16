@@ -1,6 +1,7 @@
 package org.pro.demang.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -118,7 +119,7 @@ public class MainController {
 //	}
 	
 	//// 게시글 한 개 가져오기(ajax용)
-	@PostMapping("/postItem")
+	@PostMapping("/getPostForFeed")
 	public String feedItem( @RequestParam("no") String no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
 		PostDTO dto = postService.getPost( no );

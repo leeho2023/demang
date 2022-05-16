@@ -39,7 +39,7 @@ function showPost(){
 function getPost( no ){
 	$.ajax({
 		type: 'post',
-		url: 'postItem',
+		url: 'getPostForFeed',
 		async: false,// 결과가 정확히 최신순(목록에 있는 순)으로 나오도록 동기
 		data:{
 			no: no

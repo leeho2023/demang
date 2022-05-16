@@ -3,48 +3,6 @@ body{
     padding: 0;
 }
 
-/* homeNav css 부분 */
-#homeNav{
-    border: 2px solid blueviolet;
-    width: 100vw;
-    height: 16vh;
-}
-
-.blank{
-    border: 1px solid red;
-    height: 2vh;
-}
-
-.blankNav{
-    height: 11vh;
-    display: flex;
-    justify-content: space-around;
-}
-
-.box{
-    border: 1px solid brown;
-    width: 25vw;
-}
-
-.searchBox{
-    width: 30vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.menuBox{
-    display: flex;
-    align-items: center;
-}
-
-.menu{
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    width: 20vw;
-}
-
 /* 검색 후 유저정보와 post 정보 css 부분 */
 .contentBox{
     border: 2px solid red;
@@ -220,17 +178,3 @@ figure img{
     font-size: 0.8em;
     font-weight: 700;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

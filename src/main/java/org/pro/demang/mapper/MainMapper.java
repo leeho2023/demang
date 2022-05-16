@@ -9,7 +9,6 @@ import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
-import org.pro.demang.model.TagDTO;
 
 @Mapper
 public interface MainMapper {
@@ -60,7 +59,7 @@ public interface MainMapper {
 	public MemberDTO memberRead(String m_id);
 	void memberUpdate(MemberDTO dto);
 
-    List<TagDTO> tagSearch(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
+    List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
 	public String emailCheck(String m_email);
 	
 	//// 채팅 관련
@@ -74,5 +73,9 @@ public interface MainMapper {
 			@Param("m1") String m1, 
 			@Param("m2") String m2
 			);
-	
+
+	List<Integer> getPostNO(String searchVal);
+	PostImgDTO getImage(int no);
+
+    int codeCheck(String code);
 }

@@ -69,9 +69,24 @@
 		from memberTBL m
 		inner join postTBL p
 		on p.p_writer = m.m_id
-		inner join postImgTBL p2 
+		left join postImgTBL p2 
 		on p2.p_id = p.p_id
 		where p.p_content like '%' #{searchVal} '%'
+	</select>
+
+	<!-- 검색 결과 이미지 한개 -->
+	<select id="getImage" resultType="org.pro.demang.model.PostImgDTO">
+		select * from postimgtbl where p_id = #{no} order by i_no asc limit 1
+	</select>
+
+	<!-- 검색 결과 게시글 번호 -->
+	<select id="getPostNO" resultType="Integer">
+		select p_id from postTBL where p_content like '%' #{searchVal} '%'
+	</select>
+
+	<!-- 태그 검색 결과 게시글 번호 -->
+	<select id="tagForGetPostNO" resultType="Integer">
+		select t_postNo from tagonposttbl where t_tag = #{reSearchVal}
 	</select>
 
 	<!-- 해당 태그의 게시물 검색 쿼리문 -->
@@ -109,11 +124,15 @@
 		INSERT INTO tagOnPostTBL (t_tag, t_postNo) VALUES(#{hashtag}, #{p_id})
 	</insert>
 
+	<!-- 검색 결과 회원 코드 중복 확인 -->
+	<select id="codeCheck" resultType="Integer">
+		select count(*) from memberTBL where m_code = #{code}
+	</select>
 
 	<!-- 이것은 회원가입 쿼리문입니다. -->
 	<insert id="memberInsert">
 		INSERT INTO memberTBL(m_code, m_email, m_nickname, m_password, m_birth )
-		 VALUES(1, #{m_email},#{m_nickname},#{m_password},#{m_birth})
+		 VALUES(#{m_code}, #{m_email},#{m_nickname},#{m_password},#{m_birth})
 	</insert>
 
 	<!-- 회원 번호로 회원 찾기 -->
