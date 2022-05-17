@@ -24,6 +24,8 @@
 <nav></nav>
 
 <h1>[[${post.p_id}]]번 글</h1>
+<input type="hidden" id="p_id" th:value="${post.p_id}">
+<input type="hidden" id="m_id" th:value="${session.login}">
 
 <main>
     <div class="wrap">
@@ -33,7 +35,7 @@
         <img class="propic" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
         [[${post.memberDTO.m_nickname}]]
         <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
-        <p th:if="${post.p_type} == S">판매가격</p>
+        <p th:if="${post.p_type} == N" class="textEnd">판매가격</p>
         </div>
         <div class="content">
         	<div>  	
@@ -46,11 +48,13 @@
         <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
-    	  <input type="button" id="like" name="like" value="좋아요"> 
-    	  <input type="button" name="follow" value="팔로우">
+    	  <input th:if="${session.login}" type="button" id="like" name="like" value="좋아요">[[${post.p_likeCount}]]
+    	  <input th:if="${session.login}" type="button" name="follow" value="팔로우">
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
     	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">리뷰작성</a>
+    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">구매하기</a>
+    	  <button onclick="history.back()">뒤로가기</button>	
     	  </div>
  		</div>
  		
@@ -71,8 +75,10 @@
     	  <!-- 댓글 작성란 -->
        <div class="commentInsert">
        <div>프사</div>
-       <input type="text" class="commentWrite" name="commentWrite" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
-       <div><input type="button" value="작성"></div>
+       <form action="func/newComment" method="post">
+       <input type="text" class="commentWrite" name="c_content" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
+       <div><input type="submit" value="작성"></div>
+       </form>
        </div>
        
        </div>

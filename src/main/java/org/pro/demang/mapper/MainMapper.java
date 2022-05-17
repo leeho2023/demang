@@ -78,4 +78,6 @@ public interface MainMapper {
 	PostImgDTO getImage(int no);
 
     int codeCheck(String code);
+
+	void addLike(String l_id, String l_postNo); // 좋아요 누르기
 }

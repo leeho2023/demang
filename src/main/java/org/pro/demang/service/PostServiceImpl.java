@@ -144,5 +144,10 @@ public class PostServiceImpl implements PostService{
 		return mapper.getPostNO(searchVal);
 	}
 
+	@Override
+	public void addLike(String l_id, String l_postNo) {
+		mapper.addLike(l_id, l_postNo);
+	}
+
 	
 }
