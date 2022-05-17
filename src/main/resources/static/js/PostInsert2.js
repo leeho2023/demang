@@ -31,14 +31,6 @@ $(function(){
 	});
 
 	$('#input_file').on('change', filechange);
-	
-	$("input:radio[name='p_type']:input[value='S']").click(function(){
-		$('.radio').append('<div id="sell">판매가격<input type="number" name="p_price">원</div>');
-	});
-	
-	$("input:radio[name='p_type']:input[value='N']").click(function(){
-		$('#sell').remove();
-	});
 		
 });
 

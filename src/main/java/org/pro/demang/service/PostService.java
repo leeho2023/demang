@@ -22,5 +22,6 @@ public interface PostService {
     List<PostDTO> postSearch(String searchVal);
     List<Integer> tagForGetPostNO(String reSearchVal);
 	List<Integer> getPostNO(String searchVal);
+	void addLike(String l_id, String l_postNo); // 좋아요 누르기
 	
 }
