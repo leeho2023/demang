@@ -13,7 +13,8 @@ import org.pro.demang.model.PostImgDTO;
 @Mapper
 public interface MainMapper {
 
-	List<MemberDTO> fList(int follower); // 회원 코드로 해당 친구 찾기
+	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
+	List<MemberDTO> fList(String follower); // 특정 회원(번호)이 팔로우한 회원 목록
 
 	void memberInsert(MemberDTO dto); // 회원가입
 

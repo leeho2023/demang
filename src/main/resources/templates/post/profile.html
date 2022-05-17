@@ -19,7 +19,6 @@ $(function(){
 <body>
 [[${session.login}]]번 회원 로그인, [[${dto.m_id}]]번 회원의 페이지
 <header th:include="other/homeNav"></header>
-<nav th:include="other/fList">친구목록</nav> 
 
 
 <main>
@@ -32,6 +31,7 @@ $(function(){
 				<button th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우</button><!-- js/doFollow.js에서 팔로우 여부 확인 후 내용 바꿈  -->
 				<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberUpdate'">개인정보수정</button>
 			</div>
+			<button th:onclick="location.href='chat?to=[[${dto.m_id}]]'">채팅</button>
 		</div>
 		<div>
 			<span><span id="following_count"></span>명을 팔로우 중</span>

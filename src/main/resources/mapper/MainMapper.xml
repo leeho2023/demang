@@ -51,9 +51,9 @@
 	</resultMap>
 
 
-	<!-- 친구목록 불러오는 쿼리문 -->
+	<!-- 특정 회원이 팔로우한 회원 목록 -->
 	<select id="fList" resultType="org.pro.demang.model.MemberDTO">
-		select m.m_email, m.m_nickname
+		select m.m_id, m.m_profilePic, m.m_nickname, m.m_code
 		from followTBL f join memberTBL m where f.followee = m.m_id and
 		f.follower = #{follower}
 	</select>

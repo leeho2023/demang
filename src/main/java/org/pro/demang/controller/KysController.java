@@ -28,12 +28,28 @@ public class KysController {
 	
 	//// 채팅 페이지
 	@GetMapping("/chat")
-	String chat( @RequestParam("to") String listener, Model model, HttpSession session ){
+	String chattingPage( @RequestParam("to") String listener, Model model, HttpSession session ){
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=chat?to="+listener;// 비회원인 경우 로그인하러 가기
 		model.addAttribute(// 상대방 정보
 				"listener", 
 				mapper.getMember_no(listener) 
 				);
+		model.addAttribute(
+				"lastH_id",
+				0 );
+		return "chat/chattingPage";
+	}
+	
+	//// 채팅 (ajax로 모달 만들기용)
+	@GetMapping("/chatModal")
+	String chatting( @RequestParam("to") String listener, Model model, HttpSession session ){
+		model.addAttribute(// 상대방 정보
+				"listener", 
+				mapper.getMember_no(listener) 
+				);
+		model.addAttribute(
+				"lastH_id",
+				0 );
 		return "chat/chatting";
 	}
 	

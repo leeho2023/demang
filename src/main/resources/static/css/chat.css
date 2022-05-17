@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.chatHistory {
+	display: flex;
+	flex-flow: column nowrap;
+}
+.chatHistory > * {
+	display: inline-block;
+	margin-bottom: 10px;
+	word-break: break-all;/* 넘치는 단어 무조건 줄내림 */
+}
+
+.chatHistory > .me {
+	background-color: #ffd;
+	align-self: flex-end;
+}
+
+.chatHistory > .you {
+	background-color: #def;
+	align-self: flex-start;
+}

@@ -1,36 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/fList.css">
-    <link rel="stylesheet" href="css/homeNav.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
-<body>
-	<nav id="homeNav" th:include="other/homeNav"></nav>
+??? 팔로우 목록입니다.
+<div th:each="fmember : ${fList}">
+	<a th:href="'vip?p='+${fmember.m_id}" style="display: block">
+		<div>
+			<img th:src="'data:image/png;base64,'+${fmember.m_profilePicString}" height=30>
+			<span th:text="${fmember.m_nickname}"></span>#<span th:text="${fmember.m_code}"></span>
+		</div>
+	</a>
+	<a th:href="'chat?to='+${fmember.m_id}">채팅(새 페이지)</a>
+<button th:onclick="'chat_modal('+${fmember.m_id}+')'">채팅</button>
+</div>
 
-    <div class="modal">
-        <div class="modal_body">
-            <div>
-                <div class="close close2"></div>
-            </div>
-            <div>
-                친구 목록
-            </div>
-            <div id="fList">
-                <div>아이디 닉네임</div>
-            </div>
-        </div>
-    </div>
-    <button class="btn-open-popup fListBtn">Modal 띄우기</button>
-    <a href="createCode">회원 코드 생성 테스트</a>
-
-	<footer th:include="other/footer"></footer>
-	<script src="js/homeNav.js"></script>
-    <script src="js/fList.js"></script>
-</body>
-</html>
+<script src="js/chatting.js"></script>

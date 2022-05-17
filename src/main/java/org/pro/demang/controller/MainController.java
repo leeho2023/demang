@@ -156,14 +156,15 @@ public class MainController {
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=feed";// 비회원인 경우 로그인하러 가기
-		System.out.println(session.getAttribute("login")+"번 회원으로 로그인 ~ kysController.feed");
 		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
 		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
 				"PostList", 
-				postService.getPostList_followee( 
-						session.getAttribute("login")+""// 정수를 문자열로 바꾸려고 +""
-						)
+				postService.getPostList_followee( loginId(session) )
 				);
+		model.addAttribute(
+				"fList",
+				mapper.fList(loginId(session))
+				);// 친구 목록
 		return "post/feed";
 	}
 
@@ -208,7 +209,7 @@ public class MainController {
 	@ResponseBody
 	public String doFollow( String m2, HttpSession session ) {
 		mapper.doFollow(
-				session.getAttribute("login")+"", // +""의 뜻: 문자열로 바꿈
+				loginId(session),
 				m2);
 		return "";
 	}
@@ -218,11 +219,18 @@ public class MainController {
 	@ResponseBody
 	public String followCheck( String m2, HttpSession session ) {
 		if( mapper.followCheck(
-				session.getAttribute("login")+"", // +""의 뜻: 문자열로 바꿈
+				loginId(session), 
 				m2
 				) != 0 ) {
 			return "O";
 		}
 		return "X";
+	}
+	
+	
+
+	//// 현재 로그인한 회원 번호(문자열로) 가져오기
+	private static String loginId( HttpSession session ) {
+		return session.getAttribute("login")+"";
 	}
 }

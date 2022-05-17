@@ -1,0 +1,46 @@
+@charset "UTF-8";
+#chatModals {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	max-height: 100%;
+	display: flex;
+	flex-flow: row-reverse nowrap;
+	overflow: auto;
+}
+
+/* 채팅버튼 위치 */
+.chatModal {
+	position: relative;
+	margin: 10px;
+}
+.chatModal .xButton  {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.chatDiv {
+	width: 400px;
+	height: 500px;
+	display: flex;
+	flex-flow: column nowrap;
+	background-color: #fff8;
+}
+
+.chatDiv > .chatListener {
+	flex-basis: 70px;
+}
+.chatDiv > .chatHistory_box {
+	flex-basis: 0px;
+	flex-grow: 1;
+	overflow: auto;
+}
+.chatDiv > .chatForm {
+	flex-basis: 50px;
+}
+
+/* 채팅모달에서는 간략히 보이려고 날짜 표시 안 함*/
+.chatDiv .date {
+	display: none;
+}

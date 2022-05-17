@@ -1,104 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>[[${listener.m_nickname}]]#[[${listener.m_code}]]님과 채팅</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<style>
-#chatBox {
-	height: 500px;
-	border: 2px grey solid;
-	border-radius: 1vw;
-	padding: 1vw;
-	overflow: auto;
-}
-#chatHistory > * {
-	margin: 20px;
-}
-#chatHistory > .me {
-	background-color: #ffd;
-}
-#chatHistory > .you {
-	background-color: #def;
-}
-#endOfChat {
-	border: 0;
-}
-</style>
-</head>
-<body>
-<!--<header th:include="other/homeNav"></header>-->
+<!--/* 
 
-<div><!--/* 상대 정보 */-->
-	<img th:src="'data:image/png;base64,'+${listener.m_profilePicString}" height=80>
-	<span th:text="${listener.m_nickname}"></span>#<span th:text="${listener.m_code}"></span>님과 채팅
-</div>
+chatDiv 한 상대회원과 채팅
 
-<div id="chatBox">
-	<div id="chatHistory" th:include="chat/chat"><!--/* 여기 채팅 내역 */-->
+div 상대정보
+├프사
+└닉네임
+
+div 채팅상자
+├채팅 내역
+└채팅내역 끝부분 표시
+
+form 메시지 보내기 폼
+├메시지입력
+└버튼
+
+ */-->
+
+<div class="chatDiv">
+	<div class="chatListener"><!--/* 상대 정보 */-->
+		<img th:src="'data:image/png;base64,'+${listener.m_profilePicString}" height=80>
+		<span th:text="${listener.m_nickname}"></span>#<span th:text="${listener.m_code}"></span>님과 채팅
 	</div>
-	<hr id="endOfChat"><!-- 스크롤 끝까지 내렸나 검사용 -->
+	
+	<div class="chatHistory_box">
+		<div class="chatHistory" th:include="chat/chat"><!--/* 여기 채팅 내역 */-->
+		</div>
+		<hr class="endOfChat" style="border: 0"><!-- 스크롤 끝까지 내렸나 검사용 -->
+	</div>
+	
+	<form class="chatForm">
+		<!--<input hidden="hidden" vaule="엔터키로제출방지용무의미한input">-->
+		<input type="hidden" class="chat_to" th:value="${listener.m_id}">
+		<input type="text" class="chat_content" name="h_content" placeholder="뭐라 칠려고 했더라?">
+		<button type="button" class="chat_send">보내기 버튼</button>
+	</form>
 </div>
-
-<form>
-	<input type="text" id="chat_content" name="h_content" placeholder="뭐라 칠려고 했더라?">
-	<button type="button" onclick="chat_send()">보내기 버튼</button>
-</form>
-
-<footer th:include="other/footer"></footer>
-<script>
-lastH_id = 0;
-
-$(function(){
-	chat_refresh()
-	setInterval( chat_refresh, 500 );// 주기적으로 채팅내용 새로고침
-});
-
-function chat_send(){// ajax로 메시지 한 개 보내기
-	$.ajax({
-		type: 'post',
-		url: 'chat/send',
-		data:{
-			to: [[${listener.m_id}]],// 메시지 받을 상대 회원번호
-			h_content: $('#chat_content').val()
-		},
-		success: function(){
-			chat_refresh();// 채팅 내용 새로고침 하기
-			$('#chat_content').val('');// 입력창 비우기
-		},error: function(){console.log('메시지 전송 실패')}
-	});
-}
-
-function chat_refresh(){// 채팅 내용 새로고침
-	//// 새로고침 전 스크롤이 끝까지 내려가있는 상태이면 채팅내용 새로고침 후 자동으로 스크롤 다시 끝까지 내리기
-	var autoscrollCheck = endOfChatCheck();
-	$.ajax({
-		type: 'post',
-		url: 'chat/refresh',
-		data:{
-			to: [[${listener.m_id}]],
-			since: lastH_id
-		},
-		success: function( data ){
-			if( data.length > 0 ){// 새 채팅내역 있을 때만 (없는 경우에는 controller에서 empty.html을 반환)
-				$('#lastH_id').remove();// 기존 <span#lastH_id> 삭제
-				$('#chatHistory').append(data);// 새로 받은 채팅 내용 덧붙이기
-				lastH_id = $('#lastH_id').text();// ??? 마지막 메시지의 h_id 정보는 받아올 방법이 없어서 일단 <span#lastH_id>에 넣어놨다.
-				if( autoscrollCheck ) $('#chatBox').scrollTop($('#chatHistory').outerHeight());// 맨 아래로 자동스크롤 (chatBox(채팅 보이는 영역) 안에서 스크롤을 chatHistory(채팅내역)의 높이만큼)
-			}
-		},error: function(){console.log('불러오기 실패')}
-	});
-}
-
-function endOfChatCheck(){// 채팅 내역 상자에서 스크롤 끝까지 내렸는가 검사
-	if(// 채팅의 끝 표시가 채팅박스의 밑변보다 위에 있으면(높이값이 작으면) 스크롤을 끝까지 내렸다고 판명
-			$('#chatBox').outerHeight() + $('#chatBox').offset().top// 채팅박스의 밑변의 위치
-			> ($('#endOfChat').offset().top)// 채팅의 끝 표시의 위치
-	){
-		return true;
-	}else return false;
-}
-</script>
-</body>
-</html>
