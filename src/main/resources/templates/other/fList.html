@@ -28,6 +28,31 @@
     </div>
     <button class="btn-open-popup fListBtn">Modal 띄우기</button>
     <a href="createCode">회원 코드 생성 테스트</a>
+    <hr>
+    이메일 : <input type="text" class="email" ><br>
+    <a href="#" class="mail">자바 메일 보내기 테스트</a>
+    
+
+    <div class="mailCheckModalBack">
+        <div class="mailCheckModal">
+            이메일 인증 코드 입력
+            <div>보낸 이메일 : <span class="sendEmail"></span></div>
+            <div class="test"></div>
+            <div>인증 코드 : <input type="text" class="authenticationCode"></div>
+            <input type="button" class="authentication" value="인증">
+            <input type="button" class="cancel" value="취소">
+            <input type="button" value="재전송">
+        </div>
+    </div>
+
+    <div class="mailCheckModalBack2">
+        <div class="mailCheckModal2">
+            <div>
+                이메일이 중복됩니다.
+                <input type="button" class="cancel" value="확인">
+            </div>
+        </div>
+    </div>
 
 	<footer th:include="other/footer"></footer>
 	<script src="js/homeNav.js"></script>

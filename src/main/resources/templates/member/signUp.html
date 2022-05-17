@@ -18,10 +18,12 @@
   <form action="/signUp" method="POST" id="signUp">
    <div class="div1">
         <div id="wrapper">
-             <img src="img/DEMANG.png"class="img1"><br><br>
-            
              <p class="p1"><input type="text" name="m_email" id="m_email" autocomplete="off" required><label for="user_name"><span>E-MAIL</span></label></p>
+             <input type="button" id="sendMail" value="인증코드받기">
           <div class="email regex"></div>
+          
+	          <p class="p1"><input type="text" name="e_code" id="e_code" autocomplete="off" required><label for="user_name"><span>인증코드</span></label></p>
+	          <div class="code regex"></div>
 				
 				<p class="p1"><input type="text" name="m_nickname" id="m_nickname" autocomplete="off" required><label for="user_name"><span>NAME</span></label></p>
             <div class="name regex"></div>
@@ -71,6 +73,14 @@
 
 <a href="/memberRead">멤버리드가기</a>
 
+<div class="mailCheckModalBack2">
+   <div class="mailCheckModal2">
+       <div>
+           이메일이 중복됩니다.
+           <input type="button" class="cancel" value="확인">
+       </div>
+   </div>
+</div>
  
 
 <script type="text/javascript" src="js/signUp.js"></script>

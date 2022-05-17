@@ -2,9 +2,13 @@ package org.pro.demang.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LhhController {
@@ -24,12 +29,16 @@ public class LhhController {
 	private PostService postService;
 
 	@Autowired
-	private MainMapper mapper;	
+	private MainMapper mapper;
+	
+	@Autowired
+	private MailService mailService;
+	
 
     @GetMapping("/")
 	public String home() {
 		
-		return "other/fList";
+		return "member/signUp";
 	}
     
 	@GetMapping("/fList")
@@ -127,5 +136,33 @@ public class LhhController {
 
 		return "redirect:/";
 	}
+	
+	//메일 체크하기
+	@PostMapping("/emailReduplicationCheck")
+	@ResponseBody
+	public int emailReduplicationCheck(@RequestParam("m_email")String m_email){
+		int emailCheckResult = mailService.emailCheck(m_email);
+		System.out.println(emailCheckResult);
 
+		return emailCheckResult;
+	}
+
+	// 메일 보내기
+	@PostMapping("/sendMail")
+	public String sendMail(@RequestParam("m_email")String m_email) throws MessagingException {
+
+		mailService.sendMail(m_email);
+		
+	    return "redirect:/";
+	}
+	
+	@PostMapping("/reEmailCheck")
+	@ResponseBody
+	public int reEmailCheck(EmailCheckDTO dto){
+		System.out.println(dto.toString());
+		int result = mailService.reEmailCheck(dto);
+		
+		return result;
+	}
+	
 }
