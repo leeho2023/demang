@@ -141,6 +141,12 @@
 		 VALUES(#{m_code}, #{m_email},#{m_nickname},#{m_password},#{m_birth})
 	</insert>
 
+	<!-- 이메일 인증코드 등록 쿼리 -->
+	<insert id="emailCodeInsert">
+		INSERT INTO emailcheckTBL(m_email, e_code)
+		VALUES(#{m_email}, #{e_code})
+	</insert>
+
 	<!-- 회원 번호로 회원 찾기 -->
 	<select id="getMember_no"
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};
@@ -234,9 +240,33 @@
 		) AND h_id > #{since}
 	ORDER BY h_id ASC
 	</select>
-		   
+	
+	<!-- 검색결과 memberTBL의 이메일 정보 -->
 	<select id="emailCheck" resultType="String">
-	select m_email from memberTBL where m_email = #{m_email}
-</select>
+		select m_email from memberTBL where m_email = #{m_email}
+	</select>
+
+	<!-- 검색 결과 emailCheckTBL의 이메일 정보 -->
+	<select id="emailAuthenticationCheck" resultType="String">
+		select m_email from emailCheckTBL where m_email = #{m_email}
+	</select>
+
+	<!-- memberTBL과 emailCheckTBL에 동시에 존재하지 않는 이메일 삭제하기 -->
+	<delete id="emailAuthenticationDelete">
+		DELETE FROM emailcheckTBL
+		WHERE m_email = #{m_email}
+	</delete>
+	<!-- memberTBL과 emailCheckTBL에 동시에 존재하지 않는 이메일 삭제하기 -->
+	<delete id="emailDelete">
+		DELETE FROM memberTBL
+		WHERE m_email = #{m_email}
+	</delete>
+
+	<!-- 검색 결과 이메일과 인증코드 -->
+	<select id="reEmailCheck" resultType="Integer">
+		select count(*)
+		from emailchecktbl
+		where m_email = #{m_email} and e_code = #{e_code}
+	</select>
 		   
 </mapper>

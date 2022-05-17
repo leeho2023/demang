@@ -1,4 +1,5 @@
-
+var emailCheckresult = 0;
+var m_email
 $(function(){
                 //email유효성 검사
                 $("#m_email").on("input",function(){
@@ -127,13 +128,78 @@ $(function(){
         		   alert("비밀번호확인양식을 다시 확인해주세요");
         		   retrun;
         	   }
-        	   
-        	   alert("회원가입 완료");
-        	  
+               
+
+            $.ajax({
+                type: "post",
+                url: "reEmailCheck",
+                data: {
+                    m_email : $('#m_email').val(),
+                    e_code : $('#e_code').val()
+                },
+                success: function ( data ) {
+                    // 리턴값이 1이면 인증 완료 0이면 인증 실패 alert 띄우고 다시 인증번호 입력창 띄울까?
+                    if(data == 1){
+                        alert("회원가입 완료");
+                        $("#signUp").submit();
+                    }else{
+                        alert("인증 실패");
+                        $('.mailCheckModalBack').show();
+                    }
+                }
+            });
         	   
              //빈칸 없을 때 제출.
-        	   $("#signUp").submit();
+             
+			
+             
+        	   
             	   
            
            })
         })
+
+
+
+// 이메일 인증 관련 모달 숨겨놓기
+$('.mailCheckModalBack2').hide();
+
+// 이메일 인증 관련 모달 닫기
+$('.cancel').click(function(){
+    $('.mailCheckModalBack2').hide();
+});
+
+// 이메일 중복 체크하고 없으면 메일 발송
+
+$('#sendMail').click(function(){
+
+    $('.authenticationCode').val("");
+    m_email = $('#m_email').val(); // 입력한 이메일
+    if(m_email == ""){
+        $(".email.regex").html('유효한 이메일을 입력해 주세요');
+        return;
+    }
+    $('.sendEmail').text(m_email) // 모달창에 이메일 정보
+    // 이메일 중복 체크
+    $.ajax({
+        type: "post",
+        url: "emailReduplicationCheck",
+        data: { m_email : m_email},
+        success: function ( data ) {
+            // 리턴값이 1이면 중복된 이메일 없으므로 해당 이메일로 메일 발송
+            if(data == 1){
+                // 이메일 발송 ajax
+                $.ajax({
+                    type: "post",
+                    url: "sendMail",
+                    data: { m_email : m_email },
+                    success: function ( data ) {
+                        alert('이메일을 확인해주세요');
+                    }
+                });
+            }else{      // 그게 아니면 이메일 중복이란 메시지 담긴 모달 띄우기
+                $('.mailCheckModalBack2').show();
+            }
+        }
+    });
+});

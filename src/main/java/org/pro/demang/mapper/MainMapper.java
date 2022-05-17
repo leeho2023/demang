@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
@@ -80,5 +81,16 @@ public interface MainMapper {
 
     int codeCheck(String code);
 
+
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
+
+	void emailCodeInsert(EmailCheckDTO dto);
+
+    String emailAuthenticationCheck(String m_email);
+
+    void emailAuthenticationDelete(String m_email);
+
+	void emailDelete(String m_email);
+
+    int reEmailCheck(EmailCheckDTO dto);
 }
