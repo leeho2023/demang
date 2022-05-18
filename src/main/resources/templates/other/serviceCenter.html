@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/homeNav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/postSearch.css">
+    <link rel="stylesheet" href="css/serviceCenter.css">
+    <!-- font awesome kit code -->
+    <script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header th:include="other/homeNav">메인메뉴</header>
+    <main>
+        <div class="mainwrap">
+            <div class="subwrap">
+                <div class="notice">
+                    <i class="fa-regular fa-address-card fa-4x"></i>
+                    <p>판매자 자격은 개인정보페이지에서 수정을 통해 계좌 연결과 같이 사용할 수 있습니다.</p>
+                </div>
+                <div class="notice">
+                    <div>
+                        <i class="fa-solid fa-comments-dollar fa-3x"></i>
+                        <i class="fa-regular fa-circle-check fa-3x"></i>
+                        <i class="fa-regular fa-handshake fa-3x"></i>
+                    </div>
+                    <p>중고거래 혹은 상품구매는 주의를 기울여주시기 바랍니다.</p>
+                </div>
+            </div>
+            <div class="subwrap">
+                <div class="notice">
+                    <i class="fa-regular fa-image fa-4x"></i>
+                    <p>불법 촬영물 등등등 을 게시할 경우 이용 정지, 처벌 받습니다.</p>
+                </div>
+                <div class="notice">
+                    <div>
+                        <i class="fa-solid fa-people-group fa-4x"></i>
+                    </div>
+                    <p>모든 사람들이 함께 쓰는 SnShop을 만들어 갑시다~</p>
+                </div>
+            </div>
+            <div>
+                <span class="contactUs">문의 하기</span>
+            </div>
+        </div>
+    </main>
+    <footer th:include="other/footer">푸터</footer>
+    <script src="js/serviceCenter.js"></script>
+    <script src="js/postSearch.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/homeNav.js"></script>
+</body>
+</html>

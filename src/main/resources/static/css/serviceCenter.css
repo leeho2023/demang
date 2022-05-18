@@ -1,0 +1,39 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+main div{
+    border: 1px solid black;
+    width: auto;
+    height: auto;
+}
+
+main{
+    border: 2px solid blue;
+    display: flex;
+    justify-content: center;
+}
+
+.mainwrap{
+    width: 70vw;
+    height: auto;
+}
+
+.subwrap{
+    width: 70vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.notice{
+    width: 400px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}

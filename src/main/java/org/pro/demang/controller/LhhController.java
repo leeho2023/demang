@@ -38,7 +38,8 @@ public class LhhController {
     @GetMapping("/")
 	public String home() {
 		
-		return "member/signUp";
+		// return "member/login";
+		return "other/serviceCenter";
 	}
     
 	@GetMapping("/fList")

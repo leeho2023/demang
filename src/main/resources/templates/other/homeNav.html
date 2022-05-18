@@ -1,6 +1,3 @@
-<span th:if="${session.login}"><span th:text="${session.login}"></span>번으로 로그인</span>
-<span th:unless="${session.login}">로그인 안 됨</span>
-
 <div class="blank"></div>
 <div class="blank blankNav">
 
@@ -19,7 +16,10 @@
             <li>Post</li>
             <li>Profile</li>
         </ul>
-        
+        <br>
+        <span th:if="${session.login}"><span th:text="${session.login}"></span>번으로 로그인</span>
+        <span th:unless="${session.login}">로그인 안 됨</span>
+
     </div>
 </div>
 <div class="blank"></div>

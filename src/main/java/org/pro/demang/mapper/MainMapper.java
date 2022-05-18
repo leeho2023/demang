@@ -44,15 +44,15 @@ public interface MainMapper {
 	List<Integer> getPostList_followee( String no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
 
 
-	PostDTO getPost( String no );// 게시글 번호로 게시글 찾기
-	PostDTO getPost( int no );// 게시글 번호로 게시글 찾기
-	List<CommentDTO> getCommentList(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<PostImgDTO> getImageList(String no);//게시글 번호로 해당 게시글의 이미지들 찾기
-	List<PostImgDTO> getImageList(int no);//게시글 번호로 해당 게시글의 이미지들 찾기
-	void commentInsert( CommentDTO dto );// 댓글 등록
+	PostDTO getPost( String no ); // 게시글 번호로 게시글 찾기
+	PostDTO getPost( int no ); // 게시글 번호로 게시글 찾기
+	List<CommentDTO> getCommentList(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<PostImgDTO> getImageList(String no); //게시글 번호로 해당 게시글의 이미지들 찾기
+	List<PostImgDTO> getImageList(int no); //게시글 번호로 해당 게시글의 이미지들 찾기
+	void commentInsert( CommentDTO dto ); // 댓글 등록
 
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 
