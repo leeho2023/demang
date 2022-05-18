@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="css/test.css">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
+<script th:inline="javascript">postList = [[${PostList}]]/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
 <script th:inline="javascript" src="js/postFromListByScrolling.js"></script>
-<script th:inline="javascript">m_id = [[${dto.m_id}]];/* 현재 페이지 계정 주인 */</script>
+<script th:inline="javascript">m_id = [[${dto.m_id}]]/* 현재 페이지 계정 주인 */</script>
 <script th:inline="javascript" src="js/doFollow.js"></script>
 <script>
 $(function(){
