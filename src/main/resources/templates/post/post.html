@@ -1,4 +1,4 @@
-<article class="post">TTTT
+<article class="post">
 	<div class="postView">
 		<h1 class="writerInfo">
 			<a th:href="'/vip?p='+${post.memberDTO.m_id}" style="display: block">
@@ -30,11 +30,7 @@
 		<ul class="commentList">
 			<li th:each="comment: ${commentList}">
 				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
-<<<<<<< HEAD
-					<img th:src="${comment.memberDTO.m_profilePicString}" height=30>
-=======
 					<img th:src="${comment.memberDTO.profileImage}" height=30>
->>>>>>> refs/remotes/origin/imageGetMethod_edit
 					<span>[[${comment.memberDTO.m_nickname}]]</span>
 				</a>
 				<span>[[${comment.c_content}]]</span>
