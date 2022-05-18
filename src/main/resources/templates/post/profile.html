@@ -23,7 +23,7 @@ $(function(){
 
 <main>
 <section><!-- 회원 정보 -->
-	<div class="propicDiv"><img th:src="'data:image/png;base64,'+${dto.m_profilePicString}" height=100></div>
+	<div class="propicDiv"><img th:src="${dto.m_profilePicString}" height=100></div>
 	<div>
 		<div>
 			<span>[[${dto.m_nickname}]]</span><span>#[[${dto.m_code}]]</span>

@@ -2,14 +2,14 @@
 	<div class="postView">
 		<h1 class="writerInfo">
 			<a th:href="'/vip?p='+${post.memberDTO.m_id}" style="display: block">
-				<img class="propic" alt="프로필 사진" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
+				<img class="propic" alt="프로필 사진" th:src="${post.memberDTO.m_profilePicString}" height=70>
 				<span>[[${post.memberDTO.m_nickname}]]</span>
 			</a>
 		</h1>
 		<div class="postImgBox">
 			<div class="postImgs">
 				<div class="postImgDiv" th:each="postImg: ${imageList}">
-					<img th:src="'data:image/png;base64,'+${postImg.image}" height=300>
+					<img th:src="${postImg.image}" height=300>
 				</div>
 			</div>
 			<button>&lt;</button>
@@ -30,7 +30,7 @@
 		<ul class="commentList">
 			<li th:each="comment: ${commentList}">
 				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
-					<img th:src="'data:image/png;base64,'+${comment.memberDTO.m_profilePicString}" height=30>
+					<img th:src="${comment.memberDTO.m_profilePicString}" height=30>
 					<span>[[${comment.memberDTO.m_nickname}]]</span>
 				</a>
 				<span>[[${comment.c_content}]]</span>
