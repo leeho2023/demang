@@ -17,7 +17,7 @@
             <div class="userBox" th:each="user : ${list}">
                 <div class="userProfile">
                     <div class="profileImg">
-                        <img th:src="'data:image/png;base64,'+${user.m_profilePicString}">
+                        <img th:src="${user.profileImage}">
                     </div>
                     <div class="email_nickName">
                         <span class="nickName">

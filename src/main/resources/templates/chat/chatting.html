@@ -18,7 +18,7 @@ form 메시지 보내기 폼
 
 <div class="chatDiv">
 	<div class="chatListener"><!--/* 상대 정보 */-->
-		<img th:src="'data:image/png;base64,'+${listener.m_profilePicString}" height=80>
+		<img th:src="${profileImage}" height=80>
 		<span th:text="${listener.m_nickname}"></span>#<span th:text="${listener.m_code}"></span>님과 채팅
 	</div>
 	

@@ -30,9 +30,9 @@ public class LwkController {
 		MemberDTO member = MemberService.login(dto);// 입력된 정보(dto)로 디비에서 회원정보 찾아오기
 		if( member != null ) {// 일치하는 회원 있음: 로그인 성공
 			HttpSession session = request.getSession();
-			session.setAttribute("login", member.getM_id());
-			System.out.println("lwk controller ~ red: "+red);
-			if( red == null )// 로그인 후 따로 이동할 페이지가 없으면 피드로 이동
+			session.setAttribute("login", member.getM_id()); 
+			System.out.println("lwk controller  ~ red: "+red);
+			if( red.equals("") )// 로그인 후 따로 이동할 페이지가 없으면 피드로 이동
 				return "redirect:/feed";
 			else// 있으면 그 페이지로 이동
 				return "redirect:/"+red;

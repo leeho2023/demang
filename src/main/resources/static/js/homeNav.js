@@ -53,12 +53,5 @@ function search() {
 
 
 
-$('#searchBtn').click(function (e) { 
-    search();
-    return;
-});
-
-
-
 
 

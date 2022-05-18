@@ -11,7 +11,7 @@
     <div class="userInfoBox">
         <div class="userInfo">
             <div class="profileImg">
-                <img th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}">
+                <img th:src="${post.memberDTO.profileImage}">
             </div>
             <div class="email_nickName">
                 <span class="nickName">
