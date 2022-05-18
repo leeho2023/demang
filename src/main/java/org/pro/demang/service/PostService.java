@@ -3,6 +3,7 @@ package org.pro.demang.service;
 import java.util.List;
 
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.LikeDTO;
 import org.pro.demang.model.PostDTO;
 
 public interface PostService {
@@ -23,5 +24,7 @@ public interface PostService {
     List<Integer> tagForGetPostNO(String reSearchVal);
 	List<Integer> getPostNO(String searchVal);
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
+	void addLikeCount(String l_postNo); // 좋아요 누르면 올라가는 카운트
+	List<LikeDTO> likeCheck(String l_id, String l_postNo); // 좋아요 불러오기
 	
 }

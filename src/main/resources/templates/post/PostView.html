@@ -48,8 +48,7 @@
         <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
-    	  <input th:if="${session.login}" type="button" id="like" name="like" value="좋아요">[[${post.p_likeCount}]]
-    	  <input th:if="${session.login}" type="button" name="follow" value="팔로우">
+    	  <input th:if="${session.login}" type="button" id="like" value="좋아요">[[${post.p_likeCount}]]
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
     	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">리뷰작성</a>
@@ -74,7 +73,7 @@
     	  
     	  <!-- 댓글 작성란 -->
        <div class="commentInsert">
-       <div>프사</div>
+       <div><img src="${}"></div>
        <form action="func/newComment" method="post">
        <input type="text" class="commentWrite" name="c_content" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
        <div><input type="submit" value="작성"></div>

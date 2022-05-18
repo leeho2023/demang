@@ -1,6 +1,9 @@
 package org.pro.demang.controller;
 
+import java.util.List;
+
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.LikeDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.PostService;
@@ -29,7 +32,7 @@ public class SjhController {
 	        @RequestParam(value="p_image", required = false)MultipartFile[] files) {
 
 		try {
-			int p_origin = 3; // 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
+			int p_origin = 2; // 리뷰 작성 시 참조할 원게시글 번호값[아직 미정]
 			PostDTO dto = new PostDTO(p_origin, p_type, p_writer, p_content); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
 			postService.postInsert( dto ); // 작동
 			int p_id = dto.getP_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
@@ -88,9 +91,23 @@ public class SjhController {
 	public String likeToPost(@RequestParam("p_id")String l_postNo, @RequestParam("m_id")String l_id) {
 		
 		postService.addLike(l_id, l_postNo);
+		postService.addLikeCount(l_postNo);
 		System.out.println("좋아요 누르기 완료");
 		
 		return "";
 	}
 	
+	@PostMapping("likeCheck")
+	@ResponseBody
+	public String likeCheck(@RequestParam("p_id")String l_postNo, @RequestParam("m_id")String l_id) {
+		
+		List<LikeDTO> list = postService.likeCheck(l_id, l_postNo); 
+		System.out.println("좋아요 불러오기");
+		
+		if(list.size() >= 1) {
+			return "OK";
+		}else {
+			return "NOT FOUND";
+		}
+	}
 }

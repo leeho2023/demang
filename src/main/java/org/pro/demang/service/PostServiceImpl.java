@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.LikeDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,6 +148,16 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void addLike(String l_id, String l_postNo) {
 		mapper.addLike(l_id, l_postNo);
+	}
+
+	@Override
+	public void addLikeCount(String l_postNo) {
+		mapper.addLikeCount(l_postNo);
+	}
+
+	@Override
+	public List<LikeDTO> likeCheck(String l_id, String l_postNo) {
+		return mapper.likeCheck(l_id, l_postNo);
 	}
 
 	
