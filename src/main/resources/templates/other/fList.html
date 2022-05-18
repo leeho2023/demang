@@ -2,7 +2,7 @@
 <div th:each="fmember : ${fList}">
 	<a th:href="'vip?p='+${fmember.m_id}" style="display: block">
 		<div>
-			<img th:src="'data:image/png;base64,'+${fmember.m_profilePicString}" height=30>
+			<img th:src="${fmember.profileImage}" height=30>
 			<span th:text="${fmember.m_nickname}"></span>#<span th:text="${fmember.m_code}"></span>
 		</div>
 	</a>
@@ -10,4 +10,4 @@
 <button th:onclick="'chat_modal('+${fmember.m_id}+')'">채팅</button>
 </div>
 
-<script src="js/chatting.js"></script>
+<script src="js/chatting.js"></script>-

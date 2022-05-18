@@ -12,10 +12,6 @@ $(function(){
 		$('section#postList').append("<div>게시글이 없습니다.</div>");
 	}
 	showPost();
-	showPost();
-	showPost();
-	showPost();
-	showPost();
 });
 
 ////스크롤을 끝까지 내리면 글 더 불러오기
@@ -36,8 +32,7 @@ function showPost(){
 }
 
 //// 글 번호를 통해 게시글 한 개 불러오기
-function getPost( no ){
-	$.ajax({
+function getPost( no ){$.ajax({
 		type: 'post',
 		url: 'getPostForFeed',
 		async: false,// 결과가 정확히 최신순(목록에 있는 순)으로 나오도록 동기

@@ -32,7 +32,7 @@
     	<div class="contentWrap">
         <div class="title" id="profile">
         <!-- 프로필 이미지 가져오기 -->
-        <img class="propic" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
+        <img class="propic" th:src="${post.memberDTO.profileImage}" height=70>
         [[${post.memberDTO.m_nickname}]]
         <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
         <p th:if="${post.p_type} == N" class="textEnd">판매가격</p>

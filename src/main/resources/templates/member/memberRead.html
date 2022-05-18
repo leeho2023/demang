@@ -33,8 +33,7 @@
 	<div class="input8"><h4 style="display:inline;">활동가능 여부</h4> [[${dto.m_available}]]</div> <br>
 	<div class="input9"> <h4 style="display:inline;">가입일</h4> [[${dto.m_regDate}]]</div>
 	
-	프사: <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"><br>
-	<!-- <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"> -->
+	프사: <img th:src="${dto.profileImage}"><br>
 	  <br>
 	<a th:href="@{/memberUpdate}" class="animated-button1">
   <span></span>
