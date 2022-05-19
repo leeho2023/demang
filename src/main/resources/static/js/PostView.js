@@ -65,6 +65,7 @@ function likeCheck(){
 		}, success: function(data){
 			if(data >= 1){
 				$('.tag').prepend('<button id="unlike">누름</button>');
+				$('#like').remove();
 				$('.likeCount').append('');
 				likeCount();
 				}

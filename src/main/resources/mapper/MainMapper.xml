@@ -19,6 +19,7 @@
 		<result column="p_writer" property="p_writer"/>
 		<result column="p_content" property="p_content"/>
 		<result column="p_likeCount" property="p_likeCount"/>
+		<result column="p_price" property="p_price"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 		<collection property="postImgDTO" resultMap="postImgDTO"/>
 	</resultMap>

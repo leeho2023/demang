@@ -23,7 +23,6 @@
 <header th:include="other/homeNav"></header>
 <nav></nav>
 
-<h1>[[${post.p_id}]]번 글</h1>
 <input type="hidden" id="p_id" th:value="${post.p_id}">
 <input type="hidden" id="m_id" th:value="${session.login}">
 
@@ -35,7 +34,7 @@
         <img class="propic" th:src="'data:image/png;base64,'+${post.memberDTO.m_profilePicString}" height=70>
         [[${post.memberDTO.m_nickname}]]
         <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
-        <p th:if="${post.p_type} == N" class="textEnd">판매가격</p>
+        <p th:if="${post.p_type} == S" class="textEnd">[[${post.p_price}]] 원</p>
         </div>
         <div class="content">
         	<div>  	
@@ -52,8 +51,8 @@
     	  <span id="likeCount"></span> <!-- 좋아요 갯수 나오는 곳 -->
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
-    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">리뷰작성</a>
-    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">구매하기</a>
+    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == S">리뷰작성</a>
+    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == S">구매하기</a>
     	  <button onclick="history.back()">뒤로가기</button>	
     	  </div>
  		</div>
