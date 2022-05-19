@@ -1,6 +1,7 @@
 $(function(){
 
 	$('#textInput').hide();
+	$('#defaultPrice').hide();
 	
 	// 글 작성(다음) 버튼 클릭 시 작동하는 function
 	$('#textInputBtn').click(function (e) { 
@@ -34,9 +35,11 @@ $(function(){
 	
 	$("input:radio[name='p_type']:input[value='S']").click(function(){
 		$('.radio').append('<div id="sell">판매가격<input type="number" name="p_price">원</div>');
+		$('#defaultPrice').remove();
 	});
 	
 	$("input:radio[name='p_type']:input[value='N']").click(function(){
+		$('#post').append('<input type="number" name="p_price" id="defaultPrice" value="0">');
 		$('#sell').remove();
 	});
 		

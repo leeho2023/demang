@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.LikeDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,28 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void postInsert( PostDTO dto ) {
 		mapper.postInsert(dto);
+		//// 해시태그 등록하기
+		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
+			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
+			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
+		}
+	}
+	
+	//게시글 등록(일반)
+	@Override
+	public void postInsertN(PostDTO dto) {
+		mapper.postInsertN(dto);
+		//// 해시태그 등록하기
+		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
+			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
+			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
+		}
+	}
+	
+	//게시글 등록(판매)
+	@Override
+	public void postInsertS(PostDTO dto) {
+		mapper.postInsertS(dto);
 		//// 해시태그 등록하기
 		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
 			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
@@ -149,5 +172,19 @@ public class PostServiceImpl implements PostService{
 		mapper.addLike(l_id, l_postNo);
 	}
 
+	@Override
+	public void addLikeCount(String l_postNo) {
+		mapper.addLikeCount(l_postNo);
+	}
+
+	@Override
+	public String likeCheck(String l_id, String l_postNo) {
+		return mapper.likeCheck(l_id, l_postNo);
+	}
+
+	@Override
+	public String likeCount(String l_postNo) {
+		return mapper.likeCount(l_postNo);
+	}
 	
 }

@@ -11,6 +11,7 @@ public interface MemberService {
 	void memberInsert(MemberDTO dto);
 	public MemberDTO getMember_no( String no );
 	public MemberDTO getMember_no( int no );
+	public MemberDTO getMember_no( Object no );
 
 	MemberDTO login(MemberDTO dto);
 	void memberUpdate(MemberDTO dto);

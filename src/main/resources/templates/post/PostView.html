@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/PostView.css">
@@ -23,7 +23,6 @@
 <header th:include="other/homeNav"></header>
 <nav></nav>
 
-<h1>[[${post.p_id}]]번 글</h1>
 <input type="hidden" id="p_id" th:value="${post.p_id}">
 <input type="hidden" id="m_id" th:value="${session.login}">
 
@@ -35,25 +34,25 @@
         <img class="propic" th:src="${post.memberDTO.profileImage}" height=70>
         [[${post.memberDTO.m_nickname}]]
         <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
-        <p th:if="${post.p_type} == N" class="textEnd">판매가격</p>
+        <p th:if="${post.p_type} == S" class="textEnd">[[${post.p_price}]] 원</p>
         </div>
         <div class="content">
         	<div>  	
         	<ul class="bxSlider p_image">
         	<!-- 게시글 내 이미지 불러오기 -->
-				<li th:each="image : ${imageList}"><img class="imgBox" th:src="'data:image/png;base64,'+${image.image}" /></li>
+				<li th:each="image : ${imageList}"><img class="imgBox" th:src="${image.image}" /></li>
 			</ul>
 		</div>
 			<!-- 게시글 내용 불러오기 -->
         <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
-    	  <input th:if="${session.login}" type="button" id="like" name="like" value="좋아요">[[${post.p_likeCount}]]
-    	  <input th:if="${session.login}" type="button" name="follow" value="팔로우">
+    	  <input th:if="${session.login}" type="button" id="like" value="좋아요"> <!-- 좋아요 버튼 -->
+    	  <span id="likeCount"></span> <!-- 좋아요 갯수 나오는 곳 -->
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
-    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">리뷰작성</a>
-    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">구매하기</a>
+    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == S">리뷰작성</a>
+    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == S">구매하기</a>
     	  <button onclick="history.back()">뒤로가기</button>	
     	  </div>
  		</div>
@@ -61,24 +60,12 @@
     	  <div>  
     	  <!-- 댓글 나오는 곳 -->
     	  <div class="commentRead" id="commentRead">
-    	  		<ul class="commentList">
-			<li th:each="comment: ${commentList}">
-				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
-					<img th:src="'data:image/png;base64,'+${comment.memberDTO.m_profilePicString}" height=30>
-					<span>[[${comment.memberDTO.m_nickname}]]</span>
-				</a>
-				<span>[[${comment.c_content}]]</span>
-				<span>[[${comment.c_regDate}]]</span>
-			</li>
-		</ul></div>
-    	  
+    	  </div>
     	  <!-- 댓글 작성란 -->
        <div class="commentInsert">
-       <div>프사</div>
-       <form action="func/newComment" method="post">
-       <input type="text" class="commentWrite" name="c_content" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
-       <div><input type="submit" value="작성"></div>
-       </form>
+       <img th:src="${member.profileImage}">
+       <input type="text" class="commentWrite" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
+       <div><input type="button" value="작성" id="commentInsert"></div>
        </div>
        
        </div>
@@ -86,7 +73,6 @@
 </main>
 
 <footer th:include="other/footer"></footer>
-
 <script src="/js/PostView.js"></script>
 </body>
 </html>

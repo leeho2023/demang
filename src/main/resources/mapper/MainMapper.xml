@@ -19,6 +19,7 @@
 		<result column="p_writer" property="p_writer"/>
 		<result column="p_content" property="p_content"/>
 		<result column="p_likeCount" property="p_likeCount"/>
+		<result column="p_price" property="p_price"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 		<collection property="postImgDTO" resultMap="postImgDTO"/>
 	</resultMap>
@@ -108,12 +109,20 @@
 
 	<!-- 댓글 목록 불러오는 쿼리문 -->
 	<select id="commentShow" resultType="org.pro.demang.model.CommentDTO">
-		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL on c.c_writer = m.m_id WHERE c_postNo = #{p_id}
+		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL m on c.c_writer = m.m_id WHERE c_postNo = #{p_id} order by c_regDate DESC
 	</select>
 
 	<!-- post 작성 -->
 	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id">
 		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
+	</insert>
+	
+	<insert id="postInsertN" useGeneratedKeys="true" keyProperty="p_id">
+		INSERT INTO postTBL (p_type, p_writer, p_content) VALUES(#{p_type}, #{p_writer}, #{p_content})
+	</insert>
+	
+	<insert id="postInsertS" useGeneratedKeys="true" keyProperty="p_id">
+		INSERT INTO postTBL (p_type, p_writer, p_content, p_price) VALUES(#{p_type}, #{p_writer}, #{p_content}, #{p_price})
 	</insert>
 	
 	<!-- 이미지 등록 -->
@@ -149,7 +158,7 @@
 
 	<!-- 회원 번호로 회원 찾기 -->
 	<select id="getMember_no"
-		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no};
+		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_id = #{no}
 	</select>
 	
 	<!-- 이메일로 회원 찾기 -->
@@ -170,6 +179,13 @@
 	
 	<!-- 좋아요 누르기 -->
 	<insert id="addLike">INSERT INTO likeTBL (l_id, l_postNo) VALUES(#{l_id}, #{l_postNo})</insert>
+	<update id="addLikeCount"> UPDATE postTBL set p_likeCount = p_likeCount + 1 WHERE p_id = (#{l_postNo})</update>
+	
+	<!-- 좋아요 누른 게시물인지 확인하기 -->
+	<select id="likeCheck" resultType="String">SELECT Count(*) FROM likeTBL WHERE l_id = #{l_id} AND l_postNo = #{l_postNo}</select>
+	
+	<!-- 게시글의 좋아요 개수 -->
+	<select id="likeCount" resultType="String">SELECT p_likeCount from postTBL WHERE p_id = #{l_postNo};</select>
 
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_writer" resultType="Integer">
