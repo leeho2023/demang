@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/postSearch.css">
     <link rel="stylesheet" href="css/serviceCenter.css">
+    <!-- 검색창 css -->
+    <link rel="stylesheet" href="css/search.css">
     <!-- font awesome kit code -->
     <script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
     <header th:include="other/homeNav">메인메뉴</header>
-    <main>
+    <main> 
         <div class="mainwrap">
             <div class="subwrap">
                 <div class="notice">
@@ -44,14 +46,72 @@
                 </div>
             </div>
             <div>
-                <span class="contactUs">문의 하기</span>
+                <span class="contactUs"><a href="#" class="contactUs">문의 하기</a></span>
             </div>
         </div>
     </main>
+    <div class="contactUsModalBack">
+        <div class="contactUsModal">
+            <form action="contactUsInsert" method="post" id="contactInsert" enctype="multipart/form-data">
+                <div class="mailwrap">
+                    <div class="contactUsTitle">
+                        문의하기
+                    </div>
+                    <div class="fromEmail">
+                        <span class="subtext">회원 이메일 : </span>[[${session.email}]]
+                        <input type="hidden" name="m_email" id="email" th:value="${session.email}">
+                    </div>
+                    <div class="contentTitle">
+                        <div class="contentTitleWrap">
+                            <div>
+                                <span class="subtext">제목 : </span><input type="text" name="c_contentTitle" class="title">
+                            </div>
+                            <select name="c_contactUsValues" id="c_contactUsValues">
+                                <option value="null">문의내용</option>
+                                <option>계정</option>
+                                <option>게시글</option>
+                                <option>판매/구매</option>
+                                <option>기타</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="contentwrap">
+                            <p><span class="subtext">내용 : </span></p>
+                            <textarea name="c_content" id="content" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="fileUploadwrap">
+                        <div class="fileUploadList">
+                            <div class="insert">
+                                <input type="file" onchange="addFile(this);" name="files" id="file" multiple />
+                                <div class="file-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controBtn">
+                        <input type="button" value="보내기" title="Button push blue/green" class="button btnPush btnBlueGreen sendBtn">
+                        <input type="button" value="취소" title="Button push orange" class="button btnPush btnOrange close">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 문의하기 경고창 모달 -->
+    <div class="contactUsModalBack2">
+        <div class="contactUsModal2">
+            <div>
+                <span class="text"></span><br>
+                <input type="button" class="cancel" value="확인">
+            </div>
+        </div>
+     </div>
     <footer th:include="other/footer">푸터</footer>
     <script src="js/serviceCenter.js"></script>
     <script src="js/postSearch.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/homeNav.js"></script>
+    <!-- 검색창 js -->
+    <script src="js/search.js"></script>
 </body>
 </html>

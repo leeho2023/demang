@@ -1,12 +1,27 @@
+
 <div class="blank"></div>
 <div class="blank blankNav">
 
     <div class="box logoBox"></div>
     <div class="box searchBox">
-
-        <input type="text" id="search" onkeyup="if(window.event.keyCode==13){search()}"> 
-        <button id="searchBtn">검색</button>
+        <!-- <div class="search">
+            <div class="icon">
+                <span>
+                    <svg viewBox="0 0 40 40">
+                        <path d="M3,3 L37,37"></path>
+                    </svg>
+                </span>
+            </div>
+            <div class="field">
+                <input type="text" id="search" onkeyup="if(window.event.keyCode==13){search()}" placeholder="Search for something...">
+            </div>
+        </div> -->
         
+        <!-- dribbble -->
+        <!-- <a class="dribbble" href="https://dribbble.com/shots/4871057-Search-loading-animation" target="_blank"><img src="https://cdn.dribbble.com/assets/dribbble-ball-1col-dnld-e29e0436f93d2f9c430fde5f3da66f94493fdca66351408ab0f96e2ec518ab17.png" alt=""></a> -->
+        <!-- <input type="text" id="search" onkeyup="if(window.event.keyCode==13){search()}"> 
+        <button id="searchBtn">검색</button> -->
+        <div th:include="other/searchtest"></div>
     </div>
     <div class="box menuBox">
 

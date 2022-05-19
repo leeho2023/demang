@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -109,6 +110,19 @@ public class MemberServiceImpl implements MemberService {
 				+ "<span>"+dto.getC_content()+"</span> 내가 쓴 댓글이 이렇게 표시됩니다. ~  MemberServiceImpl";
 	}
 
+	// 문의하기 DB등록
+	@Override
+	public void contactUsInsert(ContactUsDTO dto) {
+		mapper.contactUsInsert(dto);
+	}
+
+	// 문의하기 사진 DB등록
+	@Override
+	public void contactUsImgInsert(int c_id, byte[] i_image) {
+		mapper.contactUsImgInsert(c_id, i_image);
+	}
+
+
 	// 회원 코드 중복 체크
 	public boolean codeCheck(String code) {
 		int check = mapper.codeCheck(code);
@@ -140,6 +154,10 @@ public class MemberServiceImpl implements MemberService {
 
 		return code;
 	}
+
+	
+
+	
 
 
 

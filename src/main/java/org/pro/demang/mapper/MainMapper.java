@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
@@ -93,4 +94,6 @@ public interface MainMapper {
 	void emailDelete(String m_email);
 
     int reEmailCheck(EmailCheckDTO dto);
+    void contactUsInsert(ContactUsDTO dto);
+	void contactUsImgInsert(int c_id, byte[] i_image);
 }
