@@ -268,5 +268,36 @@
 		from emailchecktbl
 		where m_email = #{m_email} and e_code = #{e_code}
 	</select>
+	
+	
+	
+	<!-- 주문 및 결제 관련 -->
+	<!-- 상품 이름 -->
+	<select id="getMerName" resultType="String">
+	 SELECT mer_name FROM merchandiseTBL WHERE mer_id = #{mer_id}
+	</select>
+	<!-- 상품 가격 -->
+	<select id="getMerPrice" resultType="Integer">
+	 SELECT mer_price FROM merchandiseTBL WHERE mer_id = #{mer_id}
+	</select>
+	<!-- 주문 시도 횟수 +1 -->
+	<update id="merCountUp">
+	UPDATE merchandiseTBL SET mer_count = mer_count+1 WHERE mer_id = #{mer_id};
+	</update>
+	<!-- 주문 시도 횟수 조회 -->
+	<select id="getMerCount" resultType="Integer">
+	 SELECT mer_count FROM merchandiseTBL WHERE mer_id = #{mer_id}
+	</select>
+	<!-- 디비에 주문 넣기 -->
+	<insert id="orderInsert">
+	INSERT INTO orderTBL 
+	(ord_id, ord_buyer, ord_target, ord_amount, ord_buyer_name, ord_buyer_email, ord_buyer_tel, ord_buyer_address, ord_buyer_postcode, ord_price) 
+	VALUES(#{ord_id}, #{ord_buyer}, #{ord_target}, #{ord_amount}, #{ord_buyer_name}, #{ord_buyer_email}, #{ord_buyer_tel}, #{ord_buyer_address}, #{ord_buyer_postcode}, #{ord_price});
+	</insert>
+	<!-- 주문의 금액 조회 -->
+	<select id="getOrderPrice" resultType="Integer">
+	 SELECT ord_price FROM orderTBL WHERE ord_id = #{ord_id}
+	</select>
+	
 		   
 </mapper>

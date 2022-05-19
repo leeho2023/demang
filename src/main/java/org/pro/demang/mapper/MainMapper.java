@@ -8,6 +8,7 @@ import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
 
@@ -86,11 +87,22 @@ public interface MainMapper {
 
 	void emailCodeInsert(EmailCheckDTO dto);
 
-    String emailAuthenticationCheck(String m_email);
+	String emailAuthenticationCheck(String m_email);
 
-    void emailAuthenticationDelete(String m_email);
+	void emailAuthenticationDelete(String m_email);
 
 	void emailDelete(String m_email);
 
-    int reEmailCheck(EmailCheckDTO dto);
+	int reEmailCheck(EmailCheckDTO dto);
+	
+	
+	
+	
+	//// 주문 및 결제 관련
+	String getMerName(int mer_id);// 상품 이름
+	int getMerPrice(int mer_id);// 상품 가격
+	void merCountUp( int mer_id );// 주문 시도 횟수 +1
+	int getMerCount(int mer_id);// 주문 시도 횟수 조회
+	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
+	int getOrderPrice( String ord_id );// 주문의 금액 조회
 }

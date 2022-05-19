@@ -1,15 +1,17 @@
 package org.pro.demang.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ChatDTO;
-import org.pro.demang.model.CommentDTO;
-import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.OrderDTO;
 import org.pro.demang.service.ChatService;
 import org.pro.demang.service.MemberService;
+import org.pro.demang.service.OrderService;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +26,52 @@ public class KysController {
 	@Autowired private MemberService memberService;
 	@Autowired private PostService postService;
 	@Autowired private ChatService chatService;
+	@Autowired private OrderService orderService;
 	@Autowired private MainMapper mapper;
+	
+	//// 주문 페이지
+	@GetMapping("/order")
+	String orderPage( @RequestParam("p_id")int p_id, Model model ) {
+		//// ??? 로그인 안 돼있으면
+		model.addAttribute(// 결제할 게시물
+				"post", 
+				mapper.getPost(p_id)
+				);
+		return "order/order";
+	}
+	//// 결제 페이지
+	@PostMapping("/payment")
+	String paymentPage( OrderDTO dto, Model model, HttpSession session ) {
+		//// ??? 로그인 안 돼있으면
+		//// 주문 정보 저장
+		orderService.newOrder( dto, loginId(session) );// 서비스에서 dto 완성
+		//// 주문 정보 model에 넣기
+		model.addAttribute("order", dto);
+		System.out.println("kys controller ~ orderDTO: "+dto);
+		return "order/payment";
+	}
+	/// 결제 시도 ???
+	@PostMapping("pay")
+	@ResponseBody
+	String pay( @RequestParam("imp_uid") String imp_uid, @RequestParam("merchant_uid") String ord_id  ) {
+		System.out.println("kys control ~ imp_uid: "+imp_uid);
+		System.out.println("kys control ~ ord_id:  "+ord_id);
+		//// ??? 주문 정보 위변조 검사
+		/* 처음 요청한 금액(ord_id 주문정보로 내 디비에서 가져오기)
+		 * 실제 결제 금액 (아임포트 서버에서 imp_uid로 가져오기)
+		 * 
+		 *  */
+		int orderPrice = mapper.getOrderPrice(ord_id);// 디비에서 찾아본 주문의 결제 금액
+		
+		//// ??? 결제 성공시 상품 수량 차감
+		return "뭐 리턴해야 되지";
+	}
 	
 	//// 채팅 페이지
 	@GetMapping("/chat")
 	String chattingPage( @RequestParam("to") String listener, Model model, HttpSession session ){
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=chat?to="+listener;// 비회원인 경우 로그인하러 가기
+		if( listener == null ) return "post/feed";
 		model.addAttribute(// 상대방 정보
 				"listener", 
 				mapper.getMember_no(listener) 
