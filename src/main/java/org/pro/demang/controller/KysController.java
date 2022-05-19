@@ -44,6 +44,8 @@ public class KysController {
 	String paymentPage( OrderDTO dto, Model model, HttpSession session ) {
 		//// ??? 로그인 안 돼있으면
 		//// 주문 정보 저장
+		//// 주문 생성 전, 마지막으로 남은 상품 수량 확인 ???
+		if( dto.getOrd_amount() > mapper.getMerCount(dto.getOrd_target()) ) return "";// 주문할 수량이 남은 수량보다 크다. ???
 		orderService.newOrder( dto, loginId(session) );// 서비스에서 dto 완성
 		//// 주문 정보 model에 넣기
 		model.addAttribute("order", dto);
@@ -56,16 +58,16 @@ public class KysController {
 	String pay( @RequestParam("imp_uid") String imp_uid, @RequestParam("merchant_uid") String ord_id  ) {
 		System.out.println("kys control ~ imp_uid: "+imp_uid);
 		System.out.println("kys control ~ ord_id:  "+ord_id);
-		//// ??? 주문 정보 위변조 검사
-		/* 처음 요청한 금액(ord_id 주문정보로 내 디비에서 가져오기)
-		 * 실제 결제 금액 (아임포트 서버에서 imp_uid로 가져오기)
-		 * 
-		 *  */
-		int orderPrice = mapper.getOrderPrice(ord_id);// 디비에서 찾아본 주문의 결제 금액
 		
-		//// ??? 결제 성공시 상품 수량 차감
-		return "뭐 리턴해야 되지";
+		if( orderService.paymentVerify( imp_uid, ord_id ) ) {// 결제 검증
+			orderService.paymentValidate( ord_id );// 디비에 결제 완료 표시
+			return "결제 완료";
+		}else {
+			return "결제 실패: 검증 탈락";
+		}
 	}
+	
+	
 	
 	//// 채팅 페이지
 	@GetMapping("/chat")

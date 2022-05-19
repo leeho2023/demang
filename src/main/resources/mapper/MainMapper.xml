@@ -316,6 +316,14 @@
 	<select id="getMerCount" resultType="Integer">
 	 SELECT mer_count FROM merchandiseTBL WHERE mer_id = #{mer_id}
 	</select>
+	<!-- 남은 수량 확인 -->
+	<select id="getMerAmount" resultType="Integer">
+	SELECT SUM(m.mer_amount - o.ord_amount) AS 'amount' FROM merchandiseTBL m
+	JOIN orderTBL o ON o.ord_target = m.mer_id 
+	WHERE m.mer_id = 1
+		AND o.ord_state = 'A'
+	GROUP BY m.mer_id 
+	</select>
 	<!-- 디비에 주문 넣기 -->
 	<insert id="orderInsert">
 	INSERT INTO orderTBL 
@@ -326,6 +334,15 @@
 	<select id="getOrderPrice" resultType="Integer">
 	 SELECT ord_price FROM orderTBL WHERE ord_id = #{ord_id}
 	</select>
+	<!-- 주문 상태를 결제 완료로 -->
+	<update id="ordComplete"> UPDATE orderTBL set ord_state = 'O' WHERE ord_id = #{ord_id}</update>
+	<!-- 주문한 개수만큼 상품 수량 차감 -->
+	<update id="merSubtract">
+	UPDATE merchandiseTBL m
+	JOIN orderTBL o ON o.ord_target = m.mer_id 
+	SET m.mer_amount = m.mer_amount - o.ord_amount
+	WHERE o.ord_id = #{ord_id}
+	</update>
 	
 		   
 </mapper>

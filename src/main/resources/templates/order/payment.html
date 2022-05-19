@@ -11,7 +11,7 @@
 <div>
 	<div>merchant_uid: <span th:text="${order.ord_id}"></span></div>
 	<div>상품 이름: <span th:text="${order.ord_target_name}"></span></div>
-	<div>가격: <span th:text="${order.ord_price}"></span></div>
+	<div>결제할 금액: <span th:text="${order.ord_price}"></span></div>
 	<div>구매자 이메일: <span th:text="${order.ord_buyer_email}"></span></div>
 	<div>구매자 이름: <span th:text="${order.ord_buyer_name}"></span></div>
 	<div>구매자 연락처: <span th:text="${order.ord_buyer_tel}"></span></div>
@@ -61,6 +61,9 @@ function requestPay() {
 		}
 	});
 }
+
+
+
 
 </script>
 </body>

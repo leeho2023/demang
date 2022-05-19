@@ -113,8 +113,11 @@ public interface MainMapper {
 	//// 주문 및 결제 관련
 	String getMerName(int mer_id);// 상품 이름
 	int getMerPrice(int mer_id);// 상품 가격
-	void merCountUp( int mer_id );// 주문 시도 횟수 +1
-	int getMerCount(int mer_id);// 주문 시도 횟수 조회
+	void merCountUp( int mer_id );// 상품의 주문 시도 횟수 +1
+	int getMerCount(int mer_id);// 상품의 주문 시도 횟수 조회
+	int getMerAmount( int mer_id );// 상품 남은 수량 확인
 	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
+	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
+	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 }
