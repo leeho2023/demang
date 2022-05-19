@@ -5,6 +5,8 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.ContactUsDTO;
+import org.pro.demang.model.ContactUsImgDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class LhhController {
@@ -38,7 +41,15 @@ public class LhhController {
     @GetMapping("/")
 	public String home() {
 		
-		return "member/signUp";
+		// return "member/login";
+		return "other/serviceCenter";
+	}
+    
+    @GetMapping("/admin")
+	public String admin() {
+		
+		// return "member/login";
+		return "admin/index";
 	}
     
 	@GetMapping("/fList")
@@ -155,7 +166,8 @@ public class LhhController {
 		
 	    return "redirect:/";
 	}
-	
+
+	// 이메일 체크
 	@PostMapping("/reEmailCheck")
 	@ResponseBody
 	public int reEmailCheck(EmailCheckDTO dto){
@@ -163,6 +175,34 @@ public class LhhController {
 		int result = mailService.reEmailCheck(dto);
 		
 		return result;
+	}
+
+
+	@PostMapping("/contactUsInsert")
+	public String contactUsInsert(ContactUsDTO dto,
+	        @RequestParam("files") MultipartFile[] files) {
+		try {
+
+			System.out.println(dto.toString());
+			memberService.contactUsInsert( dto ); // 작동
+			int c_id = dto.getC_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
+			
+			// System.out.println(files.length); // 이미지 들어오는 files의 length 확인
+			// for(int i = 0; i < files.length; i++){
+			// 	System.out.println(files[i].getBytes()); // 들어오는 이미지 files의 바이트배열로 바꿔서 확인
+			// }
+
+			for(int i = 0; i < files.length; i++) {
+				ContactUsImgDTO imgDTO = new ContactUsImgDTO(); // 이미지가 들어갈 DTO를 생성
+				imgDTO.setI_image(files[i].getBytes()); // DTO안에 이미지를 byte변환하여 넘겨줌
+				memberService.contactUsImgInsert(c_id, imgDTO.getI_image()); // 작동
+				System.out.println(i + "번째 이미지 입력됨");
+			}
+			System.out.println(dto.getC_id()+"번 게시글로 작성된 거 확인하세요. ~ LHH controller ###########################");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/";
 	}
 	
 }

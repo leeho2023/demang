@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
@@ -47,15 +48,15 @@ public interface MainMapper {
 	List<Integer> getPostList_followee( String no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
 
 
-	PostDTO getPost( String no );// 게시글 번호로 게시글 찾기
-	PostDTO getPost( int no );// 게시글 번호로 게시글 찾기
-	List<CommentDTO> getCommentList(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(String no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(int no);// 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<PostImgDTO> getImageList(String no);//게시글 번호로 해당 게시글의 이미지들 찾기
-	List<PostImgDTO> getImageList(int no);//게시글 번호로 해당 게시글의 이미지들 찾기
-	void commentInsert( CommentDTO dto );// 댓글 등록
+	PostDTO getPost( String no ); // 게시글 번호로 게시글 찾기
+	PostDTO getPost( int no ); // 게시글 번호로 게시글 찾기
+	List<CommentDTO> getCommentList(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<PostImgDTO> getImageList(String no); //게시글 번호로 해당 게시글의 이미지들 찾기
+	List<PostImgDTO> getImageList(int no); //게시글 번호로 해당 게시글의 이미지들 찾기
+	void commentInsert( CommentDTO dto ); // 댓글 등록
 
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 
@@ -86,14 +87,18 @@ public interface MainMapper {
 
 
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
+
 	void emailCodeInsert(EmailCheckDTO dto);
     void emailAuthenticationDelete(String m_email);
 	void emailDelete(String m_email);
+
 	String emailAuthenticationCheck(String m_email);
     int reEmailCheck(EmailCheckDTO dto);
 	String likeCheck(String l_id, String l_postNo); // 좋아요 누르면 오르는 카운트
 	void addLikeCount(String l_postNo); // 좋아요 누르면 오르는 카운트
 	String likeCount(String l_postNo); // 게시물 좋아요 갯수
 
+    void contactUsInsert(ContactUsDTO dto);
+	void contactUsImgInsert(int c_id, byte[] i_image);
 
 }

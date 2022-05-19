@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="assets/css/styles.css">
 
         <title>Responsive sidebar submenus</title>
+        <!-- font awesome kit code -->
+        <script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
+        <!-- jquery3.6.0 cdn -->
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -18,7 +21,7 @@
         <header class="header">
             <div class="header__container">
 
-                <a href="#" class="header__logo">Demang Admin</a>
+                <a href="#" class="header__logo home">Demang Admin</a>
                 <span>[[${#dates.format(#dates.createNow(), 'yyyy년 MM월 dd일')}]] <span id="dayOfWeekBox"></span></span>
                 
     
@@ -46,13 +49,13 @@
                         <div class="nav__items">
                             <h3 class="nav__subtitle">Menu</h3>
     
-                            <a href="#" class="nav__link active">
+                            <a href="#" class="nav__link active home">
                                 <i class='bx bx-home nav__icon' ></i>
                                 <span class="nav__name">Home</span>
                             </a>
                             
                             <div class="nav__dropdown">
-                                <a href="#" class="nav__link">
+                                <a href="#" class="nav__link profile">
                                     <i class='bx bx-user nav__icon' ></i>
                                     <span class="nav__name">Profile</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -60,19 +63,19 @@
 
                                 <div class="nav__dropdown-collapse">
                                     <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">User</a>
-                                        <a href="#" class="nav__dropdown-item">Post</a>
-                                        <a href="#" class="nav__dropdown-item">test</a>
-                                        <a href="#" class="nav__dropdown-item">test</a>
+                                        <a href="#" class="nav__dropdown-item user">User</a>
+                                        <a href="#" class="nav__dropdown-item post">Post</a>
+                                        <!-- <a href="#" class="nav__dropdown-item">test</a>
+                                        <a href="#" class="nav__dropdown-item">test</a> -->
                                     </div>
                                 </div>
                             </div>
 
-                            <a href="#" class="nav__link">
+                            <a href="#" class="nav__link messages">
                                 <i class='bx bx-message-rounded nav__icon' ></i>
                                 <span class="nav__name">Messages</span>
                             </a>
-                            <div class="nav__dropdown">
+                            <!-- <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
                                     <i class='bx bx-bell nav__icon' ></i>
                                     <span class="nav__name">Notifications</span>
@@ -88,13 +91,13 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> -->
 
-                            <a href="#" class="nav__link">
+                            <a href="#" class="nav__link search">
                                 <i class='bx bx-compass nav__icon' ></i>
                                 <span class="nav__name">Search</span>
                             </a>
-                            <a href="#" class="nav__link">
+                            <a href="#" class="nav__link log">
                                 <i class='bx bx-bookmark nav__icon' ></i>
                                 <span class="nav__name">Log</span>
                             </a>
@@ -111,8 +114,37 @@
 
         <!--========== CONTENTS ==========-->
         <main>
-            <section>
-                <p>상세화면</p>
+            <section id="home">
+                <p>
+                    home(전체 유저 수 전체 게시글 수
+                    팔로워가 가장 많은 4명의 유저
+                    좋아요가 가장 많은 2개의 게시물
+                    확인 안한 가장 늦은 문의 사항 2개)
+                </p>
+                
+            </section>
+            <section id="profile">
+                <p>profile(유저 정보 일부와 게시글 정보 일부를 불러옵니다.)</p>
+                
+            </section>
+            <section id="profile_user">
+                <p>profile_user(유저정보를 전부 불러옵니다. 페이징??)</p>
+                
+            </section>
+            <section id="profile_post">
+                <p>profile_post(게시글 정보를 전부 불러옵니다. 페이징???)</p>
+                
+            </section>
+            <section id="messages">
+                <p>messages(고객센터에서 메시지를 보낸것들을 불러옵니다.)</p>
+                
+            </section>
+            <section id="search">
+                <p>search(검색 정보를 불러옵니다.)</p>
+                
+            </section>
+            <section id="log">
+                <p>log(시스템 로그를 불러옵니다.)</p>
                 
             </section>
         </main>

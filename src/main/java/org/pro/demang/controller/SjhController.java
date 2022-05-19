@@ -35,6 +35,7 @@ public class SjhController {
 		
 		//일반글 입력
 		if(p_type.equals("N")) {
+
 		try {
 			PostDTO dto = new PostDTO(p_type, p_writer, p_content); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
 			postService.postInsertN( dto ); // 작동

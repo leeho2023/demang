@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -65,9 +66,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO login(MemberDTO dto) {
 		MemberDTO member = mapper.getMember_email( dto.getM_email() );// 입력된 이메일로 회원정보 찾기
-		if( member == null ) {return null;}// 해당 이메일이 디비에 없는 경우: 찾는 회원 없음.
-		if( pwEncoder.matches(// 비밀번호가 일치하는 경우
-				dto.getM_password(), member.getM_password())) {
+		// 해당 이메일이 디비에 없는 경우: 찾는 회원 없음.
+		if( member == null ) {
+			return null;
+			}
+		// 비밀번호가 일치하는 경우
+		if(pwEncoder.matches(dto.getM_password(), member.getM_password())) {
 			return member;
 		}else {// 일치하지 않으면 null
 			return null;
@@ -109,6 +113,19 @@ public class MemberServiceImpl implements MemberService {
 				+ "<span>"+dto.getMemberDTO().getM_nickname()+"</span>"
 				+ "<span>"+dto.getC_content()+"</span> 내가 쓴 댓글이 이렇게 표시됩니다. ~  MemberServiceImpl";
 	}
+
+	// 문의하기 DB등록
+	@Override
+	public void contactUsInsert(ContactUsDTO dto) {
+		mapper.contactUsInsert(dto);
+	}
+
+	// 문의하기 사진 DB등록
+	@Override
+	public void contactUsImgInsert(int c_id, byte[] i_image) {
+		mapper.contactUsImgInsert(c_id, i_image);
+	}
+
 
 	// 회원 코드 중복 체크
 	public boolean codeCheck(String code) {

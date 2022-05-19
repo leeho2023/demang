@@ -129,6 +129,18 @@
 	<insert id="postInsertImg">
 		Insert into postImgTBL (p_id, i_image) values (#{p_id}, #{i_image})
 	</insert>
+
+	<!-- 문의하기 등록 -->
+	<insert id="contactUsInsert" useGeneratedKeys="true" keyProperty="c_id">
+		INSERT INTO contactUsTBL (m_email, c_contentTitle, c_contactUsValues, c_content)
+		VALUES(#{m_email}, #{c_contentTitle}, #{c_contactUsValues}, #{c_content})
+	</insert>
+
+	<!-- 문의하기 이미지 등록 -->
+	<insert id="contactUsImgInsert">
+		INSERT INTO contactUsImgTBL (c_id, i_image)
+		VALUES(#{c_id}, #{i_image})
+	</insert>
 	
 	<!-- 새 해시태그 등록 -->
 	<insert id="hashtagInsert">
