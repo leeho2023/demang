@@ -1,7 +1,6 @@
 package org.pro.demang.controller;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -100,7 +99,10 @@ public class MainController {
 	
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
-	public String postViewRoute( @RequestParam("p_id") String p_id, Model model ) {
+	public String postViewRoute( @RequestParam("p_id") String p_id, HttpSession session, Model model) {		
+		
+		MemberDTO dto = memberService.getMember_no(session.getAttribute("login"));
+		
 		// 게시글 정보 받아오기
 		model.addAttribute(
 				"post",
@@ -116,7 +118,24 @@ public class MainController {
 				"commentList",
 				mapper.getCommentList(p_id)
 				);
+		// 유저 정보 받아오기
+		model.addAttribute("member", dto);
+		
 		return "post/PostView";
+	}
+	
+	//세션으로 사용자 정보를 호출
+	@PostMapping("memberCheck")
+	@ResponseBody
+	public String memberCheck(@RequestParam("m_id")String m_id, Model model) {
+		
+		MemberDTO dto = memberService.getMember_no(m_id);
+		System.out.println("회원 불러오기");
+		System.out.println(dto.toString());
+		
+		model.addAttribute("member", dto);
+		
+		return "";
 	}
 	
 	//게시글 등록

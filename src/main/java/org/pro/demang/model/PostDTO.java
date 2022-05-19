@@ -21,6 +21,20 @@ public class PostDTO {
 	private MemberDTO memberDTO;
 	private PostImgDTO postImgDTO;
 	private int p_likeCount;
+	private int p_price;
+	
+	public PostDTO(String p_type, int p_writer, String p_content) {
+		this.p_type = p_type;
+		this.p_writer = p_writer;
+		this.p_content = p_content;
+	}
+	
+	public PostDTO(String p_type, int p_writer, String p_content, int p_price) {
+		this.p_type = p_type;
+		this.p_writer = p_writer;
+		this.p_content = p_content;
+		this.p_price = p_price;
+	}
 	
 	public PostDTO(int p_origin, String p_type, int p_writer, String p_content) {
 		this.p_origin = p_origin;

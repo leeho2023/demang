@@ -21,6 +21,8 @@ public interface MainMapper {
 	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
 
 	void postInsert( PostDTO dto ); // post작성
+	void postInsertN(PostDTO dto); // 게시글 등록(일반)
+	void postInsertS(PostDTO dto); // 게시글 등록(판매)
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
@@ -29,6 +31,7 @@ public interface MainMapper {
 	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
+	MemberDTO getMember_no(Object no);//세션값으로 회원찾기
 	MemberDTO getMember_email(String m_email);
 	
 	
@@ -84,5 +87,8 @@ public interface MainMapper {
 
 	void addLikeCount(String l_postNo); // 좋아요 누르면 오르는 카운트
 
-	List<LikeDTO> likeCheck(String l_id, String l_postNo); // 좋아요 누르면 오르는 카운트
+	String likeCheck(String l_id, String l_postNo); // 좋아요 누르면 오르는 카운트
+
+	String likeCount(String l_postNo); // 게시물 좋아요 갯수
+
 }

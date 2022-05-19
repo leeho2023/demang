@@ -48,7 +48,8 @@
         <div class="p_content">[[${post.p_content}]]</div>
         </div>
     	  <div class="tag">
-    	  <input th:if="${session.login}" type="button" id="like" value="좋아요">[[${post.p_likeCount}]]
+    	  <input th:if="${session.login}" type="button" id="like" value="좋아요"> <!-- 좋아요 버튼 -->
+    	  <span id="likeCount"></span> <!-- 좋아요 갯수 나오는 곳 -->
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
     	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == N">리뷰작성</a>
@@ -60,24 +61,13 @@
     	  <div>  
     	  <!-- 댓글 나오는 곳 -->
     	  <div class="commentRead" id="commentRead">
-    	  		<ul class="commentList">
-			<li th:each="comment: ${commentList}">
-				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
-					<img th:src="'data:image/png;base64,'+${comment.memberDTO.m_profilePicString}" height=30>
-					<span>[[${comment.memberDTO.m_nickname}]]</span>
-				</a>
-				<span>[[${comment.c_content}]]</span>
-				<span>[[${comment.c_regDate}]]</span>
-			</li>
-		</ul></div>
+    	  </div>
     	  
     	  <!-- 댓글 작성란 -->
        <div class="commentInsert">
-       <div><img src="${}"></div>
-       <form action="func/newComment" method="post">
-       <input type="text" class="commentWrite" name="c_content" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
-       <div><input type="submit" value="작성"></div>
-       </form>
+       <img th:src="'data:image/png;base64,'+${member.m_profilePicString}">
+       <input type="text" class="commentWrite" id="commentWrite" maxlength="50" placeholder="댓글 작성하는 곳">
+       <div><input type="button" value="작성" id="commentInsert"></div>
        </div>
        
        </div>
