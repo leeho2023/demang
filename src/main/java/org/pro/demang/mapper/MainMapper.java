@@ -9,6 +9,7 @@ import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
 
@@ -89,7 +90,10 @@ public interface MainMapper {
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
 
 	void emailCodeInsert(EmailCheckDTO dto);
-    void emailAuthenticationDelete(String m_email);
+
+
+	void emailAuthenticationDelete(String m_email);
+
 	void emailDelete(String m_email);
 
 	String emailAuthenticationCheck(String m_email);
@@ -101,4 +105,16 @@ public interface MainMapper {
     void contactUsInsert(ContactUsDTO dto);
 	void contactUsImgInsert(int c_id, byte[] i_image);
 
+
+	
+	
+	
+	
+	//// 주문 및 결제 관련
+	String getMerName(int mer_id);// 상품 이름
+	int getMerPrice(int mer_id);// 상품 가격
+	void merCountUp( int mer_id );// 주문 시도 횟수 +1
+	int getMerCount(int mer_id);// 주문 시도 횟수 조회
+	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
+	int getOrderPrice( String ord_id );// 주문의 금액 조회
 }

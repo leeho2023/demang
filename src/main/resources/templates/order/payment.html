@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>결제 페이지 만드는 중</title>
+<!-- jQuery --><script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js --><script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+</head>
+<body>
+<h1>여기에 주문 정보 표시</h1>
+<div>
+	<div>merchant_uid: <span th:text="${order.ord_id}"></span></div>
+	<div>상품 이름: <span th:text="${order.ord_target_name}"></span></div>
+	<div>가격: <span th:text="${order.ord_price}"></span></div>
+	<div>구매자 이메일: <span th:text="${order.ord_buyer_email}"></span></div>
+	<div>구매자 이름: <span th:text="${order.ord_buyer_name}"></span></div>
+	<div>구매자 연락처: <span th:text="${order.ord_buyer_tel}"></span></div>
+	<div>배송지 주소: <span th:text="${order.ord_buyer_address}"></span></div>
+	<div>배송지 우편번호: <span th:text="${order.ord_buyer_postcode}"></span></div>
+</div>
+<button onclick="requestPay()">결제하기</button>
+
+<script th:inline="javascript">
+var IMP = window.IMP; // 생략 가능
+IMP.init("imp45517274"); // 예: imp00000000
+//// ??? 테스트용으로 매번 다른 문자열 가져올 용 
+
+function requestPay() {
+	// IMP.request_pay(param, callback) 결제창 호출
+	IMP.request_pay({ // param
+		pg: "kakaopay",
+		pay_method: "trans",
+		merchant_uid: [[${order.ord_id}]],// 주문 번호
+		name: [[${order.ord_target_name}]],// 상품명
+		amount: [[${order.ord_price}]],// 가격
+		buyer_email: [[${order.ord_buyer_email}]],// 구매자 정보
+		buyer_name: [[${order.ord_buyer_name}]],
+		buyer_tel: [[${order.ord_buyer_tel}]],
+		buyer_addr: [[${order.ord_buyer_address}]],
+		buyer_postcode: [[${order.ord_buyer_postcode}]],
+	}, function (rsp) { // callback
+		if (rsp.success) {
+			console.log('결제 시도');
+			console.log('type: '+typeof(rsp.imp_uid));
+			console.log(rsp.imp_uid);
+			console.log('type: '+typeof(rsp.merchant_uid));
+			console.log(rsp.merchant_uid);
+			
+			$.ajax({
+				url: "pay",
+				method: "POST",
+				data: {
+					imp_uid: rsp.imp_uid,
+					merchant_uid: rsp.merchant_uid
+				}
+			}).done(function (data) {
+				console.log('가맹점 서버 결제 API 성공시 로직'+data);
+			})
+		}else {
+			console.log("가맹점 서버 결제 API 실패. 에러 내용: " +  rsp.error_msg);
+		}
+	});
+}
+
+</script>
+</body>
+</html>

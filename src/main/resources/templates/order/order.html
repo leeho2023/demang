@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주문 페이지 만드는 중</title>
+<!-- jQuery --><script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<style>
+form {
+	display: flex;
+	flex-direction: column;
+}
+form > * {
+	margin: 10px;
+}
+</style>
+</head>
+<body>
+<h1>[[${post.p_id}]]번 게시물에 대한 상품의 주문 DTO 만들기</h1>
+
+<form action="payment" method="post">
+	<div>???ord_target를 선택지에서 선택하게 수정할 예정</div>
+	<input type="number" id="amount"         name="ord_target"         placeholder="상품번호" value="1">
+	<input type="number" id="amount"         name="ord_amount"         placeholder="수량" value="2">
+	<input type="text"   id="buyer_name"     name="ord_buyer_name"     placeholder="구매자 이름" value="구매자 이름 예시">
+	<input type="email"  id="buyer_email"    name="ord_buyer_email"    placeholder="구매자 이메일" value="test@test.com">
+	<input type="tel"    id="buyer_tel"      name="ord_buyer_tel"      placeholder="전화번호" value="1234567890">
+	<input type="text"   id="buyer_address"  name="ord_buyer_address"  placeholder="주소" value="???주소 예시">
+	<input type="text"   id="buyer_postcode" name="ord_buyer_postcode" placeholder="우편번호" value="12345">
+	<button>결제 페이지로 이동</button>
+</form>
+</body>
+</html>
