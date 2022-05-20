@@ -319,7 +319,7 @@
 	<!-- 판매가능 수량 확인 -->
 	<select id="getMerAmount" resultType="Integer">
 	SELECT 
-	(SELECT mer_amount FROM merchandiseTBL WHERE mer_id = 1)
+	(SELECT mer_amount FROM merchandiseTBL WHERE mer_id = #{mer_id})
 	-(SELECT IFNULL(SUM(ord_amount), 0) FROM orderTBL)
 	</select>
 	<!-- 디비에 주문 넣기 -->
