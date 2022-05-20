@@ -314,15 +314,13 @@
 	</update>
 	<!-- 주문 시도 횟수 조회 -->
 	<select id="getMerCount" resultType="Integer">
-	 SELECT mer_count FROM merchandiseTBL WHERE mer_id = #{mer_id}
+	SELECT mer_count FROM merchandiseTBL WHERE mer_id = #{mer_id}
 	</select>
-	<!-- 남은 수량 확인 -->
+	<!-- 판매가능 수량 확인 -->
 	<select id="getMerAmount" resultType="Integer">
-	SELECT SUM(m.mer_amount - o.ord_amount) AS 'amount' FROM merchandiseTBL m
-	JOIN orderTBL o ON o.ord_target = m.mer_id 
-	WHERE m.mer_id = 1
-		AND o.ord_state = 'A'
-	GROUP BY m.mer_id 
+	SELECT 
+	(SELECT mer_amount FROM merchandiseTBL WHERE mer_id = 1)
+	-(SELECT IFNULL(SUM(ord_amount), 0) FROM orderTBL)
 	</select>
 	<!-- 디비에 주문 넣기 -->
 	<insert id="orderInsert">

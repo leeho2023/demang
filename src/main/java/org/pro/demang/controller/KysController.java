@@ -45,11 +45,10 @@ public class KysController {
 		//// ??? 로그인 안 돼있으면
 		//// 주문 정보 저장
 		//// 주문 생성 전, 마지막으로 남은 상품 수량 확인 ???
-		if( dto.getOrd_amount() > mapper.getMerCount(dto.getOrd_target()) ) return "";// 주문할 수량이 남은 수량보다 크다. ???
+		if( dto.getOrd_amount() > mapper.getMerAmount(dto.getOrd_target()) ) return "redirect:/memberRead";// 주문할 수량이 남은 수량보다 크다. ??? 또 일단 회원정보페이지로 ㅣ동
 		orderService.newOrder( dto, loginId(session) );// 서비스에서 dto 완성
 		//// 주문 정보 model에 넣기
 		model.addAttribute("order", dto);
-		System.out.println("kys controller ~ orderDTO: "+dto);
 		return "order/payment";
 	}
 	/// 결제 시도 ???
