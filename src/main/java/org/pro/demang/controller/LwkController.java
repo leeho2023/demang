@@ -80,7 +80,7 @@ public class LwkController {
 	   
 	   @PostMapping("/emailCheck")
 	   @ResponseBody
-	   public String emailCheck(@RequestParam("m_email") String m_email, RedirectAttributes rttr) {
+	   public String emailCheck(@RequestParam ("m_email") String m_email, RedirectAttributes rttr) {
 	      String result = MemberService.emailCheck(m_email);
 	      if (result.equals("useUser_email")) {
 	         System.out.println("user_emailbaaaaaaaaaaaad");

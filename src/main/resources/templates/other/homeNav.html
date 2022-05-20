@@ -1,23 +1,47 @@
 
-<div class="blank"></div>
+
 <div class="blank blankNav">
 
-    <div class="box logoBox"></div>
+    <div class="box logoBox"><div ><p class="p1"> <a class="a2" th:href="@{/feed}" >DEMANG</a></p>  </div></div>
     <div class="box searchBox">
 
-        <input type="text" id="search" onkeyup="if(window.event.keyCode==13){search()}"> 
-        <button id="searchBtn">검색</button>
+         <input type="text" id="search" placeholder="Search..." onkeyup="if(window.event.keyCode==13){search()}" class="searchInputs"> 
+<!--         <button id="searchBtn" class="btn1 draw-border">검색</button>  -->
+        
+        <div class="search-wrapper">
+  <div class="input-holder">
+ <button class="search-icon"  id="searchBtn" onclick="searchToggle(this, event);"><span></span></button>
+  </div>
+ </div>
         
     </div>
+    
     <div class="box menuBox">
-
-        <ul class="menu">
-            <li>Home</li>
-            <li>Massge</li>
-            <li>Post</li>
-            <li>Profile</li>
+	  <!-- <nav class="mynav">
+        <ul >
+      <li class="li1"><a class="a12" th:href="@{/feed}">Home</a></li>
+      <li><a class="a12" href="">Massge</a></li>
+      <li><a class="a12" href="">Post</a></li>
+      <li><a class="a12" href="">Profile</a></li>
+       
         </ul>
         
+       </nav> -->
+       <nav class="nav">
+  <a th:href="@{/feed}" class="nav-item is-active" active-color="orange">Home</a>
+  <a href="#" class="nav-item" active-color="green">Massge</a>
+  <a href="#" class="nav-item" active-color="blue">Post</a>
+  <a href="#" class="nav-item" active-color="red">Profile</a>
+  
+  <span class="nav-indicator"></span>
+</nav>
+       
+          
     </div>
+  
+    
+    
 </div>
-<div class="blank"></div>
+<script type="text/javascript"src="js/homeNav.js">
+
+</script>

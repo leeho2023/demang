@@ -1,6 +1,8 @@
 package org.pro.demang.service;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
@@ -29,11 +31,28 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 회원가입
 	@Override
-	public void memberInsert(MemberDTO dto) {
+	public int memberInsert(MemberDTO dto) {
 		
-		String encodedPassword = passwordEncoder.encode(dto.getM_password());
-		dto.setM_password(encodedPassword);
-		mapper.memberInsert(dto);	
+		boolean eCheck = signUpEmailCheck(dto.getM_email());
+		boolean nCheck = signUpNicknameCheck(dto.getM_nickname());
+		boolean pCheck = signUpPasswordCheck(dto.getM_password());
+		
+		if(eCheck && nCheck && pCheck) {
+			String encodedPassword = passwordEncoder.encode(dto.getM_password());
+			dto.setM_password(encodedPassword);
+			mapper.memberInsert(dto);
+			return 1;
+		}else {
+			
+			if(!eCheck) {
+				return 2;
+			}else if(!nCheck) {
+				return 3;
+			}else {
+				return 4;
+			}
+		}
+		
 	}
 
 	//// 회원번호로 회원 찾기
@@ -99,6 +118,41 @@ public class MemberServiceImpl implements MemberService {
 				+ "<span>"+dto.getC_content()+"</span> 내가 쓴 댓글이 이렇게 표시됩니다. ~  MemberServiceImpl";
 	}
 
+	
+	public boolean signUpEmailCheck(String m_email) {
+		boolean err = false;
+		String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		Pattern p = Pattern.compile(regex); 
+		Matcher m = p.matcher(m_email); 
+		if(m.matches()) { err = true; 
+		} 
+		return err;
+
+		
+	}
+	
+	public boolean signUpNicknameCheck(String m_nickname) {
+		boolean err = false;
+		String regex = "^[a-zA-Zㄱ-힣0-9-_.]{2,20}$";
+		Pattern p = Pattern.compile(regex); 
+		Matcher m = p.matcher(m_nickname); 
+		if(m.matches()) { err = true; 
+		} 
+		return err;
+	}
+	public boolean signUpPasswordCheck(String m_password) {
+		boolean err = false;
+		String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$";
+		Pattern p = Pattern.compile(regex); 
+		Matcher m = p.matcher(m_password); 
+		if(m.matches()) { err = true; 
+		} 
+		return err;
+	}
+	
+	
+
+	
 
 
 }

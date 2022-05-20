@@ -81,10 +81,19 @@ public class MainController {
 
     // 회원가입
     @PostMapping("/signUp")
-	public String signUp(MemberDTO dto) {
-		memberService.memberInsert(dto);
-		return "member/login";
-	}
+    public String signUp(MemberDTO dto, Model model) {
+    		
+       int result = memberService.memberInsert(dto);
+       
+       if(result == 1) {
+    	   return "member/login";
+       }else {
+    	   model.addAttribute("result", result);
+    	   return "member/signUp";
+       }
+      
+    }
+    
 
     // 게시글 입력페이지 이동
 	@GetMapping("/postInsert")

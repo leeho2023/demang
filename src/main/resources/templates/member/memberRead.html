@@ -5,14 +5,15 @@
 <meta charset="UTF-8">
 <title>개인정보수정</title>
 <link rel="stylesheet" href="css/memberRead.css"type="text/css">
+<link rel="stylesheet" href="css/homeNav.css"type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 </head>
 <body>
+ <header th:include="other/homeNav"></header> 
+<main>
 
- 	
 	
-	<div class="div2"><p class="p1"> <a th:href="@{/feed}">DEMANG</a></p>  </div>
      <div class="div4">
      <div class="div3">
      <br><br>
@@ -23,6 +24,7 @@
       <br><br><br>
        <div class="input1"> <h1 style="display:inline;"> [[${dto.m_nickname}]]</h1><p class="p3" style="display:inline;">님의 개인정보페이지입니다.</p></div>
 	 <br>
+	 <div class="input10"><img class="img1" th:src="'data:image/png;base64,'+${dto.m_profilePicString}"><h4 class="h232" >프로필 사진</h4></div><br>
 	  <div class="input2"> <h4 style="display:inline;">이메일</h4>   [[${dto.m_email}]]</div> <br>
 	
 	<div class="input3"> <h4 style="display:inline;">생년월일</h4> [[${dto.m_birth}]]</div> <br>
@@ -33,20 +35,25 @@
 	<div class="input8"><h4 style="display:inline;">활동가능 여부</h4> [[${dto.m_available}]]</div> <br>
 	<div class="input9"> <h4 style="display:inline;">가입일</h4> [[${dto.m_regDate}]]</div>
 	
-	프사: <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"><br>
-	<!-- <img th:src="'data:image/png;base64,'+${dto.m_profilePicString}"> -->
+
+	
 	  <br>
-	<a th:href="@{/memberUpdate}" class="animated-button1">
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-     GO TO EDIT
+	<a  th:href="@{/memberUpdate}" class="a1">
+  <span class="s1"></span>
+  <span class="s1"></span>
+  <span class="s1"></span>
+  <span class="s1"></span>
+     수정하기
 </a>
+
 	</div>
 </div>
 	<br>
-	
+</main>
+<footer th:include="other/footer"></footer>
 	<script type="text/javascript" src="js/memberRead.js"></script>
+	<script type="text/javascript"src="js/homeNav.js">
+
+</script>
 </body>
 </html>
