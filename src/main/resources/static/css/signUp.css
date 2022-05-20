@@ -3,14 +3,20 @@ body{
     margin: 0;
     padding: 0ch;
 }
+
+
+
 .div1{
     border: 2px solid black;
     text-align: center;
     width: 500px;
-    height: 640px;
+    height: 720px;
     margin-left: 38%;
-    margin-top: 6%;
+    margin-top: 3%;
 
+}
+.wrapper{
+	
 }
 .div2{
     border: 2px solid black;
@@ -32,6 +38,27 @@ body{
     
     
 }
+.rerecheck{
+
+	height: 20px;
+	
+}
+.email{
+	
+	height: 25px;
+}
+.name{
+	
+	height: 25px;
+}
+.pw{
+	
+	height: 25px;
+}
+.repw{
+	
+	height: 25px;
+}
 .PW{
     height: 30px;
     width: 235px;
@@ -51,7 +78,8 @@ body{
     text-align: center;
 }
 .img1{
-    margin-top: 60px;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 .frame1 {
     width: 90%;
@@ -218,7 +246,7 @@ position:relative;
 width:250px; 
 height:50px; 
 display:inline-block;
-margin-top: 5px;
+margin-bottom: 0px;
 
 } /* 기본세팅 */
 p input {

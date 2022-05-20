@@ -4,16 +4,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/memberUpdate.css"type="text/css">
+<link rel="stylesheet" href="css/homeNav.css"type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 </head>
 <body>
 
+ <header th:include="other/homeNav"></header> 
 
 	
-	
- <form action="/memberUpdate" method="post"id=signUp>
- <div class="div2"><p class="p1"> <a th:href="@{/feed}">DEMANG</a></p>  </div>
+
+ <form action="/memberUpdate" method="post" id=signUp enctype="multipart/form-data">
+
+
      <div class="div4">
      <div class="div3">
      <br><br>
@@ -24,6 +27,7 @@
       <br><br><br>
        <div class="input1"> <h1 style="display:inline;"> [[${dto.m_nickname}]]</h1><p class="p3" style="display:inline;">님의 개인정보 수정페이지입니다.</p></div><br>
        <div class="div5">
+        
        <div class="input2"> <h4 style="display:inline;">이름</h4> <input type="text"id="m_nickname"name="m_nickname" class="input22"th:value="${dto.m_nickname}"></div>
        <div class="name regex"></div><br>
        
@@ -43,19 +47,32 @@
         <div class="input5"> <h4 style="display:inline;"><div>자기소개</div> </h4><textarea name="m_introduce" class="input55">[[${dto.m_introduce}]]</textarea></div><br>
          </div>
          
+         
+     
+         <label class="input-file-button" for="input-file">
+  		프로필사진 업로드
+			</label>
+         <input type="file" name="propic" class="input77"  id="input-file" style="display: none;" > <br>
 	
-	<br> 
+	
+	
+			
 	
  	
- 	<div class="wrap">
-  <button type="button" class="button"name="signup" id="signupbtn">APPLY</button>
-</div>
+ <!-- 	<div class="wrap">
+  <button type="button" class="button123"name="signup" id="signupbtn">APPLY</button>
+</div> -->
+<button type="button" class="button2"name="signup" id="signupbtn"><a class="btn" >적용</a></button>
  		</div>
 </div>
  	</form> 
  	
 
-
-	<script type="text/javascript" src="js/memberUpdate.js"></script>
+<footer th:include="other/footer"></footer>
+	<script type="text/javascript" src="js/memberUpdate.js">
+	
+	
+	</script>
+	<script type="text/javascript"src="js/homeNav.js"></script>
 </body>
 </html>

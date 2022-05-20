@@ -9,7 +9,7 @@ import org.pro.demang.model.MemberDTO;
 public interface MemberService {
 
 	List<MemberDTO> fList(int follower);
-	void memberInsert(MemberDTO dto);
+	int memberInsert(MemberDTO dto);
 	public MemberDTO getMember_no( String no );
 	public MemberDTO getMember_no( int no );
 	public MemberDTO getMember_no( Object no );
@@ -24,7 +24,6 @@ public interface MemberService {
 	void contactUsImgInsert(int c_id, byte[] i_image);
 
 
-	
-	
+
 
 }
