@@ -1,5 +1,7 @@
 package org.pro.demang.controller;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -203,6 +205,24 @@ public class LhhController {
 			e.printStackTrace();
 		}
 		return "redirect:/";
+	}
+
+	//admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
+	@PostMapping("/messageList")
+	public String messageList(@RequestParam("c_id")int c_id, Model model) {
+		System.out.println(c_id);
+		List<ContactUsDTO> dtoList = memberService.messageList(c_id);
+		model.addAttribute("dtoList", dtoList);
+		return "admin/messages";
+	}
+
+	@PostMapping("/contactAllNumCount")
+	public String contactAllNumCount(Model model){
+
+		ArrayList<Integer> arrlist = memberService.contactAllNumCount();
+		model.addAttribute("arrlist", arrlist);
+
+		return "admin/pageNumList";
 	}
 	
 }

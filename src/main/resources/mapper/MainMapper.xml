@@ -57,6 +57,14 @@
 		<result column="l_postNo" property="l_postNo"/>
 	</resultMap>
 
+	<resultMap id="contactUsDTO" type="org.pro.demang.model.ContactUsDTO">
+		<result column="c_id" property="c_id"/>
+		<result column="m_email" property="m_email"/>
+		<result column="c_contentTitle" property="c_contentTitle"/>
+		<result column="c_contactUsValues" property="c_contactUsValues"/>
+		<result column="c_content" property="c_content"/>
+		<result column="c_regDate" property="c_regDate"/>
+	</resultMap>
 
 	<!-- 특정 회원이 팔로우한 회원 목록 -->
 	<select id="fList" resultType="org.pro.demang.model.MemberDTO">
@@ -327,5 +335,14 @@
 	 SELECT ord_price FROM orderTBL WHERE ord_id = #{ord_id}
 	</select>
 	
+	<!-- admin messages page sql -->
+	<select id="messageList" resultType="org.pro.demang.model.ContactUsDTO" resultMap="contactUsDTO">
+		select * from contactUsTBL order by c_id desc limit #{c_id}, 10
+	</select>
+
+	<!-- admin messagese all count -->
+	<select id="contactAllNumCount" resultType="Integer">
+		select count(c_id) from contactUsTBL
+	</select>
 		   
 </mapper>

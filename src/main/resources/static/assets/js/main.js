@@ -1,7 +1,7 @@
 $(function(){
     pageHide();
-    // $('#home').show();
-    $('#messages').show();
+    $('#home').show();
+    // $('#messages').show();
     // $('#home').show();
     // $('#home').show();
     // $('#home').show();
@@ -79,7 +79,36 @@ $('.post').click(function(){
 $('.messages').click(function(){
     pageHide();
     $('#messages').show();
+    $.ajax({
+        type: "post",
+        url: "messageList",
+        data: { c_id : 0 },
+        success: function ( data ) {
+            $('#messageInfoList').html("");
+            $('#messageInfoList').append(data);
+        }
+    });
+    $.ajax({
+        type: "post",
+        url: "contactAllNumCount",
+        success: function ( data ) {
+            $('#pageNumList').html("");
+            $('#pageNumList').append(data);
+        }
+    });
 });
+
+function messagePage(c_id){
+    $.ajax({
+        type: "post",
+        url: "messageList",
+        data: { c_id : c_id },
+        success: function ( data ) {
+            $('#messageInfoList').html("");
+            $('#messageInfoList').append(data);
+        }
+    });
+}
 /*======================== search 페이지 ========================*/
 $('.search').click(function(){
     pageHide();

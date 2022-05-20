@@ -1,28 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!--========== BOX ICONS ==========-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-
-    <!--========== CSS ==========-->
-    <link rel="stylesheet" href="../../static/assets/css/styles.css">
-
-    <title>Responsive sidebar submenus</title>
-    <!-- font awesome kit code -->
-    <script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
-    <!-- jquery3.6.0 cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
-    <body>
-        <div id="messagewrap">
-
-        </div>
-        
-        <!--========== MAIN JS ==========-->
-        <script src="../../static/assets/js/main.js"></script>
-    </body>
-</html>
+<ul id="messageInfo" th:each="dto : ${dtoList}">
+    <li class="infoItem">[[${dto.c_id}]]</li>
+    <li class="infoItem">[[${dto.m_email}]]</li>
+    <li class="infoItem">[[${dto.c_contentTitle}]]</li>
+    <li class="infoItem">[[${dto.c_contactUsValues}]]</li>
+    <li class="infoItem">[[${dto.c_regDate}]]</li>
+</ul>

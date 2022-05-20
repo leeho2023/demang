@@ -1,5 +1,6 @@
 package org.pro.demang.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -157,5 +158,27 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("생성된 회원 코드 -> " + code);
 
 		return code;
+	}
+
+	// //admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
+	@Override
+	public List<ContactUsDTO> messageList(int c_id) {
+		return mapper.messageList(c_id);
+	}
+
+	// 전체 갯수 불러와서 페이지 수 반환
+	@Override
+	public ArrayList<Integer> contactAllNumCount() {
+		
+		int c_count = mapper.contactAllNumCount();
+		int result = (int)Math.ceil((double)c_count/10);
+		ArrayList<Integer> arrlist = new ArrayList<>();
+
+		for(int i = 0; i < result; i++){
+			arrlist.add(i);
+		}
+
+
+		return arrlist;
 	}
 }

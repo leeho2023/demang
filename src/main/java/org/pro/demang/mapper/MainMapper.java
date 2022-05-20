@@ -117,4 +117,6 @@ public interface MainMapper {
 	int getMerCount(int mer_id);// 주문 시도 횟수 조회
 	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
+    List<ContactUsDTO> messageList(int c_id);
+    int contactAllNumCount();
 }
