@@ -1,13 +1,6 @@
 package org.pro.demang.service;
 
-import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.pro.demang.mapper.MainMapper;
-import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

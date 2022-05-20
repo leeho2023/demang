@@ -43,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 		String encodedPassword = passwordEncoder.encode(dto.getM_password());
 		dto.setM_password(encodedPassword);
 		mapper.memberInsert(dto);
-		mapper.emailAuthenticationDelete(dto.getM_email());
+		// mapper.emailAuthenticationDelete(dto.getM_email());
 	}
 
 	//// 회원번호로 회원 찾기
