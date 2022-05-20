@@ -6,7 +6,9 @@ import java.util.List;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.LikeDTO;
+import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.MerchandiseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -186,5 +188,23 @@ public class PostServiceImpl implements PostService{
 	public String likeCount(String l_postNo) {
 		return mapper.likeCount(l_postNo);
 	}
+
+	@Override
+	public void orderPostInsert(MerchandiseDTO merDTO) {
+		mapper.orderPostInsert(merDTO);
+	}
+
+	@Override
+	public void postSellUpdate(String p_id, String p_type) {
+		mapper.postSellUpdate(p_id, p_type);		
+	}
+
+	// 리뷰 작성 전 구매자 확인
+	@Override
+	public boolean reViewCheck(String p_id, String ord_buyer) {
+		return mapper.reViewCheck(p_id,ord_buyer);
+	}
+
+	
 	
 }

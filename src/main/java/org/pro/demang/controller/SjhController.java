@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.PostService;
@@ -31,12 +32,17 @@ public class SjhController {
 	        @RequestParam("p_type")String p_type,
 	        @RequestParam("p_writer")int p_writer,
 	        @RequestParam(value="p_image", required = false)MultipartFile[] files,
-	        @RequestParam("p_price")int p_price) {
+	        @RequestParam("mer_name")String mer_name, 
+	        @RequestParam("mer_price")int mer_price,
+	        @RequestParam("mer_amount")int mer_amount){
 		
 		//일반글 입력
 		if(p_type.equals("N")) {
 
 		try {
+//			mer_name = "";
+//			mer_price = 1;
+//			mer_amount = 1;
 			PostDTO dto = new PostDTO(p_type, p_writer, p_content); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
 			postService.postInsertN( dto ); // 작동
 			int p_id = dto.getP_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
@@ -55,9 +61,13 @@ public class SjhController {
 		// 판매글 입력
 		if(p_type.equals("S")) {
 			try {
-				PostDTO dto = new PostDTO(p_type, p_writer, p_content, p_price); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
-				postService.postInsertS( dto ); // 작동
+				PostDTO dto = new PostDTO(p_type, p_writer, p_content); // 생성되기 전 게시글에 들어갈 값을 dto로 먼저 생성
+				postService.postInsertN( dto ); // 작동
 				int p_id = dto.getP_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
+				
+				// 판매 게시글 번호, 상품 이름, 가격, 수량을 상품 정보 테이블에 등록
+				MerchandiseDTO merDTO = new MerchandiseDTO(p_id, mer_name, mer_price, mer_amount);
+				postService.orderPostInsert(merDTO);
 				
 				for(int i = 0; i < files.length; i++) {
 					PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
@@ -110,23 +120,25 @@ public class SjhController {
 		return "post/feed";
 		}
 	
+	// 좋아요 버튼 누르면 타는 Mapping
 	@PostMapping("likeToPost")
 	@ResponseBody
 	public String likeToPost(@RequestParam("p_id")String l_postNo, @RequestParam("m_id")String l_id) {
 		
 		postService.addLike(l_id, l_postNo);
-		postService.addLikeCount(l_postNo);
 		System.out.println("좋아요 누르기 완료");
 		
 		return "";
 	}
 	
+	// DB에서 로그인 한 사람과 게시물을 검색해서 이미 좋아요를 눌렀다면 다른 버튼을 띄우기
 	@PostMapping("likeCheck")
 	@ResponseBody
 	public String likeCheck(@RequestParam("p_id")String l_postNo, HttpSession session) {
 		return postService.likeCheck(session.getAttribute("login")+"", l_postNo); 
 	}
 	
+	// 좋아요 갯수 불러오기
 	@PostMapping("likeCount")
 	@ResponseBody
 	public String likeCount(@RequestParam("p_id")String l_postNo) {
@@ -143,6 +155,27 @@ public class SjhController {
 		dto.setC_postNo(c_postNo);
 		postService.commentInsert(dto);
 		return "OK";
+	}
+	
+	// 판매 상태를 변경하기
+	@PostMapping("changeSell")
+	@ResponseBody
+	public String changeSell(@RequestParam("p_id")String p_id, @RequestParam("p_type")String p_type) {
+		postService.postSellUpdate(p_id, p_type);
+		return "";
+	}
+	
+	// 리뷰 작성 전 구매자 확인
+	@PostMapping("reViewCheck")
+	@ResponseBody
+	public String reViewCheck(@RequestParam("p_id")String p_id, HttpSession session) {
+		String ord_buyer = session.getAttribute("login")+"";
+		
+		if(postService.reViewCheck(p_id, ord_buyer) == true) {
+			return "found";
+		}else {
+			return "not found";
+		}
 	}
 	
 }

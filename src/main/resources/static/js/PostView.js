@@ -3,7 +3,8 @@ $(function(){
 	likeCheck();
 	likeCount();
 // 	commentShow();
-	
+
+	var p_type = $('#p_type').val();
 	var m_id = $('#m_id').val();
 	var p_id = $('#p_id').val();
 
@@ -49,6 +50,97 @@ $(function(){
 			}
 		});
 	})
+	
+	// 판매 상태를 변경하는 function UPDATE 구문을 통해 DB에서 상태를 바꿔야함
+	$('#changeSell').click(function(){
+		if($('#selling').val() == 'selling'){
+			
+			// 상태를 판매중으로 바꿈
+			p_type = "S";
+			
+		// DB로 값을 넘겨주기 위한 ajax를 실행
+		$.ajax({
+		type: 'post',
+		url: 'changeSell',
+		data:{
+			p_type : p_type,
+			p_id : p_id
+		}, success: function(data){
+			if(data){ alert('상태를 판매중 으로 변경했습니다'); 
+			}
+		 }, error: function(){
+			console.log('판매상태 변경 에러');
+		}
+	 });
+			location.reload();
+		}
+		
+		if($('#selling').val() == 'stop'){
+
+		// 타입을 판매 중지(X)로 변경
+			p_type = "X"
+		// 이하 반복(판매 중지)
+		$.ajax({
+		type: 'post',
+		url: 'changeSell',
+		data:{
+			p_type : p_type,
+			p_id : p_id
+		}, success: function(data){
+			if(data){ alert('상태를 판매 중지 으로 변경했습니다'); 
+			}
+		 }, error: function(){
+			console.log('판매상태 변경 에러');
+		}
+	 });
+			location.reload();
+		}
+		
+		if($('#selling').val() == 'sellOut'){
+		
+		// 타입을 품절(O = outofstock)로 변경
+			p_type = "O"
+		// 이하 반복(품절)
+		$.ajax({
+		type: 'post',
+		url: 'changeSell',
+		data:{
+			p_type : p_type,
+			p_id : p_id
+		}, success: function(data){
+			if(data){ alert('상태를 품절 으로 변경했습니다'); 
+			}
+		 }, error: function(){
+			console.log('판매상태 변경 에러');
+		}
+	 });
+			location.reload();
+		}
+	})
+	
+	// 리뷰작성 누르면 ajax가 작동하게 하기
+	$('#reView').click(function(){
+	
+		$.ajax({
+		type: 'post',
+		url: 'reViewCheck',
+		data:{
+			p_id : p_id
+		}, success: function(data){
+			if(data == "found"){ 
+				alert('리뷰 쓰기 페이지로 넘어갑니다')
+			$(location).attr('href', 'http://localhost:8080/postInsert2?p_id='+p_id)
+			}else if(data == "not found"){
+				alert('구매 정보가 없습니다')
+			}
+		 }, error: function(){
+			console.log('리뷰쓰기 에러');
+		}
+	 });
+	 
+	})
+	
+	
 	
 });
 

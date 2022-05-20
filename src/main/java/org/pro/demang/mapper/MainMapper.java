@@ -12,6 +12,7 @@ import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
+import org.pro.demang.model.MerchandiseDTO;
 
 @Mapper
 public interface MainMapper {
@@ -26,6 +27,8 @@ public interface MainMapper {
 	void postInsert( PostDTO dto ); // post작성
 	void postInsertN(PostDTO dto); // 게시글 등록(일반)
 	void postInsertS(PostDTO dto); // 게시글 등록(판매)
+	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
+	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
@@ -117,4 +120,5 @@ public interface MainMapper {
 	int getMerCount(int mer_id);// 주문 시도 횟수 조회
 	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
+	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
 }

@@ -2,6 +2,8 @@ $(function(){
 
 	$('#textInput').hide();
 	$('#defaultPrice').hide();
+	$('#defaultName').hide();
+	$('#defaultAmount').hide();
 	
 	// 글 작성(다음) 버튼 클릭 시 작동하는 function
 	$('#textInputBtn').click(function (e) { 
@@ -34,13 +36,21 @@ $(function(){
 	$('#input_file').on('change', filechange);
 	
 	$("input:radio[name='p_type']:input[value='S']").click(function(){
-		$('.radio').append('<div id="sell">판매가격<input type="number" name="p_price">원</div>');
+		$('.radio').append('<div id="sell1">판매가격<input type="number" name="mer_price">원</div>');
+		$('.radio').append('<div id="sell2">상품명<input type="text" name="mer_name"></div>');
+		$('.radio').append('<div id="sell3">상품 갯수<input type="number" name="mer_amount"></div>');
 		$('#defaultPrice').remove();
+		$('#defaultName').remove();
+		$('#defaultAmount').remove();
 	});
 	
 	$("input:radio[name='p_type']:input[value='N']").click(function(){
-		$('#post').append('<input type="number" name="p_price" id="defaultPrice" value="0">');
-		$('#sell').remove();
+		$('#post').append('<input type="number" name="mer_price" id="defaultPrice" value="0">');
+		$('#post').append('<input type="text" name="mer_name" id="defaultName" value="">');
+		$('#post').append('<input type="number" name="mer_amount" id="defaultAmount" value="0">');
+		$('#sell1').remove();
+		$('#sell2').remove();
+		$('#sell3').remove();
 	});
 		
 });

@@ -19,10 +19,10 @@
 		<result column="p_writer" property="p_writer"/>
 		<result column="p_content" property="p_content"/>
 		<result column="p_likeCount" property="p_likeCount"/>
-		<result column="p_price" property="p_price"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 		<collection property="postImgDTO" resultMap="postImgDTO"/>
 	</resultMap>
+	
 	<resultMap id="postImgDTO" type="org.pro.demang.model.PostImgDTO">
 		<result column="i_no" property="i_no"/>
 		<result column="p_id" property="p_id"/>
@@ -55,6 +55,21 @@
 	<resultMap id="LikeDTO" type="org.pro.demang.model.LikeDTO">
 		<result column="l_id" property="l_id"/>
 		<result column="l_postNo" property="l_postNo"/>
+	</resultMap>
+	
+	<resultMap id="OrderDTO" type="org.pro.demang.model.OrderDTO">
+		<result column="ord_id" property="ord_id"/>
+		<result column="ord_buyer" property="ord_buyer"/>
+		<result column="ord_target" property="ord_target"/>
+		<result column="ord_target_name" property="ord_target_name"/>
+		<result column="ord_amount" property="ord_amount"/>
+		<result column="ord_buyer_name" property="ord_buyer_name"/>
+		<result column="ord_buyer_email" property="ord_buyer_email"/>
+		<result column="l_ord_buyer_telid" property="ord_buyer_tel"/>
+		<result column="ord_buyer_address" property="ord_buyer_address"/>
+		<result column="ord_buyer_postcode" property="ord_buyer_postcode"/>
+		<result column="ord_price" property="ord_price"/>
+		<result column="ord_state" property="ord_state"/>
 	</resultMap>
 
 
@@ -112,7 +127,7 @@
 		Select m.m_nickname, m.m_profilePic , m.m_code , c.* from commentTBL c join memberTBL m on c.c_writer = m.m_id WHERE c_postNo = #{p_id} order by c_regDate DESC
 	</select>
 
-	<!-- post 작성 -->
+	<!-- 게시글 관련 -->
 	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id">
 		INSERT INTO postTBL (p_origin, p_type, p_writer, p_content) VALUES(#{p_origin}, #{p_type}, #{p_writer}, #{p_content})
 	</insert>
@@ -122,8 +137,17 @@
 	</insert>
 	
 	<insert id="postInsertS" useGeneratedKeys="true" keyProperty="p_id">
-		INSERT INTO postTBL (p_type, p_writer, p_content, p_price) VALUES(#{p_type}, #{p_writer}, #{p_content}, #{p_price})
+		INSERT INTO postTBL (p_type, p_writer, p_content) VALUES(#{p_type}, #{p_writer}, #{p_content})
 	</insert>
+	
+	<update id="postSellUpdate">
+		UPDATE postTBL set p_type = #{p_type} WHERE p_id = #{p_id}; 
+	</update>
+	
+	<select id="reViewCheck" resultType="boolean">
+		SELECT if(count(*) = 1, 1, 0) FROM postTBL join orderTBL join merchandiseTBL on postTBL.p_id = #{p_id} and merchandiseTBL.mer_target = #{p_id} AND ord_buyer = #{ord_buyer} and ord_state = 'O';
+	</select>
+	
 	
 	<!-- 이미지 등록 -->
 	<insert id="postInsertImg">
@@ -326,6 +350,9 @@
 	<select id="getOrderPrice" resultType="Integer">
 	 SELECT ord_price FROM orderTBL WHERE ord_id = #{ord_id}
 	</select>
-	
+	<!-- 게시글에 들어가는 상품 정보 -->
+	<insert id="orderPostInsert">
+		INSERT INTO merchandiseTBL(mer_target, mer_name, mer_price, mer_amount) VALUES(#{mer_target}, #{mer_name}, #{mer_price}, #{mer_amount});
+	</insert>
 		   
 </mapper>

@@ -28,6 +28,7 @@
 <nav></nav>
 
 <input type="hidden" id="p_id" th:value="${post.p_id}">
+<input type="hidden" id="p_type" th:value="${post.p_type}">
 <input type="hidden" id="m_id" th:value="${session.login}">
 
 <main>
@@ -39,6 +40,15 @@
         [[${post.memberDTO.m_nickname}]]
         <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
         <p th:if="${post.p_type} == S" class="textEnd">[[${post.p_price}]] 원</p>
+        <div class="sell" th:if="${session.login} == ${post.p_writer}">
+        	<select id="selling" name="selling">
+        		<option value="">판매 상태</option>
+        		<option value="selling">판매중</option>
+        		<option value="stop">판매 중지</option>
+        		<option value="sellOut">매진</option>
+        	</select>
+        	<input type="button" id="changeSell" value="설정완료">
+        </div>
         </div>
         <div class="content">
         	<div>  	
@@ -55,8 +65,10 @@
     	  <span id="likeCount"></span> <!-- 좋아요 갯수 나오는 곳 -->
     	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
-    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == S">리뷰작성</a>
-    	  <a th:href="@{postInsert2?p_id={p_id}(p_id=${post.p_id})}" th:if="${post.p_type} == S">구매하기</a>
+    	  <button id="reView" th:if="${post.p_type} == S">리뷰작성</button>
+    	  <input id="buy" type="button" th:if="${post.p_type} == S" value="구매하기">
+    	  <input id="oos" type="button" th:if="${post.p_type} == O" value="품절">
+    	  <input id="sos" type="button" th:if="${post.p_type} == X" value="판매 중단">
     	  <button onclick="history.back()">뒤로가기</button>	
     	  </div>
  		</div>

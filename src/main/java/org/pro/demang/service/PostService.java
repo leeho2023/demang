@@ -3,14 +3,17 @@ package org.pro.demang.service;
 import java.util.List;
 
 import org.pro.demang.model.CommentDTO;
-import org.pro.demang.model.LikeDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.MerchandiseDTO;
 
 public interface PostService {
 
 	void postInsert( PostDTO dto ); // 게시글 등록(리뷰)
 	void postInsertN(PostDTO dto); // 게시글 등록(일반)
 	void postInsertS(PostDTO dto); // 게시글 등록(판매)
+	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 등록 시 같이 등록되는 상품 정보
+	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
+	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
 	void postInsertImg(int p_id, byte[] bytes); // 게시물에 달릴 이미지 등록
 	List<CommentDTO> commentShow(String p_id); // 댓글 불러오기
 	void commentInsert(CommentDTO dto); // 댓글 등록하기
