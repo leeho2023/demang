@@ -361,4 +361,19 @@ img {
     opacity: 1;
   }
 }
+
+/* messages page */
+#messagewrap{
+  border: 1px solid black;
+  width: 100%;
+  height: 80vh;
+  padding: 1% 0 0 1%;
+}
+
+#messagewrap #messageInfoBar{
+  border: 1px solid black;
+  width: 99%;
+  height: 8vh;
+}
+
 /*# sourceMappingURL=styles.css.map */

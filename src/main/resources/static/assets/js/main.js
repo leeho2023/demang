@@ -1,6 +1,10 @@
 $(function(){
     pageHide();
-    $('#home').show();
+    // $('#home').show();
+    $('#messages').show();
+    // $('#home').show();
+    // $('#home').show();
+    // $('#home').show();
 
     const week = ['일','월','화','수','목','금','토']
     var now = new Date();
