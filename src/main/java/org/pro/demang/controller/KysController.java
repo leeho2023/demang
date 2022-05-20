@@ -61,9 +61,9 @@ public class KysController {
 		
 		if( orderService.paymentVerify( imp_uid, ord_id ) ) {// 결제 검증
 			orderService.paymentValidate( ord_id );// 디비에 결제 완료 표시
-			return "결제 완료";
+			return "O";
 		}else {
-			return "결제 실패: 검증 탈락";
+			return "X";
 		}
 	}
 	

@@ -38,7 +38,6 @@ public class LwkController {
 				HttpSession session = request.getSession();
 				session.setAttribute("login", member.getM_id());
 				session.setAttribute("email", member.getM_email());
-				System.out.println("lwk controller ~ red: "+red);
 				if( red == "" ){// 로그인 후 따로 이동할 페이지가 없으면 피드로 이동
 					return "redirect:/feed";
 				}

@@ -40,9 +40,8 @@ public class MainController {
 
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
-	public String loginMove( @Param("red") String red, HttpServletRequest request, Model model ) {
+	public String loginMove( @Param("red") String red, Model model ) {
 		model.addAttribute("red", red);
-		System.out.println("Main controller ~ "+request.getHeader("Referer"));
 		return "member/login";
 	}
 
