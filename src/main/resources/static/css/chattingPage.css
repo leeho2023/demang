@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.chatHistory_box {
+	border: 2px grey solid;
+	border-radius: 1vw;
+	padding: 1vw;
+	overflow: auto;
+}
+.chatHistory > * {
+	margin: 20px;
+}
+

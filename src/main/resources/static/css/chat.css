@@ -3,6 +3,7 @@
 .chatHistory {
 	display: flex;
 	flex-flow: column nowrap;
+	overflow: auto;
 }
 .chatHistory > * {
 	display: inline-block;

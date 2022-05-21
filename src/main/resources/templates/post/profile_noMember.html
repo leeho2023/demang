@@ -3,19 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>no member found</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/test.css">
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 검색창 --><script src="js/search.js"></script>
+<!-- ??? 게시글 읽기 관련 스크립트 -->
+
+<!-- css -->
+<!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 검색창 --><link rel="stylesheet" href="css/search.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css"><link rel="stylesheet" href="css/chatModal.css">
 </head>
 <body>
-<header>헤더</header>
-<nav>친구목록</nav>
-
+<header th:replace="other/homeNav">메인메뉴</header>
 
 <main>
 찾는 회원이 없습니다.
 </main>
 
+<div id="globalSidebar">
+	<nav th:replace="other/fList">팔로목록</nav>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
 
-<footer>푸터</footer>
+<div id="chatModals"></div>
 </body>
 </html>

@@ -4,28 +4,29 @@
 <meta charset="UTF-8">
 <title>[[${listener.m_nickname}]]#[[${listener.m_code}]]님과 채팅</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/homeNav.css"type="text/css"><link rel="stylesheet" href="css/footer.css"type="text/css">
-<link rel="stylesheet" href="css/chat.css"type="text/css">
-<style>
-.chatHistory_box {
-	height: 500px;
-	border: 2px grey solid;
-	border-radius: 1vw;
-	padding: 1vw;
-	overflow: auto;
-}
-.chatHistory > * {
-	margin: 20px;
-}
-</style>
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="js/globalScript.js"></script>
+<!-- 검색창 --><script src="js/search.js"></script>
+
+<!-- css -->
+<link rel="stylesheet" href="css/chattingPage.css">
+<!-- global frame --><link rel="stylesheet" href="css/globalFrame2.css">
+<!-- 검색창 --><link rel="stylesheet" href="css/search.css">
+<!-- 채팅(모달과 공통사항) --><link rel="stylesheet" href="css/chat.css">
+<!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
 </head>
 <body>
-<header th:include="other/homeNav"></header>
+<header th:replace="other/homeNav">메인메뉴</header>
 
 <main th:include="chat/chatting">이 안에 .chatDiv 들어감</main>
 
-<footer th:include="other/footer"></footer>
+
+<div id="globalSidebar">
+	<nav th:replace="other/fList">팔로목록</nav>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
 <script>
 $(function(){
 	chat_initialize( $('.chatDiv') )

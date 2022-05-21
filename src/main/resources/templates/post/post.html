@@ -1,41 +1,39 @@
-<article class="post">
-	<div class="postView">
+<div class="post">
+	<article class="postView">
 		<h1 class="writerInfo">
-			<a th:href="'/vip?p='+${post.memberDTO.m_id}" style="display: block">
-				<img class="propic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=70>
-				<span>[[${post.memberDTO.m_nickname}]]</span>
-			</a>
+			<a th:href="'/vip?p='+${post.memberDTO.m_id}"><img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=70></a>
+			<span class="nickname" th:text="${post.memberDTO.m_nickname}"></span>
+			<span class="code">#[[${post.memberDTO.m_code}]]</span>
 		</h1>
 		<div class="postImgBox">
 			<div class="postImgs">
 				<div class="postImgDiv" th:each="postImg: ${imageList}">
-					<img th:src="${postImg.image}" height=300>
+					<img class="propic" th:src="${postImg.image}" height=300>
 				</div>
 			</div>
-			<button>&lt;</button>
-			<button>&gt;</button>
 		</div>
 		<div class="content">[[${post.p_content}]]<button>더보기 버튼 아직 아무기능 없음</button></div>
-		
-		<div class="menubar">
-			<button>관심</button>
-			<button>답글</button>
-			<button>&hellip;</button>
+	</article>
+	
+	<div class="menubar">
+		<button>♡</button>
+		<button>댓글</button>
+		<button>답글</button>
+		<button class="etc" onclick="parentOpen(this)">&hellip;</button>
+		<div class="more">
+			<button>수정</button>
+			<button>삭제</button>
+			<button>신고</button>
 		</div>
-		<div class="myComment">
-			<input type="text" placeholder="한 마디 남기기">
-			<button type="button" th:onclick="'newComment('+${session.login}+', this, '+${post.p_id}+')'">댓글쓰기</button>
-			<!--/* 댓글 작성 하면 ajax로 댓글을 디비에 등록하고 div.myComment의 내용을 비우고 방금 쓴 그 댓글을 표시한다. 표시하는 내용은 MemberServiceImpl에 있다. */-->
-		</div>
-		<ul class="commentList">
-			<li th:each="comment: ${commentList}">
-				<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
-					<img th:src="${comment.memberDTO.profileImage}" height=30>
-					<span>[[${comment.memberDTO.m_nickname}]]</span>
-				</a>
-				<span>[[${comment.c_content}]]</span>
-				<span>[[${comment.c_regDate}]]</span>
-			</li>
-		</ul>
 	</div>
-</article>
+	
+	<ul class="commentList">
+		<li th:each="comment: ${commentList}">
+			<a th:href="'/vip?p='+${comment.memberDTO.m_id}"><img class="profilePic" th:src="${comment.memberDTO.profileImage}" height=30></a>
+			<span class="nickname">[[${comment.memberDTO.m_nickname}]]</span>
+			<span class="content">[[${comment.c_content}]]</span>
+			<span class="regdate">[[${comment.c_regDate}]]</span>
+			<span>X</span>
+		</li>
+	</ul>
+</div>

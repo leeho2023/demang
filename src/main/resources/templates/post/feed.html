@@ -2,28 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>DeMang</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/test.css">
-<link rel="stylesheet" href="css/homeNav.css"type="text/css"><link rel="stylesheet" href="css/footer.css"type="text/css">
-<!-- 검색창 css -->
-<link rel="stylesheet" href="css/search.css">
-<link rel="stylesheet" href="css/chat.css"><link rel="stylesheet" href="css/chatModal.css">
+<title>DEMANG</title>
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="js/globalScript.js"></script>
+<!-- 스크롤 내려 글 부르기 --><script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script><script src="js/postFromListByScrolling.js">/* 게시글 불러오기 */</script> 
+<!-- 검색창 --><script src="js/search.js"></script>
+<!-- ??? 게시글 읽기 관련 스크립트 -->
+<script src="js/newComment.js"></script>
+
+<!-- css -->
+<!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 검색창 --><link rel="stylesheet" href="css/search.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css"><link rel="stylesheet" href="css/chatModal.css">
+<!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
 </head>
 <body>
-<header th:include="other/homeNav">메인메뉴</header>
-<nav th:include="other/fList">팔로목록</nav>
+<header th:replace="other/homeNav">메인메뉴</header>
+
 <main>
-<section id="postList"></section><hr id="endOfPostListPosCheck">
+	<section id="postList"></section><hr id="endOfPostListPosCheck">
 </main>
+
+<div id="globalSidebar">
+	<nav th:replace="other/fList">팔로목록</nav>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
 <div id="chatModals"></div>
-<footer th:include="other/footer">푸터</footer>
 
-
-<script th:inline="javascript">postList = [[${PostList}]];/*표시할 게시글 번호 목록. 여기 빨간줄은 무시하자. 잘 된다.(이클립스가 타임리프 모르는 듯)*/</script>
-<script src="js/postFromListByScrolling.js">/* 게시글 불러오기 */</script> 
-<script src="js/newComment.js">/* 새 댓글 등록 */</script>
-<!-- 검색창 js -->
-<script src="js/search.js"></script>
 </body>
 </html>
