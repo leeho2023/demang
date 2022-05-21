@@ -60,9 +60,11 @@ public class MainController {
     // 친구 목록 불러오기(해당 유저의 회원코드 사용) 
 	@PostMapping("/fList")
 	public String fList(@RequestParam("follower")int follower, Model model) {
-		List<MemberDTO> list = memberService.fList(follower);
-		model.addAttribute("list",list);
-		return "other/fListList";
+		model.addAttribute(
+				"fList",
+				memberService.fList(follower)
+				);
+		return "other/fList";
 	}
 
     // 댓글 보기

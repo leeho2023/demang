@@ -22,7 +22,6 @@ body
 
 /* ??? 영역확인용 색 */
 #globalHeader {
-	background-color: #fdd;
 }
 main {
 	background-color: white;
@@ -53,6 +52,16 @@ body {
 #globalHeader {/* 300px * auto */
 	z-index: 1;
 }
+#globalHeader .menuList > * {
+	margin: 5px;
+	padding: 10px;
+	border: 2px #ddd solid;
+	border-radius: 5px;
+	background-color: white;
+}
+#globalHeader .menuList > *:hover {
+	background-color: #eee;
+}
 #globalFooter {
 	text-align: center;
 }
@@ -60,6 +69,13 @@ body {
 
 /* 전체 틀 */
 /* 넓은 화면 */
+@media (min-width: 1800px){
+	body {
+		width: 1800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
 @media (min-width: 1500px){
 	body {
 		display: grid;
@@ -72,7 +88,7 @@ body {
 		grid-row: 1/2;
 	}
 	/* 헤더 */
-	#globalHeader {/* 300px * auto */
+	body > #globalHeader {/* 300px * auto */
 		position: fixed;
 		top: 0px;
 		left: 0px;
@@ -88,16 +104,6 @@ body {
 	#globalHeader .menu > button {
 		display: none;
 	}
-	#globalHeader .menuList > * {
-		margin: 5px;
-		padding: 10px;
-		border: 2px #ddd solid;
-		border-radius: 5px;
-		background-color: white;
-	}
-	#globalHeader .menuList > *:hover {
-		background-color: #eee;
-	}
 	/* 사이드바 */
 	#globalSidebar {
 		position: fixed;
@@ -109,8 +115,6 @@ body {
 		display: none;
 	}
 	#globalFList {
-		top: 0px;
-		right: 0px;
 	}
 	#globalFooter {
 		padding: 20px;
@@ -153,13 +157,6 @@ body {
 		flex-flow: row nowrap;
 		justify-content: center;
 	}
-	#globalHeader .menuList > * {
-		margin: 5px;
-		padding: 10px;
-		border: 2px #ddd solid;
-		border-radius: 5px;
-		background-color: white;
-	}
 	/* 사이드바 */
 	#globalSidebar {
 		position: fixed;
@@ -171,8 +168,6 @@ body {
 		display: none;
 	}
 	#globalFList {
-		top: 0px;
-		right: 0px;
 	}
 	#globalFooter {
 		padding: 20px;
@@ -223,11 +218,6 @@ body {
 	#globalHeader .menu:not(.open) .menuList {
 		display: none;
 	}
-	#globalHeader .menuList > * {
-		margin: 2px;
-		padding: 5px;
-		background-color: #cfc;
-	}
 	/* 사이드바 */
 	#globalSidebar {
 		position: fixed;
@@ -239,6 +229,9 @@ body {
 	#globalSidebar:not(.open) {
 		height: 40px;
 	}
+	#globalSidebar #globalFooter {/* 푸터 안 보임 */
+		display: none;
+	}
 	#globalSidebar:not(.open) > button {
 		position: absolute;
 		top: 0;
@@ -248,11 +241,6 @@ body {
 	}
 	#globalSidebar:not(.open) #globalFList {
 		display: none;
-	}
-	#globalSidebar:not(.open) #globalFooter {
-		height: 100%;
-		padding-left: 40px;
-		overflow: hidden;
 	}
 	/**//* 펼친 상태 */
 	#globalSidebar.open {
