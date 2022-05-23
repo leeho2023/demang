@@ -16,7 +16,6 @@ public interface PostService {
 	MerchandiseDTO priceSearch(String p_id); // 물건 정보 조회
 	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
 	void postInsertImg(int p_id, byte[] bytes); // 게시물에 달릴 이미지 등록
-	List<CommentDTO> commentShow(String p_id); // 댓글 불러오기
 	void commentInsert(CommentDTO dto); // 댓글 등록하기
 	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 	public PostDTO getPost( String no );

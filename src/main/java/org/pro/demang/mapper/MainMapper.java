@@ -22,7 +22,6 @@ public interface MainMapper {
 
 	void memberInsert(MemberDTO dto); // 회원가입
 
-	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
 	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 
 	void postInsert( PostDTO dto ); // post작성

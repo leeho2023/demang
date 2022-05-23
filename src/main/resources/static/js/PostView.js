@@ -192,7 +192,6 @@ function likeCount(){
 function commentShow(){
 	
 	var p_id = $('#p_id').val();
-	$('#commentRead').empty();
 	
 	$.ajax({
 		type: 'post',
@@ -200,12 +199,7 @@ function commentShow(){
 		data:{
 			p_id : p_id
 		}, success: function(data){
-				$(data).each(function(){
-					$('#commentRead').append(this.c_writer + "<br>");
-					$('#commentRead').append(this.m_profilePic + "<br>");
-					$('#commentRead').append(this.c_content + "<br>");
-					$('#commentRead').append(this.c_regDate + "<br>");
-				})
+					$('#commentRead').html(data);
 		},error: function(){
 			console.log('댓글 목록 불러오기 에러');
 		}

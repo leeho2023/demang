@@ -69,10 +69,10 @@ public class MainController {
 
     // 댓글 보기
 	@PostMapping("/CommentShow")
-	@ResponseBody
-	public List<CommentDTO> commentShow(@RequestParam("p_id")String p_id){
-		List<CommentDTO> list = postService.commentShow(p_id);
-		return list;
+	public String commentShow(@RequestParam("p_id")String p_id, Model model){
+		List<CommentDTO> list = mapper.getCommentList(p_id);
+		model.addAttribute("commentList",list);
+		return "post/commentList";
 		
 	}
 	

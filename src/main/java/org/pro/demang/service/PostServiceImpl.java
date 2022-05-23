@@ -55,12 +55,6 @@ public class PostServiceImpl implements PostService{
 		mapper.postInsertImg(p_id, bytes);
 	}
 
-	//댓글 불러오기
-	@Override
-	public List<CommentDTO> commentShow(String p_id) {
-		return mapper.commentShow(p_id);
-	}
-
 	// 댓글 등록하기
 	@Override
 	public void commentInsert(CommentDTO dto) {
