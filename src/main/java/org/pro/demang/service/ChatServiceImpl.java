@@ -1,6 +1,5 @@
 package org.pro.demang.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;

@@ -1,7 +1,163 @@
-<ul id="messageInfo" th:each="dto : ${dtoList}">
-    <li class="infoItem">[[${dto.c_id}]]</li>
-    <li class="infoItem">[[${dto.m_email}]]</li>
-    <li class="infoItem">[[${dto.c_contentTitle}]]</li>
-    <li class="infoItem">[[${dto.c_contactUsValues}]]</li>
-    <li class="infoItem">[[${dto.c_regDate}]]</li>
-</ul>
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <title>Responsive sidebar submenus</title>
+        <!-- font awesome kit code -->
+        <script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
+        <!-- jquery3.6.0 cdn -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!--========== HEADER ==========-->
+        <header class="header">
+            <div class="header__container">
+
+                <a href="/admin" class="header__logo home">Demang Admin</a>
+                <span>[[${#dates.format(#dates.createNow(), 'yyyy년 MM월 dd일')}]] <span id="dayOfWeekBox"></span></span>
+                
+    
+                <div class="header__search">
+                    <input type="search" placeholder="Search" class="header__input">
+                    <i class='bx bx-search header__icon'></i>
+                </div>
+    
+                <div class="header__toggle">
+                    <i class='bx bx-menu' id="header-toggle"></i>
+                </div>
+            </div>
+        </header>
+
+        <!--========== NAV ==========-->
+        <div class="nav" id="navbar">
+            <nav class="nav__container">
+                <div>
+                    <a href="/admin" class="nav__link nav__logo">
+                        <i class='bx bxs-disc nav__icon' ></i>
+                        <span class="nav__logo-name">Demang<br> Admin</span>
+                    </a>
+    
+                    <div class="nav__list">
+                        <div class="nav__items">
+                            <h3 class="nav__subtitle">Menu</h3>
+    
+                            <a href="/admin" class="nav__link active home">
+                                <i class='bx bx-home nav__icon' ></i>
+                                <span class="nav__name">Home</span>
+                            </a>
+                            
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link profile">
+                                    <i class='bx bx-user nav__icon' ></i>
+                                    <span class="nav__name">Profile</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="#" class="nav__dropdown-item user">User</a>
+                                        <a href="#" class="nav__dropdown-item post">Post</a>
+                                        <!-- <a href="#" class="nav__dropdown-item">test</a>
+                                        <a href="#" class="nav__dropdown-item">test</a> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="/contactUsList" class="nav__link messages">
+                                <i class='bx bx-message-rounded nav__icon' ></i>
+                                <span class="nav__name">Messages</span>
+                            </a>
+                            <!-- <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-bell nav__icon' ></i>
+                                    <span class="nav__name">Notifications</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
+
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <a href="#" class="nav__dropdown-item">Blocked</a>
+                                        <a href="#" class="nav__dropdown-item">Silenced</a>
+                                        <a href="#" class="nav__dropdown-item">Publish</a>
+                                        <a href="#" class="nav__dropdown-item">Program</a>
+                                    </div>
+                                </div>
+
+                            </div> -->
+
+                            <a href="#" class="nav__link search">
+                                <i class='bx bx-compass nav__icon' ></i>
+                                <span class="nav__name">Search</span>
+                            </a>
+                            <a href="#" class="nav__link log">
+                                <i class='bx bx-bookmark nav__icon' ></i>
+                                <span class="nav__name">Log</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon' ></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+        <!--========== CONTENTS ==========-->
+        <main>
+            <section id="messages">
+                <span>문의</span>
+                <div id="messagewrap">
+                    <div id="messageInfoBar">
+                        <ul id="infoBar">
+                            <li class="infoItem">번호</li>
+                            <li class="infoItem">이메일</li>
+                            <li class="infoItem">제목</li>
+                            <li class="infoItem">분류</li>
+                            <li class="infoItem">날짜</li>
+                        </ul>
+                    </div>
+                    <div id="messageInfoList">
+                        <ul id="messageInfo" th:each="dto : ${contactUsList.getList()}">
+                            <li class="infoItem">[[${dto.getC_id}]]</li>
+                            <li class="infoItem">[[${dto.getM_email}]]</li>
+                            <li class="infoItem">[[${dto.getC_contentTitle}]]</li>
+                            <li class="infoItem">[[${dto.getC_contactUsValues}]]</li>
+                            <li class="infoItem">[[${dto.getC_regDate}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="pageNumwrap">
+                    <ul id="pageNumList">
+                        <!-- getPrePage : 이전 페이지 -->
+                        <li th:classappend="${contactUsList.getPrePage() == 0} ? 'disabled'">
+                            <!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
+                            <a th:href="@{/contactUsList(pageNum=${contactUsList.getPrePage()})}">Previous</a>
+                        </li>
+                        <!-- getNavigateFirstPage() : 페이징의 처음 숫자 getNavigateLastPage : 페이징의 마지막 숫자를 이용해 페이징 숫자 출력 -->
+                        <!-- href : /page?pageNum=선택한 페이지&keyword=검색분류&search=검색어 -->
+                        <li th:each="page: ${#numbers.sequence(contactUsList.getNavigateFirstPage(), contactUsList.getNavigateLastPage())}" th:classappend="${page == contactUsList.getPageNum()} ? 'active'">
+                            <a th:text="${page}" th:href="@{/contactUsList(pageNum=${page})}"></a>
+                        </li>
+                        <!-- getPrePage : 다음 페이지 -->
+                        <li th:classappend="${contactUsList.getNextPage() == 0} ? 'disabled'">
+                            <!-- href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 -->
+                            <a th:href="@{/contactUsList(pageNum=${contactUsList.getNextPage()})}">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        <!--========== MAIN JS ==========-->
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>

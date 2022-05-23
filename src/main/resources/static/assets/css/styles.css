@@ -380,7 +380,7 @@ img {
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid red;
+  border: 1px solid #7b9acc;
   height: 6vh;
   display: flex;
   justify-content: center;
@@ -431,6 +431,9 @@ img {
 
 #pageNumwrap ul > li{
   width: 2%;
+}
+#pageNumwrap ul > li:nth-child(1){
+  width: 5%;
 }
 
 /* 목록들의 너비 맞춤 */

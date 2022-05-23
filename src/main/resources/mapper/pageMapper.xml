@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.pro.demang.mapper.PagingMapper">
+    <select id="findUser" resultType="org.pro.demang.model.ContactUsDTO">
+        SELECT *
+        FROM contactUsTBL
+        WHERE 1=1
+        ORDER BY c_id DESC
+        <!-- <if test="keyword == 'name'">
+            AND name LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test="keyword == 'email'">
+            AND email LIKE CONCAT('%',#{search},'%')
+        </if> -->
+    </select>
+</mapper>

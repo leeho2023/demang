@@ -1,10 +1,11 @@
 package org.pro.demang.controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
+
+import com.github.pagehelper.PageInfo;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ContactUsDTO;
@@ -14,6 +15,7 @@ import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
+import org.pro.demang.service.PagingServiceImpl;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,8 @@ public class LhhController {
 	@Autowired
 	private MailService mailService;
 	
+	@Autowired
+	private PagingServiceImpl pagingServiceImpl;
 
     @GetMapping("/")
 	public String home() {
@@ -48,9 +52,12 @@ public class LhhController {
 	}
     
     @GetMapping("/admin")
-	public String admin() {
+	public String admin(Model model) {
 		
-		// return "member/login";
+		model.addAttribute("userCount", mapper.userCount());
+		model.addAttribute("postCount", mapper.postCount());
+		model.addAttribute("postTOP", mapper.postTOP());
+
 		return "admin/index";
 	}
     
@@ -207,13 +214,18 @@ public class LhhController {
 		return "redirect:/";
 	}
 
+	// ##########################################################################################
+	//  페이징 관련 테스트
 	//admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
 	@PostMapping("/messageList")
 	public String messageList(@RequestParam("c_id")int c_id, Model model) {
 		System.out.println(c_id);
 		List<ContactUsDTO> dtoList = memberService.messageList(c_id);
+		ArrayList<Integer> arrlist = memberService.contactAllNumCount();
+		model.addAttribute("arrlist", arrlist);
 		model.addAttribute("dtoList", dtoList);
-		return "admin/messages";
+
+		return "admin/appendMessage";
 	}
 
 	@PostMapping("/contactAllNumCount")
@@ -224,5 +236,18 @@ public class LhhController {
 
 		return "admin/pageNumList";
 	}
+	
+	@GetMapping("/contactUsList")
+	public String page(
+            @RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
+	PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
+	model.addAttribute("contactUsList", p);
+	return "admin/messages";
+	}
+	
+
+
+
+	// #########################################################################################
 	
 }

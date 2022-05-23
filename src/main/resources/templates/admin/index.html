@@ -71,9 +71,10 @@
                                 </div>
                             </div>
 
-                            <a href="#" class="nav__link messages">
+                            <a href="/contactUsList" class="nav__link messages">
                                 <i class='bx bx-message-rounded nav__icon' ></i>
                                 <span class="nav__name">Messages</span>
+                                <!-- <span class="nav__name">Messages</span> -->
                             </a>
                             <!-- <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
@@ -116,73 +117,34 @@
         <main>
             <section id="home">
                 <p>
-                    home(전체 유저 수 전체 게시글 수
-                    팔로워가 가장 많은 4명의 유저
-                    좋아요가 가장 많은 2개의 게시물
-                    확인 안한 가장 늦은 문의 사항 2개)
+                    home
                 </p>
-                
-            </section>
-            <section id="profile">
-                <p>profile(유저 정보 일부와 게시글 정보 일부를 불러옵니다.)</p>
-                
-            </section>
-            <section id="profile_user">
-                <p>profile_user(유저정보를 전부 불러옵니다. 페이징??)</p>
-                
-            </section>
-            <section id="profile_post">
-                <p>profile_post(게시글 정보를 전부 불러옵니다. 페이징???)</p>
-                
-            </section>
-            <section id="messages">
-                <span>문의</span>
-                <div id="messagewrap">
-                    <div id="messageInfoBar">
-                        <ul id="infoBar">
-                            <li class="infoItem">번호</li>
-                            <li class="infoItem">이메일</li>
-                            <li class="infoItem">제목</li>
-                            <li class="infoItem">분류</li>
-                            <li class="infoItem">날짜</li>
-                        </ul>
-                    </div>
-                    <div id="messageInfoList">
-                        <ul id="messageInfo">
-                            <li class="infoItem">1</li>
-                            <li class="infoItem">sutak@suatk.com</li>
-                            <li class="infoItem">게시글에 문제가 있어요</li>
-                            <li class="infoItem">게시글</li>
-                            <li class="infoItem">2022년 5월 23일</li>
-                        </ul>
+                <div>
+                    전체 유저 수 = [[${userCount}]]
+                </div>
+                <div>
+                    전체 게시글 수 = [[${postCount}]]
+                </div>
+                <div>
+                    팔로워가 가장 많은 4명의 유저
+                </div>
+                <div>
+                    좋아요가 가장 많은 2개의 게시물
+                    <div th:each="post : ${postTOP}">
+                        <p>게시글 번호 : [[${post.p_id}]]</p>
+                        <p>게시글 내용 : [[${post.p_content}]]</p>
+                        <p>좋아요 갯수 : [[${post.p_likeCount}]]</p>
+                        <p>글 쓴 유저 [[${post.memberDTO.m_email}]]</p>
+                        <p>유저 코드 : [[${post.memberDTO.m_code}]]</p>
                     </div>
                 </div>
-                <div id="pageNumwrap">
-                    <ul id="pageNumList">
-                        <li><a href="#">&lt;&lt;</a></li>
-                        <li><a href="#">&lt;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">10</a></li>
-                        <li><a href="#">&gt;</a></li>
-                        <li><a href="#">&gt;&gt;</a></li>
-                    </ul>
+                <div>
+                    확인 안한 가장 늦은 문의 사항 2개
+                    <div>
+                        
+                    </div>
                 </div>
-                
-            </section>
-            <section id="search">
-                <p>search(검색 정보를 불러옵니다.)</p>
-                
-            </section>
-            <section id="log">
-                <p>log(시스템 로그를 불러옵니다.)</p>
+
                 
             </section>
         </main>

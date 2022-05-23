@@ -23,8 +23,11 @@ public interface MemberService {
 	public String emailCheck(String m_email);
     void contactUsInsert(ContactUsDTO dto);
 	void contactUsImgInsert(int c_id, byte[] i_image);
+	// #######################################
+	// 페이징 관련 테스트 (끝나면 지워도됨)
 	List<ContactUsDTO> messageList(int c_id);
     ArrayList<Integer> contactAllNumCount();
+	public List<ContactUsDTO> selectContactList(ContactUsDTO dto);
 
 
 	

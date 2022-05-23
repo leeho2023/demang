@@ -1,0 +1,7 @@
+<ul id="messageInfo" th:each="dto : ${dtoList}">
+    <li class="infoItem">[[${dto.c_id}]]</li>
+    <li class="infoItem">[[${dto.m_email}]]</li>
+    <li class="infoItem">[[${dto.c_contentTitle}]]</li>
+    <li class="infoItem">[[${dto.c_contactUsValues}]]</li>
+    <li class="infoItem">[[${dto.c_regDate}]]</li>
+</ul>

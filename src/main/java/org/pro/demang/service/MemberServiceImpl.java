@@ -1,6 +1,7 @@
 package org.pro.demang.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -160,6 +161,9 @@ public class MemberServiceImpl implements MemberService {
 		return code;
 	}
 
+
+	// ###########################################################################################
+	// 페이징 관련
 	// //admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
 	@Override
 	public List<ContactUsDTO> messageList(int c_id) {
@@ -174,11 +178,27 @@ public class MemberServiceImpl implements MemberService {
 		int result = (int)Math.ceil((double)c_count/10);
 		ArrayList<Integer> arrlist = new ArrayList<>();
 
-		for(int i = 0; i < result; i++){
+		for(int i = 0; i < 10; i++){
 			arrlist.add(i);
 		}
 
 
 		return arrlist;
 	}
+
+	@Override
+	public List<ContactUsDTO> selectContactList(ContactUsDTO dto) {
+		
+		List<ContactUsDTO> contactUsList = Collections.emptyList();
+
+		int contactTotalCount = mapper.selectContactTotalCount(dto);
+
+		if(contactTotalCount > 0){
+			contactUsList = mapper.selectContactList(dto);
+		}
+
+		return contactUsList;
+	}
+
+	// ###########################################################################################
 }

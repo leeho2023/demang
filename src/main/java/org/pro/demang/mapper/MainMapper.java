@@ -102,12 +102,21 @@ public interface MainMapper {
 	void addLikeCount(String l_postNo); // 좋아요 누르면 오르는 카운트
 	String likeCount(String l_postNo); // 게시물 좋아요 갯수
 
-    void contactUsInsert(ContactUsDTO dto);
-	void contactUsImgInsert(int c_id, byte[] i_image);
-
-
+    void contactUsInsert(ContactUsDTO dto); // 문의 내용 DB 입력
+	void contactUsImgInsert(int c_id, byte[] i_image); // 문의 내용 번호에 따른 이미지 DB 입력
 	
+	// 페이징 관련
+	public List<ContactUsDTO> selectContactList(ContactUsDTO dto);
+	public int selectContactTotalCount(ContactUsDTO dto);
+
+	// 내가 만든 페이징 관련
+	List<ContactUsDTO> messageList(int c_id);
+    int contactAllNumCount();
 	
+	int userCount();
+	int postCount();
+	List<PostDTO> postTOP();
+
 	
 	
 	//// 주문 및 결제 관련
@@ -117,6 +126,6 @@ public interface MainMapper {
 	int getMerCount(int mer_id);// 주문 시도 횟수 조회
 	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
-    List<ContactUsDTO> messageList(int c_id);
-    int contactAllNumCount();
+	
+    
 }
