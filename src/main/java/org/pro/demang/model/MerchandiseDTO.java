@@ -18,4 +18,13 @@ public class MerchandiseDTO {
 		this.mer_price = mer_price;
 		this.mer_amount = mer_amount;
 	}
+	
+	public MerchandiseDTO(int mer_id, int mer_target, String mer_name, int mer_price, int mer_amount, int mer_count) {
+		this.mer_id = mer_id;
+		this.mer_target = mer_target;
+		this.mer_name = mer_name;
+		this.mer_price = mer_price;
+		this.mer_amount = mer_amount;
+		this.mer_count = mer_count;
+	}
 }

@@ -1,5 +1,7 @@
 package org.pro.demang.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
@@ -176,6 +178,27 @@ public class SjhController {
 		}else {
 			return "not found";
 		}
+	}
+	
+	// 리뷰 목록 불러오기
+	@PostMapping("reViewShow")
+	@ResponseBody
+	public List<PostDTO> reViewShow(@RequestParam("p_id")String p_origin) {
+		
+		List<PostDTO> dto = postService.postReviewShow(p_origin);
+		
+		return dto;
+	}
+
+	// 물건 가격 불러오기
+	@PostMapping("price")
+	@ResponseBody
+	public MerchandiseDTO price(@RequestParam("p_id")String p_id) {
+		
+		MerchandiseDTO dto = postService.priceSearch(p_id);
+		System.out.println(dto.toString());
+		
+		return dto;
 	}
 	
 }

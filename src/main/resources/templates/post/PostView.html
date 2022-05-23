@@ -27,9 +27,9 @@
 <header th:include="other/homeNav"></header>
 <nav></nav>
 
-<input type="hidden" id="p_id" th:value="${post.p_id}">
-<input type="hidden" id="p_type" th:value="${post.p_type}">
-<input type="hidden" id="m_id" th:value="${session.login}">
+<input type="text" id="p_id" th:value="${post.p_id}">
+<input type="text" id="p_type" th:value="${post.p_type}">
+<input type="text" id="m_id" th:value="${session.login}">
 
 <main>
     <div class="wrap">
@@ -39,8 +39,8 @@
         <img class="propic" th:src="${post.memberDTO.profileImage}" height=70>
         [[${post.memberDTO.m_nickname}]]
         <!-- 판매글 일 때만 판매 가격이 나타나도록 표시 -->
-        <p th:if="${post.p_type} == S" class="textEnd">[[${post.p_price}]] 원</p>
-        <div class="sell" th:if="${session.login} == ${post.p_writer}">
+        <p th:if="${post.p_type} == S" class="textEnd"> [[${Merchandise.mer_price}]]원 / [[${Merchandise.mer_amount}]] 개 남음</p>
+        <div class="sell" th:if="${session.login} == ${post.p_writer} and ${post.p_type} == 'S' or ${post.p_type} == 'O' or ${post.p_type} == 'X'">
         	<select id="selling" name="selling">
         		<option value="">판매 상태</option>
         		<option value="selling">판매중</option>

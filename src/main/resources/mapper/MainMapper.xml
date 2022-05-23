@@ -19,6 +19,7 @@
 		<result column="p_writer" property="p_writer"/>
 		<result column="p_content" property="p_content"/>
 		<result column="p_likeCount" property="p_likeCount"/>
+		<result column="p_regDate" property="p_regDate"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 		<collection property="postImgDTO" resultMap="postImgDTO"/>
 	</resultMap>
@@ -70,6 +71,14 @@
 		<result column="ord_buyer_postcode" property="ord_buyer_postcode"/>
 		<result column="ord_price" property="ord_price"/>
 		<result column="ord_state" property="ord_state"/>
+	</resultMap>
+	<resultMap id="MerchandiseDTO" type="org.pro.demang.model.MerchandiseDTO">
+		<result column="mer_id" property="mer_id"/>
+		<result column="mer_target" property="mer_target"/>
+		<result column="mer_name" property="mer_name"/>
+		<result column="mer_price" property="mer_price"/>
+		<result column="mer_amount" property="mer_amount"/>
+		<result column="mer_count" property="mer_count"/>
 	</resultMap>
 
 
@@ -146,6 +155,16 @@
 	
 	<select id="reViewCheck" resultType="boolean">
 		SELECT if(count(*) = 1, 1, 0) FROM postTBL join orderTBL join merchandiseTBL on postTBL.p_id = #{p_id} and merchandiseTBL.mer_target = #{p_id} AND ord_buyer = #{ord_buyer} and ord_state = 'O';
+	</select>
+	
+	<!-- 리뷰 읽어오기 -->
+	<select id="postReviewShow" resultType="org.pro.demang.model.PostDTO" resultMap="postDTO">
+		SELECT * FROM postTBL join postImgTBL on p_type = 'R' AND p_origin = #{p_origin};
+	</select>
+	
+	<!-- 게시글 물건 불러오기 -->
+	<select id="priceSearch" resultType="org.pro.demang.model.MerchandiseDTO" resultMap="MerchandiseDTO">
+		SELECT * FROM merchandiseTBL WHERE mer_target = #{p_id};
 	</select>
 	
 	

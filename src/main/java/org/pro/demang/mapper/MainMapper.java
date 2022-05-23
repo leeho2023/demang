@@ -23,12 +23,14 @@ public interface MainMapper {
 	void memberInsert(MemberDTO dto); // 회원가입
 
 	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
+	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 
 	void postInsert( PostDTO dto ); // post작성
 	void postInsertN(PostDTO dto); // 게시글 등록(일반)
 	void postInsertS(PostDTO dto); // 게시글 등록(판매)
 	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
 	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
+	MerchandiseDTO priceSearch(String p_id); // 판매 게시글 물건 정보 불러오기
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록

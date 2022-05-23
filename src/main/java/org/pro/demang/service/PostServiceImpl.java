@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
-import org.pro.demang.model.LikeDTO;
-import org.pro.demang.model.OrderDTO;
-import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.MerchandiseDTO;
+import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -203,6 +201,18 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public boolean reViewCheck(String p_id, String ord_buyer) {
 		return mapper.reViewCheck(p_id,ord_buyer);
+	}
+
+	// 리뷰 불러오기
+	@Override
+	public List<PostDTO> postReviewShow(String p_origin) {
+		return mapper.postReviewShow(p_origin);
+	}
+
+	// 물건 불러오기
+	@Override
+	public MerchandiseDTO priceSearch(String p_id) {
+		return mapper.priceSearch(p_id);
 	}
 
 	
