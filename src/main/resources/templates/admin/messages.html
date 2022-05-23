@@ -21,7 +21,7 @@
         <header class="header">
             <div class="header__container">
 
-                <a href="#" class="header__logo home">Demang Admin</a>
+                <a href="/admin" class="header__logo home">Demang Admin</a>
                 <span>[[${#dates.format(#dates.createNow(), 'yyyy년 MM월 dd일')}]] <span id="dayOfWeekBox"></span></span>
                 
     
@@ -40,7 +40,7 @@
         <div class="nav" id="navbar">
             <nav class="nav__container">
                 <div>
-                    <a href="#" class="nav__link nav__logo">
+                    <a href="/admin" class="nav__link nav__logo">
                         <i class='bx bxs-disc nav__icon' ></i>
                         <span class="nav__logo-name">Demang<br> Admin</span>
                     </a>
@@ -49,7 +49,7 @@
                         <div class="nav__items">
                             <h3 class="nav__subtitle">Menu</h3>
     
-                            <a href="#" class="nav__link active home">
+                            <a href="/admin" class="nav__link active home">
                                 <i class='bx bx-home nav__icon' ></i>
                                 <span class="nav__name">Home</span>
                             </a>
@@ -74,7 +74,6 @@
                             <a href="/contactUsList" class="nav__link messages">
                                 <i class='bx bx-message-rounded nav__icon' ></i>
                                 <span class="nav__name">Messages</span>
-                                <!-- <span class="nav__name">Messages</span> -->
                             </a>
                             <!-- <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
@@ -115,40 +114,49 @@
 
         <!--========== CONTENTS ==========-->
         <main>
-            <section id="home">
-                <p>
-                    home
-                </p>
-                <div>
-                    전체 유저 수 = [[${userCount}]]
-                </div>
-                <div>
-                    전체 게시글 수 = [[${postCount}]]
-                </div>
-                <div>
-                    팔로워가 가장 많은 4명의 유저
-                </div>
-                <div>
-                    좋아요가 가장 많은 2개의 게시물
-                    <div th:each="post : ${postTOP}">
-                        <p>게시글 번호 : [[${post.p_id}]]</p>
-                        <p>게시글 내용 : [[${post.p_content}]]</p>
-                        <p>좋아요 갯수 : [[${post.p_likeCount}]]</p>
-                        <p>글 쓴 유저 [[${post.memberDTO.m_email}]]</p>
-                        <p>유저 코드 : [[${post.memberDTO.m_code}]]</p>
+            <section id="messages">
+                <span>문의</span>
+                <div id="messagewrap">
+                    <div id="messageInfoBar">
+                        <ul id="infoBar">
+                            <li class="infoItem">번호</li>
+                            <li class="infoItem">이메일</li>
+                            <li class="infoItem">제목</li>
+                            <li class="infoItem">분류</li>
+                            <li class="infoItem">날짜</li>
+                        </ul>
+                    </div>
+                    <div id="messageInfoList">
+                        <ul id="messageInfo" th:each="dto : ${contactUsList.getList()}">
+                            <li class="infoItem">[[${dto.getC_id}]]</li>
+                            <li class="infoItem">[[${dto.getM_email}]]</li>
+                            <li class="infoItem">[[${dto.getC_contentTitle}]]</li>
+                            <li class="infoItem">[[${dto.getC_contactUsValues}]]</li>
+                            <li class="infoItem">[[${dto.getC_regDate}]]</li>
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    확인 안한 가장 늦은 문의 사항 2개
-                    <div>
-                        
-                    </div>
+                <div id="pageNumwrap">
+                    <ul id="pageNumList">
+                        <!-- getPrePage : 이전 페이지 -->
+                        <li th:classappend="${contactUsList.getPrePage() == 0} ? 'disabled'">
+                            <!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
+                            <a th:href="@{/contactUsList(pageNum=${contactUsList.getPrePage()})}">Previous</a>
+                        </li>
+                        <!-- getNavigateFirstPage() : 페이징의 처음 숫자 getNavigateLastPage : 페이징의 마지막 숫자를 이용해 페이징 숫자 출력 -->
+                        <!-- href : /page?pageNum=선택한 페이지&keyword=검색분류&search=검색어 -->
+                        <li th:each="page: ${#numbers.sequence(contactUsList.getNavigateFirstPage(), contactUsList.getNavigateLastPage())}" th:classappend="${page == contactUsList.getPageNum()} ? 'active'">
+                            <a th:text="${page}" th:href="@{/contactUsList(pageNum=${page})}"></a>
+                        </li>
+                        <!-- getPrePage : 다음 페이지 -->
+                        <li th:classappend="${contactUsList.getNextPage() == 0} ? 'disabled'">
+                            <!-- href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 -->
+                            <a th:href="@{/contactUsList(pageNum=${contactUsList.getNextPage()})}">Next</a>
+                        </li>
+                    </ul>
                 </div>
-
-                
             </section>
         </main>
-
         <!--========== MAIN JS ==========-->
         <script src="assets/js/main.js"></script>
     </body>

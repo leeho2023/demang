@@ -361,4 +361,96 @@ img {
     opacity: 1;
   }
 }
+
+/* messages page */
+#messagewrap{
+  border: 1px solid black;
+  width: 100%;
+  height: 77vh;
+  padding: 0 0 0 1%;
+}
+
+#messagewrap #messageInfoBar{
+  border: 1px solid black;
+  width: 99%;
+  height: 6vh;
+}
+
+#messageInfoBar #infoBar{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #7b9acc;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+}
+
+#infoBar .infoItem{
+  /* border-right: 2px solid rgba(0, 0, 0, 0.5); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#messagewrap #messageInfoList{
+  /* border: 1px solid black; */
+  width: 99%;
+  height: 8vh;
+}
+
+#messageInfoList #messageInfo{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* border: 1px solid red; */
+  height: 7vh;
+  display: flex;
+  justify-content: center;
+}
+
+#messageInfo .infoItem{
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pageNumwrap{
+  border: 1px solid red;
+}
+
+#pageNumwrap #pageNumList{
+  border: 1px solid blue;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#pageNumwrap ul > li{
+  width: 2%;
+}
+#pageNumwrap ul > li:nth-child(1){
+  width: 5%;
+}
+
+/* 목록들의 너비 맞춤 */
+#messagewrap ul>li:nth-child(1){
+  width: 5%;
+}
+#messagewrap ul>li:nth-child(2){
+  width: 22%;
+}
+#messagewrap ul>li:nth-child(3){
+  width: 40%;
+}
+#messagewrap ul>li:nth-child(4){
+  width: 10%;
+}
+#messagewrap ul>li:nth-child(5){
+  width: 13%;
+}
+
 /*# sourceMappingURL=styles.css.map */

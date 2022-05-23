@@ -1,6 +1,10 @@
 $(function(){
-    pageHide();
-    $('#home').show();
+    // pageHide();
+    // $('#home').show();
+    // $('#messages').show();
+    // $('#home').show();
+    // $('#home').show();
+    // $('#home').show();
 
     const week = ['일','월','화','수','목','금','토']
     var now = new Date();
@@ -40,50 +44,70 @@ function colorLink(){
 linkColor.forEach(l => l.addEventListener('click', colorLink))
 
 /*======================== 페이지 숨김 ========================*/
-function pageHide(){
-    $('#home').hide();
-    $('#profile').hide();
-    $('#profile_user').hide();
-    $('#profile_post').hide();
-    $('#messages').hide();
-    $('#search').hide();
-    $('#log').hide();
-}
+// function pageHide(){
+//     $('#home').hide();
+//     $('#profile').hide();
+//     $('#profile_user').hide();
+//     $('#profile_post').hide();
+//     $('#messages').hide();
+//     $('#search').hide();
+//     $('#log').hide();
+// }
 
 /*======================== 페이지 이동 ========================*/
 /*======================== home 페이지 ========================*/
 $('.home').click(function(){
-    pageHide();
-    $('#home').show();
+    // pageHide();
+    // $('#home').show();
 });
 /*======================== profile 페이지 ========================*/
 $('.profile').click(function(){
-    pageHide();
-    $('#profile').show();
+    // pageHide();
+    // $('#profile').show();
 });
 /*======================== profile_user 페이지 ========================*/
 $('.user').click(function(){
-    pageHide();
-    $('#profile_user').show();
+    // pageHide();
+    // $('#profile_user').show();
 });
 /*======================== profile_post 페이지 ========================*/
 $('.post').click(function(){
-    pageHide();
-    $('#profile_post').show();
+    // pageHide();
+    // $('#profile_post').show();
 });
 /*======================== messages 페이지 ========================*/
 $('.messages').click(function(){
-    pageHide();
-    $('#messages').show();
+    // pageHide();
+    // $('#messages').show();
+    // $.ajax({
+    //     type: "get",
+    //     url: "contactAllNumCount",
+    //     success: function ( data ) {
+    //         $('#messageInfoList').html("");
+    //         $('#messageInfoList').append(data);
+    //     }
+    // });
 });
+
+function messagePage(c_id){
+    $.ajax({
+        type: "post",
+        url: "messageList",
+        data: { c_id : c_id },
+        success: function ( data ) {
+            $('#messageInfoList').html("");
+            $('#messageInfoList').append(data);
+        }
+    });
+}
 /*======================== search 페이지 ========================*/
 $('.search').click(function(){
-    pageHide();
-    $('#search').show();
+    // pageHide();
+    // $('#search').show();
 });
 /*======================== log 페이지 ========================*/
 $('.log').click(function(){
-    pageHide();
-    $('#log').show();
+    // pageHide();
+    // $('#log').show();
 });
 

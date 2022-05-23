@@ -57,6 +57,14 @@
 		<result column="l_postNo" property="l_postNo"/>
 	</resultMap>
 
+	<resultMap id="contactUsDTO" type="org.pro.demang.model.ContactUsDTO">
+		<result column="c_id" property="c_id"/>
+		<result column="m_email" property="m_email"/>
+		<result column="c_contentTitle" property="c_contentTitle"/>
+		<result column="c_contactUsValues" property="c_contactUsValues"/>
+		<result column="c_content" property="c_content"/>
+		<result column="c_regDate" property="c_regDate"/>
+	</resultMap>
 
 	<!-- 특정 회원이 팔로우한 회원 목록 -->
 	<select id="fList" resultType="org.pro.demang.model.MemberDTO">
@@ -341,6 +349,55 @@
 	SET m.mer_amount = m.mer_amount - o.ord_amount
 	WHERE o.ord_id = #{ord_id}
 	</update>
+	
+	<!-- ############################################################# -->
+	<!-- 페이징 관련 -->
+	<!-- admin messages page sql -->
+	<select id="messageList" resultType="org.pro.demang.model.ContactUsDTO" resultMap="contactUsDTO">
+		select * from contactUsTBL order by c_id desc limit #{c_id}, 10
+	</select>
+
+	<!-- admin page -->
+	<select id="userCount" resultType="Integer">
+		SELECT count(*) FROM memberTBL
+	</select>
+
+	<select id="postCount" resultType="Integer">
+		SELECT count(*) FROM postTBL
+	</select>
+
+	<select id="postTOP" resultMap="postDTO">
+		select * from postTBL p
+		right join memberTBL m
+		on p.p_writer = m.m_id
+		left join postImgTBL pit
+		on p.p_id = pit.p_id
+		order by p.p_likeCount desc
+		limit 2
+	</select>
+
+	<select id="contactAllNumCount" resultType="Integer">
+		select count(c_id) from contactUsTBL
+	</select>
+	
+	<select id="selectContactList" parameterType="org.pro.demang.model.ContactUsDTO" resultType="org.pro.demang.model.ContactUsDTO">
+		SELECT
+			*
+		FROM
+			contactUsTBL
+		ORDER BY
+			c_id DESC
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+	</select>
+	<select id="selectContactTotalCount" parameterType="org.pro.demang.model.ContactUsDTO" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			contactUsTBL
+	</select>
+
+	<!-- ############################################################# -->
 	
 		   
 </mapper>

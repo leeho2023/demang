@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 검색 -->
+<form action="" method="get">
+    <div>
+        <select name="keyword" id="keyword">
+            <option value="name">이름</option>
+            <option value="email">이메일</option>
+        </select>
+        <input type="text" id="search" name="search">
+        <button type="submit">검색</button>
+    </div>
+</form>
+
+[[${users.getList()}]]
+
+<!-- 리스트 테이블 -->
+<table>
+    <thead>
+    <tr>
+        <th scope="col">이름</th>
+        <th scope="col">이메일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users.getList()}">
+    	<th th:text="${user.getC_id()}"></th>
+    	<th th:text="${user.getM_email()}"></th>
+    	<td th:text="${user.getC_contentTitle()}"></td>
+    	<td th:text="${user.getC_contactUsValues()}"></td>
+    	<td th:text="${user.getC_regDate()}"></td>
+    </tr>
+    </tbody>
+</table>
+<!-- 페이징 -->
+<nav>
+    <ul>
+        <!-- getPrePage : 이전 페이지 -->
+        <li th:classappend="${users.getPrePage() == 0} ? 'disabled'">
+            <!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
+            <a th:href="@{/contactUsList(pageNum=${users.getPrePage()})}">Previous</a>
+        </li>
+        <!-- getNavigateFirstPage() : 페이징의 처음 숫자 getNavigateLastPage : 페이징의 마지막 숫자를 이용해 페이징 숫자 출력 -->
+        <!-- href : /page?pageNum=선택한 페이지&keyword=검색분류&search=검색어 -->
+        <li th:each="page: ${#numbers.sequence(users.getNavigateFirstPage(), users.getNavigateLastPage())}" th:classappend="${page == users.getPageNum()} ? 'active'">
+            <a th:text="${page}" th:href="@{/contactUsList(pageNum=${page})}"></a>
+        </li>
+        <!-- getPrePage : 다음 페이지 -->
+        <li th:classappend="${users.getNextPage() == 0} ? 'disabled'">
+            <!-- href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 -->
+            <a th:href="@{/contactUsList(pageNum=${users.getNextPage()})}">Next</a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>

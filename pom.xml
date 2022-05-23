@@ -76,6 +76,13 @@
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-mail</artifactId>
      </dependency>
+     
+     <!-- pageHelper xml -->
+     <dependency>
+		<groupId>com.github.pagehelper</groupId>
+		<artifactId>pagehelper-spring-boot-starter</artifactId>
+		<version>1.4.1</version>
+	</dependency>
 
 		
 
