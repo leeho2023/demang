@@ -71,7 +71,6 @@ public class LwkController {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=memberRead";// 비회원인 경우 로그인하러 가기
 		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
 		// 프사 인코딩
-		String temp = Base64.getEncoder().encodeToString(dto.getM_profilePic());
 		System.out.println("lwkController.memberRead ~ "+dto);
 		model.addAttribute("dto",dto);
 		return "member/memberRead";
