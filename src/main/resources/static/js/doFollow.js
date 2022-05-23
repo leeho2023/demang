@@ -43,3 +43,7 @@ function followCheck( m_id ){
 		}
 	});
 }
+
+$(function(){
+	followCheck( m_id );// 팔로우 되어있나 확인 ~~ js/doFollow.js
+});

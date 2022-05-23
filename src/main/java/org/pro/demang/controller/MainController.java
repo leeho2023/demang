@@ -60,9 +60,11 @@ public class MainController {
     // 친구 목록 불러오기(해당 유저의 회원코드 사용) 
 	@PostMapping("/fList")
 	public String fList(@RequestParam("follower")int follower, Model model) {
-		List<MemberDTO> list = memberService.fList(follower);
-		model.addAttribute("list",list);
-		return "other/fListList";
+		model.addAttribute(
+				"fList",
+				memberService.fList(follower)
+				);
+		return "other/fList";
 	}
 
     // 댓글 보기
@@ -188,21 +190,19 @@ public class MainController {
 				"PostList", 
 				postService.getPostList_followee( loginId(session) )
 				);
-		model.addAttribute(
-				"fList",
-				mapper.fList(loginId(session))
-				);// 친구 목록
 		return "post/feed";
 	}
 
 	//// 개인 페이지
 	@GetMapping("/vip")
-	public String profile( @RequestParam("p") String no, Model model ) {
+	public String profile( @RequestParam(value="p", required=false) String no, Model model, HttpSession session ) {
+		//// 회원번호 지정되어있지 않으면 자신(현재로그인)의 번호로 지정
+		if( no == null ) no = loginId(session);
 		//// 식별코드로 회원정보 찾기
 		MemberDTO dto = memberService.getMember_no(no);
 		//// 찾는 회원이 없는 경우 회원 없다는 페이지로 이동
 		if( dto == null ) return "post/profile_noMember";
-		model.addAttribute(// 글 목록
+		model.addAttribute(// 글 목록 (이 페이지 주인이 쓴 글 목록)
 				"PostList", 
 				mapper.getPostList_writer( dto.getM_id() )
 				);

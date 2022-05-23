@@ -1,38 +1,28 @@
+<header id="globalHeader">
+<div>
+	<a class="a2" th:href="@{/}" >DEMANG</a>
+</div>
 
-<span th:if="${session.login}"><span th:text="${session.login}"></span>번으로 로그인</span>
-<span th:unless="${session.login}">로그인 안 됨</span>
-<span th:if="${session.bir}"><span th:text="${session.bir}"></span>test</span>
-
-
-
-
-<div class="blank blankNav">
-
-    <div class="box logoBox"><div ><p class="p1"> <a class="a2" th:href="@{/feed}" >DEMANG</a></p>  </div></div>
-    <div class="box searchBox">
-
-
-        <input type="text" id="search" placeholder="Search..." onkeyup="if(window.event.keyCode==13){search()}" class="searchInputs"> 
+<div class="searchBar">
+    <input type="text" id="search" placeholder="Search..." onkeyup="if(window.event.keyCode==13){search()}" class="searchInputs"> 
         
-        
-        <div class="search-wrapper">
-            <div class="input-holder">
-                <button class="search-icon"  id="searchBtn" onclick="searchToggle(this, event);"><span></span></button>
-            </div>
+    <div class="search-wrapper">
+        <div class="input-holder">
+            <button class="search-icon"  id="searchBtn" onclick="searchToggle(this, event);"><span></span></button>
         </div>
-        <!-- <div th:include="other/searchtest"></div> -->
-    </div>
-    <div class="box menuBox">
-        <nav class="nav">
-            <a th:href="@{/feed}" class="nav-item is-active" active-color="orange">Home</a>
-            <a href="#" class="nav-item" active-color="green">Massge</a>
-            <a href="#" class="nav-item" active-color="blue">Post</a>
-            <a href="#" class="nav-item" active-color="red">Profile</a>
-    
-            <span class="nav-indicator"></span>
-        </nav>
     </div>
 </div>
 
-<div class="blank"></div>
-
+<div class="menu">
+	<button onclick="parentOpen(this)">≡</button>
+	<ul class="menuList">
+		<li onclick="location.href='/'">Home</li>
+		<li onclick="location.href='/postInsert'">글쓰기</li>
+		<li onclick="location.href='/myLike'">내관심</li>
+		<li onclick="location.href='/vip'">
+			<span th:if="${session.login}"><span th:text="${session.login}"></span>번으로 로그인됨</span>
+			<span th:unless="${session.login}">로그인 안 됨</span>
+		</li>
+	</ul>
+</div>
+</header>

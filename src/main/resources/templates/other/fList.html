@@ -1,13 +1,12 @@
-??? 팔로우 목록입니다.
-<div th:each="fmember : ${fList}">
-	<a th:href="'vip?p='+${fmember.m_id}" style="display: block">
-		<div>
-			<img th:src="${fmember.profileImage}" height=30>
-			<span th:text="${fmember.m_nickname}"></span>#<span th:text="${fmember.m_code}"></span>
-		</div>
-	</a>
-	<a th:href="'chat?to='+${fmember.m_id}">채팅(새 페이지)</a>
-<button th:onclick="'chat_modal('+${fmember.m_id}+')'">채팅</button>
-</div>
-
-<script src="js/chatting.js"></script>-
+<nav id="globalFList">
+	<h1>나의 팔로우</h1>
+	<div class="fItem" th:each="fmember : ${fList}">
+		<a class="profilePic" th:href="'vip?p='+${fmember.m_id}" style="display: block;"><img class="profilePic" th:src="${fmember.profileImage}" height=30></a>
+		<span class="nickcode">
+			<span th:text="${fmember.m_nickname}"></span>
+			#<span th:text="${fmember.m_code}"></span>
+		</span>
+		<button class="chatBtn" th:onclick="'newChat('+${fmember.m_id}+')'">채팅</button>
+	</div>
+</nav>
+<script src="js/chatting.js"></script>

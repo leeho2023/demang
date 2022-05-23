@@ -1,0 +1,111 @@
+@charset "UTF-8";
+/*
+게시물영역 div.post
+├게시물 article.postView
+│├글쓴이 정보 h1.writerInfo
+│├이미지들 div.postImgBox
+│└본문 div.content
+├메뉴 div.menubar
+│├좋아요
+│├댓글
+│├답글
+│├더보기
+│└추가메뉴
+│　├수정
+│　├삭제
+│　└신고
+├댓글쓰기 div.myComment
+└댓글목록 ul.commentList
+*/
+
+/* 게시물 영역 */
+.post {
+	margin: 15px;
+	padding: 20px;
+	border: #ddd solid 2px;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: #aaa 0 0 5px
+}
+
+/* 게시물 - 글쓴이 정보 */
+.post > .postView > .writerInfo {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: start;
+	align-items: center;
+	font-size: 1.5em;
+}
+.post > .postView > .writerInfo .profilePic {
+	height: 70px;
+	width: 70px;
+}
+.post > .postView > .writerInfo .nickname {
+	margin-left: 13px;
+}
+.post > .postView > .writerInfo .code {
+	color: grey;
+}
+/* 게시물 - 본문 */
+.post > .postView .content {
+	padding: 20px;
+}
+
+/* 메뉴 */
+.post > .menubar {
+	border-top: #ddd solid 2px;
+	position: relative;/* 추가메뉴 절대위치 하려고 */
+}
+.post > .menubar > button {
+	border: none;
+	background-color: inherit;
+	font-size: 30px;
+	font-weight: bold;
+	color: #aaa;
+	transform: scale(0.9, 0.9);
+}
+.post > .menubar > button:hover {
+	transform: scale(1, 1);
+}
+.post > .menubar > .etc {
+	float: right;
+}
+.post > .menubar:not(.open) > .more {/* 추가메뉴는 열지 않으면 안 보임 */
+	display: none;
+}
+.post > .menubar > .more {
+	position: absolute;
+	right: 0;
+	border: #aaa solid 2px;
+	display: flex;
+	flex-flow: column nowrap;
+}
+.post > .menubar > .more > button {
+	border: none;
+	padding: 10px;
+	background-color: white;
+	font-size: inherit;
+	color: inherit;
+}
+
+
+/*
+댓글 목록 ul.commentList
+└댓글 한 개 li
+　├프사
+　├닉네임
+　├본문
+　├날짜
+　└삭제 혹은 신고
+*/
+/* 댓글 목록 */
+.commentList .profilePic {
+	height: 30px;
+	width: 30px;
+}
+.commentList .regdate {
+	color: grey;
+}
+
+
+

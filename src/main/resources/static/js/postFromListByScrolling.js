@@ -1,4 +1,5 @@
-/* 필요
+/* 스크롤 내려 게시글 불러오기 (게시글 번호의 정수배열에서 정수값으로 ajax를 통해 게시글 정보 가져와서 append)
+준비물
 정수배열 postList
 <section id="postList"></> 뒤에 <hr id="endOfPostListPosCheck">
 */
@@ -11,6 +12,16 @@ $(function(){
 	if( postList.length == 0 ){// 불러올 게시글이 없는 경우
 		$('section#postList').append("<div>게시글이 없습니다.</div>");
 	}
+	//// ??? 화면 끝까지 닿일 때까지 반복하기
+	showPost();
+	showPost();
+	showPost();
+	showPost();
+	showPost();
+	showPost();
+	showPost();
+	showPost();
+	showPost();
 	showPost();
 });
 

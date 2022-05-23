@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/*
+메인
+├회원 정보 section.memberInfo
+│├프사
+│└나머지 소개
+│　├닉네임, 코드, 채팅 버튼, 팔로우버튼
+│　├자기소개글
+│　└팔로잉 팔로워 수
+└게시글 목록: postList_stack.css에서 맡음
+*/
+
+section.memberInfo {
+	padding: 20px;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: stretch;
+}
+
+/* 프사 */
+section.memberInfo .profilePic {
+	height: 200px;
+	width: 200px;
+}
+/* 소개 */
+section.memberInfo > .etc {
+	padding-left: 30px;
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column nowrap;
+}
+section.memberInfo > .etc > .nickcode > *{
+	display: inline;
+	vertical-align: middle;	
+}
+section.memberInfo > .etc > .nickcode > h1 {
+	font-size: 50px;
+}
+section.memberInfo > .etc > .introduce {
+	padding: 10px;
+}
+/* 팔로잉, 팔로워 수 */
+section.memberInfo > .etc > .followNum .point {
+	color: dodgerblue;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+

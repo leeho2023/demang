@@ -1,8 +1,5 @@
-/*
-chatting.html에 실제 채팅 기능 덧붙이기
+/* chatting.html에 실제 채팅 기능 덧붙이기 
 */
-
-
  //// 초기 설정 
 function chat_initialize( chatDiv ){
 	chat_refresh( chatDiv );// 처음에 보여줄 이전 채팅 내역
@@ -13,11 +10,6 @@ function chat_initialize( chatDiv ){
 	});
 	setInterval( chat_refresh, 500, chatDiv );// 주기적으로 새로고침(새로 쌓인 채팅내역 불러오기)
 }
-
-
-
-
-
 
 //// ajax로 메시지 한 개 보내기 (이 버튼을 누른 form)
 function chat_send( form ){
@@ -73,19 +65,28 @@ function endOfChatCheck( chatDiv ){// 채팅 내역 상자에서 스크롤 끝�
 
 
 
-
-
-/* 
-채팅 모달 만들기
+/*
+팔로우목록에서 채팅 버튼 눌렀을 때
+현재 페이지가 채팅 페이지이면 그 회원과의 채팅 페이지로 이동
+현재 페이지가 채팅 페이지가 아니면 채팅 모달 띄우기
  */
+function newChat( listener ){
+	if( window.location.pathname == '/chat' ){
+		window.location.href = '/chat?to='+listener 
+	}else{
+		chat_modal( listener )
+	}
+}
 
+/* 채팅 모달 만들기 
+준비물: 채팅 모달들이 들어갈 상자 div#chatModals
+*/
 function chat_modal( listener ){// 회원번호 → body 하위에 그 회원과의 채팅 모달 만들기
 	//// 그 회원과의 채팅이 이미 열려있으면 아무것도 안 하기
 	chats = document.querySelectorAll('.chatDiv .chat_to');// ??? var
 	for( let i=0; i < chats.length; i++ ){
 		if( listener == chats[i].value ) return;// 열려는 채팅과 같은 회원번호 찾으면 더이상 아무것도 않고 이 함수 끝내기
 	}
-	
 	//// ajax로 채팅 불러와서 모달에 넣기
 	$.ajax({
 		url: 'chatModal',
