@@ -18,7 +18,9 @@
         <!-- /postInsert 게시글 작성,, /imgInsert 이미지 전송(테스트) -->
             <form action="/postInsert" id="post" method="Post" enctype="multipart/form-data">
             <input type="hidden" name="p_writer" th:value="${session.login}">
-            <input type="number" name="p_price" id="defaultPrice" value="0">
+            <input type="number" name="mer_price" id="defaultPrice" value="0">
+            <input type="text" name="mer_name" id="defaultName" value="">
+            <input type="number" name="mer_amount" id="defaultAmount" value="1"> 
             <div class="write">
                 <div class="radio">
                     <input type="radio" name="p_type" value="N" checked="checked">일반

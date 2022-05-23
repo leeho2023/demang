@@ -12,6 +12,7 @@ import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
+import org.pro.demang.model.MerchandiseDTO;
 
 @Mapper
 public interface MainMapper {
@@ -21,11 +22,14 @@ public interface MainMapper {
 
 	void memberInsert(MemberDTO dto); // 회원가입
 
-	List<CommentDTO> commentShow(String p_id); //댓글 목록 불러오기
+	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 
 	void postInsert( PostDTO dto ); // post작성
 	void postInsertN(PostDTO dto); // 게시글 등록(일반)
 	void postInsertS(PostDTO dto); // 게시글 등록(판매)
+	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
+	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
+	MerchandiseDTO priceSearch(String p_id); // 판매 게시글 물건 정보 불러오기
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
@@ -126,8 +130,8 @@ public interface MainMapper {
 	int getMerCount(int mer_id);// 상품의 주문 시도 횟수 조회
 	int getMerAmount( int mer_id );// 상품 판매가능 수량 확인
 	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
-	int getOrderPrice( String ord_id );// 주문의 금액 조회
 	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
-
+	int getOrderPrice( String ord_id );// 주문의 금액 조회
+	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
 }

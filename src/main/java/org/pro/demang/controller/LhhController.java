@@ -47,8 +47,7 @@ public class LhhController {
     @GetMapping("/")
 	public String home() {
 		
-		// return "member/login";
-		return "other/serviceCenter";
+		return "post/feed";
 	}
     
     @GetMapping("/admin")

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PostService;
@@ -69,10 +70,10 @@ public class MainController {
 
     // 댓글 보기
 	@PostMapping("/CommentShow")
-	@ResponseBody
-	public List<CommentDTO> commentShow(@RequestParam("p_id")String p_id){
-		List<CommentDTO> list = postService.commentShow(p_id);
-		return list;
+	public String commentShow(@RequestParam("p_id")String p_id, Model model){
+		List<CommentDTO> list = mapper.getCommentList(p_id);
+		model.addAttribute("commentList",list);
+		return "post/commentList";
 		
 	}
 	
@@ -112,6 +113,7 @@ public class MainController {
 	public String postViewRoute( @RequestParam("p_id") String p_id, HttpSession session, Model model) {		
 		
 		MemberDTO dto = memberService.getMember_no(session.getAttribute("login"));
+		MerchandiseDTO dto2 = postService.priceSearch(p_id);
 		
 		// 게시글 정보 받아오기
 		model.addAttribute(
@@ -130,6 +132,8 @@ public class MainController {
 				);
 		// 유저 정보 받아오기
 		model.addAttribute("member", dto);
+		// 판매 물품 받아오기
+		model.addAttribute("Merchandise", dto2);
 		
 		return "post/PostView";
 	}
@@ -254,8 +258,6 @@ public class MainController {
 		return "X";
 	}
 	
-	
-
 	//// 현재 로그인한 회원 번호(문자열로) 가져오기
 	private static String loginId( HttpSession session ) {
 		return session.getAttribute("login")+"";

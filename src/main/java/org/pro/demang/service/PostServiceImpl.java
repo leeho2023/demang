@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
+import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,12 +53,6 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void postInsertImg(int p_id, byte[] bytes) {
 		mapper.postInsertImg(p_id, bytes);
-	}
-
-	//댓글 불러오기
-	@Override
-	public List<CommentDTO> commentShow(String p_id) {
-		return mapper.commentShow(p_id);
 	}
 
 	// 댓글 등록하기
@@ -185,5 +180,35 @@ public class PostServiceImpl implements PostService{
 	public String likeCount(String l_postNo) {
 		return mapper.likeCount(l_postNo);
 	}
+
+	@Override
+	public void orderPostInsert(MerchandiseDTO merDTO) {
+		mapper.orderPostInsert(merDTO);
+	}
+
+	@Override
+	public void postSellUpdate(String p_id, String p_type) {
+		mapper.postSellUpdate(p_id, p_type);		
+	}
+
+	// 리뷰 작성 전 구매자 확인
+	@Override
+	public boolean reViewCheck(String p_id, String ord_buyer) {
+		return mapper.reViewCheck(p_id,ord_buyer);
+	}
+
+	// 리뷰 불러오기
+	@Override
+	public List<PostDTO> postReviewShow(String p_origin) {
+		return mapper.postReviewShow(p_origin);
+	}
+
+	// 물건 불러오기
+	@Override
+	public MerchandiseDTO priceSearch(String p_id) {
+		return mapper.priceSearch(p_id);
+	}
+
+	
 	
 }
