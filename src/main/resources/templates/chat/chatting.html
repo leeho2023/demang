@@ -29,9 +29,8 @@ form 메시지 보내기 폼
 	</div>
 	
 	<form class="chatForm">
-		<!--<input hidden="hidden" vaule="엔터키로제출방지용무의미한input">-->
 		<input type="hidden" class="chat_to" th:value="${listener.m_id}">
 		<input type="text" class="chat_content" name="h_content" autocomplete="off" placeholder="뭐라 칠려고 했더라?">
-		<button type="button" class="chat_send">보내기 버튼</button>
+		<button type="submit" class="chat_send">보내기 버튼</button>
 	</form>
 </div>

@@ -19,23 +19,6 @@ body
 　├접기펴기버튼
 　└푸터#globalFooter
 */
-
-/* ??? 영역확인용 색 */
-#globalHeader {
-}
-main {
-	background-color: white;
-}
-#globalFList {
-	background-color: white;
-}
-#globalFooter {
-	text-align: center;
-	color: #888;
-	
-}
-
-
 /* 시작하기 전 */
 * {
 	margin: 0;
@@ -44,6 +27,12 @@ main {
 ol , ul {
 	list-style-type: none;
 }
+
+main {
+	background-color: pink;
+}
+
+
 
 /* 공통 */
 body {
@@ -64,6 +53,14 @@ body {
 }
 #globalFooter {
 	text-align: center;
+}
+#globalHeader , main , #globalFList {
+	/*background-color: white;*/
+}
+#globalFooter {
+	text-align: center;
+	color: #888;
+	
 }
 
 

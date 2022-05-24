@@ -9,6 +9,7 @@ function parentOpen( me ){// 누를 요소에서 onclick="이함수(this)"
 
 /* 팔로우 목록 불러오기 */
 $(function(){
+	if( sessionLogin == null ) return;
 	$.ajax({
 		url: 'fList',
 		method: 'post',
@@ -20,3 +21,27 @@ $(function(){
 		}
 	});
 });
+
+
+// 검색
+function search() {
+
+    var searchVal = $('#search').val();
+    let first_char = searchVal.charAt(0);
+    let reSearchVal = searchVal.substring(1, searchVal.length);
+
+    if(first_char === '@'){
+        location.href = "userSearch?reSearchVal="+reSearchVal;
+        return;
+    }
+
+    if(first_char === '#'){
+        location.href = "tagSearch?reSearchVal="+reSearchVal;
+        return;
+    }
+
+	location.href = "postSearch?searchVal="+searchVal;
+    return;
+}
+
+

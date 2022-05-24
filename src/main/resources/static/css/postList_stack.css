@@ -3,19 +3,21 @@
 게시물영역 div.post
 ├게시물 article.postView
 │├글쓴이 정보 h1.writerInfo
-│├이미지들 div.postImgBox
+│├이미지들 div.postImgs
 │└본문 div.content
+│
 ├메뉴 div.menubar
 │├좋아요
 │├댓글
 │├답글
-│├더보기
-│└추가메뉴
-│　├수정
+│├더보기 button.etc
+│└추가메뉴 div.more
 │　├삭제
 │　└신고
-├댓글쓰기 div.myComment
-└댓글목록 ul.commentList
+│
+└댓글 영역 div.comments
+　├댓글쓰기 div.myComment
+　└댓글목록 ul.commentList
 */
 
 /* 게시물 영역 */
@@ -47,7 +49,7 @@
 	color: grey;
 }
 /* 게시물 - 본문 */
-.post > .postView .content {
+.post > .postView > .content {
 	padding: 20px;
 }
 

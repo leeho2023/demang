@@ -1,39 +1,53 @@
 <div class="post">
+
 	<article class="postView">
-		<h1 class="writerInfo">
+		<h1 class="writerInfo"><!--/* 작성자 */-->
 			<a th:href="'/vip?p='+${post.memberDTO.m_id}"><img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=70></a>
 			<span class="nickname" th:text="${post.memberDTO.m_nickname}"></span>
 			<span class="code">#[[${post.memberDTO.m_code}]]</span>
 		</h1>
-		<div class="postImgBox">
-			<div class="postImgs">
-				<div class="postImgDiv" th:each="postImg: ${imageList}">
-					<img class="propic" th:src="${postImg.image}" height=300>
-				</div>
-			</div>
+		
+		<div th:if="${imageList}" class="postImgs"><!--/* 이미지 (있을 때만) */-->
+			<ul class="bxSlider postImgDiv">
+				<li th:each="image : ${imageList}">
+					<img class="imgBox" th:src="${image.image}" />
+				</li>
+			</ul>
 		</div>
-		<div class="content">[[${post.p_content}]]<button>더보기 버튼 아직 아무기능 없음</button></div>
+		
+		<div class="content"><!--/* 본문 */-->
+			<span th:text="${post.p_content}"></span>
+			<button class="more" th:onclick="'location.href=\'/postView?p_id='+${post.p_id}+'\''">자세히</button><!--/* 상세보기 페이지로 이동 */-->
+		</div>
+		
 	</article>
 	
-	<div class="menubar">
+	<div class="menubar"><!--/* 메뉴 */-->
 		<button>♡</button>
 		<button>댓글</button>
-		<button>답글</button>
+		<button th:onclick="'location.href=\'/postInsert?p_type=R&to='+${post.p_id}+'\''">답글</button>
 		<button class="etc" onclick="parentOpen(this)">&hellip;</button>
 		<div class="more">
-			<button>수정</button>
 			<button>삭제</button>
 			<button>신고</button>
 		</div>
 	</div>
 	
-	<ul class="commentList">
-		<li th:each="comment: ${commentList}">
-			<a th:href="'/vip?p='+${comment.memberDTO.m_id}"><img class="profilePic" th:src="${comment.memberDTO.profileImage}" height=30></a>
-			<span class="nickname">[[${comment.memberDTO.m_nickname}]]</span>
-			<span class="content">[[${comment.c_content}]]</span>
-			<span class="regdate">[[${comment.c_regDate}]]</span>
-			<span>X</span>
-		</li>
-	</ul>
+	<div class="comments">
+		<form class="commentForm">
+			<input type="hidden" class="c_postNo" th:value="${post.p_id}">
+			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="뭐라 칠려고 했더라?">
+			<button type="submit">보내기 버튼</button>
+		</form>
+		
+		<ul class="commentList"><!--/* 댓글 목록 */-->
+			<li th:each="comment: ${commentList}">
+				<a th:href="'/vip?p='+${comment.memberDTO.m_id}"><img class="profilePic" th:src="${comment.memberDTO.profileImage}" height=30></a>
+				<span class="nickname">[[${comment.memberDTO.m_nickname}]]</span>
+				<span class="content">[[${comment.c_content}]]</span>
+				<span class="regdate">[[${comment.c_regDate}]]</span>
+				<span>X</span>
+			</li>
+		</ul>
+	</div>
 </div>

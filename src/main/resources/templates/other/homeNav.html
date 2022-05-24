@@ -8,7 +8,7 @@
         
     <div class="search-wrapper">
         <div class="input-holder">
-            <button class="search-icon"  id="searchBtn" onclick="searchToggle(this, event);"><span></span></button>
+            <button class="search-icon"  id="searchBtn" onclick="searchToggle(this, event);"><span>검색</span></button>
         </div>
     </div>
 </div>
@@ -19,9 +19,11 @@
 		<li onclick="location.href='/'">Home</li>
 		<li onclick="location.href='/postInsert'">글쓰기</li>
 		<li onclick="location.href='/myLike'">내관심</li>
-		<li onclick="location.href='/vip'">
-			<span th:if="${session.login}"><span th:text="${session.login}"></span>번으로 로그인됨</span>
-			<span th:unless="${session.login}">로그인 안 됨</span>
+		<li th:if="${session.login}" onclick="location.href='/vip'">
+			<span th:text="${session.login}"></span>번으로 로그인됨
+		</li>
+		<li th:unless="${session.login}" onclick="location.href='/loginMove'">
+			<span>로그인</span>
 		</li>
 	</ul>
 </div>

@@ -1,51 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>게시글 작성</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/PostInsert.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- script -->
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- 이 페이지 전용 --><script src="/js/PostInsert.js"></script>
+
+<!-- css -->
+<!-- 이 페이지 전용 --><link rel="stylesheet" href="/css/PostInsert.css">
 <!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
-<title>글 작성</title>
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
+<!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
 </head>
 <body>
 
+<header th:replace="other/homeNav">메인메뉴</header>
 
-	<header th:include="other/homeNav"></header>
-    <nav></nav>
-    <main>
-        <div class="wrap">
-        <!-- /postInsert 게시글 작성,, /imgInsert 이미지 전송(테스트) -->
-            <form action="/postInsert" id="post" method="Post" enctype="multipart/form-data">
-            <input type="hidden" name="p_writer" th:value="${session.login}">
-            <input type="number" name="mer_price" id="defaultPrice" value="0">
-            <input type="text" name="mer_name" id="defaultName" value="">
-            <input type="number" name="mer_amount" id="defaultAmount" value="1"> 
-            <div class="write">
-                <div class="radio">
-                    <input type="radio" name="p_type" value="N" checked="checked">일반
-                    <input type="radio" name="p_type" value="S">판매
-                </div>
-                	<div class="write_main" id="imgWrap">
-                  	<div class="labelWrap" id="labelWrap">
-                	<ul class="selectedImg">
-                		<li>
-                    	<input type="file" id="input_file" accept="image/*" >
-                    	<label for="input_file" class="label" id="file_label"></label>
-                    	</li>
-                	</ul>
-                    </div>
-                    <textarea name="p_content" class="textInput" id="textInput"></textarea> <!-- 글 내용 작성 input -->
-                    </div>
-                <div class="write_foot">
-                    <input type="button" value="다음" class="textInputBtn" id="textInputBtn">
-                </div>
-            </div>
-        </form>
-        </div>
-    </main>
 
-    <footer th:include="other/footer"></footer>
-<script src="/js/PostInsert.js"></script>
+<main><form action="/postInsert" id="postForm" method="Post" enctype="multipart/form-data">
+	
+	<div>
+		<!--/* 게시글 종류 */-->
+		<div id="p_type">
+			<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰/답글 대상 게시글 번호">
+			<label for="p_type_n" th:if="${p_type} == 'N'"><input type="radio" id="p_type_n" name="p_type" value="N" checked="checked">일반</label>
+			<label for="p_type_s" th:if="${p_type} == 'N'"><input type="radio" id="p_type_s" name="p_type" value="S">판매</label>
+			<label for="p_type_r" th:if="${p_type} == 'R'"><input type="radio" id="p_type_r" name="p_type" value="R" checked="checked">리뷰·답글</label>
+		</div>
+		
+		<button type="submit">작성완료</button>
+	</div>
+	
+	<!--/* 상품 정보 */-->
+	<div id="mer" th:if="${p_type} == 'N'">
+		<ul id="merList">
+			<!-- merAdd()에서도 똑같이 li를 append  -->
+			<li>
+				<label for="mer_name">상품명: <input type="text" id="mer_name" name="mer_name"></label>
+				<label for="mer_price">단가: <input type="number" id="mer_price" name="mer_price" ></label>
+				<label for="mer_amount">수량: <input type="number" id="mer_amount" name="mer_amount" value="1"> </label>
+				<button class="xbutton" onclick="deleteImg(this)">X</button>
+			</li>
+		</ul>
+		<button type="button" id="merAddBtn" onclick="merAdd()">상품 추가</button>
+	</div>
+	
+	<div id="postBody"><!--/* 게시글 내용 */-->
+		<!--/* 이미지 첨부 */-->
+		<ul id="selectedImg" class="selectedImg">
+			<li>
+				<input type="file" id="input_file" accept="image/*" >
+				<label for="input_file" class="file_label" id="file_label"></label>
+			</li>
+		</ul>
+		
+		<!--/* 본문 */-->
+		<textarea id="p_content" name="p_content" class="textInput" placeholder="본문 내용을 입력하세요">본문예시 ???</textarea>
+	</div>
+	
+</form></main>
+
+<div id="globalSidebar">
+	<th:block th:if="${session.login}"><nav th:replace="other/fList">팔로목록</nav></th:block>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
+<div id="chatModals"></div>
+
 </body>
 </html>

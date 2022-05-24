@@ -19,35 +19,38 @@ public class PostServiceImpl implements PostService{
 	//게시글 등록하기
 	@Override
 	public void postInsert( PostDTO dto ) {
-		mapper.postInsert(dto);
+		if( dto.getP_origin() == 0 )
+			mapper.postInsert_noOrigin(dto);
+		else
+			mapper.postInsert(dto);
 		//// 해시태그 등록하기
 		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
 			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
 			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
 		}
 	}
-	
-	//게시글 등록(일반)
-	@Override
-	public void postInsertN(PostDTO dto) {
-		mapper.postInsertN(dto);
-		//// 해시태그 등록하기
-		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
-			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
-			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
-		}
-	}
-	
-	//게시글 등록(판매)
-	@Override
-	public void postInsertS(PostDTO dto) {
-		mapper.postInsertS(dto);
-		//// 해시태그 등록하기
-		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
-			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
-			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
-		}
-	}
+//	
+//	//게시글 등록(일반)
+//	@Override
+//	public void postInsertN(PostDTO dto) {
+//		mapper.postInsertN(dto);
+//		//// 해시태그 등록하기
+//		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
+//			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
+//			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
+//		}
+//	}
+//	
+//	//게시글 등록(판매)
+//	@Override
+//	public void postInsertS(PostDTO dto) {
+//		mapper.postInsertS(dto);
+//		//// 해시태그 등록하기
+//		for( String temp: findHashtags(dto.getP_content()) ) {// 게시글의 해시태그 하나마다
+//			mapper.hashtagInsert( temp );// 디비에 해시태그 등록
+//			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
+//		}
+//	}
 	
 	//게시글 이미지 등록하기
 	@Override
@@ -182,11 +185,6 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public void orderPostInsert(MerchandiseDTO merDTO) {
-		mapper.orderPostInsert(merDTO);
-	}
-
-	@Override
 	public void postSellUpdate(String p_id, String p_type) {
 		mapper.postSellUpdate(p_id, p_type);		
 	}
@@ -201,12 +199,6 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public List<PostDTO> postReviewShow(String p_origin) {
 		return mapper.postReviewShow(p_origin);
-	}
-
-	// 물건 불러오기
-	@Override
-	public MerchandiseDTO priceSearch(String p_id) {
-		return mapper.priceSearch(p_id);
 	}
 
 	

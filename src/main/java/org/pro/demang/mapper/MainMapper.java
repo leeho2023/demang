@@ -24,12 +24,10 @@ public interface MainMapper {
 
 	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 
-	void postInsert( PostDTO dto ); // post작성
-	void postInsertN(PostDTO dto); // 게시글 등록(일반)
-	void postInsertS(PostDTO dto); // 게시글 등록(판매)
+	void postInsert( PostDTO dto ); // 게시글 작성
+	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
 	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
 	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
-	MerchandiseDTO priceSearch(String p_id); // 판매 게시글 물건 정보 불러오기
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
@@ -61,6 +59,7 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<PostImgDTO> getImageList(String no); //게시글 번호로 해당 게시글의 이미지들 찾기
 	List<PostImgDTO> getImageList(int no); //게시글 번호로 해당 게시글의 이미지들 찾기
+	List<MerchandiseDTO> getMerchandiseList(String no); // 게시글의 상품 목록 불러오기
 	void commentInsert( CommentDTO dto ); // 댓글 등록
 
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
@@ -133,5 +132,5 @@ public interface MainMapper {
 	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
-	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
+	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
 }

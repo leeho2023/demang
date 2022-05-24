@@ -1,134 +1,117 @@
 @charset "UTF-8";
+/*
+폼 form#postForm
+├게시글 종류 div#p_type
+│
+├작성완료 버튼 button
+│
+├상품 정보 div#mer
+│├상품 정보 ul#merList
+││├항목 li
+│││├상품명 label, input
+│││├단가 label, input
+│││├수랑 label, input
+│││└삭제 버튼 button
+││├항목 li
+││└항목 li …
+││
+│└상품 추가 button#merAddBtn
+│
+└게시글 내용 div#postBody
+　├이미지 첨부 ul#selectedImgs
+　└본문 textarea#p_content
 
-body{
-    margin: 0px;
-}
+  
+*/
 
-.wrap{
-    border: 1px solid black;
-    height: 70vh;
-    width: 80vw;
-}
-
-.write{
-    border: 1px solid red;
-    height: 60vh;
-    width: 70vw;
-    margin: 5vh;
-    margin-left: 5vw;
-}
-
-.write_main{
-   border: 1px solid black;
-   height: 55vh;
-   display: flex;
-}
-
-.write_imgBtn{
-    display: none;
-}
-
-.textInput{
-   height: 55vh;
-   width: 55vw;
-}
-
-.write_img{
-    height: 15vh;
-    width: 15vw;
-    background-color: white;
-}
-
-.write_img:hover{
-    background-color: lightgrey;
-}
-
-.textInputBtn{
-    height: 4vh;
-    width: 70vw;
-}
-
-.write_foot{
-    border: 1px solid purple;
-    height: 5vh;
-    text-align: center;
-}
-
-.labelWrap{
-	height: 50vh;
-	width: 70vw;
-	align-items:center;
-}
-
-label {
-	background-image: url(../img/plus.png);
-	background-size: cover;
-   line-height: 15vh;
-   display: inline-block; 
-   min-width: 150px;
-   min-height: 150px;
-   max-width: 150px;
-   max-height: 150px;
-   cursor: auto;
-   border: 1px solid black;
-} 
-
-input[type="file"] { 
-    position: absolute; 
-    width: 0px; 
-    height: 0px; 
-    padding: 0; 
-    overflow: hidden; 
-    clip:rect(0,0,0,0); 
-    border: 0; }
-    
-
-.label:hover{
-   background-color: lightgrey;
-}
-
-.nextLabel{
-	width: 50vw;
-	height: 50vh;
-}
-
-.innerImg{
-    min-width: 150px;
-    min-height: 150px;
-    max-width: 150px;
-    max-height: 150px;
-    margin-right: 5px;
-}
-
-ul{
-	padding: 0;
-	margin: 0;
-}
-
-li{
-	list-style: none;
-	overflow: hidden;
-	margin-right: 3vh;
-}
-
-.imgDelete{
-	height: 15vh;
-	width: 15vw; 
-}
-
-.thumb{
-	width: 500px;
-	height: 500px;
-}
-
-.selectedImg{
+#postForm {
 	display: flex;
+	flex-flow: column nowrap;
+}
+#postForm > * {
+	margin-top: 30px;
 }
 
-.selectedImg > li:nth-child(6) {
+#p_type {
+	display: inline-block;
+}
+
+/* 상품 정보 */
+#postForm:not(.p_type_s) #mer {/* 판매글이 아니면 상품목록 숨김 */
 	display: none;
 }
+#postForm #merList > li ,
+#postForm #merAddBtn {
+	position: relative;
+	margin-top: 8px;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 13px;
+	border: #ccc solid 2px;
+	background-color: white;
+	display: block;
+}
+#postForm #merList > li > .xbutton {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	border: none;
+	height: 40px;
+	width: 40px;
+	background-color: #ccc;
+	color: white;
+}
 
-textarea{
-	resize:none;
+/* 게시글 내용 */
+#postBody {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+}
+
+/* 이미지 첨부 */
+#postForm #selectedImgs {
+	border: 1px solid black;
+}
+#postForm #selectedImgs img {/* ??? */
+	height: 50px;
+	width: 50px;
+}
+
+/* 본문 */
+#postForm #p_content {
+	margin: 5px;
+	padding: 15px;
+	border: 4px solid #ddd;
+	border-radius: 20px;
+	resize: none;
+}
+
+
+
+
+/* 이미지 첨부 */
+#selectedImg {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+#selectedImg .file_label {/* input 대신 눌릴 라벨 */
+	background-image: url(../img/plus.png);
+	background-size: cover;
+	display: inline-block; 
+	width: 150px;
+	height: 150px;
+	cursor: auto;
+	border: 1px solid black;
+}
+#selectedImg input[type="file"] {/* input은 눌리지 않게 표시 안함 */
+	display: none
+}
+#selectedImg .innerImg {
+	width: 150px;
+	height: 150px;
+}
+#selectedImgs > li:nth-child(6) {/* 이미지는 5개까지만 첨부 가능: 6번째 input을 숨김 */
+	/*display: none;*/
 }

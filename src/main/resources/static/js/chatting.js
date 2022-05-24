@@ -3,7 +3,6 @@
  //// 초기 설정 
 function chat_initialize( chatDiv ){
 	chat_refresh( chatDiv );// 처음에 보여줄 이전 채팅 내역
-	$(chatDiv).find('.chat_send').on("click",function(){chat_send( $(this).parents('form') )});// 전송 버튼 이벤트
 	$(chatDiv).children('form').submit(function(){// 폼의 submit 이벤트 가로채기 (입력창에서 엔터키누르면)
 		chat_send( this );// this: html form element
 		return false;

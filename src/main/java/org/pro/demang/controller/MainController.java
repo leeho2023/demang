@@ -103,37 +103,53 @@ public class MainController {
 
     // 게시글 입력페이지 이동
 	@GetMapping("/postInsert")
-	public String postInsertRoute(HttpSession session) {
+	public String postInsertRoute( 
+			@RequestParam(value="p_type", required = false) String p_type,//  게시물 종류
+			@RequestParam(value="to", required = false) Integer to,// 리뷰·답글 대상
+			HttpSession session, Model model ) {
+		
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=postInsert";// 비회원인 경우 로그인하러 가기
+		
+		if( p_type == null ) p_type = "N";// 게시물 종류 기본값 N(일반인데 html 파싱 시에는 N, S를 포괄하는 거로 취급)
+		if( to == null ) to = 0;// 리뷰답글 대상 기본값 0 (DB에 넣을 때 null로)
+
+		//// 리뷰글인데 리뷰 대상이 지정되지 않음: 오류
+		if( p_type.equals("R") && to == 0 ) {
+			// ??? 처리방법 아직 없음
+		}
+		
+		model.addAttribute("p_type", p_type);
+		model.addAttribute("to", to);
+		
 		return "post/PostInsert";
 	}
 	
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
-	public String postViewRoute( @RequestParam("p_id") String p_id, HttpSession session, Model model) {		
-		
-		MemberDTO dto = memberService.getMember_no(session.getAttribute("login"));
-		MerchandiseDTO dto2 = postService.priceSearch(p_id);
-		
-		// 게시글 정보 받아오기
-		model.addAttribute(
-				"post",
-				mapper.getPost(p_id)
-				);
+	public String postViewRoute( @RequestParam("p_id") String p_id, HttpSession session, Model model) {
+		PostDTO dto = mapper.getPost(p_id);
+		// 게시글 정보 받아서 넣기
+		model.addAttribute( "post", dto );
 		// 게시글의 이미지 정보
-		model.addAttribute(
-				"imageList",
-				mapper.getImageList(p_id)
-				);
-		// 게시글 댓글 받아오기
+		if( mapper.getImageList(p_id).size() > 0 ) {
+			model.addAttribute(
+					"imageList",
+					mapper.getImageList(p_id)
+					);
+		}
+		// 게시글의 댓글들
 		model.addAttribute(
 				"commentList",
 				mapper.getCommentList(p_id)
 				);
-		// 유저 정보 받아오기
-		model.addAttribute("member", dto);
-		// 판매 물품 받아오기
-		model.addAttribute("Merchandise", dto2);
+		// 판매글일 경우 상품들
+		if( dto.getP_type().equals("S") ) {
+			model.addAttribute(
+					"merchandiseList",
+					mapper.getMerchandiseList(p_id)
+					);
+		}
+		
 		
 		return "post/PostView";
 	}

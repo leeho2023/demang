@@ -1,5 +1,74 @@
+/* 대부분의 페이지
+
+채팅 모달들 모여있는 div#chatModals
+├채팅모달 div.chatModal
+│├닫기 버튼 button.xButton
+│└채팅상자 div.chatDiv = chatting.html
+│　├상대정보 div.chatListener
+│　├채팅내역 div.chatHistory_box
+│　└새 메시지 입력 form.chatForm
+│
+├채팅모달
+├채팅모달
+└ …
+*/
+
+/* 채팅 페이지
+main
+└div.chatDiv 한 개
+*/
+
 @charset "UTF-8";
 
+/* 채팅 모달 */
+#chatModals {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	max-height: 100%;
+	display: flex;
+	flex-flow: row-reverse nowrap;
+	overflow: auto;
+}
+
+
+.chatModal {
+	position: relative;
+	margin: 10px;
+}
+.chatModal > .xButton  {/* 닫기버튼 위치 */
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.chatModal > .chatDiv {
+	width: 300px;
+	height: 50vh;
+	display: flex;
+	flex-flow: column nowrap;
+	background-color: #fff8;
+}
+
+.chatModal > .chatDiv > .chatListener {
+	flex-basis: 70px;
+}
+.chatModal > .chatDiv > .chatHistory_box {
+	flex-basis: 0px;
+	flex-grow: 1;
+	overflow: auto;
+}
+.chatModal > .chatDiv > .chatForm {
+	flex-basis: 50px;
+}
+
+.chatModal > .chatDiv .date {/* 채팅모달에서는 간략히 보이려고 날짜 표시 안 함*/
+	display: none;
+}
+
+
+
+/* 채팅 내역 */
 .chatHistory {
 	display: flex;
 	flex-flow: column nowrap;

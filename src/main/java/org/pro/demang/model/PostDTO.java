@@ -34,5 +34,9 @@ public class PostDTO {
 		this.p_writer = p_writer;
 		this.p_content = p_content;
 	}
+
+	public void setP_writer(String p_writer) {
+		this.p_writer = Integer.parseInt(p_writer);
+	}
 	
 }
