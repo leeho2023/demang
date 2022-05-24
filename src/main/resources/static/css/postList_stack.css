@@ -9,11 +9,8 @@
 ├메뉴 div.menubar
 │├좋아요
 │├댓글
-│├답글
-│├더보기 button.etc
-│└추가메뉴 div.more
-│　├삭제
-│　└신고
+│├삭제
+│└신고
 │
 └댓글 영역 div.comments
 　├댓글쓰기 div.myComment
@@ -55,13 +52,13 @@
 
 /* 메뉴 */
 .post > .menubar {
+	margin: 20px 0;
 	border-top: #ddd solid 2px;
-	position: relative;/* 추가메뉴 절대위치 하려고 */
 }
 .post > .menubar > button {
 	border: none;
 	background-color: inherit;
-	font-size: 30px;
+	font-size: inherit;
 	font-weight: bold;
 	color: #aaa;
 	transform: scale(0.9, 0.9);
@@ -69,37 +66,44 @@
 .post > .menubar > button:hover {
 	transform: scale(1, 1);
 }
-.post > .menubar > .etc {
-	float: right;
-}
-.post > .menubar:not(.open) > .more {/* 추가메뉴는 열지 않으면 안 보임 */
+.post > .menubar > .buy {
 	display: none;
 }
-.post > .menubar > .more {
-	position: absolute;
-	right: 0;
-	border: #aaa solid 2px;
-	display: flex;
-	flex-flow: column nowrap;
-}
-.post > .menubar > .more > button {
-	border: none;
-	padding: 10px;
-	background-color: white;
-	font-size: inherit;
-	color: inherit;
+.post > .menubar > .report {
+	float: right;
 }
 
 
 /*
-댓글 목록 ul.commentList
-└댓글 한 개 li
-　├프사
-　├닉네임
-　├본문
-　├날짜
-　└삭제 혹은 신고
+댓글 영역 div.comments
+├새 댓글 입력란 form.commentForm
+│├input
+│└button
+│
+└댓글 목록 ul.commentList
+　└댓글 한 개 li
+　　├프사
+　　├닉네임
+　　├본문
+　　├날짜
+　　└삭제 혹은 신고
 */
+/* 새 댓글 입력란 */
+.post:not(.newComment) .commentForm {/* 댓글버튼 누르기 전에는 안 보임 */
+	display: none;
+}
+.post .commentForm {
+	margin: 20px 0;
+	display: flex;
+	flex-flow: row nowrap;
+}
+.post .commentForm > input {
+	flex-grow: 1;
+}
+.post .commentForm > button {
+	flex-grow: 0;
+}
+
 /* 댓글 목록 */
 .commentList .profilePic {
 	height: 30px;

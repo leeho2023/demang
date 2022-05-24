@@ -8,14 +8,16 @@
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
 <!-- 스크롤 내려 글 부르기 --><script th:inline="javascript">postList = [[${PostList}]];</script><script src="js/postFromListByScrolling.js"></script> 
-<!-- ??? 게시글 읽기 관련 스크립트 -->
+<!-- 게시글 관련 --><script src="js/postView.js"></script>
 <!-- 팔로우 확인 --><script th:inline="javascript">m_id = [[${dto.m_id}]]/* 현재 페이지 계정 주인 */</script><script th:inline="javascript" src="js/doFollow.js"></script>
+<!-- 이미지 슬라이더 --><script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <!-- css -->
 <!-- 이 페이지 전용 --><link rel="stylesheet" href="css/profile.css">
 <!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 <!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
+<!-- 이미지 슬라이더 --><link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 </head>
 <body>
 

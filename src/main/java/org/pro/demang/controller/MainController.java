@@ -233,9 +233,15 @@ public class MainController {
 	
 	//// 댓글 등록 (ajax용)
 	@PostMapping("func/newComment")
-	@ResponseBody
-	public String newComment( CommentDTO dto ) {
-		return memberService.commentInsert(dto);
+	public String newComment( CommentDTO dto, HttpSession session, Model model ) {
+		dto.setC_writer( loginId(session)  );
+		System.out.println("main con new comment ~ dto: "+dto);
+		postService.commentInsert(dto);// 디비에 댓글 넣기
+		model.addAttribute(
+				"comment",
+				dto
+				);
+		return "post/comment";
 	}
 
 	//// 팔로잉 수 가져오기

@@ -50,7 +50,8 @@ function getPost( no ){$.ajax({
 		data:{
 			no: no
 		},success: function( data ){
-			$('section#postList').append(data);
+			$('section#postList').append(data);// 불러온 post 붙이기
+			postDivInitialize( $('.post').last() );// 새로 만든 post 초기설정 (postView.js에 있다)
 		},error: function( data ){
 			console.log('게시글 불러오는 중 문제 발생 ― postFromListByScrolling.js');
 		}

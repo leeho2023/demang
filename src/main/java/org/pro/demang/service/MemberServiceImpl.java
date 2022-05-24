@@ -125,15 +125,6 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.memberSearch(reSearchVal);
 	}
 	
-	//// 댓글 등록 후 표시할 html 요소를 반환
-	@Override
-	public String commentInsert(CommentDTO dto) {
-		mapper.commentInsert(dto);
-		dto.setMemberDTO( getMember_no( dto.getC_writer() ) );// 댓글 작성자 번호로 회원 조회하여 정보에 넣기
-		return "<img src=\""+dto.getMemberDTO().getProfileImage()+"\" height=30>"
-				+ "<span>"+dto.getMemberDTO().getM_nickname()+"</span>"
-				+ "<span>"+dto.getC_content()+"</span> 내가 쓴 댓글이 이렇게 표시됩니다. ~  MemberServiceImpl";
-	}
 
 
 	// 문의하기 DB등록

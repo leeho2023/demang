@@ -62,6 +62,10 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void commentInsert(CommentDTO dto) {
 		mapper.commentInsert(dto);
+		dto.setMemberDTO( // 회원정보
+				mapper.getMember_no( 
+						dto.getC_writer()
+						) );
 	}
 
 	
