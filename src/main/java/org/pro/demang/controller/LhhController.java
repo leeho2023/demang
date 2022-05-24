@@ -1,11 +1,8 @@
 package org.pro.demang.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
-
-import com.github.pagehelper.PageInfo;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ContactUsDTO;
@@ -25,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageInfo;
 
 @Controller
 public class LhhController {
@@ -60,6 +59,8 @@ public class LhhController {
 
 		return "admin/index";
 	}
+
+	
     
 	@GetMapping("/fList")
 	public String fList() {
@@ -214,35 +215,36 @@ public class LhhController {
 		return "redirect:/";
 	}
 
-	// ##########################################################################################
-	//  페이징 관련 테스트
-	//admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
-	@PostMapping("/messageList")
-	public String messageList(@RequestParam("c_id")int c_id, Model model) {
-		System.out.println(c_id);
-		List<ContactUsDTO> dtoList = memberService.messageList(c_id);
-		ArrayList<Integer> arrlist = memberService.contactAllNumCount();
-		model.addAttribute("arrlist", arrlist);
-		model.addAttribute("dtoList", dtoList);
-
-		return "admin/appendMessage";
-	}
-
-	@PostMapping("/contactAllNumCount")
-	public String contactAllNumCount(Model model){
-
-		ArrayList<Integer> arrlist = memberService.contactAllNumCount();
-		model.addAttribute("arrlist", arrlist);
-
-		return "admin/pageNumList";
-	}
 	
+	
+	
+//	admin messages 페이징 
 	@GetMapping("/contactUsList")
 	public String page(
             @RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
 	PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
 	model.addAttribute("contactUsList", p);
 	return "admin/messages";
+	}
+
+//	admin 페이지에서 검색 하는거
+	@GetMapping("/adminSearch")
+	public String adminSearch(@RequestParam("search")String search, Model model){
+		
+		System.out.println("LHHController### admin 페이지 검색 = " + search);
+		int memCount = memberService.memberSearchCount(search); // 검색어로 검색된 유저수 
+		int postCount = postService.postSearchCount(search); // 검색어로 검색된 게시글 수
+		int contactCount = memberService.contactSearchCount(search); // 검색어로 검색된 문의 수
+		List<MemberDTO> memList = memberService.memberSearch(search); // 검색어로 검색된 유저
+		List<PostDTO> postList = postService.postSearch(search); // 검색어로 검색된 게시글
+		List<ContactUsDTO> contactList = memberService.contactSearch(search); // 검색어로 검색된 문의글
+		
+		model.addAttribute("memCount", memCount);
+		model.addAttribute("postCount", postCount);
+		model.addAttribute("contactCount", contactCount);
+		
+		
+		return "admin/adminSearchTotal";
 	}
 	
 

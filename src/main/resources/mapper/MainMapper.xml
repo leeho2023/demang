@@ -350,22 +350,40 @@
 	WHERE o.ord_id = #{ord_id}
 	</update>
 	
-	<!-- ############################################################# -->
-	<!-- 페이징 관련 -->
-	<!-- admin messages page sql -->
-	<select id="messageList" resultType="org.pro.demang.model.ContactUsDTO" resultMap="contactUsDTO">
-		select * from contactUsTBL order by c_id desc limit #{c_id}, 10
+	<!-- 관리자 페이지 검색된 유저 수 -->
+	<select id="memberSearchCount" resultType="Integer">
+		select count(*)
+		from memberTBL
+		where m_email
+		like '%' #{search} '%'
 	</select>
-
-	<!-- admin page -->
+	
+	<!-- 관리자 페이지 검색된 문의 수 -->
+	<select id="contactSearchCount" resultType="Integer">
+		select count(*)
+		from contactUsTBL
+		where c_content
+		like '%' #{search} '%'
+	</select>
+	
+	<!-- 관리자 페이지 검색된 게시글 수 -->
+	<select id="postSearchCount" resultType="Integer">
+		select count(*)
+		from postTBL
+		where p_content
+		like '%' #{search} '%'
+	</select>
+	
+	<!-- 관리자 홈에 나오는 것들 -->
+	<!-- 전체 유저수 -->
 	<select id="userCount" resultType="Integer">
 		SELECT count(*) FROM memberTBL
 	</select>
-
+	<!-- 전체 게시글 수 -->
 	<select id="postCount" resultType="Integer">
 		SELECT count(*) FROM postTBL
 	</select>
-
+	<!-- 좋아요가 가장 많은 게시글 두개 -->
 	<select id="postTOP" resultMap="postDTO">
 		select * from postTBL p
 		right join memberTBL m
@@ -375,29 +393,6 @@
 		order by p.p_likeCount desc
 		limit 2
 	</select>
-
-	<select id="contactAllNumCount" resultType="Integer">
-		select count(c_id) from contactUsTBL
-	</select>
-	
-	<select id="selectContactList" parameterType="org.pro.demang.model.ContactUsDTO" resultType="org.pro.demang.model.ContactUsDTO">
-		SELECT
-			*
-		FROM
-			contactUsTBL
-		ORDER BY
-			c_id DESC
-		LIMIT
-			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
-	</select>
-	<select id="selectContactTotalCount" parameterType="org.pro.demang.model.ContactUsDTO" resultType="Integer">
-		SELECT
-			COUNT(*)
-		FROM
-			contactUsTBL
-	</select>
-
-	<!-- ############################################################# -->
 	
 		   
 </mapper>

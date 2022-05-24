@@ -452,5 +452,8 @@ img {
 #messagewrap ul>li:nth-child(5){
   width: 13%;
 }
+#messagewrap ul>li:nth-child(6){
+  width: 7%;
+}
 
 /*# sourceMappingURL=styles.css.map */

@@ -111,3 +111,9 @@ $('.log').click(function(){
     // $('#log').show();
 });
 
+function search(){
+    var header_input = $('#header_input');
+    var adminSearch = $('#adminSearch');
+
+
+}

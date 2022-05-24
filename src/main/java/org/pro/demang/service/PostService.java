@@ -28,5 +28,6 @@ public interface PostService {
 	void addLikeCount(String l_postNo); // 좋아요 누르면 올라가는 카운트
 	String likeCheck(String l_id, String l_postNo); // 좋아요 불러오기
 	String likeCount(String l_postNo); // 좋아요 갯수 불러오기
+	int postSearchCount(String search);
 	
 }

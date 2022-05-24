@@ -185,5 +185,10 @@ public class PostServiceImpl implements PostService{
 	public String likeCount(String l_postNo) {
 		return mapper.likeCount(l_postNo);
 	}
+
+	@Override
+	public int postSearchCount(String search) {
+		return mapper.postSearchCount(search);
+	}
 	
 }

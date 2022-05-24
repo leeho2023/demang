@@ -62,11 +62,13 @@ public interface MainMapper {
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 
 	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
+	
+	List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
 
 	public MemberDTO memberRead(String m_id);
 	void memberUpdate(MemberDTO dto);
 
-    List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
+    
 	public String emailCheck(String m_email);
 	
 	//// 채팅 관련
@@ -105,13 +107,6 @@ public interface MainMapper {
     void contactUsInsert(ContactUsDTO dto); // 문의 내용 DB 입력
 	void contactUsImgInsert(int c_id, byte[] i_image); // 문의 내용 번호에 따른 이미지 DB 입력
 	
-	// 페이징 관련
-	public List<ContactUsDTO> selectContactList(ContactUsDTO dto);
-	public int selectContactTotalCount(ContactUsDTO dto);
-
-	// 내가 만든 페이징 관련
-	List<ContactUsDTO> messageList(int c_id);
-    int contactAllNumCount();
 	
 	int userCount();
 	int postCount();
@@ -129,5 +124,10 @@ public interface MainMapper {
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
 	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
+	
+	//// 관리자 페이지 검색 관련
+	int memberSearchCount(String search);
+	int contactSearchCount(String search);
+	int postSearchCount(String search);
 
 }
