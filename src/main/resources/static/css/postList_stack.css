@@ -42,9 +42,6 @@
 .post > .postView > .writerInfo .nickname {
 	margin-left: 13px;
 }
-.post > .postView > .writerInfo .code {
-	color: grey;
-}
 /* 게시물 - 본문 */
 .post > .postView > .content {
 	padding: 20px;

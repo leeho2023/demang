@@ -3,23 +3,6 @@
 메인
 ├게시글 = post/post.html = div.post
 └상품 목록 div.merchandises
-
-
-게시물영역 div.post
-├게시물 article.postView
-│├글쓴이 정보 h1.writerInfo
-│├이미지들 div.postImgs
-│└본문 div.content
-│
-├메뉴 div.menubar
-│├좋아요
-│├댓글
-│├삭제
-│└신고
-│
-└댓글 영역 div.comments
-　├댓글쓰기 div.myComment
-　└댓글목록 ul.commentList
 */
 
 /* 게시물 영역 틀 */
@@ -60,9 +43,6 @@
 .post > .postView > .writerInfo .nickname {
 	margin-left: 13px;
 }
-.post > .postView > .writerInfo .code {
-	color: grey;
-}
 /* 게시물 - 이미지 */
 .post > .postView > .postImgs {
 }
@@ -81,7 +61,7 @@
 .post > .menubar {
 	border-top: #ddd solid 2px;
 }
-.post > .menubar > button  {
+.post > .menubar button  {
 	border: none;
 	background-color: inherit;
 	font-size: inherit;

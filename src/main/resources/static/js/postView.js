@@ -7,10 +7,31 @@
 　├댓글 작성 form.commentForm
 　└댓글 목록 ul.commentList
 
+
+좋아요
+메뉴바 하위에 div 하위에 각각 좋아요 버튼, 취소 버튼
+좋아요 눌린 상태 구별 지표: div의 클래스에 liked가 있고 아니면 없다
+좋아요 안 눌린 상태이면 좋아요 버튼만,
+좋아요 눌린 상태이면 취소 버튼만 표시된다: CSS
+
 */
 //// 게시글(div.post) 초기설정
-function postDivInitialize( postDiv ){
-	//// 
+function postDivInitialize( postDiv, p_id ){
+	//// 좋아요 여부 확인
+	$.ajax({
+		type: 'post',
+		url: 'likeCheck',
+		data:{
+			p_id : p_id
+		}, success: function(data){// data: 누름 여부 boolean
+			if( data ){
+				$(postDiv).find('.likeDiv').addClass('liked');
+			}
+		},error: function(){
+			console.log('좋아요 불러오기 에러');
+		}
+	});
+	
 	//// 이미지 슬라이더 적용
 	$( postDiv ).find('.bxSlider').bxSlider({
 		captions: true
@@ -35,6 +56,61 @@ function newComment( form ){// form: 댓글을 제출할 html form 요소
 		}
 	});
 }
+
+//// 좋아요 버튼 누름
+function like( p_id, btn ){
+	postDiv = $(btn).parents('.post');// 누른 버튼에 해당하는 게시글 div 요소 찾기
+	//// 좋아요 추가하기 ajax
+	$.ajax({
+		type: 'post',
+		url: 'likeToPost',
+		async: true,
+		data:{
+			p_id : p_id
+		},success: function(){
+			likeCount( postDiv, p_id );// 좋아요 개수 새로고침
+			$(btn).parent().addClass('liked');// 부모 요소에 liked 클래스 추가 (좋아요 누른 상태임을 표시)
+		},error: function(){
+			console.log('좋아요 실패');
+		}
+	});
+}
+
+//// 좋아요 취소 버튼 누름
+function unlike( p_id, btn ){
+	postDiv = $(btn).parents('.post');// 누른 버튼에 해당하는 게시글 div 요소 찾기
+	//// 좋아요 취소하기 ajax
+	$.ajax({
+		type: 'post',
+		url: 'unlikeToPost',
+		async: true,
+		data:{
+			p_id : p_id
+		},success: function(){
+			likeCount( postDiv, p_id );// 좋아요 개수 새로고침
+			$(btn).parent().removeClass('liked');// 부모 요소에 liked 클래스 제거 (좋아요 안 누른 상태임을 표시)
+		},error: function(){
+			console.log('좋아요 취소 실패');
+		}
+	});
+}
+
+// 좋아요 개수 디비에서 가져와서 표시
+function likeCount( postDiv, p_id ){
+		$.ajax({
+		type: 'post',
+		url: 'likeCount',
+		data:{
+			p_id : p_id
+		}, success: function(data){
+			$(postDiv).find('.likeCount').text(data);// 가져온 좋아요 수 갖다붙이기
+		},error: function(){
+			console.log('좋아요 개수 불러오기 에러');
+		}
+	});
+};
+
+
 
 // $(function(){
 
@@ -197,49 +273,6 @@ function newComment( form ){// form: 댓글을 제출할 html form 요소
 // }
 
 
-
-// 좋아요 버튼을 누르면 작동함
-function likeCheck(){
-
-	var p_id = $('#p_id').val();
-	
-	$.ajax({
-		type: 'post',
-		url: 'likeCheck',
-		data:{
-			p_id : p_id
-		}, success: function(data){
-			if(data >= 1){
-				$('.tag').prepend('<button id="unlike">누름</button>');
-				$('#like').remove();
-				$('.likeCount').append('');
-				likeCount();
-				}
-		},error: function(){
-			console.log('좋아요 불러오기 에러');
-		}
-	});
-};
-
-// 좋아요 개수를 가져옴
-function likeCount(){
-	
-	var p_id = $('#p_id').val();
-	
-		$.ajax({
-		type: 'post',
-		url: 'likeCount',
-		data:{
-			p_id : p_id
-		}, success: function(data){
-			if(data){
-				$('#likeCount').text(data);
-			}
-		},error: function(){
-			console.log('갯수 불러오기 에러');
-		}
-	});
-};
 
 
 // 리뷰 목록을 가져옴

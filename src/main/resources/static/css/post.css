@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/*
+메인
+├게시글 = post/post.html = div.post
+└상품 목록 div.merchandises
+
+
+게시물영역 div.post
+├게시물 article.postView
+│├글쓴이 정보 h1.writerInfo
+│├이미지들 div.postImgs
+│└본문 div.content
+│
+├메뉴 div.menubar
+│├좋아요 혹은 좋아요취소 div.likeDiv
+││├좋아요 버튼 button.like
+││└좋아요 취소 버튼 button.unlike
+│├댓글
+│├삭제
+│└신고
+│
+└댓글 영역 div.comments
+　├댓글쓰기 div.myComment
+　└댓글목록 ul.commentList
+*/
+
+/* 글쓴이 정보 */
+.post > .postView > .writerInfo .code {
+	color: grey;
+}
+
+
+/* 메뉴 */
+.post > .menubar > .likeDiv.liked > .like {
+	display: none;
+}
+.post > .menubar > .likeDiv:not(.liked) > .unlike {
+	display: none;
+}

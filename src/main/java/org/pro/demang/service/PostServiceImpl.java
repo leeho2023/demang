@@ -172,6 +172,10 @@ public class PostServiceImpl implements PostService{
 	public void addLike(String l_id, String l_postNo) {
 		mapper.addLike(l_id, l_postNo);
 	}
+	@Override
+	public void removeLike(String l_id, String l_postNo) {
+		mapper.removeLike(l_id, l_postNo);
+	}
 
 	@Override
 	public void addLikeCount(String l_postNo) {
@@ -179,13 +183,17 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public String likeCheck(String l_id, String l_postNo) {
-		return mapper.likeCheck(l_id, l_postNo);
+	public boolean likeCheck(String l_id, String l_postNo) {
+		if( mapper.likeCheck(l_id, l_postNo) > 0 ) return true;
+		return false;
 	}
-
+	
+	//// 게시글의 좋아요 개수. null이면 0으로 변환해 반환
 	@Override
 	public String likeCount(String l_postNo) {
-		return mapper.likeCount(l_postNo);
+		String count = mapper.likeCount(l_postNo);
+		if( count == null ) return "0";
+		return count;
 	}
 
 	@Override

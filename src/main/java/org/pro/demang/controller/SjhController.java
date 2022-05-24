@@ -157,22 +157,26 @@ public class SjhController {
 //		return "post/feed";
 //		}
 	
-	// 좋아요 버튼 누르면 타는 Mapping
+	//// 게시글에 좋아요 (좋아요 버튼 누르면 ajax로)
 	@PostMapping("likeToPost")
 	@ResponseBody
-	public String likeToPost(@RequestParam("p_id")String l_postNo, @RequestParam("m_id")String l_id) {
-		
-		postService.addLike(l_id, l_postNo);
-		System.out.println("좋아요 누르기 완료");
-		
+	public String likeToPost(@RequestParam("p_id")String l_postNo, HttpSession session ) {
+		postService.addLike( loginId(session), l_postNo);
+		return "";
+	}
+	//// 게시글에 좋아요 취소 (좋아요 취소 버튼 누르면 ajax로)
+	@PostMapping("unlikeToPost")
+	@ResponseBody
+	public String unlikeToPost(@RequestParam("p_id")String l_postNo, HttpSession session ) {
+		postService.removeLike( loginId(session), l_postNo);
 		return "";
 	}
 	
-	// DB에서 로그인 한 사람과 게시물을 검색해서 이미 좋아요를 눌렀다면 다른 버튼을 띄우기
+	// 좋아요 여부 확인
 	@PostMapping("likeCheck")
 	@ResponseBody
-	public String likeCheck(@RequestParam("p_id")String l_postNo, HttpSession session) {
-		return postService.likeCheck(session.getAttribute("login")+"", l_postNo); 
+	public boolean likeCheck(@RequestParam("p_id")String l_postNo, HttpSession session) {
+		return postService.likeCheck( session.getAttribute("login")+"", l_postNo ); 
 	}
 	
 	// 좋아요 갯수 불러오기
