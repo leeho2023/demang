@@ -47,7 +47,7 @@ public class LhhController {
     @GetMapping("/")
 	public String home() {
 		
-		return "post/feed";
+		return "redirect:/feed";
 	}
     
     @GetMapping("/admin")
