@@ -272,9 +272,6 @@ function likeCount( postDiv, p_id ){
 // 	});
 // }
 
-
-
-
 // 리뷰 목록을 가져옴
 function reViewShow(){
 	var p_id = $('#p_id').val();

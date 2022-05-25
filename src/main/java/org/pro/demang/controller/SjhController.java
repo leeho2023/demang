@@ -13,6 +13,7 @@ import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -132,4 +133,10 @@ public class SjhController {
 	private static String loginId( HttpSession session ) {
 		return session.getAttribute("login")+"";
 	}
+	
+	@GetMapping
+	private String reView() {
+		return "post/reViewList";
+	}
+	
 }
