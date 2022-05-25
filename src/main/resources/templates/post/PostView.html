@@ -28,16 +28,84 @@ $(document).ready(function(){
 
 <header th:replace="other/homeNav">메인메뉴</header>
 
-<main>
-	<th:block th:replace="post/postItem_stack"></th:block><!--/* 게시글 */-->
+<main><!--/* 게시글 */-->
+<!-- 
+게시물영역 div.post
+├게시물 article.postView
+│├글쓴이 정보 h1.writerInfo
+│├이미지들 div.postImgs
+│└본문 div.content
+│
+├메뉴 div.menubar
+│├좋아요 혹은 좋아요취소 div.likeDiv
+││├좋아요 버튼 button.like
+││└좋아요 취소 버튼 button.unlike
+│├댓글
+│├삭제
+│└신고
+│
+├댓글 영역 div.comments
+│├댓글쓰기 div.myComment
+│└댓글목록 ul.commentList
+│
+└상품목록
+-->
+<div class="post">
+
+	<article class="postView">
+		<h1 class="writerInfo"><!--/* 작성자 */-->
+			<a th:href="'/vip?p='+${post.memberDTO.m_id}"><img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=70></a>
+			<span class="nickname" th:text="${post.memberDTO.m_nickname}"></span>
+			<span class="code">#[[${post.memberDTO.m_code}]]</span>
+		</h1>
+		
+		<div th:if="${imageList}" class="postImgs"><!--/* 이미지 (있을 때만) */-->
+			<ul class="bxSlider postImgDiv">
+				<li th:each="image : ${imageList}">
+					<img class="imgBox" th:src="${image.image}" />
+				</li>
+			</ul>
+		</div>
+		
+		<div class="content"><!--/* 본문 */-->
+			<span th:utext="${post.p_content}"></span>
+		</div>
+		
+	</article>
 	
-	<div class="merchandises"><!--/* 상품 */-->
-		<select th:if="${merchandiseList}">
-			<option th:each="mer: ${merchandiseList}" value="${mer.mer_id}">
-				[[${mer.mer_name}]]
-			</option>
-		</select>
+	<div class="menubar"><!--/* 메뉴 */-->
+		<div class="likeDiv" style="display: inline-block">
+			<button class="like" th:onclick="'like('+${post.p_id}+', this)'">♡</button>
+			<button class="unlike" th:onclick="'unlike('+${post.p_id}+', this)'">♥</button>
+		</div>	
+		<span class="likeCount" th:text="${post.p_likeCount}">좋아요 수</span>
+		<button class="comment" onclick="$(this).parents('.post').addClass('newComment')">댓글</button><!--/* 새 댓글 작성란 보이기 클래스 */-->
+		<button class="delete" th:if="${session.login} == ${post.p_writer}">삭제</button><!--/* 게시글 작성자만 */-->
+		<button class="buy" th:if="${post.p_type} == 'S'" th:onclick="'location.href=\'/order?p_id='+${post.p_id}+'\''">구매</button>
+		<button class="report" th:unless="${session.login} == ${post.p_writer}">신고</button><!--/* 게시글 작성자 아닌 사람만 */-->
 	</div>
+	
+	<div class="comments">
+		<form class="commentForm" onsubmit="newComment(this); return false;">
+			<input type="hidden" class="c_postNo" name="c_postNo" th:value="${post.p_id}">
+			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="나의 한 마디">
+			<button type="submit">보내기 버튼</button>
+		</form>
+		
+		<ul th:replace="post/commentList"></ul><!--/* 댓글 목록 */-->
+	</div>
+		
+	<th:block th:if="${post.p_type}=='S'"><!--/* 판매글일 때만 상품 목록 보이기 */-->
+	항목을 누르면 해당 상품 주문 페이지로 이동합니다.
+	<ul th:if="${merList.size} > 0">
+		<li th:each="mer: ${merList}" th:onclick="'location.href=\'/order?mer_id='+${mer.mer_id}+'\''">
+			<span th:text="${mer.mer_name}"></span><!--/* 상품 이름 */-->
+			<span><span th:text="${mer.mer_amount}"></span>개 남음</span><!--/* 주문가능 수량 */-->
+		</li>
+	</ul>
+	<div th:if="${merList.size} == 0">현재 주문 가능한 수량이 없습니다.</div>
+	</th:block>
+</div>
 </main>
 
 <div id="globalSidebar">

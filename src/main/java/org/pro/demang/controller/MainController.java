@@ -8,6 +8,7 @@ import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,15 +108,16 @@ public class MainController {
 	
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
-	public String postViewRoute( @RequestParam("p_id") String p_id, HttpSession session, Model model) {
+	public String postViewRoute( @RequestParam("p_id") int p_id, HttpSession session, Model model) {
 		PostDTO dto = postService.getPost(p_id);
 		// 게시글 정보 받아서 넣기
 		model.addAttribute( "post", dto );
 		// 게시글의 이미지 정보
-		if( mapper.getImageList(p_id).size() > 0 ) {
+		List<PostImgDTO> imageList = mapper.getImageList(p_id);
+		if( imageList.size() > 0 ) {// 이미지가 있을 때만
 			model.addAttribute(
 					"imageList",
-					mapper.getImageList(p_id)
+					imageList
 					);
 		}
 		// 게시글의 댓글들
@@ -123,14 +125,13 @@ public class MainController {
 				"commentList",
 				mapper.getCommentList(p_id)
 				);
-		// 판매글일 경우 상품들
+		// 판매글일 경우 상품 목록
 		if( dto.getP_type().equals("S") ) {
 			model.addAttribute(
-					"merchandiseList",
+					"merList",
 					mapper.getMerchandiseList(p_id)
 					);
 		}
-		
 		
 		return "post/PostView";
 	}

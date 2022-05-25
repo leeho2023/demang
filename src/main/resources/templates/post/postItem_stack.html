@@ -1,9 +1,4 @@
 <!-- 
-메인
-├게시글 = post/post.html = div.post
-└상품 목록 div.merchandises
-
-
 게시물영역 div.post
 ├게시물 article.postView
 │├글쓴이 정보 h1.writerInfo
@@ -54,7 +49,6 @@
 		<span class="likeCount" th:text="${post.p_likeCount}">좋아요 수</span>
 		<button class="comment" onclick="$(this).parents('.post').addClass('newComment')">댓글</button><!--/* 새 댓글 작성란 보이기 클래스 */-->
 		<button class="delete" th:if="${session.login} == ${post.p_writer}">삭제</button><!--/* 게시글 작성자만 */-->
-		<button class="buy" th:if="${post.p_type} == 'S'">구매</button>
 		<button class="report" th:unless="${session.login} == ${post.p_writer}">신고</button><!--/* 게시글 작성자 아닌 사람만 */-->
 	</div>
 	

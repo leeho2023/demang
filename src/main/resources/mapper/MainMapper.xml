@@ -164,7 +164,7 @@
 	
 	<!-- 게시글의 상품 목록 불러오기 -->
 	<select id="getMerchandiseList" resultType="org.pro.demang.model.MerchandiseDTO">
-		SELECT * FROM merchandiseTBL WHERE mer_target = #{p_id};
+		SELECT * FROM merchandiseTBL WHERE mer_target = #{p_id} AND mer_amount > 0;
 	</select>
 	
 	
@@ -349,13 +349,9 @@
 	
 	
 	<!-- 주문 및 결제 관련 -->
-	<!-- 상품 이름 -->
-	<select id="getMerName" resultType="String">
-	 SELECT mer_name FROM merchandiseTBL WHERE mer_id = #{mer_id}
-	</select>
-	<!-- 상품 가격 -->
-	<select id="getMerPrice" resultType="Integer">
-	 SELECT mer_price FROM merchandiseTBL WHERE mer_id = #{mer_id}
+	<!--  -->
+	<select id="getMerchandise" resultType="org.pro.demang.model.MerchandiseDTO">
+	SELECT * FROM merchandiseTBL WHERE mer_id = #{mer_id}
 	</select>
 	<!-- 주문 시도 횟수 +1 -->
 	<update id="merCountUp">

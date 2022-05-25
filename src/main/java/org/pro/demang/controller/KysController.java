@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ChatDTO;
+import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.service.ChatService;
 import org.pro.demang.service.MemberService;
@@ -29,14 +30,32 @@ public class KysController {
 	
 	//// 주문 페이지
 	@GetMapping("/order")
-	String orderPage( @RequestParam("p_id")int p_id, Model model ) {
+	String orderPage( @RequestParam("mer_id")int mer_id, Model model ) {
 		//// ??? 로그인 안 돼있으면
+		model.addAttribute(
+				"mer",
+				mapper.getMerchandise(mer_id)
+				);
+		return "order/order";
+	}
+/*	@GetMapping("/order")
+	String orderPage( @RequestParam("p_id")int p_id, Model model ) {
+		List<MerchandiseDTO> merList = mapper.getMerchandiseList(p_id);
+		if( merList.size() == 0 ) {// 현재 주문 가능한 상품이 없음
+			return "redirect:/postView?p_id="+p_id;// 게시글 상세보기 페이지로 리다이렉트
+		}
+		//// ??? 로그인 안 돼있으면
+		
 		model.addAttribute(// 결제할 게시물
 				"post", 
 				mapper.getPost(p_id)
 				);
+		model.addAttribute(
+				"merList",
+				merList
+				);
 		return "order/order";
-	}
+	}*/
 	//// 결제 페이지
 	@PostMapping("/payment")
 	String paymentPage( OrderDTO dto, Model model, HttpSession session ) {
