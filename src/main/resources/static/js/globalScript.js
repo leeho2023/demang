@@ -7,9 +7,12 @@ function parentOpen( me ){// 누를 요소에서 onclick="이함수(this)"
 	}
 }
 
-/* 팔로우 목록 불러오기 */
+
 $(function(){
+	
+	//// 로그인 돼있어야 이하 실행
 	if( sessionLogin == null ) return;
+	//// 팔로우 목록 불러오기 
 	$.ajax({
 		url: 'fList',
 		method: 'post',
@@ -20,7 +23,12 @@ $(function(){
 			console.log('팔로우 목록 불러오기 실패');
 		}
 	});
+	
+	//// 로그인 정보 표시 (상단바에) 
+	//// ??? 미구현
 });
+
+
 
 
 // 검색

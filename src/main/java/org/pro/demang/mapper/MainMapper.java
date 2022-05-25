@@ -55,6 +55,8 @@ public interface MainMapper {
 	//// 해시태그
 	void hashtagInsert( String hashtag );// 해시태그 테이블에 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 정보 등록
+	List<String> getHashTags( int p_id );// 게시글의 해시태그들 가져오기
+	List<String> getHashTags( String p_id );// 게시글의 해시태그들 가져오기
 	//// 좋아요
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
 	void removeLike(String l_id, String l_postNo);// 좋아요 취소
@@ -88,10 +90,12 @@ public interface MainMapper {
 	
 	
 	// 검색 관련
+	List<Integer> searchPost( String val );// 본문에 검색어를 포함하는 게시글 검색 (글번호 목록)
+	List<Integer> searchTag( String tag );// 검색태그를 포함한 게시글 검색 (글번호 목록)
+	List<MemberDTO> searchMember( String val );// 검색어를 포함하는 닉네임의 회원 검색
+	// 아래는 일단 호현씨가 한 것들
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
-	List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
-	List<Integer> getPostNO(String searchVal);
 	PostImgDTO getImage(int no);// (검색 결과용) 게시글의 이미지 한 개
 	
 	

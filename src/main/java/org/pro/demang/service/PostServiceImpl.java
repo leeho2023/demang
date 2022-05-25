@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
-import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.TagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,11 @@ public class PostServiceImpl implements PostService{
 	// 게시글 등록하기
 	@Override
 	public void postInsert( PostDTO dto ) {
+		//// 꺾쇠를 &lt;, $gt;로 변환하고
+		dto.setP_content(
+				dto.getP_content().replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+				);
+		
 		if( dto.getP_origin() == 0 )
 			mapper.postInsert_noOrigin(dto);
 		else
@@ -32,12 +37,23 @@ public class PostServiceImpl implements PostService{
 	//// 번호로 게시글 찾기
 	@Override
 	public PostDTO getPost( String no ) {
-		return mapper.getPost(no);
+		PostDTO dto = mapper.getPost(no);// 게시글 읽어오기
+		List<String> tags = mapper.getHashTags(no);//// 해시태그 읽어오기
+		// 본문의 해시태그를 <a>로 감싸기
+		for( String tag: tags ) {
+			dto.setP_content(
+					dto.getP_content().replace(
+							"#"+tag
+							,"<a class=\"hashTag\" href=\"/search?type=hashtag&val="+tag+"\">" + "#"+tag + "</a>")
+					);
+		}
+		return dto;
 	}
 	@Override
 	public PostDTO getPost( int no ) {
-		return mapper.getPost(no);
+		return getPost( no+"" );
 	}
+	
 	//// 회원 번호로; 해당 회원의 게시글 목록(게시글번호만)(최신순)
 	@Override
 	public List<Integer> getPostList_writer( String no ){
@@ -106,27 +122,6 @@ public class PostServiceImpl implements PostService{
 		return mapper.getCommentList(no);
 	}
 	
-	
-	
-	// 게시글 검색
-	@Override
-	public List<PostDTO> postSearch(String searchVal) {
-		
-		return mapper.postSearch(searchVal);
-	}
-	// 태그 게시물 검색
-	@Override
-	public List<Integer> tagForGetPostNO(String reSearchVal) {
-		
-		return mapper.tagForGetPostNO(reSearchVal);
-	}
-	
-
-	@Override
-	public List<Integer> getPostNO(String searchVal) {
-		
-		return mapper.getPostNO(searchVal);
-	}
 
 	
 	
@@ -152,6 +147,8 @@ public class PostServiceImpl implements PostService{
 	public List<PostDTO> postReviewShow(String p_origin) {
 		return mapper.postReviewShow(p_origin);
 	}
+	
+	
 
 	
 	
@@ -165,7 +162,7 @@ public class PostServiceImpl implements PostService{
 		//// #에서부터 문자열 끝 혹은 분리문자(띄어쓰기, 점, 쉼표 등) 만나기 전까지를 해시태그로 보기???
 		String[] tags = new String[tagsNMax];// 태그들의 배열
 		int tagsN = 0;// 태그 개수
-		for( int i = 0; i<bytes.length; i++ ) {
+		for( int i = 0; i<bytes.length; i++ ) {// 바이트 단위로 문자열 분석
 			if( bytes[i] == 35 ) {// #: 해시태그 시작
 				i++;
 				byte[] tagBuild = new byte[20];

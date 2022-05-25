@@ -18,7 +18,6 @@
 	<ul class="menuList">
 		<li onclick="location.href='/'">Home</li>
 		<li onclick="location.href='/postInsert'">글쓰기</li>
-		<li onclick="location.href='/myLike'">내관심</li>
 		<li th:if="${session.login}" onclick="location.href='/vip'">
 			<span th:text="${session.login}"></span>번으로 로그인됨
 		</li>

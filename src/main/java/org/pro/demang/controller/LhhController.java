@@ -66,7 +66,7 @@ public class LhhController {
 		
 		return "other/fList";
 	}
-
+/*
 	//유저 검색
 	@GetMapping("/userSearch")
 	public String userSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
@@ -134,7 +134,7 @@ public class LhhController {
 
 		return "other/searchTag";
 	}
-
+*/
 	// 회원 코드 생성 테스트
 	@GetMapping("/createCode")
 	public String createCode(){

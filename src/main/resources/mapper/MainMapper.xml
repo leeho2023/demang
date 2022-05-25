@@ -21,7 +21,6 @@
 		<result column="p_likeCount" property="p_likeCount"/>
 		<result column="p_regDate" property="p_regDate"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
-		<collection property="postImgDTO" resultMap="postImgDTO"/>
 	</resultMap>
 	
 	<resultMap id="postImgDTO" type="org.pro.demang.model.PostImgDTO">
@@ -127,14 +126,9 @@
 		select * from postimgtbl where p_id = #{no} order by i_no asc limit 1
 	</select>
 
-	<!-- 검색 결과 게시글 번호 -->
-	<select id="getPostNO" resultType="Integer">
+	<!-- 본문에 검색어를 포함하는 게시글 검색 (글번호 목록) -->
+	<select id="searchPost" resultType="Integer">
 		select p_id from postTBL where p_content like '%' #{searchVal} '%'
-	</select>
-
-	<!-- 태그 검색 결과 게시글 번호 -->
-	<select id="tagForGetPostNO" resultType="Integer">
-		select t_postNo from tagonposttbl where t_tag = #{reSearchVal}
 	</select>
 
 	<!-- 해당 태그의 게시물 검색 쿼리문 -->
@@ -206,6 +200,10 @@
 	<insert id="hashtagOnTableInsert">
 		INSERT INTO tagOnPostTBL (t_tag, t_postNo) VALUES(#{hashtag}, #{p_id})
 	</insert>
+	<!-- 게시글의 해시태그들 가져오기 -->
+	<select id="getHashTags" resultType="String">
+		SELECT t_tag FROM tagOnPostTBL WHERE t_postNo = #{t_postNo}
+	</select>
 
 	<!-- 검색 결과 회원 코드 중복 확인 -->
 	<select id="codeCheck" resultType="Integer">

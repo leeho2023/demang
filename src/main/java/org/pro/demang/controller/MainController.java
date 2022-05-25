@@ -108,7 +108,7 @@ public class MainController {
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
 	public String postViewRoute( @RequestParam("p_id") String p_id, HttpSession session, Model model) {
-		PostDTO dto = mapper.getPost(p_id);
+		PostDTO dto = postService.getPost(p_id);
 		// 게시글 정보 받아서 넣기
 		model.addAttribute( "post", dto );
 		// 게시글의 이미지 정보
@@ -246,8 +246,41 @@ public class MainController {
 		return "X";
 	}
 	
+	//// 검색 페이지
+	@GetMapping("/search")
+	public String postSearch( 
+			@RequestParam(value="type", required=false) String searchType, // hashtag, member, post, null이거나 엉뚱한 값인 경우 post
+			@RequestParam("val") String searchVal, 
+			Model model) {
+		//// 검색어가 없는 경우 ???
+		
+		//// searchType에 따라 검색 유형 나뉜다
+		//// 유형 없는 경우: 게시글 검색으로 리다이렉트
+		if( searchType == null ) 
+			return "redirect:/search?type=post&val="+searchVal;
+		//// 해시태그 검색
+		if( searchType.equals("hashtag") ) {
+			
+			return "post/search";
+		}
+		//// 해시태그 검색
+		if( searchType.equals("member") ) {
+
+			return "post/search";
+		}
+		//// 게시글 검색
+		if( searchType.equals("post") ) {
+
+			return "post/search";
+		}
+		//// 다른 엉뚱한 유형: 게시글 검색으로 리다이렉트
+		return "redirect:/search?type=post&val="+searchVal;
+	}
+	
+	
 	//// 현재 로그인한 회원 번호(문자열로) 가져오기
 	private static String loginId( HttpSession session ) {
 		return session.getAttribute("login")+"";
 	}
+	
 }

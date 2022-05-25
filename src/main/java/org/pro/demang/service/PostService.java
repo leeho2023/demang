@@ -22,9 +22,6 @@ public interface PostService {
 	public List<Integer> getPostList_writer( int no );
 	public List<Integer> getPostList_followee( String no );
 	public List<Integer> getPostList_followee( int no );
-   List<PostDTO> postSearch(String searchVal);
-   List<Integer> tagForGetPostNO(String reSearchVal);
-	List<Integer> getPostNO(String searchVal);
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
 	void removeLike(String loginId, String l_postNo);// 좋아요 취소
 	boolean likeCheck(String l_id, String l_postNo); // 좋아요 불러오기
