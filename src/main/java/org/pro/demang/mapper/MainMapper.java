@@ -67,11 +67,13 @@ public interface MainMapper {
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 
 	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
+	
+	List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
 
 	public MemberDTO memberRead(String m_id);
 	void memberUpdate(MemberDTO dto);
 
-    List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
+    
 	public String emailCheck(String m_email);
 	
 	//// 채팅 관련
@@ -112,13 +114,6 @@ public interface MainMapper {
     void contactUsInsert(ContactUsDTO dto); // 문의 내용 DB 입력
 	void contactUsImgInsert(int c_id, byte[] i_image); // 문의 내용 번호에 따른 이미지 DB 입력
 	
-	// 페이징 관련
-	public List<ContactUsDTO> selectContactList(ContactUsDTO dto);
-	public int selectContactTotalCount(ContactUsDTO dto);
-
-	// 내가 만든 페이징 관련
-	List<ContactUsDTO> messageList(int c_id);
-    int contactAllNumCount();
 	
 	int userCount();
 	int postCount();
@@ -139,4 +134,16 @@ public interface MainMapper {
 	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
 	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
 	int stuffNum(String p_id); // 물건 번호 조회하기
+
+	
+	//// 관리자 페이지 검색 관련
+	int memberSearchCount(String search);
+	int contactSearchCount(String search);
+	int postSearchCount(String search);
+	List<MemberDTO> memberSearchAdmin(String search);
+	List<ContactUsDTO> contactSearchAdmin(String search);
+	List<PostDTO> postSearchAdmin(String search);
+    void updateC_checked(String c_id);
+	ContactUsDTO messageOneSelect(String c_id);
+
 }

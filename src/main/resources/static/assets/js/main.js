@@ -89,6 +89,7 @@ $('.messages').click(function(){
     // });
 });
 
+
 function messagePage(c_id){
     $.ajax({
         type: "post",
@@ -111,3 +112,9 @@ $('.log').click(function(){
     // $('#log').show();
 });
 
+function search(){
+    var header_input = $('#header_input');
+    var adminSearch = $('#adminSearch');
+
+
+}

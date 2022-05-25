@@ -1,6 +1,5 @@
 package org.pro.demang.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.pro.demang.model.CommentDTO;
@@ -23,11 +22,15 @@ public interface MemberService {
 	public String emailCheck(String m_email);
     void contactUsInsert(ContactUsDTO dto);
 	void contactUsImgInsert(int c_id, byte[] i_image);
-	// #######################################
-	// 페이징 관련 테스트 (끝나면 지워도됨)
-	List<ContactUsDTO> messageList(int c_id);
-    ArrayList<Integer> contactAllNumCount();
-	public List<ContactUsDTO> selectContactList(ContactUsDTO dto);
+	
+	// admin 검색 관련
+	int memberSearchCount(String search);
+	int contactSearchCount(String search);
+	List<ContactUsDTO> contactSearch(String search);
+	List<MemberDTO> memberSearchAdmin(String search);
+	List<ContactUsDTO> contactSearchAdmin(String search);
+    void updateC_checked(String c_id);
+	ContactUsDTO messageOneSelect(String c_id);
 
 
 

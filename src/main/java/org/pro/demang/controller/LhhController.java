@@ -1,11 +1,8 @@
 package org.pro.demang.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
-
-import com.github.pagehelper.PageInfo;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ContactUsDTO;
@@ -25,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageInfo;
 
 @Controller
 public class LhhController {
@@ -59,6 +58,8 @@ public class LhhController {
 
 		return "admin/index";
 	}
+
+	
     
 	@GetMapping("/fList")
 	public String fList() {
@@ -213,35 +214,65 @@ public class LhhController {
 		return "redirect:/";
 	}
 
-	// ##########################################################################################
-	//  페이징 관련 테스트
-	//admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
-	@PostMapping("/messageList")
-	public String messageList(@RequestParam("c_id")int c_id, Model model) {
-		System.out.println(c_id);
-		List<ContactUsDTO> dtoList = memberService.messageList(c_id);
-		ArrayList<Integer> arrlist = memberService.contactAllNumCount();
-		model.addAttribute("arrlist", arrlist);
-		model.addAttribute("dtoList", dtoList);
-
-		return "admin/appendMessage";
-	}
-
-	@PostMapping("/contactAllNumCount")
-	public String contactAllNumCount(Model model){
-
-		ArrayList<Integer> arrlist = memberService.contactAllNumCount();
-		model.addAttribute("arrlist", arrlist);
-
-		return "admin/pageNumList";
-	}
 	
+	
+	
+//	admin messages 페이징 
 	@GetMapping("/contactUsList")
 	public String page(
             @RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
 	PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
 	model.addAttribute("contactUsList", p);
 	return "admin/messages";
+	}
+
+//	c_check 업데이트
+	@GetMapping("/updateC_checked")
+	public String updateC_checked(@RequestParam("c_id") String c_id, Model model) throws Exception {
+		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
+		
+		memberService.updateC_checked(c_id);
+		
+		return "redirect:/contactUsList";
+	}
+	
+//	messageOneSelect 하나만 상세 보기
+	@GetMapping("/messageOneSelect")
+	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
+		ContactUsDTO dto = memberService.messageOneSelect(c_id);
+		model.addAttribute("dto", dto);
+		return "";
+	}
+
+//	admin 페이지에서 검색 하는거
+	@GetMapping("/adminSearch")
+	public String adminSearch(@RequestParam("search")String search, Model model){
+		
+		System.out.println("LHHController### admin 페이지 검색 = " + search);
+		int memCount = memberService.memberSearchCount(search); // 검색어로 검색된 유저수 
+		int postCount = postService.postSearchCount(search); // 검색어로 검색된 게시글 수
+		int contactCount = memberService.contactSearchCount(search); // 검색어로 검색된 문의 수
+		List<MemberDTO> memList = memberService.memberSearchAdmin(search); // 검색어로 검색된 유저
+		List<PostDTO> postList = postService.postSearchAdmin(search); // 검색어로 검색된 게시글
+		List<ContactUsDTO> contactList = memberService.contactSearchAdmin(search); // 검색어로 검색된 문의글
+		
+		System.out.println(memCount);
+		System.out.println(postCount);
+		System.out.println(contactCount);
+		System.out.println(memList);
+		System.out.println(postList);
+		System.out.println(contactList);
+		
+		model.addAttribute("search", search);
+		model.addAttribute("memCount", memCount);
+		model.addAttribute("postCount", postCount);
+		model.addAttribute("contactCount", contactCount);
+		model.addAttribute("memList", memList);
+		model.addAttribute("postList", postList);
+		model.addAttribute("contactList", contactList);
+		
+		
+		return "admin/adminSearchTotal";
 	}
 	
 

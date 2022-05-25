@@ -1,0 +1,79 @@
+#searchwrap{
+    border: 1px solid black;
+    width: 100%;
+    height: 77vh;
+    padding: 1% 0 0 1%;
+  }
+  
+  #searchwrap #searchInfoBar{
+    border: 1px solid black;
+    width: 99%;
+    height: 5vh;
+  }
+  
+  #searchInfoBar #infoBar{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid #7b9acc;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #infoBar .infoItem{
+    /* border-right: 2px solid rgba(0, 0, 0, 0.5); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #searchwrap #searchInfoList{
+    /* border: 1px solid black; */
+    width: 99%;
+    height: 18vh;
+  }
+  
+  #searchInfoList #searchInfo{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* border: 1px solid red; */
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #searchInfo .infoItem{
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#search{
+    display: none;
+}
+
+  /* 목록들의 너비 맞춤 */
+#searchwrap ul>li:nth-child(1){
+    width: 5%;
+  }
+  #searchwrap ul>li:nth-child(2){
+    width: 22%;
+  }
+  #searchwrap ul>li:nth-child(3){
+    width: 40%;
+  }
+  #searchwrap ul>li:nth-child(4){
+    width: 10%;
+  }
+  #searchwrap ul>li:nth-child(5){
+    width: 13%;
+  }
+  #searchwrap ul>li:nth-child(6){
+    width: 7%;
+  }
+  #searchwrap ul>li:nth-child(7){
+    width: 7%;
+  }

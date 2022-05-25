@@ -403,30 +403,35 @@ img {
   margin: 0;
   padding: 0;
   list-style: none;
-  /* border: 1px solid red; */
+  /* border: 3px solid red; */
   height: 7vh;
   display: flex;
   justify-content: center;
 }
 
 #messageInfo .infoItem{
-  /* border: 1px solid blue; */
+  /* border: 3px solid blue; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #pageNumwrap{
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 #pageNumwrap #pageNumList{
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   justify-content: center;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 #pageNumwrap ul > li{
@@ -451,6 +456,9 @@ img {
 }
 #messagewrap ul>li:nth-child(5){
   width: 13%;
+}
+#messagewrap ul>li:nth-child(6){
+  width: 7%;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,7 +1,6 @@
 package org.pro.demang.controller;
 
 import java.io.IOException;
-import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,7 +31,7 @@ public class LwkController {
 		if(dto.getM_email().equals("admin")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("login", dto.getM_email());
-			return "admin/index";
+			return "redirect:/admin";
 		}else { // admin이 아닐 때 로그인하기
 			MemberDTO member = MemberService.login(dto);// 입력된 정보(dto)로 디비에서 회원정보 찾아오기
 			if( member != null ) {// 일치하는 회원 있음: 로그인 성공

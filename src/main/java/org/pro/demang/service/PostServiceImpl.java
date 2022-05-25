@@ -204,6 +204,14 @@ public class PostServiceImpl implements PostService{
 	public boolean reViewCheck(int ord_target, String ord_buyer) {
 		return mapper.reViewCheck(ord_target, ord_buyer);
 	}
+	public int postSearchCount(String search) {
+		return mapper.postSearchCount(search);
+	}
+
+	@Override
+	public List<PostDTO> postSearchAdmin(String search) {
+		return mapper.postSearchAdmin(search);
+	}
 	
 	// 글에 있는 리뷰 개수 불러오기
 	@Override

@@ -1,7 +1,5 @@
 package org.pro.demang.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -107,6 +105,8 @@ public class MemberServiceImpl implements MemberService {
 		mapper.memberUpdate(dto);
 		
 	}
+	
+	
 	@Override
     public String emailCheck(String m_email) {
        String resultPW =  mapper.emailCheck(m_email);
@@ -214,44 +214,43 @@ public class MemberServiceImpl implements MemberService {
 		return code;
 	}
 
-
-	// ###########################################################################################
-	// 페이징 관련
-	// //admin 페이지에서 messages 탭으로 들어갈 때 ajax로 최신 10개 글만 불러 오기
+//	admin 페이지 검색된 유저 수
 	@Override
-	public List<ContactUsDTO> messageList(int c_id) {
-		return mapper.messageList(c_id);
+	public int memberSearchCount(String search) {
+		return mapper.memberSearchCount(search);
 	}
 
-	// 전체 갯수 불러와서 페이지 수 반환
+//	admin 페이지 검색된 문의 수
 	@Override
-	public ArrayList<Integer> contactAllNumCount() {
+	public int contactSearchCount(String search) {
+		return mapper.contactSearchCount(search);
+	}
+//  admin 페이지 검색된 문의 3개
+	@Override
+	public List<ContactUsDTO> contactSearch(String search) {
+		return null;
+	}
+
+	@Override
+	public List<MemberDTO> memberSearchAdmin(String search) {
+		return mapper.memberSearchAdmin(search);
+	}
+
+	@Override
+	public List<ContactUsDTO> contactSearchAdmin(String search) {
+		return mapper.contactSearchAdmin(search);
+	}
+
+	@Override
+	public void updateC_checked(String c_id) {
+		mapper.updateC_checked(c_id);
+	}
+
+	@Override
+	public ContactUsDTO messageOneSelect(String c_id) {
 		
-		int c_count = mapper.contactAllNumCount();
-		int result = (int)Math.ceil((double)c_count/10);
-		ArrayList<Integer> arrlist = new ArrayList<>();
-
-		for(int i = 0; i < 10; i++){
-			arrlist.add(i);
-		}
-
-
-		return arrlist;
+		return mapper.messageOneSelect(c_id);
 	}
-
-	@Override
-	public List<ContactUsDTO> selectContactList(ContactUsDTO dto) {
-		
-		List<ContactUsDTO> contactUsList = Collections.emptyList();
-
-		int contactTotalCount = mapper.selectContactTotalCount(dto);
-
-		if(contactTotalCount > 0){
-			contactUsList = mapper.selectContactList(dto);
-		}
-
-		return contactUsList;
-	}
-
-	// ###########################################################################################
+	
+	
 }

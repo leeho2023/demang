@@ -12,6 +12,7 @@ public class ContactUsDTO{
     private String c_contactUsValues;
     private String c_content;
     private Timestamp c_regDate;
+    private boolean c_checked;
     private MemberDTO memberDTO;
     private ContactUsImgDTO contactUsImgDTO;
 
