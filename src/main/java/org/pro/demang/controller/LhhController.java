@@ -227,6 +227,24 @@ public class LhhController {
 	return "admin/messages";
 	}
 
+//	c_check 업데이트
+	@GetMapping("/updateC_checked")
+	public String updateC_checked(@RequestParam("c_id") String c_id, Model model) throws Exception {
+		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
+		
+		memberService.updateC_checked(c_id);
+		
+		return "redirect:/contactUsList";
+	}
+	
+//	messageOneSelect 하나만 상세 보기
+	@GetMapping("/messageOneSelect")
+	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
+		ContactUsDTO dto = memberService.messageOneSelect(c_id);
+		model.addAttribute("dto", dto);
+		return "";
+	}
+
 //	admin 페이지에서 검색 하는거
 	@GetMapping("/adminSearch")
 	public String adminSearch(@RequestParam("search")String search, Model model){
@@ -235,13 +253,24 @@ public class LhhController {
 		int memCount = memberService.memberSearchCount(search); // 검색어로 검색된 유저수 
 		int postCount = postService.postSearchCount(search); // 검색어로 검색된 게시글 수
 		int contactCount = memberService.contactSearchCount(search); // 검색어로 검색된 문의 수
-		List<MemberDTO> memList = memberService.memberSearch(search); // 검색어로 검색된 유저
-		List<PostDTO> postList = postService.postSearch(search); // 검색어로 검색된 게시글
-		List<ContactUsDTO> contactList = memberService.contactSearch(search); // 검색어로 검색된 문의글
+		List<MemberDTO> memList = memberService.memberSearchAdmin(search); // 검색어로 검색된 유저
+		List<PostDTO> postList = postService.postSearchAdmin(search); // 검색어로 검색된 게시글
+		List<ContactUsDTO> contactList = memberService.contactSearchAdmin(search); // 검색어로 검색된 문의글
 		
+		System.out.println(memCount);
+		System.out.println(postCount);
+		System.out.println(contactCount);
+		System.out.println(memList);
+		System.out.println(postList);
+		System.out.println(contactList);
+		
+		model.addAttribute("search", search);
 		model.addAttribute("memCount", memCount);
 		model.addAttribute("postCount", postCount);
 		model.addAttribute("contactCount", contactCount);
+		model.addAttribute("memList", memList);
+		model.addAttribute("postList", postList);
+		model.addAttribute("contactList", contactList);
 		
 		
 		return "admin/adminSearchTotal";

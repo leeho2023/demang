@@ -190,5 +190,10 @@ public class PostServiceImpl implements PostService{
 	public int postSearchCount(String search) {
 		return mapper.postSearchCount(search);
 	}
+
+	@Override
+	public List<PostDTO> postSearchAdmin(String search) {
+		return mapper.postSearchAdmin(search);
+	}
 	
 }

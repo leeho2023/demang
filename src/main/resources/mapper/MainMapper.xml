@@ -63,8 +63,17 @@
 		<result column="c_contentTitle" property="c_contentTitle"/>
 		<result column="c_contactUsValues" property="c_contactUsValues"/>
 		<result column="c_content" property="c_content"/>
+		<result column="c_checked" property="c_checked"/>
 		<result column="c_regDate" property="c_regDate"/>
+		<collection property="contactUsImgDTO" resultMap="contactUsImgDTO"/>
 	</resultMap>
+	
+	<resultMap id="contactUsImgDTO" type="org.pro.demang.model.ContactUsImgDTO">
+		<result column="i_no" property="i_no"/>
+		<result column="c_id" property="c_id"/>
+		<result column="i_image" property="i_image"/>
+	</resultMap>
+	
 
 	<!-- 특정 회원이 팔로우한 회원 목록 -->
 	<select id="fList" resultType="org.pro.demang.model.MemberDTO">
@@ -358,12 +367,36 @@
 		like '%' #{search} '%'
 	</select>
 	
+	<!-- 관리자 페이지 유저 검색 기능 쿼리문 -->
+	<select id="memberSearchAdmin" resultType="org.pro.demang.model.MemberDTO">
+		select * 
+		from memberTBL m 
+		where m_email like '%' #{search} '%' 
+		or m_nickname like '%' #{search} '%'
+		order by m_id DESC
+		limit 3;
+	</select>
+	
 	<!-- 관리자 페이지 검색된 문의 수 -->
 	<select id="contactSearchCount" resultType="Integer">
 		select count(*)
 		from contactUsTBL
 		where c_content
 		like '%' #{search} '%'
+	</select>
+	
+	<!-- 관리자 페이지 검색된 문의 3개 -->
+	<select id="contactSearchAdmin" resultMap="contactUsDTO">
+		select * 
+		from contactUsTBL
+		where c_content 
+		like '%' #{search} '%'
+		order by c_id DESC
+		limit 3
+	</select>
+
+	<select id="messageOneSelect" resultMap="contactUsDTO">
+		select *
 	</select>
 	
 	<!-- 관리자 페이지 검색된 게시글 수 -->
@@ -373,6 +406,22 @@
 		where p_content
 		like '%' #{search} '%'
 	</select>
+	
+	<!-- 관리자 페이지 검색된 게시글 3개 -->
+	<select id="postSearchAdmin" resultMap="postDTO">
+		select * from postTBL
+		where p_content like '%' #{search} '%'
+		order by p_id desc
+		limit 3
+	</select>
+
+	<!-- 문의 확인 업데이트 -->
+	<update id="updateC_checked">
+		UPDATE contactUsTBL
+		SET c_checked=true
+		WHERE c_id=#{c_id}
+	</update>
+	
 	
 	<!-- 관리자 홈에 나오는 것들 -->
 	<!-- 전체 유저수 -->

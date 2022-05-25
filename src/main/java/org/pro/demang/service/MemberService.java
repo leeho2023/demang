@@ -1,6 +1,5 @@
 package org.pro.demang.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.pro.demang.model.CommentDTO;
@@ -28,6 +27,10 @@ public interface MemberService {
 	int memberSearchCount(String search);
 	int contactSearchCount(String search);
 	List<ContactUsDTO> contactSearch(String search);
+	List<MemberDTO> memberSearchAdmin(String search);
+	List<ContactUsDTO> contactSearchAdmin(String search);
+    void updateC_checked(String c_id);
+	ContactUsDTO messageOneSelect(String c_id);
 
 
 

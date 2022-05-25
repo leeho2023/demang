@@ -89,6 +89,7 @@ $('.messages').click(function(){
     // });
 });
 
+
 function messagePage(c_id){
     $.ajax({
         type: "post",

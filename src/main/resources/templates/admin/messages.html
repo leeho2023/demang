@@ -134,11 +134,22 @@
                         <ul id="messageInfo" th:each="dto : ${contactUsList.getList()}">
                             <li class="infoItem">[[${dto.getC_id}]]</li>
                             <li class="infoItem">[[${dto.getM_email}]]</li>
-                            <li class="infoItem title">[[${dto.getC_contentTitle}]]</li>
+                            <li class="infoItem">
+                                <a th:href="@{/messageOneSelect(c_id=${dto.getC_id})}">
+                                    [[${dto.getC_contentTitle}]]
+                                </a>
+                            </li>
                             <li class="infoItem">[[${dto.getC_contactUsValues}]]</li>
                             <li class="infoItem">[[${dto.getC_regDate}]]</li>
-                            <li class="infoItem" th:if="${dto.c_checked} == ture"><i class="fa-solid fa-circle-check fa-xl"></i></li>
-                            <li class="infoItem" th:if="${dto.c_checked} == false"><i class="fa-regular fa-circle fa-xl"></i></li>
+                            <li class="infoItem" th:if="${dto.c_checked} == true">
+                                <i class="fa-solid fa-circle-check fa-xl"></i>
+                            </li>
+                            
+                            <li class="infoItem" th:if="${dto.c_checked} == false">
+                                <a th:href="@{/updateC_checked(c_id=${dto.getC_id})}">
+                                    <i class="fa-regular fa-circle fa-xl"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

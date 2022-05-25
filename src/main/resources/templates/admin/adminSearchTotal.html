@@ -9,7 +9,7 @@
 
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="assets/css/styles.css">
-
+        <link rel="stylesheet" href="assets/css/adminSearchTotal.css">
         <title>Responsive sidebar submenus</title>
         <!-- font awesome kit code -->
         <script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
@@ -118,11 +118,88 @@
         <!--========== CONTENTS ==========-->
         <main>
             <section id="adminSearchTotal">
-                <span>adminSearchTotal</span>
-                <div th:if="${memCount > 0}"> member 검색 완료</div>
-                <div th:if="${postCount > 0}"> post 검색 완료</div>
-                <div th:if="${contactCount > 0}"> 문의 검색 완료</div>
-                
+                <span>검색 결과</span>
+                <div id="searchwrap">
+                    <span>회원</span>
+                    <div th:if="${memCount > 0}" id="searchInfoBar">
+                        <ul id="infoBar">
+                            <li class="infoItem">번호</li>
+                            <li class="infoItem">닉네임</li>
+                            <li class="infoItem">이메일</li>
+                            <li class="infoItem">생일</li>
+                            <li class="infoItem">가입날짜</li>
+                            <li class="infoItem">
+                                <input type="button" th:value="${search}" id="search" class="memSearch">
+                                <button><label for="search">더 보기</label></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="searchInfoList">
+                        <ul id="searchInfo" th:each="memDto : ${memList}">
+                            <li class="infoItem">[[${memDto.m_id}]]</li>
+                            <li class="infoItem">[[${memDto.m_nickname}]] #[[${memDto.m_code}]]</li>
+                            <li class="infoItem">[[${memDto.m_email}]]</li>
+                            <li class="infoItem">[[${memDto.m_birth}]]</li>
+                            <li class="infoItem">[[${memDto.m_regDate}]]</li>
+                            <li class="infoItem"></li>
+                        </ul>
+                    </div>
+                    <span th:if="${postCount > 0}">게시글</span>
+                    <div th:if="${postCount > 0}" id="searchInfoBar">
+                        <ul id="infoBar">
+                            <li class="infoItem">번호</li>
+                            <li class="infoItem">닉네임</li>
+                            <li class="infoItem">이메일</li>
+                            <li class="infoItem">내용</li>
+                            <li class="infoItem">작성일</li>
+                            <li class="infoItem">
+                                <input type="button" th:value="${search}" id="search" class="memSearch">
+                                <button><label for="search">더 보기</label></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:if="${postCount > 0}" id="searchInfoList">
+                        <ul id="searchInfo" th:each="memDto : ${memList}">
+                            <li class="infoItem">[[${memDto.m_id}]]</li>
+                            <li class="infoItem">[[${memDto.m_nickname}]] #[[${memDto.m_code}]]</li>
+                            <li class="infoItem">[[${memDto.m_email}]]</li>
+                            <li class="infoItem">[[${memDto.m_birth}]]</li>
+                            <li class="infoItem">[[${memDto.m_regDate}]]</li>
+                            <li class="infoItem"></li>
+                        </ul>
+                    </div>
+                    <span th:if="${contactCount > 0}">고객문의</span>
+                    <div th:if="${contactCount > 0}" id="searchInfoBar">
+                        <ul id="infoBar">
+                            <li class="infoItem">번호</li>
+                            <li class="infoItem">이메일</li>
+                            <li class="infoItem">제목</li>
+                            <li class="infoItem">분류</li>
+                            <li class="infoItem">날짜</li>
+                            <li class="infoItem">확인</li>
+                            <li class="infoItem">
+                                <input type="button" th:value="${search}" id="search" class="memSearch">
+                                <button><label for="search">더 보기</label></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:if="${contactCount > 0}" id="searchInfoList">
+                        <ul id="searchInfo" th:each="memDto : ${memList}">
+                            <li class="infoItem">[[${memDto.m_id}]]</li>
+                            <li class="infoItem">[[${memDto.m_nickname}]] #[[${memDto.m_code}]]</li>
+                            <li class="infoItem">[[${memDto.m_email}]]</li>
+                            <li class="infoItem">[[${memDto.m_birth}]]</li>
+                            <li class="infoItem">[[${memDto.m_regDate}]]</li>
+                            <li class="infoItem"></li>
+                        </ul>
+                    </div>
+                    <div th:if="${postCount > 0}" id="postSearchwrap">
+                        <div>[[${postList}]]test</div>
+                    </div>
+                    <div th:if="${contactCount > 0}" id="contactSearchwrap">
+                        <div>[[${contactList}]]test</div>
+                    </div>
+                </div>
             </section>
         </main>
         <!--========== MAIN JS ==========-->

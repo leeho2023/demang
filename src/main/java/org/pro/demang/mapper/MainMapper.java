@@ -129,5 +129,10 @@ public interface MainMapper {
 	int memberSearchCount(String search);
 	int contactSearchCount(String search);
 	int postSearchCount(String search);
+	List<MemberDTO> memberSearchAdmin(String search);
+	List<ContactUsDTO> contactSearchAdmin(String search);
+	List<PostDTO> postSearchAdmin(String search);
+    void updateC_checked(String c_id);
+	ContactUsDTO messageOneSelect(String c_id);
 
 }

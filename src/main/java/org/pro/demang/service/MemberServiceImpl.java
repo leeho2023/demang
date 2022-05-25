@@ -1,7 +1,5 @@
 package org.pro.demang.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -231,6 +229,27 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<ContactUsDTO> contactSearch(String search) {
 		return null;
+	}
+
+	@Override
+	public List<MemberDTO> memberSearchAdmin(String search) {
+		return mapper.memberSearchAdmin(search);
+	}
+
+	@Override
+	public List<ContactUsDTO> contactSearchAdmin(String search) {
+		return mapper.contactSearchAdmin(search);
+	}
+
+	@Override
+	public void updateC_checked(String c_id) {
+		mapper.updateC_checked(c_id);
+	}
+
+	@Override
+	public ContactUsDTO messageOneSelect(String c_id) {
+		
+		return mapper.messageOneSelect(c_id);
 	}
 	
 	
