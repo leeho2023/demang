@@ -3,17 +3,12 @@
 	<a class="a2" th:href="@{/}" >DEMANG</a>
 </div>
 
-<div class="searchBar">
-    <input type="text" id="search" placeholder="Search..." onkeyup="if(window.event.keyCode==13){search()}" class="searchInputs"> 
-        
-    <div class="search-wrapper">
-        <div class="input-holder">
-            <button class="search-icon"  id="searchBtn" onclick="searchToggle(this, event);"><span>검색</span></button>
-        </div>
-    </div>
-</div>
+<form id="searchBar" onsubmit="homeNavSearch(); return false;">
+    <input type="text" id="search" name="val" placeholder="일반검색 #태그검색 @회원검색" autocomplete=off> 
+	<button class="search-icon"  id="searchBtn"><span>검색</span></button>
+</form>
 
-<div class="menu">
+<div id="mainMenu">
 	<button onclick="parentOpen(this)">≡</button>
 	<ul class="menuList">
 		<li onclick="location.href='/'">Home</li>

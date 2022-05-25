@@ -45,7 +45,7 @@ function showPost(){
 //// 글 번호를 통해 게시글 한 개 불러오기
 function getPost( no ){$.ajax({// no: 게시글 번호 p_id
 		type: 'post',
-		url: 'getPostForFeed',
+		url: 'getPost_'+postType,
 		async: false,// 결과가 정확히 최신순(목록에 있는 순)으로 나오도록 동기
 		data:{
 			no: no

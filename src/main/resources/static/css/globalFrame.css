@@ -98,7 +98,7 @@ body {
 		margin: 10px;
 		background-color: white;
 	}
-	#globalHeader .menu > button {
+	#globalHeader #mainMenu > button {
 		display: none;
 	}
 	/* 사이드바 */
@@ -146,7 +146,7 @@ body {
 	#globalHeader > * {
 		background-color: white;
 	}
-	#globalHeader .menu > button {
+	#globalHeader #mainMenu> button {
 		display: none;
 	}
 	#globalHeader .menuList {
@@ -200,7 +200,7 @@ body {
 		margin: 10px;
 		background-color: white;
 	}
-	#globalHeader .menu {
+	#globalHeader #mainMenu {
 		max-height: 100%;
 		display: flex;
 		flex-flow: column nowrap;

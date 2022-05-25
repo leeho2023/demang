@@ -149,9 +149,9 @@ public class MainController {
 		return "";
 	}
 	
-	//// 게시글 한 개 가져오기(ajax용)
-	@PostMapping("/getPostForFeed")
-	public String feedItem( @RequestParam("no") String no, Model model ) {
+	//// 게시글 한 개 가져오기(ajax용, stack으로 표시할 용도)
+	@PostMapping("/getPost_stack")
+	public String postItem_forStack( @RequestParam("no") int no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
 		PostDTO dto = postService.getPost( no );
 		model.addAttribute("post", dto);
@@ -165,7 +165,20 @@ public class MainController {
 				"commentList",
 				mapper.getCommentList_recent( no )
 				);
-		return "post/post";
+		return "post/postItem_stack";
+	}
+	//// 게시글 한 개 가져오기(ajax용, stack으로 표시할 용도)
+	@PostMapping("/getPost_album")
+	public String postItem_forAlbum( @RequestParam("no") int no, Model model ) {
+		//// 번호로 게시글 찾아서 DTO 받아오기
+		PostDTO dto = postService.getPost( no );
+		model.addAttribute("post", dto);
+		//// 게시글의 이미지 한 개만
+		model.addAttribute(
+				"image",
+				mapper.getPostImage( no )
+				);
+		return "post/postItem_album";
 	}
 
     //// 개인 피드
@@ -174,10 +187,11 @@ public class MainController {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=feed";// 비회원인 경우 로그인하러 가기
 		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
 		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
-				"PostList", 
+				"postList", 
 				postService.getPostList_followee( loginId(session) )
 				);
-		return "post/feed";
+		model.addAttribute("postType", "stack");
+		return "post/postList";
 	}
 
 	//// 개인 페이지
@@ -190,12 +204,13 @@ public class MainController {
 		//// 찾는 회원이 없는 경우 회원 없다는 페이지로 이동
 		if( dto == null ) return "post/profile_noMember";
 		model.addAttribute(// 글 목록 (이 페이지 주인이 쓴 글 목록)
-				"PostList", 
+				"postList", 
 				mapper.getPostList_writer( dto.getM_id() )
 				);
-		//// 회원정보와 함께 회원정보 페이지로
-		model.addAttribute("dto", dto);
-		return "post/profile";
+		model.addAttribute("postType", "stack");
+		model.addAttribute("additional", "profile");
+		model.addAttribute("dto", dto);// 해당 회원 정보
+		return "post/postList";
 	}
 	
 	//// 댓글 등록 (ajax용)
@@ -245,10 +260,10 @@ public class MainController {
 		}
 		return "X";
 	}
-	
+
 	//// 검색 페이지
 	@GetMapping("/search")
-	public String postSearch( 
+	public String prePostSearch( 
 			@RequestParam(value="type", required=false) String searchType, // hashtag, member, post, null이거나 엉뚱한 값인 경우 post
 			@RequestParam("val") String searchVal, 
 			Model model) {
@@ -258,20 +273,33 @@ public class MainController {
 		//// 유형 없는 경우: 게시글 검색으로 리다이렉트
 		if( searchType == null ) 
 			return "redirect:/search?type=post&val="+searchVal;
-		//// 해시태그 검색
-		if( searchType.equals("hashtag") ) {
+		//// 회원 검색
+		if( searchType.equals("member") ) {
 			
-			return "post/search";
+			return "post/ ???";// ??? 회원 검색 결과용 페이지 따로 있어야..
 		}
 		//// 해시태그 검색
-		if( searchType.equals("member") ) {
-
-			return "post/search";
+		if( searchType.equals("hashtag") ) {
+			model.addAttribute(
+					"postList", 
+					mapper.searchTag(searchVal)// 검색결과 게시글 목록
+					);
+			model.addAttribute("postType", "album");// 이 페이지는 앨범식으로 표시
+			model.addAttribute("additional", "searchInfo");// 이 페이지에서 searchInfo.html을 추가로 표시
+			model.addAttribute("searchVal", searchVal);
+			return "post/postList";
 		}
 		//// 게시글 검색
 		if( searchType.equals("post") ) {
-
-			return "post/search";
+			System.out.println("main con ~ post list: "+mapper.searchPost(searchVal));
+			model.addAttribute(
+					"postList", 
+					mapper.searchPost(searchVal)// 검색결과 게시글 목록
+					);
+			model.addAttribute("postType", "album");// 이 페이지는 앨범식으로 표시
+			model.addAttribute("additional", "searchInfo");// 이 페이지에서 searchInfo.html을 추가로 표시
+			model.addAttribute("searchVal", searchVal);
+			return "post/postList";
 		}
 		//// 다른 엉뚱한 유형: 게시글 검색으로 리다이렉트
 		return "redirect:/search?type=post&val="+searchVal;

@@ -7,16 +7,16 @@
 -->
 <div class="post" th:onclick="'location.href=\'/postView?p_id='+${post.p_id}+'\''">
 		<h1 class="writerInfo"><!--/* 작성자 */-->
-			<a th:href="'/vip?p='+${post.memberDTO.m_id}"><img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=70></a>
+			<img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=70>
 			<span class="nickname" th:text="${post.memberDTO.m_nickname}"></span>
 			<span class="code">#[[${post.memberDTO.m_code}]]</span>
 		</h1>
 		
-		<div th:if="${image}" class="postImg"><!--/* 이미지 (있을 때만) */-->
+		<div th:if="${image}" class="content"><!--/* 이미지 (있을 때만) */-->
 			<img class="imgBox" th:src="${image.image}" />
 		</div>
 		
-		<div th:unless="${image}" class="content"><!--/* 본문 */-->
+		<div th:unless="${image}" class="content"><!--/* 이미지 없으면 본문 표시 */-->
 			<span th:utext="${post.p_content}"></span>
 		</div>
 </div>

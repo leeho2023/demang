@@ -18,19 +18,8 @@ import org.pro.demang.model.MerchandiseDTO;
 public interface MainMapper {
 	
 	// 회원 관련
-	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
-	List<MemberDTO> fList(String follower); // 특정 회원(번호)이 팔로우한 회원 목록
-	void memberInsert(MemberDTO dto); // 회원가입
-	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
-	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
-	MemberDTO getMember_no(Object no);//세션값으로 회원찾기
-	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기
-	int followingCount(int no);// 내가 팔로우한 사람 수
-	int followerCount(int no);// 나를 팔로우한 사람 수
-	void doFollow( String m1, String m2 );// m1이 m2를 팔로우하기
-	int followCheck( String m1, String m2);// 팔로우 여부 체크
-	public MemberDTO memberRead(String m_id);
-	void memberUpdate(MemberDTO dto);
+	//// 회원가입
+	void memberInsert(MemberDTO dto); // 새 회원 등록
     int codeCheck(String code);// 코드 중복 검사
 	void emailCodeInsert(EmailCheckDTO dto);// 이메일 인증코드 등록
 	void emailAuthenticationDelete(String m_email);// 회원가입 완료 시 이메일 인증코드 삭제
@@ -38,6 +27,19 @@ public interface MainMapper {
 	String emailAuthenticationCheck(String m_email);
     int reEmailCheck(EmailCheckDTO dto);
 	public String emailCheck(String m_email);
+	//// 회원정보
+	void memberUpdate(MemberDTO dto);
+	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
+	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
+	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기
+	//// 팔로우
+	void doFollow( String m1, String m2 );// m1이 m2를 팔로우하기
+	int followCheck( String m1, String m2);// 팔로우 여부 체크
+	int followingCount(int no);// 내가 팔로우한 사람 수
+	int followerCount(int no);// 나를 팔로우한 사람 수
+	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
+	List<MemberDTO> fList(String follower); // 특정 회원(번호)이 팔로우한 회원 목록
+	
 	
 	// 게시글 관련
     //// 순수 게시물
@@ -96,7 +98,7 @@ public interface MainMapper {
 	// 아래는 일단 호현씨가 한 것들
     List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
 	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
-	PostImgDTO getImage(int no);// (검색 결과용) 게시글의 이미지 한 개
+	PostImgDTO getPostImage(int no);// (검색 결과용) 게시글의 이미지 한 개
 	
 	
 	//// 채팅 관련

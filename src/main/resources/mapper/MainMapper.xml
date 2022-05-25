@@ -122,24 +122,17 @@
 	</select>
 	
 	<!-- (검색 결과용) 게시글의 이미지 한 개 -->
-	<select id="getImage" resultType="org.pro.demang.model.PostImgDTO">
-		select * from postimgtbl where p_id = #{no} order by i_no asc limit 1
+	<select id="getPostImage" resultType="org.pro.demang.model.PostImgDTO">
+		select * from postImgTBL where p_id = #{no} order by i_no asc limit 1
 	</select>
 
 	<!-- 본문에 검색어를 포함하는 게시글 검색 (글번호 목록) -->
 	<select id="searchPost" resultType="Integer">
 		select p_id from postTBL where p_content like '%' #{searchVal} '%'
 	</select>
-
-	<!-- 해당 태그의 게시물 검색 쿼리문 -->
-	<select id="tagSearch" parameterType="org.pro.demang.model.TagDTO" resultMap="tagDTO">
-		select t.*, p.*, m.*
-		from tagOnPostTBL t
-		inner join postTBL p
-		on t.t_postNo = p.p_id
-		inner join memberTBL m 
-		on p.p_writer = m.m_id 
-		where t.t_tag = '#{reSearchVal}'
+	<!-- 검색태그가 있는 게시글 검색 (글번호 목록) -->
+	<select id="searchTag" resultType="Integer">
+		SELECT t_postNo FROM tagOnPostTBL WHERE t_tag = #{searchVal}
 	</select>
 
 	<!-- 게시글 관련 -->
@@ -348,9 +341,9 @@
 
 	<!-- 검색 결과 이메일과 인증코드 -->
 	<select id="reEmailCheck" resultType="Integer">
-		select count(*)
-		from emailchecktbl
-		where m_email = #{m_email} and e_code = #{e_code}
+		SELECT count(*)
+		FROM emailCheckTBL
+		WHERE m_email = #{m_email} AND e_code = #{e_code}
 	</select>
 	
 	

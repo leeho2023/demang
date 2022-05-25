@@ -29,7 +29,7 @@ $(document).ready(function(){
 <header th:replace="other/homeNav">메인메뉴</header>
 
 <main>
-	<th:block th:replace="post/post"></th:block><!--/* 게시글 */-->
+	<th:block th:replace="post/postItem_stack"></th:block><!--/* 게시글 */-->
 	
 	<div class="merchandises"><!--/* 상품 */-->
 		<select th:if="${merchandiseList}">

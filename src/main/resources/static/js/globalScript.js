@@ -7,6 +7,28 @@ function parentOpen( me ){// 누를 요소에서 onclick="이함수(this)"
 	}
 }
 
+//// 검색
+function homeNavSearch() {
+	// 입력된 검색어 첫글자에 따라 검색 유형 달리
+	var searchVal = $('#search').val();
+	let first_char = searchVal.charAt(0);
+	let reSearchVal = searchVal.substring(1, searchVal.length);
+	
+	if(first_char === '@'){// 회원 검색
+		location.href = "search?type=member&val="+reSearchVal;
+		return;
+	}
+
+	if(first_char === '#'){// 태그 검색
+		location.href = "search?type=hashtag&val="+reSearchVal;
+		return;
+	}
+	
+	// 기타: 게시글 검색
+	location.href = "search?type=post&val="+searchVal;
+	return;
+}
+
 
 $(function(){
 	
