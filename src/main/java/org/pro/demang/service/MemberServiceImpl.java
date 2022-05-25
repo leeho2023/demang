@@ -75,10 +75,6 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO getMember_no( int no ) {
 		return getMember_no(""+no);
 	}
-	@Override
-	public MemberDTO getMember_no(Object no) {
-		return mapper.getMember_no(no);
-	}
 	
 	//// 로그인
 	//// 이메일, 비밀번호만 들어있는 dto를 받아서 그에 해당하는 회원이 있는 경우 해당 회원의 dto반환, 아니면 null.

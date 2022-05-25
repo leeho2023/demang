@@ -149,7 +149,7 @@ public class MainController {
 		return "";
 	}
 	
-	//// 게시글 한 개 가져오기(ajax용, stack으로 표시할 용도)
+	//// 게시글 한 개 가져오기(ajax용, stack식으로 표시할 용도)
 	@PostMapping("/getPost_stack")
 	public String postItem_forStack( @RequestParam("no") int no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
@@ -167,7 +167,7 @@ public class MainController {
 				);
 		return "post/postItem_stack";
 	}
-	//// 게시글 한 개 가져오기(ajax용, stack으로 표시할 용도)
+	//// 게시글 한 개 가져오기(ajax용, album식으로 표시할 용도)
 	@PostMapping("/getPost_album")
 	public String postItem_forAlbum( @RequestParam("no") int no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
