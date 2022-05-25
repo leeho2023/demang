@@ -1,12 +1,13 @@
 package org.pro.demang.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MemberDTO;
-import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PostService;

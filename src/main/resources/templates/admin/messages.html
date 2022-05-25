@@ -135,12 +135,12 @@
                             <li class="infoItem">[[${dto.getC_id}]]</li>
                             <li class="infoItem">[[${dto.getM_email}]]</li>
                             <li class="infoItem">
-                                <a th:href="@{/messageOneSelect(c_id=${dto.getC_id})}">
+                                <a href="#" th:onclick="'javascript:messageOneSelect('+ ${dto.getC_id} + ');'">
                                     [[${dto.getC_contentTitle}]]
                                 </a>
                             </li>
                             <li class="infoItem">[[${dto.getC_contactUsValues}]]</li>
-                            <li class="infoItem">[[${dto.getC_regDate}]]</li>
+                            <li class="infoItem">[[${#dates.format(dto.getC_regDate, 'yyyy년 MM월 dd일 HH:mm:ss')}]]</li>
                             <li class="infoItem" th:if="${dto.c_checked} == true">
                                 <i class="fa-solid fa-circle-check fa-xl"></i>
                             </li>
@@ -172,6 +172,21 @@
                         </li>
                     </ul>
                 </div>
+            </section>
+            <section id="messageOneSelect">
+                <!-- <div id="messageOnewrap">
+                    <div class="messageOneTitle">문의 내용</div>
+                    <div id="messageOneInfo">
+                        <div>제목</div>
+                        <div>이메일</div>
+                        <div>분류</div>
+                        <div>내용</div>
+                        <div>날짜</div>
+                    </div>
+                    <div class="messageOneConBtn">
+                        버튼
+                    </div>
+                </div> -->
             </section>
         </main>
         <!--========== MAIN JS ==========-->

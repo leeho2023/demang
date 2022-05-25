@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
-import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;

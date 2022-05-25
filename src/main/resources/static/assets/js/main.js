@@ -90,17 +90,63 @@ $('.messages').click(function(){
 });
 
 
-function messagePage(c_id){
+
+
+// ajax로 contactUsDTO 한개 불러오기
+function messageOneSelect(c_id){
     $.ajax({
         type: "post",
-        url: "messageList",
-        data: { c_id : c_id },
+        url: "messageOneSelect",
+        data: {
+            c_id : c_id
+        },
         success: function ( data ) {
-            $('#messageInfoList').html("");
-            $('#messageInfoList').append(data);
+            $('#messageOneSelect').html("");
+            $('#messages').hide();
+            $('#messageOneSelect').css('display','flex');
+            $('#messageOneSelect').append(data);
         }
     });
+};
+// ajax로 메일 보내는 폼 나타내기
+function writeMail(){
+    var m_email = $('#m_email').val();
+    var c_id = $('#c_id').val();
+
+    $.ajax({
+        type: "post",
+        url: "sendMailForm",
+        data: {
+            m_email : m_email,
+            c_id : c_id
+        },
+        success: function ( data ) {
+            $('#messageOneSelect').hide();
+            $('main').append(data);
+        }
+    });
+};
+
+function messageClose(){
+    $('#messageOneSelect').css('display','none')
+    $('#messages').show();
+    location.reload();
+};
+
+function sendMail(){
+
+    var content = $('#content').val();
+    var answerInsert = $('#answerInsert');
+
+    if(content == ""){
+        alert('내용을 입력해주세요');
+        return;
+    }
+
+    answerInsert.submit();
+    
 }
+
 /*======================== search 페이지 ========================*/
 $('.search').click(function(){
     // pageHide();

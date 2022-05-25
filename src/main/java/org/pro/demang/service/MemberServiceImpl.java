@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.pro.demang.mapper.MainMapper;
-import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;

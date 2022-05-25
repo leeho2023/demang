@@ -137,17 +137,6 @@
 		select t_postNo from tagonposttbl where t_tag = #{reSearchVal}
 	</select>
 
-	<!-- 해당 태그의 게시물 검색 쿼리문 -->
-	<select id="tagSearch" parameterType="org.pro.demang.model.TagDTO" resultMap="tagDTO">
-		select t.*, p.*, m.*
-		from tagOnPostTBL t
-		inner join postTBL p
-		on t.t_postNo = p.p_id
-		inner join memberTBL m 
-		on p.p_writer = m.m_id 
-		where t.t_tag = '#{reSearchVal}'
-	</select>
-
 	<!-- 게시글 관련 -->
 	<!-- 게시글 삽입 -->
 	<insert id="postInsert" useGeneratedKeys="true" keyProperty="p_id">
@@ -442,9 +431,12 @@
 		limit 3
 	</select>
 
-	<!-- <select id="messageOneSelect" resultMap="contactUsDTO">
-		select *
-	</select> -->
+	<select id="messageOneSelect" resultMap="contactUsDTO">
+		select * from contactUsTBL c
+		left join contactUsImgTBL ci
+		on c.c_id = ci.c_id
+		where c.c_id = #{c_id}
+	</select>
 	
 	<!-- 관리자 페이지 검색된 게시글 수 -->
 	<select id="postSearchCount" resultType="Integer">

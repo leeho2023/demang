@@ -1,7 +1,7 @@
 <div class="post">
     <div class="imgBox">
         <figure th:if="${image}">
-            <img th:src="'data:image/png;base64,'+${image.image}">
+            <img th:src="${image.image}">
         </figure>
         <figure th:unless="${image}">
             <p class="p_content" th:text="${post.p_content}"></p>

@@ -67,6 +67,12 @@ public class LhhController {
 		return "other/fList";
 	}
 
+	@GetMapping("/serviceCenter")
+	public String serviceCenter() {
+		
+		return "other/serviceCenter";
+	}
+
 	//유저 검색
 	@GetMapping("/userSearch")
 	public String userSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
@@ -237,11 +243,33 @@ public class LhhController {
 	}
 	
 //	messageOneSelect 하나만 상세 보기
-	@GetMapping("/messageOneSelect")
+	@PostMapping("/messageOneSelect")
 	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
+		System.out.println(c_id);
 		ContactUsDTO dto = memberService.messageOneSelect(c_id);
+		memberService.updateC_checked(c_id);
 		model.addAttribute("dto", dto);
-		return "";
+		return "admin/appendMessage";
+	}
+	
+//	문의 메일 폼 나타내기
+	@PostMapping("/sendMailForm")
+	public String sendMailForm(
+			@RequestParam("m_email") String m_email,
+			@RequestParam("c_id") String c_id, Model model) {
+		System.out.println(m_email);
+		System.out.println(c_id);
+		model.addAttribute("m_email", m_email);
+		model.addAttribute("c_id", c_id);
+		return "admin/sendMailForm";
+	}
+	
+//	문의 답변하기
+	@PostMapping("answerInsert")
+	public String answerInsert() {
+		
+		
+		return "redirect:/contactUsList";
 	}
 
 //	admin 페이지에서 검색 하는거
