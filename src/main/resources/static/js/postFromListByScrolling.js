@@ -43,14 +43,15 @@ function showPost(){
 }
 
 //// 글 번호를 통해 게시글 한 개 불러오기
-function getPost( no ){$.ajax({
+function getPost( no ){$.ajax({// no: 게시글 번호 p_id
 		type: 'post',
 		url: 'getPostForFeed',
 		async: false,// 결과가 정확히 최신순(목록에 있는 순)으로 나오도록 동기
 		data:{
 			no: no
 		},success: function( data ){
-			$('section#postList').append(data);
+			$('section#postList').append(data);// 불러온 post 붙이기
+			postDivInitialize( $('.post').last(), no );// 새로 만든 post 초기설정 (postView.js에 있다)
 		},error: function( data ){
 			console.log('게시글 불러오는 중 문제 발생 ― postFromListByScrolling.js');
 		}

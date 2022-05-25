@@ -1,3 +1,27 @@
+<!-- 
+메인
+├게시글 = post/post.html = div.post
+└상품 목록 div.merchandises
+
+
+게시물영역 div.post
+├게시물 article.postView
+│├글쓴이 정보 h1.writerInfo
+│├이미지들 div.postImgs
+│└본문 div.content
+│
+├메뉴 div.menubar
+│├좋아요 혹은 좋아요취소 div.likeDiv
+││├좋아요 버튼 button.like
+││└좋아요 취소 버튼 button.unlike
+│├댓글
+│├삭제
+│└신고
+│
+└댓글 영역 div.comments
+　├댓글쓰기 div.myComment
+　└댓글목록 ul.commentList
+-->
 <div class="post">
 
 	<article class="postView">
@@ -23,31 +47,24 @@
 	</article>
 	
 	<div class="menubar"><!--/* 메뉴 */-->
-		<button>♡</button>
-		<button>댓글</button>
-		<button th:onclick="'location.href=\'/postInsert?p_type=R&to='+${post.p_id}+'\''">답글</button>
-		<button class="etc" onclick="parentOpen(this)">&hellip;</button>
-		<div class="more">
-			<button>삭제</button>
-			<button>신고</button>
-		</div>
+		<div class="likeDiv" style="display: inline-block">
+			<button class="like" th:onclick="'like('+${post.p_id}+', this)'">♡</button>
+			<button class="unlike" th:onclick="'unlike('+${post.p_id}+', this)'">♥</button>
+		</div>	
+		<span class="likeCount" th:text="${post.p_likeCount}">좋아요 수</span>
+		<button class="comment" onclick="$(this).parents('.post').addClass('newComment')">댓글</button><!--/* 새 댓글 작성란 보이기 클래스 */-->
+		<button class="delete" th:if="${session.login} == ${post.p_writer}">삭제</button><!--/* 게시글 작성자만 */-->
+		<button class="buy">구매</button>
+		<button class="report" th:unless="${session.login} == ${post.p_writer}">신고</button><!--/* 게시글 작성자 아닌 사람만 */-->
 	</div>
 	
 	<div class="comments">
-		<form class="commentForm">
-			<input type="hidden" class="c_postNo" th:value="${post.p_id}">
-			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="뭐라 칠려고 했더라?">
+		<form class="commentForm" onsubmit="newComment(this); return false;">
+			<input type="hidden" class="c_postNo" name="c_postNo" th:value="${post.p_id}">
+			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="나의 한 마디">
 			<button type="submit">보내기 버튼</button>
 		</form>
 		
-		<ul class="commentList"><!--/* 댓글 목록 */-->
-			<li th:each="comment: ${commentList}">
-				<a th:href="'/vip?p='+${comment.memberDTO.m_id}"><img class="profilePic" th:src="${comment.memberDTO.profileImage}" height=30></a>
-				<span class="nickname">[[${comment.memberDTO.m_nickname}]]</span>
-				<span class="content">[[${comment.c_content}]]</span>
-				<span class="regdate">[[${comment.c_regDate}]]</span>
-				<span>X</span>
-			</li>
-		</ul>
+		<ul th:replace="post/commentList"></ul><!--/* 댓글 목록 */-->
 	</div>
 </div>

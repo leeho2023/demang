@@ -16,65 +16,84 @@ import org.pro.demang.model.MerchandiseDTO;
 
 @Mapper
 public interface MainMapper {
-
+	
+	// 회원 관련
 	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
 	List<MemberDTO> fList(String follower); // 특정 회원(번호)이 팔로우한 회원 목록
-
 	void memberInsert(MemberDTO dto); // 회원가입
-
-	int postReviewList(String p_origin); // 글에 있는 리뷰 개수 불러오기
-	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
-
-	void postInsert( PostDTO dto ); // 게시글 작성
-	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
-	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
-	boolean reViewCheck(int ord_target, String ord_buyer); // 리뷰 작성 전 구매자 확인
-	MerchandiseDTO priceSearch(String p_id); // 판매 게시글 물건 정보 불러오기
-	
-	void hashtagInsert( String hashtag );// 해시태그 등록
-	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
-
-	void postInsertImg(int p_id, @Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
-	
 	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
 	MemberDTO getMember_no(Object no);//세션값으로 회원찾기
-	MemberDTO getMember_email(String m_email);
-	
-	
-	
+	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기
 	int followingCount(int no);// 내가 팔로우한 사람 수
 	int followerCount(int no);// 나를 팔로우한 사람 수
 	void doFollow( String m1, String m2 );// m1이 m2를 팔로우하기
 	int followCheck( String m1, String m2);// 팔로우 여부 체크
+	public MemberDTO memberRead(String m_id);
+	void memberUpdate(MemberDTO dto);
+    int codeCheck(String code);// 코드 중복 검사
+	void emailCodeInsert(EmailCheckDTO dto);// 이메일 인증코드 등록
+	void emailAuthenticationDelete(String m_email);// 회원가입 완료 시 이메일 인증코드 삭제
+	void emailDelete(String m_email);
+	String emailAuthenticationCheck(String m_email);
+    int reEmailCheck(EmailCheckDTO dto);
+	public String emailCheck(String m_email);
 	
+	// 게시글 관련
+    //// 순수 게시물
+	void postInsert( PostDTO dto ); // 게시글 작성
+	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
 	List<Integer> getPostList_writer( String no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_writer( int no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_followee( String no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
-
-
 	PostDTO getPost( String no ); // 게시글 번호로 게시글 찾기
 	PostDTO getPost( int no ); // 게시글 번호로 게시글 찾기
-	List<CommentDTO> getCommentList(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	//// 이미지
+	void postInsertImg(int p_id, @Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
 	List<PostImgDTO> getImageList(String no); //게시글 번호로 해당 게시글의 이미지들 찾기
 	List<PostImgDTO> getImageList(int no); //게시글 번호로 해당 게시글의 이미지들 찾기
-	List<MerchandiseDTO> getMerchandiseList(String no); // 게시글의 상품 목록 불러오기
+	//// 해시태그
+	void hashtagInsert( String hashtag );// 해시태그 테이블에 해시태그 등록
+	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 정보 등록
+	//// 좋아요
+	void addLike(String l_id, String l_postNo); // 좋아요 누르기
+	void removeLike(String l_id, String l_postNo);// 좋아요 취소
+	int likeCheck(String l_id, String l_postNo); // 좋아요 눌렀는지 검사
+	String likeCount(String l_postNo); // 게시물 좋아요 갯수
+	//// 댓글
 	void commentInsert( CommentDTO dto ); // 댓글 등록
-
-    List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
-
-	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
+	List<CommentDTO> getCommentList(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
+	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)
+	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)
+	//// 상품
+	List<MerchandiseDTO> getMerchandiseList(String no); // 게시글의 상품 목록 불러오기
+	String getMerName(int mer_id);// 상품 이름
+	int getMerPrice(int mer_id);// 상품 가격
+	void merCountUp( int mer_id );// 상품의 주문 시도 횟수 +1
+	int getMerCount(int mer_id);// 상품의 주문 시도 횟수 조회
+	int getMerAmount( int mer_id );// 상품 판매가능 수량 확인
+	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
+	//// 리뷰
+	int postReviewList(String p_origin); // 글에 있는 리뷰 개수 불러오기
+	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
+	boolean reViewCheck(int ord_target, String ord_buyer); // 리뷰 작성 전 구매자 확인
 	
+	
+	//// 주문 및 결제 관련
+	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
+	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
+	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
+	int getOrderPrice( String ord_id );// 주문의 금액 조회
+	
+	
+	// 검색 관련
+    List<MemberDTO> memberSearch(String reSearchVal); // 검색창 입력된 단어가 포함된 이메일이나 닉네임 검색
+	List<PostDTO> postSearch(String searchVal); // 검색창에 입력된 단어가 포함된 게시글 검색
 	List<Integer> tagForGetPostNO(String reSearchVal); // 검색창에 입력된 단어가 태그인 게시물 검색
-
-	public MemberDTO memberRead(String m_id);
-	void memberUpdate(MemberDTO dto);
-
-    
-	public String emailCheck(String m_email);
+	List<Integer> getPostNO(String searchVal);
+	PostImgDTO getImage(int no);// (검색 결과용) 게시글의 이미지 한 개
+	
 	
 	//// 채팅 관련
 	void chatSend( ChatDTO dto );// 메시지 한 개 보내기
@@ -87,56 +106,14 @@ public interface MainMapper {
 			@Param("m1") String m1, 
 			@Param("m2") String m2
 			);
-
-	List<Integer> getPostNO(String searchVal);
-	PostImgDTO getImage(int no);
-
-    int codeCheck(String code);
-
-
-	void addLike(String l_id, String l_postNo); // 좋아요 누르기
-	void deleteLike(String l_id, String l_postNo); // 좋아요 취소하기
-
-	void emailCodeInsert(EmailCheckDTO dto);
-
-
-	void emailAuthenticationDelete(String m_email);
-
-	void emailDelete(String m_email);
-
-	String emailAuthenticationCheck(String m_email);
-    int reEmailCheck(EmailCheckDTO dto);
-	String likeCheck(String l_id, String l_postNo); // 좋아요 누르면 오르는 카운트
-	void addLikeCount(String l_postNo); // 좋아요 누르면 오르는 카운트
-	void deleteLikeCount(String l_postNo); //좋아요 취소하면 내려가는 카운트
-	String likeCount(String l_postNo); // 게시물 좋아요 갯수
-
-    void contactUsInsert(ContactUsDTO dto); // 문의 내용 DB 입력
-	void contactUsImgInsert(int c_id, byte[] i_image); // 문의 내용 번호에 따른 이미지 DB 입력
 	
 	
+	// 관리자 페이지 관련
 	int userCount();
 	int postCount();
 	List<PostDTO> postTOP();
-
-	
-	
-	//// 주문 및 결제 관련
-	String getMerName(int mer_id);// 상품 이름
-	int getMerPrice(int mer_id);// 상품 가격
-	void merCountUp( int mer_id );// 상품의 주문 시도 횟수 +1
-	int getMerCount(int mer_id);// 상품의 주문 시도 횟수 조회
-	int getMerAmount( int mer_id );// 상품 판매가능 수량 확인
-	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
-	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
-	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
-	int getOrderPrice( String ord_id );// 주문의 금액 조회
-	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
-	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
-	int stuffNum(String p_id); // 물건 번호 조회하기
-
-	
-	//// 관리자 페이지 검색 관련
+    void contactUsInsert(ContactUsDTO dto); // 문의 내용 DB 입력
+	void contactUsImgInsert(int c_id, byte[] i_image); // 문의 내용 번호에 따른 이미지 DB 입력
 	int memberSearchCount(String search);
 	int contactSearchCount(String search);
 	int postSearchCount(String search);
@@ -145,5 +122,4 @@ public interface MainMapper {
 	List<PostDTO> postSearchAdmin(String search);
     void updateC_checked(String c_id);
 	ContactUsDTO messageOneSelect(String c_id);
-
 }

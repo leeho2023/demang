@@ -1,10 +1,3 @@
 <ul class="commentList">
-	<li th:each="comment: ${commentList}">
-		<a th:href="'/vip?p='+${comment.memberDTO.m_id}">
-			<img th:src="${comment.memberDTO.profileImage}" height=30 alt="프로필 사진">
-			<span>[[${comment.memberDTO.m_nickname}]]</span>
-		</a>
-		<span>[[${comment.c_content}]]</span>
-		<span>[[${comment.c_regDate}]]</span>
-	</li>
+	<th:block th:each="comment: ${commentList}" ><li th:replace="post/comment"></li></th:block>
 </ul>

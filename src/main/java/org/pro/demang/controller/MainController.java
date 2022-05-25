@@ -28,14 +28,6 @@ public class MainController {
 	@Autowired
 	private MainMapper mapper;
 
-
-    //로그인 페이지
-    // @GetMapping("/")
-	// public String home() {
-		
-	// 	return "member/login";
-	// }
-
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
 	public String loginMove( @Param("red") String red, Model model ) {
@@ -72,14 +64,6 @@ public class MainController {
 		model.addAttribute("commentList",list);
 		return "post/commentList";
 		
-	}
-	
-	// 댓글 작성
-	@PostMapping("/CommentInsert")
-	@ResponseBody
-	public String commentInsert(CommentDTO dto) {
-		postService.commentInsert(dto);
-		return "OK";
 	}
 
     // 회원가입
@@ -165,20 +149,6 @@ public class MainController {
 		return "";
 	}
 	
-	//게시글 등록
-//	@PostMapping("/postInsert")
-//	public String postInsert(
-//            @RequestParam(value="p_image", required=false) MultipartFile file,
-//	        @RequestParam("p_content")String p_content) {
-//	    try {
-//	        postService.postInsert(p_content, file.getBytes());
-//	        
-//	      } catch (Exception e) {
-//	         e.printStackTrace();
-//	      }
-//	      return "post/PostInsert";
-//	}
-	
 	//// 게시글 한 개 가져오기(ajax용)
 	@PostMapping("/getPostForFeed")
 	public String feedItem( @RequestParam("no") String no, Model model ) {
@@ -230,9 +200,14 @@ public class MainController {
 	
 	//// 댓글 등록 (ajax용)
 	@PostMapping("func/newComment")
-	@ResponseBody
-	public String newComment( CommentDTO dto ) {
-		return memberService.commentInsert(dto);
+	public String newComment( CommentDTO dto, HttpSession session, Model model ) {
+		dto.setC_writer( loginId(session)  );
+		postService.commentInsert(dto);// 디비에 댓글 넣기
+		model.addAttribute(
+				"comment",
+				dto
+				);
+		return "post/comment";
 	}
 
 	//// 팔로잉 수 가져오기

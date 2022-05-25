@@ -18,7 +18,6 @@ public interface MemberService {
 	void memberUpdate(MemberDTO dto);
 
     List<MemberDTO> memberSearch(String reSearchVal);
-	String commentInsert(CommentDTO dto);
 	public String emailCheck(String m_email);
     void contactUsInsert(ContactUsDTO dto);
 	void contactUsImgInsert(int c_id, byte[] i_image);

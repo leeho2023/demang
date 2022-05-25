@@ -3,26 +3,6 @@
 메인
 ├게시글 = post/post.html = div.post
 └상품 목록 div.merchandises
-
-
-게시물영역 div.post
-├게시물 article.postView
-│├글쓴이 정보 h1.writerInfo
-│├이미지들 div.postImgs
-│└본문 div.content
-│
-├메뉴 div.menubar
-│├좋아요
-│├댓글
-│├답글
-│├더보기 button.etc
-│└추가메뉴 div.more
-│　├삭제
-│　└신고
-│
-└댓글 영역 div.comments
-　├댓글쓰기 div.myComment
-　└댓글목록 ul.commentList
 */
 
 /* 게시물 영역 틀 */
@@ -133,9 +113,6 @@
 .post > .postView > .writerInfo .nickname {
 	margin-left: 13px;
 }
-.post > .postView > .writerInfo .code {
-	color: grey;
-}
 /* 게시물 - 이미지 */
 .post > .postView > .postImgs {
 }
@@ -153,26 +130,23 @@
 /* 메뉴 */
 .post > .menubar {
 	border-top: #ddd solid 2px;
-	position: relative;/* 추가메뉴 절대위치 하려고 */
 }
-.post > .menubar > .more {
-	display: inline-block;
-}
-.post > .menubar > button ,
-.post > .menubar > .more > button {
+.post > .menubar button  {
 	border: none;
 	background-color: inherit;
-	font-size: 30px;
+	font-size: inherit;
 	font-weight: bold;
 	color: #aaa;
 	transform: scale(0.9, 0.9);
 }
-.post > .menubar > button:hover ,
-.post > .menubar > .more > button:hover {
+.post > .menubar > button:hover  {
 	transform: scale(1, 1);
 }
-.post > .menubar > .etc {/* 이 페이지에서는 이 버튼 안 씀 */
+.post > .menubar > .comment {
 	display: none;
+}
+.post > .menubar > .report {
+	float: right;
 }
 
 
@@ -186,6 +160,7 @@
 　├날짜
 　└삭제 혹은 신고
 */
+
 /* 댓글 목록 */
 .commentList .profilePic {
 	height: 30px;

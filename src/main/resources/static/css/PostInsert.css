@@ -24,67 +24,68 @@
   
 */
 
+
 #postForm {
-	display: flex;
-	flex-flow: column nowrap;
+   display: flex;
+   flex-flow: column nowrap;
 }
 #postForm > * {
-	margin-top: 30px;
+   margin-top: 30px;
 }
 
 #p_type {
-	display: inline-block;
+   display: inline-block;
 }
 
 /* 상품 정보 */
 #postForm:not(.p_type_s) #mer {/* 판매글이 아니면 상품목록 숨김 */
-	display: none;
+   display: none;
 }
 #postForm #merList > li ,
 #postForm #merAddBtn {
-	position: relative;
-	margin-top: 8px;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 13px;
-	border: #ccc solid 2px;
-	background-color: white;
-	display: block;
+   position: relative;
+   margin-top: 8px;
+   box-sizing: border-box;
+   width: 100%;
+   padding: 13px;
+   border: #ccc solid 2px;
+   background-color: white;
+   display: block;
 }
 #postForm #merList > li > .xbutton {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	border: none;
-	height: 40px;
-	width: 40px;
-	background-color: #ccc;
-	color: white;
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   border: none;
+   height: 40px;
+   width: 40px;
+   background-color: #ccc;
+   color: white;
 }
 
 /* 게시글 내용 */
 #postBody {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: auto;
 }
 
 /* 이미지 첨부 */
 #postForm #selectedImgs {
-	border: 1px solid black;
+   border: 1px solid black;
 }
 #postForm #selectedImgs img {/* ??? */
-	height: 50px;
-	width: 50px;
+   height: 50px;
+   width: 50px;
 }
 
 /* 본문 */
 #postForm #p_content {
-	margin: 5px;
-	padding: 15px;
-	border: 4px solid #ddd;
-	border-radius: 20px;
-	resize: none;
+   margin: 5px;
+   padding: 15px;
+   border: 4px solid #ddd;
+   border-radius: 20px;
+   resize: none;
 }
 
 
@@ -92,26 +93,26 @@
 
 /* 이미지 첨부 */
 #selectedImg {
-	display: flex;
-	flex-flow: row wrap;
+   display: flex;
+   flex-flow: row wrap;
 }
 
 #selectedImg .file_label {/* input 대신 눌릴 라벨 */
-	background-image: url(../img/plus.png);
-	background-size: cover;
-	display: inline-block; 
-	width: 150px;
-	height: 150px;
-	cursor: auto;
-	border: 1px solid black;
+   background-image: url(../img/plus.png);
+   background-size: cover;
+   display: inline-block; 
+   width: 150px;
+   height: 150px;
+   cursor: auto;
+   border: 1px solid black;
 }
 #selectedImg input[type="file"] {/* input은 눌리지 않게 표시 안함 */
-	display: none
+   display: none
 }
 #selectedImg .innerImg {
-	width: 150px;
-	height: 150px;
+   width: 150px;
+   height: 150px;
 }
-#selectedImgs > li:nth-child(6) {/* 이미지는 5개까지만 첨부 가능: 6번째 input을 숨김 */
-	/*display: none;*/
+#selectedImg > li:nth-child(6) {/* 이미지는 5개까지만 첨부 가능: 6번째 input을 숨김 */
+   display: none;
 }

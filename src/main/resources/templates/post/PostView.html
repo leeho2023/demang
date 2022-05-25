@@ -7,6 +7,7 @@
 <!-- script -->
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- 게시글 관련 --><script src="js/postView.js"></script>
 <!-- 이미지 슬라이더 --><script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <!-- 슬라이더 작동 Script -->
  <script>
@@ -18,7 +19,7 @@ $(document).ready(function(){
 </script>
 
 <!-- css -->
-<!-- 이 페이지 전용 --><link rel="stylesheet" href="/css/PostView.css">
+<!-- 게시글 --><link rel="stylesheet" href="css/post.css"><link rel="stylesheet" href="/css/PostView.css">
 <!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 <!-- 이미지 슬라이더 --><link rel="stylesheet" href="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
