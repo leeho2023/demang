@@ -37,9 +37,12 @@ $(function(){
 		
 		// 글 내용으로 들어갈 문자값
 		var textInput = $('#textInput').val();
-		var imgInput = $('.innerImg').val();
 		
-		if(imgInput !== null){
+		if($('.inputFile').length == 1 ){
+			alert('사진을 등록 해 주세요');
+			return;
+		}
+		if($('.inputFile').length > 1){
 			$('#textInput').show();
 			$('.labelWrap').attr('class', 'nextLabel');
 			$('.innerImg').attr('onclick',"").unbind('click');
@@ -47,12 +50,11 @@ $(function(){
 			$('.innerImg').hide();
 			$('#file_label').hide();
 		}
-		
-		if(textInput == "" && imgInput !== null){
-			alert('내용을 입력해 주세요');
+		if($('.inputFile').length > 1 && textInput == ""){
+			alert('내용을 입력 해 주세요');
+			return;
 		}
-		
-		if(textInput !== ""){
+		if(textInput !== "" && $('.inputFile').length > 1){
 			alert('전송완료');
 			$('#post').submit();
 		}
@@ -99,13 +101,13 @@ function filechange(){ // 업로드 버튼에 마우스가 올려지면 요소�
 	
 	reader.onload = function(e){ // 순서상 마지막에 작동함
 		var src = e.target.result; // 이미지 주소 가져오기
-		$('#file_label').remove(); // 라벨을 없앰으로써 기존 파일첨부버튼 화면상에서 제거
-		$('#input_file').attr('name', 'p_image')// 파일이 선택된 input에 name 속성 지정해서 나중에 값 넘어가게
-		$('#input_file').parent().append('<img onclick="deleteImg(this)" src="'+src+'" class="innerImg">');// 첨부한 이미지를 보여줄 img 태그
-		$('#input_file').removeAttr('id');// 새로 생길 input을 위해 기존 input의 id를 없앤다
-		let htmlData = '';// 새 input 추가
-		htmlData += '<li><input type="file" id="input_file" accept="image/*" >';
-		htmlData += '<label for="input_file" class="file_label" id="file_label"></label>';
+		$('#file_label').remove();  
+		document.getElementById('input_file').setAttribute('name', 'p_image');
+		$('#input_file').parent().append('<img onclick="deleteImg(this)" src="'+src+'" class="innerImg">');
+		$('#input_file').removeAttr('id');
+		let htmlData = '';
+		htmlData += '<li><input type="file" class= "inputFile" id="input_file" accept="image/*">';
+		htmlData += '<label for="input_file" class="label" id="file_label"></label>';
 		htmlData += '</li>';
 		parent.append(htmlData);
 		$('#input_file').on('change', filechange);

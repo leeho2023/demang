@@ -168,6 +168,17 @@ public class SjhController {
 		return "";
 	}
 	
+	// 좋아요 버튼 취소하면 Mapping
+	@PostMapping("unlike")
+	@ResponseBody
+	public String unlike(@RequestParam("p_id")String l_postNo, @RequestParam("m_id")String l_id) {
+		
+		postService.deleteLike(l_id, l_postNo);
+		System.out.println("좋아요 취소하기 완료");
+		
+		return "";
+	}
+	
 	// DB에서 로그인 한 사람과 게시물을 검색해서 이미 좋아요를 눌렀다면 다른 버튼을 띄우기
 	@PostMapping("likeCheck")
 	@ResponseBody
@@ -208,11 +219,20 @@ public class SjhController {
 	public String reViewCheck(@RequestParam("p_id")String p_id, HttpSession session) {
 		String ord_buyer = session.getAttribute("login")+"";
 		
-		if(postService.reViewCheck(p_id, ord_buyer) == true) {
+		int ord_target = postService.stuffNum(p_id);
+		
+		if(postService.reViewCheck(ord_target, ord_buyer) == true) {
 			return "found";
 		}else {
 			return "not found";
 		}
+	}
+	
+	// 리뷰 목록 개수 가져오기
+	@PostMapping("reViewList")
+	@ResponseBody
+	public int reViewList(@RequestParam("p_id")String p_origin) {
+		return postService.postReviewList(p_origin);
 	}
 	
 	// 리뷰 목록 불러오기
@@ -221,6 +241,8 @@ public class SjhController {
 	public List<PostDTO> reViewShow(@RequestParam("p_id")String p_origin) {
 		
 		List<PostDTO> dto = postService.postReviewShow(p_origin);
+		
+		System.out.println(dto);
 		
 		return dto;
 	}

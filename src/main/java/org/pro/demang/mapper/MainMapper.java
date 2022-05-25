@@ -22,12 +22,14 @@ public interface MainMapper {
 
 	void memberInsert(MemberDTO dto); // 회원가입
 
+	int postReviewList(String p_origin); // 글에 있는 리뷰 개수 불러오기
 	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 
 	void postInsert( PostDTO dto ); // 게시글 작성
 	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
 	void postSellUpdate(String p_id, String p_type); // 판매 상태를 변경하기
-	boolean reViewCheck(String p_id, String ord_buyer); // 리뷰 작성 전 구매자 확인
+	boolean reViewCheck(int ord_target, String ord_buyer); // 리뷰 작성 전 구매자 확인
+	MerchandiseDTO priceSearch(String p_id); // 판매 게시글 물건 정보 불러오기
 	
 	void hashtagInsert( String hashtag );// 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 등록
@@ -91,6 +93,7 @@ public interface MainMapper {
 
 
 	void addLike(String l_id, String l_postNo); // 좋아요 누르기
+	void deleteLike(String l_id, String l_postNo); // 좋아요 취소하기
 
 	void emailCodeInsert(EmailCheckDTO dto);
 
@@ -103,6 +106,7 @@ public interface MainMapper {
     int reEmailCheck(EmailCheckDTO dto);
 	String likeCheck(String l_id, String l_postNo); // 좋아요 누르면 오르는 카운트
 	void addLikeCount(String l_postNo); // 좋아요 누르면 오르는 카운트
+	void deleteLikeCount(String l_postNo); //좋아요 취소하면 내려가는 카운트
 	String likeCount(String l_postNo); // 게시물 좋아요 갯수
 
     void contactUsInsert(ContactUsDTO dto); // 문의 내용 DB 입력
@@ -133,4 +137,6 @@ public interface MainMapper {
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
 	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
+	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
+	int stuffNum(String p_id); // 물건 번호 조회하기
 }

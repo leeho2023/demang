@@ -168,11 +168,21 @@ public class PostServiceImpl implements PostService{
 	public void addLike(String l_id, String l_postNo) {
 		mapper.addLike(l_id, l_postNo);
 	}
+	
+	@Override
+	public void deleteLike(String l_id, String l_postNo) {
+		mapper.deleteLike(l_id, l_postNo);
+	}
 
 	@Override
 	public void addLikeCount(String l_postNo) {
 		mapper.addLikeCount(l_postNo);
 	}
+	
+	@Override
+	public void deleteLikeCount(String l_postNo) {
+		mapper.deleteLikeCount(l_postNo);
+	}	
 
 	@Override
 	public String likeCheck(String l_id, String l_postNo) {
@@ -191,8 +201,14 @@ public class PostServiceImpl implements PostService{
 
 	// 리뷰 작성 전 구매자 확인
 	@Override
-	public boolean reViewCheck(String p_id, String ord_buyer) {
-		return mapper.reViewCheck(p_id,ord_buyer);
+	public boolean reViewCheck(int ord_target, String ord_buyer) {
+		return mapper.reViewCheck(ord_target, ord_buyer);
+	}
+	
+	// 글에 있는 리뷰 개수 불러오기
+	@Override
+	public int postReviewList(String p_origin) {
+		return mapper.postReviewList(p_origin);
 	}
 
 	// 리뷰 불러오기
@@ -201,6 +217,16 @@ public class PostServiceImpl implements PostService{
 		return mapper.postReviewShow(p_origin);
 	}
 
-	
-	
+
+	// 물건 불러오기
+	@Override
+	public MerchandiseDTO priceSearch(String p_id) {
+		return mapper.priceSearch(p_id);
+	}
+
+	// 물건 번호 조회하기
+	@Override
+	public int stuffNum(String p_id) {
+		return mapper.stuffNum(p_id);
+	}
 }
