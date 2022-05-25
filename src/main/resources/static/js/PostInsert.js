@@ -11,9 +11,12 @@ $(function(){
 		
 		// 글 내용으로 들어갈 문자값
 		var textInput = $('#textInput').val();
-		var imgInput = $('.innerImg').val();
 		
-		if(imgInput !== null){
+		if($('.inputFile').length == 1 ){
+			alert('사진을 등록 해 주세요');
+			return;
+		}
+		if($('.inputFile').length > 1){
 			$('#textInput').show();
 			$('.labelWrap').attr('class', 'nextLabel');
 			$('.innerImg').attr('onclick',"").unbind('click');
@@ -21,12 +24,11 @@ $(function(){
 			$('.innerImg').hide();
 			$('#file_label').hide();
 		}
-		
-		if(textInput == "" && imgInput !== null){
-			alert('내용을 입력해 주세요');
+		if($('.inputFile').length > 1 && textInput == ""){
+			alert('내용을 입력 해 주세요');
+			return;
 		}
-		
-		if(textInput !== ""){
+		if(textInput !== "" && $('.inputFile').length > 1){
 			alert('전송완료');
 			$('#post').submit();
 		}
@@ -78,7 +80,7 @@ function filechange(){ // 업로드 버튼에 마우스가 올려지면 요소�
 		$('#input_file').parent().append('<img onclick="deleteImg(this)" src="'+src+'" class="innerImg">');
 		$('#input_file').removeAttr('id');
 		let htmlData = '';
-		htmlData += '<li><input type="file" id="input_file" accept="image/*">';
+		htmlData += '<li><input type="file" class= "inputFile" id="input_file" accept="image/*">';
 		htmlData += '<label for="input_file" class="label" id="file_label"></label>';
 		htmlData += '</li>';
 		parent.append(htmlData);

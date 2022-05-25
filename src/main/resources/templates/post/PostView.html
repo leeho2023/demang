@@ -27,9 +27,9 @@
 <header th:include="other/homeNav"></header>
 <nav></nav>
 
-<input type="text" id="p_id" th:value="${post.p_id}">
-<input type="text" id="p_type" th:value="${post.p_type}">
-<input type="text" id="m_id" th:value="${session.login}">
+<input type="hidden" id="p_id" th:value="${post.p_id}">
+<input type="hidden" id="p_type" th:value="${post.p_type}">
+<input type="hidden" id="m_id" th:value="${session.login}">
 
 <main>
     <div class="wrap">
@@ -63,13 +63,14 @@
     	  <div class="tag">
     	  <input th:if="${session.login}" type="button" id="like" value="좋아요"> <!-- 좋아요 버튼 -->
     	  <span id="likeCount"></span> <!-- 좋아요 갯수 나오는 곳 -->
-    	  <input type="text" readonly="readonly" value="태그 나오는 곳">
     	  <!-- 게시글 타입이 S(판매)일 때만 보이게 함 -->
     	  <button id="reView" th:if="${post.p_type} == S">리뷰작성</button>
     	  <input id="buy" type="button" th:if="${post.p_type} == S" value="구매하기">
     	  <input id="oos" type="button" th:if="${post.p_type} == O" value="품절">
     	  <input id="sos" type="button" th:if="${post.p_type} == X" value="판매 중단">
     	  <button onclick="history.back()">뒤로가기</button>	
+    	  <button th:if="${post.p_type} == 'S' or ${post.p_type} == 'O' or ${post.p_type} == 'X'" id="gotoReView" onclick="location.href='feed'">
+    	  		리뷰 보러가기 (</button>
     	  </div>
  		</div>
  		
@@ -84,7 +85,6 @@
        <div><input type="button" value="작성" id="commentInsert"></div>
        </div>
        
-       </div>
     </div>
 </main>
 

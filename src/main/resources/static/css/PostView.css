@@ -39,6 +39,10 @@ body{
     width: 60vw;
 }
 
+.p_content{
+	overflow: auto;
+}
+
 .p_image{
 	border: 1px dotted orange;
 	text-align:center;

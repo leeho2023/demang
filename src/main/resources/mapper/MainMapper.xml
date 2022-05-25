@@ -156,13 +156,24 @@
 		UPDATE postTBL set p_type = #{p_type} WHERE p_id = #{p_id}; 
 	</update>
 	
+	<!-- 물건 번호 조회하기 --> 
+	<select id="stuffNum" resultType="integer">
+		SELECT * FROM merchandiseTBL where mer_target = #{p_id}
+	</select>
+	
+	<!-- 리뷰 작성 시 구매자 확인 -->
 	<select id="reViewCheck" resultType="boolean">
-		SELECT if(count(*) = 1, 1, 0) FROM postTBL join orderTBL join merchandiseTBL on postTBL.p_id = #{p_id} and merchandiseTBL.mer_target = #{p_id} AND ord_buyer = #{ord_buyer} and ord_state = 'O';
+		SELECT if(count(*) = 1, 1, 0) FROM orderTBL ot WHERE ord_target = #{ord_target} AND ord_buyer = #{ord_buyer} AND ord_state = 'O';
+	</select>
+	
+	<!-- 리뷰개수 가져오기 -->
+	<select id="postReviewList" resultType="integer">
+		SELECT count(*) FROM postTBL WHERE p_type = 'R' AND p_origin = #{p_origin}
 	</select>
 	
 	<!-- 리뷰 읽어오기 -->
-	<select id="postReviewShow" resultType="org.pro.demang.model.PostDTO" resultMap="postDTO">
-		SELECT * FROM postTBL join postImgTBL on p_type = 'R' AND p_origin = #{p_origin};
+	<select id="postReviewShow" resultType="org.pro.demang.model.PostDTO">
+		SELECT * FROM postTBL Where p_type = 'R' AND p_origin = #{p_origin};
 	</select>
 	
 	<!-- 게시글 물건 불러오기 -->
@@ -237,7 +248,9 @@
 	
 	<!-- 좋아요 누르기 -->
 	<insert id="addLike">INSERT INTO likeTBL (l_id, l_postNo) VALUES(#{l_id}, #{l_postNo})</insert>
-	<update id="addLikeCount"> UPDATE postTBL set p_likeCount = p_likeCount + 1 WHERE p_id = (#{l_postNo})</update>
+	
+	<!-- 좋아요 취소하기 -->
+	<delete id="deleteLike">DELETE FROM likeTBL WHERE l_id=#{l_id} AND l_postNo=#{l_postNo} </delete>
 	
 	<!-- 좋아요 누른 게시물인지 확인하기 -->
 	<select id="likeCheck" resultType="String">SELECT Count(*) FROM likeTBL WHERE l_id = #{l_id} AND l_postNo = #{l_postNo}</select>

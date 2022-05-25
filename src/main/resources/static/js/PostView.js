@@ -1,13 +1,15 @@
 $(function(){
 
 	likeCheck();
-	likeCount();
 	commentShow();
-	reViewShow();
 
 	var p_type = $('#p_type').val();
 	var m_id = $('#m_id').val();
 	var p_id = $('#p_id').val();
+		
+	if(p_type == "S" || p_type == "O" || p_type == "X"){
+		reViewList();
+	}
 
 	$('#like').click(function like(){
 		// 해당 글에 좋아요를 누르면 작동하는 ajax
@@ -121,8 +123,6 @@ $(function(){
 	// 리뷰작성 누르면 ajax가 작동하게 하기
 	$('#reView').click(function(){
 	
-	alert('리뷰쓰기');
-	
 		$.ajax({
 		type: 'post',
 		url: 'reViewCheck',
@@ -141,8 +141,6 @@ $(function(){
 	 });
 })
 	
-	
-	
 });
 
 // 좋아요 버튼을 누르면 작동함
@@ -157,13 +155,58 @@ function likeCheck(){
 			p_id : p_id
 		}, success: function(data){
 			if(data >= 1){
-				$('.tag').prepend('<button id="unlike">누름</button>');
+				$('.tag').prepend('<button onclick="unlike()" id="unlike">안좋아요</button>');
 				$('#like').remove();
 				$('.likeCount').append('');
 				likeCount();
 				}
 		},error: function(){
 			console.log('좋아요 불러오기 에러');
+		}
+	});
+};
+
+
+function relike(){
+
+	var p_id = $('#p_id').val();
+	var m_id = $('#m_id').val();
+		// 해당 글에 좋아요를 누르면 작동하는 ajax
+		$.ajax({
+		type: 'post',
+		url: 'likeToPost',
+		async: true,
+		data:{
+			m_id : m_id,
+			p_id : p_id
+		},success: function(){
+			likeCheck();
+			$('#like').remove();
+		},error: function(){
+			console.log('에러');
+			}
+		});
+	}
+
+// 좋아요 버튼을 다시 누르면 취소됨
+function unlike(){
+
+	var p_id = $('#p_id').val();
+	var m_id = $('#m_id').val();
+	
+	$.ajax({
+		type: 'post',
+		url: 'unlike',
+		data:{
+			m_id : m_id,
+			p_id : p_id
+		}, success: function(data){
+				$('.tag').prepend('<input type="button" onclick="relike()" id="like" value="좋아요">');
+				$('#unlike').remove();
+				$('.likeCount').append('');
+				likeCount();
+		},error: function(){
+			console.log('안좋아요 불러오기 에러');
 		}
 	});
 };
@@ -206,6 +249,42 @@ function commentShow(){
 	});
 }
 
+	// 리뷰 개수를 가져옴
+// 	function reViewList(){
+// 	
+// 		var p_id = $('#p_id').val();
+// 				
+// 		$.ajax({
+// 		type: 'post',
+// 		url: 'reViewList',
+// 		data:{
+// 			p_id : p_id
+// 		}, success: function(data){
+// 				$('.p_content').prepend('<button id="reViewList" onclick="reViewShow()"> 리뷰 갯수 ( ' + data + ' )</button> ' +'<br><br>');
+// 		},error: function(){
+// 			console.log('리뷰 불러오기 에러');
+// 		}
+// 	});
+// }
+
+	// 리뷰 개수 가져옴	
+	function reViewList(){
+	
+		var p_id = $('#p_id').val();
+				
+		$.ajax({
+		type: 'post',
+		url: 'reViewList',
+		data:{
+			p_id : p_id
+		}, success: function(data){
+				$('#gotoReView').append(data + ')');
+		},error: function(){
+			console.log('리뷰 불러오기 에러');
+		}
+	});
+}
+
 // 리뷰 목록을 가져옴
 	function reViewShow(){
 	
@@ -217,9 +296,11 @@ function commentShow(){
 		data:{
 			p_id : p_id
 		}, success: function(data){
+		$('.p_content > span').remove();
 			console.log(data);
 			$(data).each(function(){
-				$('.p_content').prepend('<button> 리뷰 갯수 ( ' + this.p_id + ' )</button> ' +'<br><br>');
+				var str = this.p_content;
+				$('.p_content').prepend('<span><a href="postView?p_id='+this.p_id+'" id="reViewShow">' + str.substr(0,10) + '</a><br></span>');
 			})
 		},error: function(){
 			console.log('리뷰 불러오기 에러');
