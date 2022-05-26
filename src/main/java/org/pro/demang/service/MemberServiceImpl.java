@@ -252,6 +252,12 @@ public class MemberServiceImpl implements MemberService {
 
 		return contactUsList;
 	}
+	//관리자 페이지 회원목록
+	@Override
+	public List<MemberDTO> userList() {
+		
+		return mapper.userList();
+	}
 
 	// ###########################################################################################
 }

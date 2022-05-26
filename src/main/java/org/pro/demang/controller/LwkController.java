@@ -1,7 +1,7 @@
 package org.pro.demang.controller;
 
 import java.io.IOException;
-import java.util.Base64;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -107,6 +107,14 @@ public class LwkController {
 			return "good";
 		}
 	}
+	@GetMapping("/adminUser")
+    public String adminMember(Model model) {
+       System.out.println("aa");
+     List<MemberDTO> list =   MemberService.userList();
+       model.addAttribute("list",list);
+     
+       return "admin/user";
+    }
 }
 
 

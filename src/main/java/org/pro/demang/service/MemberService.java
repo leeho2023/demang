@@ -28,6 +28,8 @@ public interface MemberService {
 	List<ContactUsDTO> messageList(int c_id);
     ArrayList<Integer> contactAllNumCount();
 	public List<ContactUsDTO> selectContactList(ContactUsDTO dto);
+	//관리자 페이지 회원목록
+	List<MemberDTO> userList();
 
 
 

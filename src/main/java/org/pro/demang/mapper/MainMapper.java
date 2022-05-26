@@ -134,4 +134,9 @@ public interface MainMapper {
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
 	void orderPostInsert(MerchandiseDTO merDTO); // 게시글 작성 시 등록되는 상품 정보
+	
+	
+	//관리자 페이지 회원목록
+	public List<MemberDTO> userList();
+	   
 }

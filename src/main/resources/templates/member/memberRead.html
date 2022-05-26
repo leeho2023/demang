@@ -16,13 +16,14 @@
      <div class="div4">
      <div class="div3">
      <br><br>
-     <p class="p2">PERSONNAL<br> PROFILE</p>
+   
      
      </div>
       <div class="div1">
       <br><br><br>
        <div class="input1"> <h1 style="display:inline;"> [[${dto.m_nickname}]]</h1><p class="p3" style="display:inline;">님의 개인정보페이지입니다.</p></div>
     <br>
+    <h4 class="imgH4">프로필사진</h4>  <img th:src="${dto.profileImage}"class="input10"><br>
      <div class="input2"> <h4 style="display:inline;">이메일</h4>   [[${dto.m_email}]]</div> <br>
    
    <div class="input3"> <h4 style="display:inline;">생년월일</h4> [[${dto.m_birth}]]</div> <br>
@@ -33,7 +34,7 @@
    <div class="input8"><h4 style="display:inline;">활동가능 여부</h4> [[${dto.m_available}]]</div> <br>
    <div class="input9"> <h4 style="display:inline;">가입일</h4> [[${dto.m_regDate}]]</div>
    
-   프사: <img th:src="${dto.profileImage}"><br>
+  
      <br>
    <a th:href="@{/memberUpdate}" class="animated-button1">
   <span></span>

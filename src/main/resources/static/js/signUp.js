@@ -160,26 +160,7 @@ document.getElementById('m_birth').value = new Date().toISOString().substring(0,
 
     })
         	   
-<<<<<<< HEAD
-=======
-             //빈칸 없을 때 제출.
-             
-			
-             
-        	   
-             $("#signUp").submit();   
->>>>>>> refs/remotes/origin/adminpage3
-           
-<<<<<<< HEAD
-})
-
-        
-=======
-           })
-
-        });
->>>>>>> refs/remotes/origin/adminpage3
-
+});
 
 
 // 이메일 인증 관련 모달 숨겨놓기
