@@ -83,6 +83,7 @@ public interface MainMapper {
 	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
+	List<OrderDTO> getOrderList(int loginId);// 회원의 주문 목록 조회
 	
 	
 	// 검색 관련

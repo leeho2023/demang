@@ -73,8 +73,15 @@ public class KysController {
 	
 	//// 주문 내역 확인 페이지
 	@GetMapping("/orderlist")
-	String orderlist() {
-		
+	String orderlist( Model model, HttpSession session ) {
+		if( loginId(session) == 0 ) return "redirect:/loginMove?red=orderlist";// 비회원인 경우 로그인하러 가기
+		model.addAttribute(
+				"orderList",
+				mapper.getOrderList( loginId(session) ) 
+				);
+		for( OrderDTO temp: mapper.getOrderList( loginId(session) )  ) {
+			System.out.println(temp);
+		}
 		return "order/orderList";
 	}
 	
@@ -86,7 +93,7 @@ public class KysController {
 		if( loginId(session) == 0 ) return "redirect:/loginMove?red=chat?to="+listener;// 비회원인 경우 로그인하러 가기
 		model.addAttribute(// 상대방 정보
 				"listener", 
-				mapper.getMember_no(listener) 
+				mapper.getMember_no( listener ) 
 				);
 		model.addAttribute(
 				"lastH_id",
@@ -99,7 +106,7 @@ public class KysController {
 	String chatting( @RequestParam("to") int listener, Model model, HttpSession session ){
 		model.addAttribute(// 상대방 정보
 				"listener", 
-				mapper.getMember_no(listener) 
+				mapper.getMember_no( listener ) 
 				);
 		model.addAttribute(
 				"lastH_id",

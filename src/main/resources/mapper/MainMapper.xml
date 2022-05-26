@@ -61,15 +61,16 @@
 		<result column="ord_id" property="ord_id"/>
 		<result column="ord_buyer" property="ord_buyer"/>
 		<result column="ord_target" property="ord_target"/>
-		<result column="ord_target_name" property="ord_target_name"/>
 		<result column="ord_amount" property="ord_amount"/>
 		<result column="ord_buyer_name" property="ord_buyer_name"/>
 		<result column="ord_buyer_email" property="ord_buyer_email"/>
-		<result column="l_ord_buyer_telid" property="ord_buyer_tel"/>
+		<result column="ord_buyer_tel" property="ord_buyer_tel"/>
 		<result column="ord_buyer_address" property="ord_buyer_address"/>
 		<result column="ord_buyer_postcode" property="ord_buyer_postcode"/>
 		<result column="ord_price" property="ord_price"/>
+		<result column="ord_date" property="ord_date"/>
 		<result column="ord_state" property="ord_state"/>
+		<collection property="targetDTO" resultMap="MerchandiseDTO"/>
 	</resultMap>
 	<resultMap id="MerchandiseDTO" type="org.pro.demang.model.MerchandiseDTO">
 		<result column="mer_id" property="mer_id"/>
@@ -406,6 +407,13 @@
 	SET m.mer_amount = m.mer_amount - o.ord_amount
 	WHERE o.ord_id = #{ord_id}
 	</update>
+	<!-- 회원의 주문 내역 -->
+	<select id="getOrderList" resultMap="OrderDTO">
+	SELECT * FROM orderTBL o 
+	JOIN merchandiseTBL m 
+		ON o.ord_target = m.mer_id 
+	WHERE o.ord_buyer = #{no};
+	</select>
 	
 	<!-- 게시글에 들어가는 상품 정보 -->
 	<insert id="merchandiseInsert">
