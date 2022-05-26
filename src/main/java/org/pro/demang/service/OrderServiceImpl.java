@@ -5,7 +5,6 @@ import java.util.List;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.OrderDTO;
-import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpEntity;
@@ -45,7 +44,7 @@ public class OrderServiceImpl implements OrderService{
 	
 	//// 새 주문 생성
 	@Override
-	public void newOrder( OrderDTO dto, String loginId ) {
+	public void newOrder( OrderDTO dto, int loginId ) {
 		int mer_id = dto.getOrd_target();// 상품 번호
 		MerchandiseDTO merdto = mapper.getMerchandise( mer_id );// 주문할 상품
 		//// 주문 시도 횟수 +1

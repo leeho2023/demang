@@ -67,13 +67,9 @@ public class MemberServiceImpl implements MemberService {
 
 	//// 회원번호로 회원 찾기
 	@Override
-	public MemberDTO getMember_no( String no ) {
+	public MemberDTO getMember_no( int no ) {
 		MemberDTO dto = mapper.getMember_no(no);
 		return dto;
-	}
-	@Override
-	public MemberDTO getMember_no( int no ) {
-		return getMember_no(""+no);
 	}
 	
 	//// 로그인

@@ -64,7 +64,7 @@ public class MainController {
 
     // 댓글 보기
 	@PostMapping("/CommentShow")
-	public String commentShow(@RequestParam("p_id")String p_id, Model model){
+	public String commentShow(@RequestParam("p_id") Integer p_id, Model model){
 		List<CommentDTO> list = mapper.getCommentList(p_id);
 		model.addAttribute("commentList",list);
 		return "post/commentList";
@@ -201,9 +201,13 @@ public class MainController {
 
 	//// 개인 페이지
 	@GetMapping("/vip")
-	public String profile( @RequestParam(value="p", required=false) String no, Model model, HttpSession session ) {
-		//// 회원번호 지정되어있지 않으면 자신(현재로그인)의 번호로 지정
-		if( no == null ) no = loginId(session);
+	public String profile( @RequestParam(value="p", required=false) Integer no, Model model, HttpSession session ) {
+		//// 회원번호 지정되어있지 않으면 자신(현재로그인)의 번호로 지정, 로그인도 안 돼있으면 로그인 페이지로
+		if( no == null ) {
+			no = loginId(session);
+			if( loginId(session) == 0 )// 로그인 안 돼있으면
+				return "redirect:/loginMove?red=vip";// 로그인 페이지로
+		} 
 		//// 식별코드로 회원정보 찾기
 		MemberDTO dto = memberService.getMember_no(no);
 		//// 찾는 회원이 없는 경우 회원 없다는 페이지로 이동
@@ -246,7 +250,7 @@ public class MainController {
 	//// 팔로우 하기
 	@PostMapping("/func/doFollow")
 	@ResponseBody
-	public String doFollow( String m2, HttpSession session ) {
+	public String doFollow( int m2, HttpSession session ) {
 		mapper.doFollow(
 				loginId(session),
 				m2);
@@ -256,7 +260,7 @@ public class MainController {
 	//// 팔로우 확인
 	@GetMapping("/func/followCheck")
 	@ResponseBody
-	public String followCheck( String m2, HttpSession session ) {
+	public String followCheck( int m2, HttpSession session ) {
 		if( mapper.followCheck(
 				loginId(session), 
 				m2
@@ -311,9 +315,10 @@ public class MainController {
 	}
 	
 	
-	//// 현재 로그인한 회원 번호(문자열로) 가져오기
-	private static String loginId( HttpSession session ) {
-		return session.getAttribute("login")+"";
+	//// 현재 로그인한 회원 번호(정수) 가져오기
+	private static int loginId( HttpSession session ) {
+		if( session.getAttribute("login") == null ) return 0;
+		return Integer.parseInt( session.getAttribute("login")+"" );
 	}
 	
 }

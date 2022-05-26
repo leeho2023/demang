@@ -8,9 +8,8 @@ import org.pro.demang.model.AnswerDTO;
 
 public interface MemberService {
 
-	List<MemberDTO> fList(int follower);
-	int memberInsert(MemberDTO dto);
-	public MemberDTO getMember_no( String no );
+	List<MemberDTO> fList( int follower );
+	int memberInsert( MemberDTO dto );
 	public MemberDTO getMember_no( int no );
 
 	MemberDTO login(MemberDTO dto);

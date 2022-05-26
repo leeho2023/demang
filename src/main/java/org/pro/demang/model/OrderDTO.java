@@ -19,10 +19,6 @@ public class OrderDTO {
 	private int ord_price;
 	private Timestamp ord_date;
 	private char ord_state;
-	
-	public void setOrd_buyer( String ord_buyer ) {
-		this.ord_buyer = Integer.parseInt(ord_buyer);
-	}
 
 	/*public OrderDTO(int ord_target, String mer_name, int mer_price, int mer_amount) {
 		this.ord_target = ord_target;

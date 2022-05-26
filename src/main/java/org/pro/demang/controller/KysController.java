@@ -75,9 +75,8 @@ public class KysController {
 	
 	//// 채팅 페이지
 	@GetMapping("/chat")
-	String chattingPage( @RequestParam("to") String listener, Model model, HttpSession session ){
-		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=chat?to="+listener;// 비회원인 경우 로그인하러 가기
-		if( listener == null ) return "post/feed";
+	String chattingPage( @RequestParam("to") int listener, Model model, HttpSession session ){
+		if( loginId(session) == 0 ) return "redirect:/loginMove?red=chat?to="+listener;// 비회원인 경우 로그인하러 가기
 		model.addAttribute(// 상대방 정보
 				"listener", 
 				mapper.getMember_no(listener) 
@@ -90,7 +89,7 @@ public class KysController {
 	
 	//// 채팅 (ajax로 모달 만들기용)
 	@GetMapping("/chatModal")
-	String chatting( @RequestParam("to") String listener, Model model, HttpSession session ){
+	String chatting( @RequestParam("to") int listener, Model model, HttpSession session ){
 		model.addAttribute(// 상대방 정보
 				"listener", 
 				mapper.getMember_no(listener) 
@@ -104,7 +103,7 @@ public class KysController {
 	//// 채팅 보내기 (ajax용)
 	@PostMapping("/chat/send")
 	@ResponseBody
-	String chat_send( @RequestParam("to") String listener, @RequestParam("h_content") String h_content, HttpSession ss ) {
+	String chat_send( @RequestParam("to") int listener, @RequestParam("h_content") String h_content, HttpSession ss ) {
 		chatService.chatSend( 
 				new ChatDTO( loginId(ss), listener, h_content ) );
 		return "";
@@ -112,7 +111,7 @@ public class KysController {
 	
 	//// (채팅 내역 새로고침 용) 특정 번호 다음의 채팅만 불러오기
 	@PostMapping("/chat/refresh")
-	String chat_refresh( @RequestParam("to") String listener, @RequestParam("since") int since, HttpSession session, Model model ) {
+	String chat_refresh( @RequestParam("to") int listener, @RequestParam("since") int since, HttpSession session, Model model ) {
 		List<ChatDTO> list = chatService.chatHistory( loginId(session), listener, since );
 		if( list.size() <= 0 ) {return "empty";}
 		model.addAttribute(// 채팅 내역
@@ -127,7 +126,7 @@ public class KysController {
 	
 	//// 채팅 전체 내역 확인
 	@GetMapping("/chat/history")
-	String chat_history( @RequestParam("to") String listener, Model model, HttpSession session ){
+	String chat_history( @RequestParam("to") int listener, Model model, HttpSession session ){
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=chat/history?to="+listener;// 비회원인 경우 로그인하러 가기
 		model.addAttribute(// 상대방 정보
 				"listener", 
@@ -140,9 +139,10 @@ public class KysController {
 		return "chat/history";
 	}
 	
-	
-	//// 현재 로그인한 회원 번호(문자열로) 가져오기
-	private static String loginId( HttpSession session ) {
-		return session.getAttribute("login")+"";
+
+	//// 현재 로그인한 회원 번호(정수) 가져오기 // 비로그인 상태일 경우 0으로
+	private static int loginId( HttpSession session ) {
+		if( session.getAttribute("login") == null ) return 0;
+		return Integer.parseInt( session.getAttribute("login")+"" );
 	}
 }
