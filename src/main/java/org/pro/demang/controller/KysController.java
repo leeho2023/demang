@@ -79,9 +79,6 @@ public class KysController {
 				"orderList",
 				mapper.getOrderList( loginId(session) ) 
 				);
-		for( OrderDTO temp: mapper.getOrderList( loginId(session) )  ) {
-			System.out.println(temp);
-		}
 		return "order/orderList";
 	}
 	

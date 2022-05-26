@@ -9,7 +9,6 @@ public class OrderDTO {
 	private String ord_id;// 주문 번호: ord-상품번호-주문시도횟수
 	private int ord_buyer;// 구매자 (회원 번호)
 	private int ord_target;// 주문 대상 상품 번호
-	private String ord_target_name;// 주문 대상 상품 번호
 	private MerchandiseDTO targetDTO;// 주문 대상 상품 정보
 	private int ord_amount;// 수량
 	private String ord_buyer_name;// 구매자 이름

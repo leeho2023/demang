@@ -10,7 +10,7 @@
 <h1>여기에 주문 정보 표시</h1>
 <div>
 	<div>merchant_uid: <span th:text="${order.ord_id}"></span></div>
-	<div>상품 이름: <span th:text="${order.ord_target_name}"></span></div>
+	<div>상품 이름: <span th:text="${order.targetDTO.mer_name}"></span></div>
 	<div>결제할 금액: <span th:text="${order.ord_price}"></span></div>
 	<div>구매자 이메일: <span th:text="${order.ord_buyer_email}"></span></div>
 	<div>구매자 이름: <span th:text="${order.ord_buyer_name}"></span></div>
@@ -31,7 +31,7 @@ function requestPay() {
 		pg: "kakaopay",
 		pay_method: "trans",
 		merchant_uid: [[${order.ord_id}]],// 주문 번호
-		name: [[${order.ord_target_name}]],// 상품명
+		name: [[${order.targetDTO.mer_name}]],// 상품명
 		amount: [[${order.ord_price}]],// 가격
 		buyer_email: [[${order.ord_buyer_email}]],// 구매자 정보
 		buyer_name: [[${order.ord_buyer_name}]],
