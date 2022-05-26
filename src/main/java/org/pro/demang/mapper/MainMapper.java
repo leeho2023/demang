@@ -12,6 +12,7 @@ import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
+import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.model.MerchandiseDTO;
 
 @Mapper
@@ -122,4 +123,6 @@ public interface MainMapper {
 	List<PostDTO> postSearchAdmin(String search);
     void updateC_checked(String c_id);
 	ContactUsDTO messageOneSelect(String c_id);
+	void answerInsert(AnswerDTO dto); // 문의 답변 등록
+	AnswerDTO answerSelect(String c_id); // 해당 문의의 답변 가져오기
 }

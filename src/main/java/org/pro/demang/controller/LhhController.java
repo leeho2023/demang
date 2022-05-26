@@ -10,6 +10,7 @@ import org.pro.demang.model.ContactUsImgDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PagingServiceImpl;
@@ -232,23 +233,18 @@ public class LhhController {
 	return "admin/messages";
 	}
 
-//	c_check 업데이트
-	@GetMapping("/updateC_checked")
-	public String updateC_checked(@RequestParam("c_id") String c_id, Model model) throws Exception {
-		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
-		
-		memberService.updateC_checked(c_id);
-		
-		return "redirect:/contactUsList";
-	}
 	
 //	messageOneSelect 하나만 상세 보기
 	@PostMapping("/messageOneSelect")
 	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
-		System.out.println(c_id);
-		ContactUsDTO dto = memberService.messageOneSelect(c_id);
+		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
+		ContactUsDTO cDto = memberService.messageOneSelect(c_id);
+		AnswerDTO aDto = memberService.answerSelect(c_id);
+		
+		System.out.println(aDto);
 		memberService.updateC_checked(c_id);
-		model.addAttribute("dto", dto);
+		model.addAttribute("cDto", cDto);
+		model.addAttribute("aDto", aDto);
 		return "admin/appendMessage";
 	}
 	
@@ -257,8 +253,8 @@ public class LhhController {
 	public String sendMailForm(
 			@RequestParam("m_email") String m_email,
 			@RequestParam("c_id") String c_id, Model model) {
-		System.out.println(m_email);
-		System.out.println(c_id);
+		System.out.println("LHHController### 선택한 m_email 값 = " + m_email);
+		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
 		model.addAttribute("m_email", m_email);
 		model.addAttribute("c_id", c_id);
 		return "admin/sendMailForm";
@@ -266,8 +262,17 @@ public class LhhController {
 	
 //	문의 답변하기
 	@PostMapping("answerInsert")
-	public String answerInsert() {
+	public String answerInsert(AnswerDTO dto,
+			@RequestParam("m_email") String m_email) {
 		
+		System.out.println("m_email 값 : " + m_email);
+		System.out.println("===================");
+		
+		try {
+			mailService.answerInsert(m_email, dto);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		
 		return "redirect:/contactUsList";
 	}

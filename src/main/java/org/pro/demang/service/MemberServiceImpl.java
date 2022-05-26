@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.AnswerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -240,6 +241,11 @@ public class MemberServiceImpl implements MemberService {
 	public ContactUsDTO messageOneSelect(String c_id) {
 		
 		return mapper.messageOneSelect(c_id);
+	}
+
+	@Override
+	public AnswerDTO answerSelect(String c_id) {
+		return mapper.answerSelect(c_id);
 	}
 	
 	

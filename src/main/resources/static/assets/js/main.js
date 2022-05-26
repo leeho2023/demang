@@ -6,7 +6,7 @@ $(function(){
     // $('#home').show();
     // $('#home').show();
 
-    const week = ['일','월','화','수','목','금','토']
+    const week = ['일','월','화','수','목','금','토'];
     var now = new Date();
     var year = now.getDay();
     var dayOfWeek = week[now.getDay()];
@@ -14,34 +14,34 @@ $(function(){
     dayOfWeekBox.text(dayOfWeek+'요일');
 
 
-})
+});
 
 /*==================== SHOW NAVBAR ====================*/
 const showMenu = (headerToggle, navbarId) =>{
-    const toggleBtn = document.getElementById(headerToggle),
-    nav = document.getElementById(navbarId)
+    const toggleBtn = document.getElementById(headerToggle);
+    nav = document.getElementById(navbarId);
     
     // Validate that variables exist
     if(headerToggle && navbarId){
         toggleBtn.addEventListener('click', ()=>{
             // We add the show-menu class to the div tag with the nav__menu class
-            nav.classList.toggle('show-menu')
+            nav.classList.toggle('show-menu');
             // change icon
-            toggleBtn.classList.toggle('bx-x')
-        })
-    }
-}
-showMenu('header-toggle','navbar')
+            toggleBtn.classList.toggle('bx-x');
+        });
+    };
+};
+showMenu('header-toggle','navbar');
 
 /*==================== LINK ACTIVE ====================*/
-const linkColor = document.querySelectorAll('.nav__link')
+const linkColor = document.querySelectorAll('.nav__link');
 
 function colorLink(){
-    linkColor.forEach(l => l.classList.remove('active'))
-    this.classList.add('active')
-}
+    linkColor.forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+};
 
-linkColor.forEach(l => l.addEventListener('click', colorLink))
+linkColor.forEach(l => l.addEventListener('click', colorLink));
 
 /*======================== 페이지 숨김 ========================*/
 // function pageHide(){
@@ -92,6 +92,13 @@ $('.messages').click(function(){
 
 
 
+function closeBtn(){
+    $('#messageOneSelect').show();
+    $('.answerModalBack').hide();
+};
+
+
+
 // ajax로 contactUsDTO 한개 불러오기
 function messageOneSelect(c_id){
     $.ajax({
@@ -102,12 +109,14 @@ function messageOneSelect(c_id){
         },
         success: function ( data ) {
             $('#messageOneSelect').html("");
+            $('.answerModalBack').css('display','none');
             $('#messages').hide();
             $('#messageOneSelect').css('display','flex');
             $('#messageOneSelect').append(data);
         }
     });
 };
+
 // ajax로 메일 보내는 폼 나타내기
 function writeMail(){
     var m_email = $('#m_email').val();
@@ -121,23 +130,28 @@ function writeMail(){
             c_id : c_id
         },
         success: function ( data ) {
+            $('.answerModalBack').html("");
             $('#messageOneSelect').hide();
-            $('main').append(data);
+            $('.answerModalBack').css('display','flex');
+            $('.answerModalBack').append(data);
         }
     });
 };
 
+// 한개 메시지 닫기
 function messageClose(){
     $('#messageOneSelect').css('display','none')
     $('#messages').show();
     location.reload();
 };
 
+
+
+// 메일 보내는 부분
 function sendMail(){
 
     var content = $('#content').val();
     var answerInsert = $('#answerInsert');
-
     if(content == ""){
         alert('내용을 입력해주세요');
         return;
