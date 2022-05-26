@@ -10,8 +10,8 @@ body{
     border: 2px solid black;
     text-align: center;
     width: 500px;
-    height: 720px;
-    margin-left: 38%;
+    height: 680px;
+    margin-left: 37%;
     margin-top: 3%;
 
 }
@@ -23,21 +23,11 @@ body{
   
     width: 500px;
     height: 100px;
-    margin-left: 38%;
+    margin-left: 37%;
     margin-top: 15px;
 
 }
-.ID{
-    height: 30px;
-    width: 235px;
-    margin-top: 20px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    text-align: center;
-    
-    
-}
+
 .rerecheck{
 
 	height: 20px;
@@ -45,6 +35,9 @@ body{
 }
 .email{
 	
+	height: 25px;
+}
+.code{
 	height: 25px;
 }
 .name{
@@ -91,7 +84,10 @@ body{
   .birth{
 	margin-top: 18px;
 }
-
+#sendMail{
+	position: absolute;
+	background-color: white;
+}
 /*새버튼 수정해라*/
 .frame2 {
     width: 90%;
@@ -99,6 +95,7 @@ body{
     text-align: center;
     margin-left:30% ;
     margin-bottom: 1000px;
+    
   }
   button {
     margin: 20px;
@@ -328,7 +325,7 @@ transform:translateX(0); }
 }
 
 .box {
-margin-left: 44.55%;
+margin-left: 43.5%;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;

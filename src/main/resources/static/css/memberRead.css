@@ -8,9 +8,10 @@ body{
     border: 1px solid rgb(186, 189, 182);
     height: 91%;
     width: 80%;
-    margin-left: 19.9%;
+    margin-left: 40%;
   border-bottom: none;
     border-top: none;
+    border-left: none;
     position: absolute;  
     display: inline;
   
@@ -35,7 +36,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-       margin-left: 50px;
+       margin-left: 0px;
         
 }
 .input2{
@@ -44,7 +45,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input3{
     border: 1px solid rgb(211, 215, 207);
@@ -52,7 +53,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input4{
   border: 1px solid rgb(211, 215, 207);
@@ -60,7 +61,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
        
 }
 .input5{
@@ -69,7 +70,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input6{
     border: 1px solid rgb(211, 215, 207);
@@ -77,7 +78,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input7{
     border: 1px solid rgb(211, 215, 207);
@@ -85,7 +86,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input8{
     border: 1px solid rgb(211, 215, 207);
@@ -93,7 +94,7 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input9{
     border: 1px solid rgb(211, 215, 207);
@@ -101,17 +102,24 @@ body{
         border-left: none;
         border-right: none;
         border-bottom: none;
-         margin-left: 100px;
+         margin-left: 50px;
 }
 .input10{
-	margin-left: 800px;
-	position: absolute;
-	margin-top: -55px;
+	margin-left: 50px;
 	
+	
+border-radius: 5%;
+height: 200px;
+}
+
+.imgH4{
+	margin-left: 50px;
+   margin-bottom: 10px;
 }
 .h232{
  margin-left: 32%;
  font-size: 30px;
+ 
 
 }
 
@@ -129,11 +137,7 @@ body{
 	margin-left: 50px;
 	
 }
-.p2{
-	font-size: 35px;
-	margin-top: 50px;
-	margin-left:100px;
-}
+
 .p3{
 	font-size: 30px;
 }

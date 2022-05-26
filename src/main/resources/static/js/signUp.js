@@ -162,8 +162,6 @@ document.getElementById('m_birth').value = new Date().toISOString().substring(0,
         	   
 });
 
-
-
 // 이메일 인증 관련 모달 숨겨놓기
 $('.mailCheckModalBack2').hide();
 

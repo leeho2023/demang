@@ -243,6 +243,11 @@ public class MemberServiceImpl implements MemberService {
 	public AnswerDTO answerSelect(String c_id) {
 		return mapper.answerSelect(c_id);
 	}
-	
-	
+	//관리자 페이지 회원목록
+	@Override
+	public List<MemberDTO> userList() {
+		
+		return mapper.userList();
+	}
+
 }

@@ -220,7 +220,7 @@
 
 	<!-- 이메일 인증코드 등록 쿼리 -->
 	<insert id="emailCodeInsert">
-		INSERT INTO emailcheckTBL(m_email, e_code)
+		INSERT INTO emailCheckTBL(m_email, e_code)
 		VALUES(#{m_email}, #{e_code})
 	</insert>
 
@@ -339,7 +339,7 @@
 
 	<!-- memberTBL과 emailCheckTBL에 동시에 존재하지 않는 이메일 삭제하기 -->
 	<delete id="emailAuthenticationDelete">
-		DELETE FROM emailcheckTBL
+		DELETE FROM emailCheckTBL
 		WHERE m_email = #{m_email}
 	</delete>
 	<!-- memberTBL과 emailCheckTBL에 동시에 존재하지 않는 이메일 삭제하기 -->
@@ -523,6 +523,12 @@
 		FROM
 			contactUsTBL
 	</select>
+	
+	
+	<!-- 관리자 페이지 회원목록 -->
+	<select id="userList" resultType="org.pro.demang.model.MemberDTO">
+        SELECT * FROM memberTBL
+     </select>
 
 	<!-- ############################################################# -->
 
