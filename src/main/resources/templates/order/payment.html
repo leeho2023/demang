@@ -2,23 +2,67 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제 페이지 만드는 중</title>
+<title>결제 대기 중</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- script -->
 <!-- jQuery --><script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js --><script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+<!-- css -->
+<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 이 페이지 --><link rel="stylesheet" href="css/payment.css">
 </head>
 <body>
-<h1>여기에 주문 정보 표시</h1>
-<div>
-	<div>merchant_uid: <span th:text="${order.ord_id}"></span></div>
-	<div>상품 이름: <span th:text="${order.targetDTO.mer_name}"></span></div>
-	<div>결제할 금액: <span th:text="${order.ord_price}"></span></div>
-	<div>구매자 이메일: <span th:text="${order.ord_buyer_email}"></span></div>
-	<div>구매자 이름: <span th:text="${order.ord_buyer_name}"></span></div>
-	<div>구매자 연락처: <span th:text="${order.ord_buyer_tel}"></span></div>
-	<div>배송지 주소: <span th:text="${order.ord_buyer_address}"></span></div>
-	<div>배송지 우편번호: <span th:text="${order.ord_buyer_postcode}"></span></div>
+
+<header th:replace="other/homeNav">메인메뉴</header>
+
+<main>
+	<h1>결제 정보 확인</h1>
+	<hr>
+	
+	<table class="orderInfo">
+		<tr>
+			<th>주문 번호</th>
+			<td th:text="${order.ord_id}"></td>
+		</tr>
+		<tr>
+			<th>상품 이름</th>
+			<td th:text="${order.targetDTO.mer_name}"></td>
+		</tr>
+		<tr>
+			<th>결제할 금액</th>
+			<td>[[${order.ord_price}]]원</td>
+		</tr>
+		<tr>
+			<th>구매자 이메일</th>
+			<td th:text="${order.ord_buyer_email}"></td>
+		</tr>
+		<tr>
+			<th>구매자 이름</th>
+			<td th:text="${order.ord_buyer_name}"></td>
+		</tr>
+		<tr>
+			<th>구매자 연락처</th>
+			<td th:text="${order.ord_buyer_tel}"></td>
+		</tr>
+		<tr>
+			<th>배송지 주소</th>
+			<td th:text="${order.ord_buyer_address}"></td>
+		</tr>
+		<tr>
+			<th>배송지 우편번호</th>
+			<td th:text="${order.ord_buyer_postcode}"></td>
+		</tr>
+	</table>
+	
+	<div class="under">
+		<button onclick="requestPay()">결제하기</button>
+	</div>
+</main>
+
+<div id="globalSidebar">
+	<footer th:replace="other/footer">푸터</footer>
 </div>
-<button onclick="requestPay()">결제하기</button>
 
 <script th:inline="javascript">
 var IMP = window.IMP; // 생략 가능
@@ -66,10 +110,6 @@ function requestPay() {
 		}
 	});
 }
-
-
-
-
 </script>
 </body>
 </html>

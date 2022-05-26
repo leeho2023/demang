@@ -27,14 +27,23 @@ body
 ol , ul {
 	list-style-type: none;
 }
-
-main {
-	background-color: #F2EDD7;
+:root {/* 테마색 */
+	--backCol: white;
+	--themeCol: rgb(42, 36, 29);
+	--foreCol: white;
 }
 
+/* */
+.button {
+	background-color: var(--themeCol);
+	color: var(--foreCol);
+	border: none;
+	padding: 4px 8px;
+	border-radius: 20px;
+	font-weight: bold;
+}
 
-
-/* 공통 */
+/* 공통 - 전체 틀 */
 body {
 	position: relative;
 }
@@ -55,13 +64,13 @@ body {
 	text-align: center;
 }
 #globalHeader , main , #globalFList {
-	/*background-color: white;*/
+	background-color: white;
 }
 #globalFooter {
 	text-align: center;
 	color: #888;
-	
 }
+
 
 
 /* 전체 틀 */
@@ -212,7 +221,7 @@ body {
 		top: 60px;
 		right: 0px;
 	}
-	#globalHeader .menu:not(.open) .menuList {
+	#globalHeader #mainMenu:not(.open) .menuList {
 		display: none;
 	}
 	/* 사이드바 */
