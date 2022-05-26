@@ -4,13 +4,15 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import com.github.pagehelper.PageInfo;
+
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.ContactUsImgDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
-import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PagingServiceImpl;
@@ -23,8 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.github.pagehelper.PageInfo;
 
 @Controller
 public class LhhController {
@@ -154,6 +154,15 @@ public class LhhController {
 		return "redirect:/";
 	}
 
+// 관리자 user 페이징
+	@GetMapping("/userListPage")
+    public String userListPage(
+		@RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
+		PageInfo<MemberDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
+    	model.addAttribute("userListPaging", p);
+     
+       	return "admin/userPage";
+    }
 	
 	
 	
@@ -161,7 +170,7 @@ public class LhhController {
 	@GetMapping("/contactUsList")
 	public String page(
             @RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
-	PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
+	PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getContactList(pageNum), 10);
 	model.addAttribute("contactUsList", p);
 	return "admin/messages";
 	}
