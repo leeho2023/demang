@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class KysController {
@@ -30,41 +31,29 @@ public class KysController {
 	
 	//// 주문 페이지
 	@GetMapping("/order")
-	String orderPage( @RequestParam("mer_id")int mer_id, Model model ) {
+	String orderPage( @RequestParam("mer_id")int mer_id, @RequestParam("from")int p_id, Model model ) {
 		//// ??? 로그인 안 돼있으면
-		model.addAttribute(
+		model.addAttribute(// 주문할 상품 정보
 				"mer",
-				mapper.getMerchandise(mer_id)
+				orderService.getMerchandise(mer_id)
 				);
+		model.addAttribute( "backto", p_id );// 결제 완료 후 돌아갈 게시글 상세보기 페이지의 게시글 번호
 		return "order/order";
 	}
-/*	@GetMapping("/order")
-	String orderPage( @RequestParam("p_id")int p_id, Model model ) {
-		List<MerchandiseDTO> merList = mapper.getMerchandiseList(p_id);
-		if( merList.size() == 0 ) {// 현재 주문 가능한 상품이 없음
-			return "redirect:/postView?p_id="+p_id;// 게시글 상세보기 페이지로 리다이렉트
-		}
-		//// ??? 로그인 안 돼있으면
-		
-		model.addAttribute(// 결제할 게시물
-				"post", 
-				mapper.getPost(p_id)
-				);
-		model.addAttribute(
-				"merList",
-				merList
-				);
-		return "order/order";
-	}*/
 	//// 결제 페이지
 	@PostMapping("/payment")
-	String paymentPage( OrderDTO dto, Model model, HttpSession session ) {
+	String paymentPage( OrderDTO dto, @RequestParam("backto")int p_id, Model model, RedirectAttributes rttr, HttpSession session ) {
 		//// ??? 로그인 안 돼있으면
 		//// 주문 정보 저장
-		if( dto.getOrd_amount() > mapper.getMerAmount(dto.getOrd_target()) ) return "redirect:/memberRead";// 주문할 수량이 남은 수량보다 크다. ??? 또 일단 회원정보페이지로 ㅣ동
+		if( dto.getOrd_amount() > mapper.getMerAmount(dto.getOrd_target()) ) { // 주문할 수량이 남은 수량보다 크면
+			System.out.println("ksy con ~ 주문 요청하신 수량이 현재 상품의 남은 수량보다 많습니다.");
+			rttr.addFlashAttribute("alert", "주문 요청하신 수량이 현재 상품의 남은 수량보다 많습니다.");// 수량 초과 메시지와 함께
+			return "redirect:/postView?p_id="+p_id;//이전 게시글로 돌아가기
+		}
 		orderService.newOrder( dto, loginId(session) );// 서비스에서 dto 완성
 		//// 주문 정보 model에 넣기
 		model.addAttribute("order", dto);
+		model.addAttribute( "backto", p_id );// 결제 완료 후 돌아갈 게시글 상세보기 페이지의 게시글 번호
 		return "order/payment";
 	}
 	/// 결제 시도 ???

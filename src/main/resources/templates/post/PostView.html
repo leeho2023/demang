@@ -98,7 +98,7 @@ $(document).ready(function(){
 	<th:block th:if="${post.p_type}=='S'"><!--/* 판매글일 때만 상품 목록 보이기 */-->
 	항목을 누르면 해당 상품 주문 페이지로 이동합니다.
 	<ul th:if="${merList.size} > 0">
-		<li th:each="mer: ${merList}" th:onclick="'location.href=\'/order?mer_id='+${mer.mer_id}+'\''">
+		<li th:each="mer: ${merList}" th:if="${mer.mer_amount} > 0" th:onclick="'location.href=\'/order?mer_id='+${mer.mer_id}+'&from='+${post.p_id}+'\''">
 			<span th:text="${mer.mer_name}"></span><!--/* 상품 이름 */-->
 			<span><span th:text="${mer.mer_amount}"></span>개 남음</span><!--/* 주문가능 수량 */-->
 		</li>

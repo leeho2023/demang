@@ -1,6 +1,9 @@
 package org.pro.demang.service;
 
+import java.util.List;
+
 import org.pro.demang.mapper.MainMapper;
+import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +23,37 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class OrderServiceImpl implements OrderService{
 	@Autowired private MainMapper mapper;
 	
+	//// 상품 정보 가져오기 (수량을 주문가능수량으로 대체)
+	@Override
+	public MerchandiseDTO getMerchandise( int mer_id ) {
+		MerchandiseDTO dto = mapper.getMerchandise(mer_id);
+		replace_merAmount_with_orderableAmount(dto);
+		return dto;
+	}
+	//// 게시글의 상품 목록 가져오기 (수량을 주문가능수량으로 대체)
+	@Override
+	public List<MerchandiseDTO> getMerchandiseList( int p_id ) {
+		List<MerchandiseDTO> list = mapper.getMerchandiseList(p_id);
+		for( MerchandiseDTO dto: list ) {
+			replace_merAmount_with_orderableAmount(dto);
+		}
+		return list;
+	}
+	private void replace_merAmount_with_orderableAmount( MerchandiseDTO dto ) {
+		dto.setMer_amount( mapper.getMerAmount( dto.getMer_id() ) );
+	}
 	
 	//// 새 주문 생성
 	@Override
 	public void newOrder( OrderDTO dto, String loginId ) {
 		int mer_id = dto.getOrd_target();// 상품 번호
+		MerchandiseDTO merdto = mapper.getMerchandise( mer_id );// 주문할 상품
 		//// 주문 시도 횟수 +1
 		mapper.merCountUp( mer_id );
 		//// 주문 dto 완성
-		dto.setOrd_id("ord-"+dto.getOrd_target()+"-"+mapper.getMerCount(mer_id));// 주문 번호
-		dto.setOrd_target_name( mapper.getMerName(mer_id) );// 상품 이름
-		dto.setOrd_price( mapper.getMerPrice(mer_id) * dto.getOrd_amount() );// 가격 = 해당 상품의 단가 * 구매자가 입력한 수량 ???
+		dto.setOrd_id("ord-"+dto.getOrd_target()+"-"+mapper.getMerCount(mer_id));// 주문 번호 만들기
+		dto.setOrd_target_name( merdto.getMer_name() );// 주문 정보에 상품 이름 넣기
+		dto.setOrd_price( merdto.getMer_price() * dto.getOrd_amount() );// 가격 = 해당 상품의 단가 * 구매자가 입력한 수량 ???
 		dto.setOrd_buyer( loginId );// 구매자 회원번호
 		// 주문 시각은 DB에서 자동 생성
 		//// 주문을 디비에 저장 (실제 결제 시 결제 정보 위변조 확인용)

@@ -24,10 +24,10 @@ public class OrderDTO {
 		this.ord_buyer = Integer.parseInt(ord_buyer);
 	}
 
-	public OrderDTO(int p_id, String mer_name, int mer_price, int mer_amount) {
-		this.ord_target = p_id;
+	/*public OrderDTO(int ord_target, String mer_name, int mer_price, int mer_amount) {
+		this.ord_target = ord_target;
 		this.ord_target_name = mer_name;
 		this.ord_price = mer_price;
 		this.ord_amount = mer_amount;
-	}
+	}*/
 }

@@ -33,7 +33,8 @@ form > * {
 	<h1>[[${mer.mer_name}]] 주문하기</h1>
 	
 	<form action="payment" method="post">
-		<input type="hidden" th:value="${mer.mer_id}">
+		<input type="hidden" name="backto" th:value="${backto}">
+		<input type="hidden" name="ord_target" th:value="${mer.mer_id}">
 		<div>
 			<span>수량 (최대 <span id="show_amount_max" th:text="${mer.mer_amount}"></span>개)</span>
 			<input type="number" id="amount"         name="ord_amount" placeholder="수량" value="1" min=1 th:max="${mer.mer_amount}">

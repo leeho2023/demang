@@ -10,6 +10,7 @@ import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.MemberService;
+import org.pro.demang.service.OrderService;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class MainController {
     private MemberService memberService;
     @Autowired
 	PostService postService;
+    @Autowired
+    OrderService orderService;
 	@Autowired
 	private MainMapper mapper;
 
@@ -129,7 +132,7 @@ public class MainController {
 		if( dto.getP_type().equals("S") ) {
 			model.addAttribute(
 					"merList",
-					mapper.getMerchandiseList(p_id)
+					orderService.getMerchandiseList(p_id)
 					);
 		}
 		

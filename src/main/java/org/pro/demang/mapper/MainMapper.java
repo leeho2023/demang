@@ -71,8 +71,8 @@ public interface MainMapper {
 	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)
 	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)
 	//// 상품
-	List<MerchandiseDTO> getMerchandiseList( int no );// 게시글의 상품 목록 불러오기
 	MerchandiseDTO getMerchandise( int mer_id );// 상품 번호로 상품 찾기
+	List<MerchandiseDTO> getMerchandiseList( int mer_id );// 게시글의 상품 목록 불러오기
 	void merCountUp( int mer_id );// 상품의 주문 시도 횟수 +1
 	int getMerCount(int mer_id);// 상품의 주문 시도 횟수 조회
 	int getMerAmount( int mer_id );// 상품 판매가능 수량 확인
