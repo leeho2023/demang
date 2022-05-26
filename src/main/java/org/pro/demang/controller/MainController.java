@@ -251,23 +251,30 @@ public class MainController {
 	@PostMapping("/func/doFollow")
 	@ResponseBody
 	public String doFollow( int m2, HttpSession session ) {
-		mapper.doFollow(
-				loginId(session),
-				m2);
+		if( m2 == loginId(session) ) return "";// 나 자신을 팔로우하려는 시도: 아무것도 안 함
+		if( followCheck( m2, session ) ) {// 이미 팔로우 되어있는 경우
+			mapper.unFollow(// 팔로우 해제
+					loginId(session),
+					m2);
+		}else {// 아니면
+			mapper.doFollow(// 팔로우 하기
+					loginId(session),
+					m2);
+		}
 		return "";
 	}
 	
-	//// 팔로우 확인
+	//// 팔로우 확인 // true: 팔로우중 / false: 팔로우 안하고있음
 	@GetMapping("/func/followCheck")
 	@ResponseBody
-	public String followCheck( int m2, HttpSession session ) {
+	public boolean followCheck( int m2, HttpSession session ) {
 		if( mapper.followCheck(
 				loginId(session), 
 				m2
 				) != 0 ) {
-			return "O";
+			return true;
 		}
-		return "X";
+		return false;
 	}
 
 	//// 검색 페이지

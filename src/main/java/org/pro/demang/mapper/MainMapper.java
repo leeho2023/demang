@@ -34,6 +34,7 @@ public interface MainMapper {
 	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기
 	//// 팔로우
 	void doFollow( int m1, int m2 );// m1이 m2를 팔로우하기
+	void unFollow(int m1, int m2);// m1이 m2를 팔로우 취소
 	int followCheck( int m1, int m2);// 팔로우 여부 체크
 	int followingCount(int no);// 내가 팔로우한 사람 수
 	int followerCount(int no);// 나를 팔로우한 사람 수

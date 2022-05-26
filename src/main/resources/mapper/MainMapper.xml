@@ -242,6 +242,10 @@
 	
 	<!-- 팔로우하기 -->
 	<insert id="doFollow">INSERT INTO followTBL (follower, followee) VALUES(#{m1}, #{m2})</insert>
+	<!-- 팔로우 취소 -->
+	<delete id="unFollow">DELETE FROM followTBL WHERE follower = #{m1} AND followee = #{m2}</delete>
+	
+	<!-- 팔로우 여부 확인(0 또는 1) -->
 	<select id="followCheck" resultType="Integer">
 	SELECT COUNT(*)  FROM followTBL WHERE follower=#{m1} AND followee=#{m2}</select>
 	
