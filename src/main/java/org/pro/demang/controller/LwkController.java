@@ -46,30 +46,17 @@ public class LwkController {
 					return "redirect:/"+red;
 				}
 			}else { // 로그인 실패
-				rttr.addFlashAttribute("msg", false);
+				rttr.addFlashAttribute("alert", "아이디와 비밀번호를 다시 확인해주세요.");
 				return "redirect:/loginMove";
 			}
 		}
-		
-	}
-	
-	//// 로그아웃
-	//// 세션을 삭제한다.
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		System.out.println("lwk controller ~ LOG OUT");
-		HttpSession session = request.getSession();
-		session.invalidate();
-		System.out.println("lwk controller ~ LOG OUT");
-		
-		return "redirect:/";
 	}
 	
 	// 회원 정보보기창
 	@GetMapping("/memberRead")
 	public String memberRead(Model model, HttpSession session) {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=memberRead";// 비회원인 경우 로그인하러 가기
-		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
+		MemberDTO dto = MemberService.getMember_no( loginId(session) );
 		// 프사 인코딩
 		System.out.println("lwkController.memberRead ~ "+dto);
 		model.addAttribute("dto",dto);
@@ -80,7 +67,7 @@ public class LwkController {
 	@GetMapping("/memberUpdate")
 	public String memberUpdate(Model model, HttpSession session) {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=memberUpdate";// 비회원인 경우 로그인하러 가기
-		MemberDTO dto = MemberService.getMember_no(session.getAttribute("login")+"");
+		MemberDTO dto = MemberService.getMember_no( loginId(session) );
 		model.addAttribute("dto",dto);
 		return "member/memberUpdate";
 	}
@@ -106,6 +93,21 @@ public class LwkController {
 			rttr.addFlashAttribute("good", true);
 			return "good";
 		}
+	}
+	@GetMapping("/adminUser")
+    public String adminMember(Model model) {
+       System.out.println("aa");
+     List<MemberDTO> list =   MemberService.userList();
+       model.addAttribute("list",list);
+     
+       return "admin/user";
+    }
+	
+
+	//// 현재 로그인한 회원 번호(정수) 가져오기 // 비로그인 상태일 경우 0으로
+	private static int loginId( HttpSession session ) {
+		if( session.getAttribute("login") == null ) return 0;
+		return Integer.parseInt( session.getAttribute("login")+"" );
 	}
 }
 

@@ -61,15 +61,16 @@
 		<result column="ord_id" property="ord_id"/>
 		<result column="ord_buyer" property="ord_buyer"/>
 		<result column="ord_target" property="ord_target"/>
-		<result column="ord_target_name" property="ord_target_name"/>
 		<result column="ord_amount" property="ord_amount"/>
 		<result column="ord_buyer_name" property="ord_buyer_name"/>
 		<result column="ord_buyer_email" property="ord_buyer_email"/>
-		<result column="l_ord_buyer_telid" property="ord_buyer_tel"/>
+		<result column="ord_buyer_tel" property="ord_buyer_tel"/>
 		<result column="ord_buyer_address" property="ord_buyer_address"/>
 		<result column="ord_buyer_postcode" property="ord_buyer_postcode"/>
 		<result column="ord_price" property="ord_price"/>
+		<result column="ord_date" property="ord_date"/>
 		<result column="ord_state" property="ord_state"/>
+		<collection property="targetDTO" resultMap="MerchandiseDTO"/>
 	</resultMap>
 	<resultMap id="MerchandiseDTO" type="org.pro.demang.model.MerchandiseDTO">
 		<result column="mer_id" property="mer_id"/>
@@ -242,6 +243,10 @@
 	
 	<!-- 팔로우하기 -->
 	<insert id="doFollow">INSERT INTO followTBL (follower, followee) VALUES(#{m1}, #{m2})</insert>
+	<!-- 팔로우 취소 -->
+	<delete id="unFollow">DELETE FROM followTBL WHERE follower = #{m1} AND followee = #{m2}</delete>
+	
+	<!-- 팔로우 여부 확인(0 또는 1) -->
 	<select id="followCheck" resultType="Integer">
 	SELECT COUNT(*)  FROM followTBL WHERE follower=#{m1} AND followee=#{m2}</select>
 	
@@ -259,7 +264,8 @@
 
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_writer" resultType="Integer">
-	SELECT * FROM postTBL WHERE p_writer=#{no} ORDER BY p_id DESC</select>
+	SELECT * FROM postTBL WHERE p_writer=#{no} ORDER BY p_id DESC
+	</select>
 		
 	<!-- 해당 번호의 회원이 팔로우한 회원들이 쓴 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_followee" resultType="Integer">
@@ -269,6 +275,11 @@
 		ON f.followee = p.p_writer
 		WHERE f.follower = #{no}
 		ORDER BY p.p_id DESC;
+	</select>
+	
+	<!-- 해당 번호의 회원이 좋아한 게시글들(게시글번호만) -->
+	<select id="getPostList_like" resultType="Integer">
+		SELECT l_postNo From likeTBL WHERE l_id = #{l_id}
 	</select>
 
 
@@ -401,6 +412,13 @@
 	SET m.mer_amount = m.mer_amount - o.ord_amount
 	WHERE o.ord_id = #{ord_id}
 	</update>
+	<!-- 회원의 주문 내역 -->
+	<select id="getOrderList" resultMap="OrderDTO">
+	SELECT * FROM orderTBL o 
+	JOIN merchandiseTBL m 
+		ON o.ord_target = m.mer_id 
+	WHERE o.ord_buyer = #{no};
+	</select>
 	
 	<!-- 게시글에 들어가는 상품 정보 -->
 	<insert id="merchandiseInsert">

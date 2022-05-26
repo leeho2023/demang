@@ -6,28 +6,18 @@ import lombok.Data;
 
 @Data
 public class OrderDTO {
-	private String ord_id;
-	private int ord_buyer;
-	private int ord_target;
-	private String ord_target_name;
-	private int ord_amount;
-	private String ord_buyer_name;
-	private String ord_buyer_email;
-	private String ord_buyer_tel;
-	private String ord_buyer_address;
-	private String ord_buyer_postcode;
-	private int ord_price;
-	private Timestamp ord_date;
-	private char ord_state;
-	
-	public void setOrd_buyer( String ord_buyer ) {
-		this.ord_buyer = Integer.parseInt(ord_buyer);
-	}
-
-	/*public OrderDTO(int ord_target, String mer_name, int mer_price, int mer_amount) {
-		this.ord_target = ord_target;
-		this.ord_target_name = mer_name;
-		this.ord_price = mer_price;
-		this.ord_amount = mer_amount;
-	}*/
+	private String ord_id;// 주문 번호: ord-상품번호-주문시도횟수
+	private int ord_buyer;// 구매자 (회원 번호)
+	private int ord_target;// 주문 대상 상품 번호
+	private String ord_target_name;// 주문 대상 상품 번호
+	private MerchandiseDTO targetDTO;// 주문 대상 상품 정보
+	private int ord_amount;// 수량
+	private String ord_buyer_name;// 구매자 이름
+	private String ord_buyer_email;// 구매자 이메일
+	private String ord_buyer_tel;// 구매자 연락처
+	private String ord_buyer_address;// 배송지 주소
+	private String ord_buyer_postcode;// 배송지 우편번호
+	private int ord_price;// 결제 가격 (단가 아님)
+	private Timestamp ord_date;// 주문일자
+	private char ord_state;// O: 상태 결제완료 / A: 결제대기 / X: 결제실패
 }

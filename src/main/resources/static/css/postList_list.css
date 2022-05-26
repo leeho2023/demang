@@ -1,1 +1,38 @@
 @charset "UTF-8";
+
+#postList {
+	display: flex;
+	flex-flow: column nowrap;
+}
+.post {
+	margin: 10px 0;
+	border: 2px solid #ddd;
+	
+	box-sizing: content-box;
+	height: 100px;/* = .contentImg의 height */
+	
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}
+.post .writerInfo {/* 작성자 정보 */
+	
+}
+
+.post .imageBox {/* 이미지 */
+	
+}
+.post .contentImg {
+	height: 100px;/* = .post의 height */
+}
+
+.post .content {/* 본문 */
+	flex-grow: 1;
+}
+
+
+.post .more {
+	
+}
+
+

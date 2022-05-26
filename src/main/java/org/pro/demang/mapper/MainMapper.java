@@ -30,47 +30,41 @@ public interface MainMapper {
 	public String emailCheck(String m_email);
 	//// 회원정보
 	void memberUpdate(MemberDTO dto);
-	MemberDTO getMember_no(String no);// 회원번호로 회원 찾기
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
 	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기
 	//// 팔로우
-	void doFollow( String m1, String m2 );// m1이 m2를 팔로우하기
-	int followCheck( String m1, String m2);// 팔로우 여부 체크
+	void doFollow( int m1, int m2 );// m1이 m2를 팔로우하기
+	void unFollow(int m1, int m2);// m1이 m2를 팔로우 취소
+	int followCheck( int m1, int m2);// 팔로우 여부 체크
 	int followingCount(int no);// 내가 팔로우한 사람 수
 	int followerCount(int no);// 나를 팔로우한 사람 수
 	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
-	List<MemberDTO> fList(String follower); // 특정 회원(번호)이 팔로우한 회원 목록
 	
 	
 	// 게시글 관련
     //// 순수 게시물
 	void postInsert( PostDTO dto ); // 게시글 작성
 	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
-	List<Integer> getPostList_writer( String no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_writer( int no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
-	List<Integer> getPostList_followee( String no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
-	PostDTO getPost( String no ); // 게시글 번호로 게시글 찾기
+	List<Integer> getPostList_followee( int no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
+	List<Integer> getPostList_like(int no);// 회원 번호로; 해당 회원이 좋아한 글 목록
 	PostDTO getPost( int no ); // 게시글 번호로 게시글 찾기
 	//// 이미지
 	void postInsertImg(int p_id, @Param("i_image")byte[] bytes); // 게시글 이미지 등록하기
-	List<PostImgDTO> getImageList(String no); //게시글 번호로 해당 게시글의 이미지들 찾기
 	List<PostImgDTO> getImageList(int no); //게시글 번호로 해당 게시글의 이미지들 찾기
 	//// 해시태그
 	void hashtagInsert( String hashtag );// 해시태그 테이블에 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 정보 등록
 	List<String> getHashTags( int p_id );// 게시글의 해시태그들 가져오기
-	List<String> getHashTags( String p_id );// 게시글의 해시태그들 가져오기
 	//// 좋아요
-	void addLike(String l_id, String l_postNo); // 좋아요 누르기
-	void removeLike(String l_id, String l_postNo);// 좋아요 취소
-	int likeCheck(String l_id, String l_postNo); // 좋아요 눌렀는지 검사
-	String likeCount(String l_postNo); // 게시물 좋아요 갯수
+	void addLike(int l_id, int l_postNo); // 좋아요 누르기
+	void removeLike(int l_id, int l_postNo);// 좋아요 취소
+	int likeCheck(int l_id, int l_postNo); // 좋아요 눌렀는지 검사
+	String likeCount(int l_postNo); // 게시물 좋아요 갯수
 	//// 댓글
 	void commentInsert( CommentDTO dto ); // 댓글 등록
 	void commentDelete(String c_id); // 댓글 삭제하기
-	List<CommentDTO> getCommentList(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
-	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)
 	List<CommentDTO> getCommentList_recent(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)
 	//// 상품
 	MerchandiseDTO getMerchandise( int mer_id );// 상품 번호로 상품 찾기
@@ -80,9 +74,9 @@ public interface MainMapper {
 	int getMerAmount( int mer_id );// 상품 판매가능 수량 확인
 	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
 	//// 리뷰
-	int postReviewList(String p_origin); // 글에 있는 리뷰 개수 불러오기
-	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
-	boolean reViewCheck(int ord_target, String ord_buyer); // 리뷰 작성 전 구매자 확인
+	int postReviewList(int p_origin); // 글에 있는 리뷰 개수 불러오기
+	List<PostDTO> postReviewShow(int p_origin); // 리뷰 불러오기
+	boolean reViewCheck(int ord_target, int ord_buyer); // 리뷰 작성 전 구매자 확인
 	
 	
 	//// 주문 및 결제 관련
@@ -90,6 +84,7 @@ public interface MainMapper {
 	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
+	List<OrderDTO> getOrderList(int loginId);// 회원의 주문 목록 조회
 	
 	
 	// 검색 관련
@@ -105,13 +100,13 @@ public interface MainMapper {
 	//// 채팅 관련
 	void chatSend( ChatDTO dto );// 메시지 한 개 보내기
 	List<ChatDTO> chatHistory( // 두 회원 사이의 채팅 읽어오기 (from 뒤의 것부터만)
-			@Param("m1") String m1, 
-			@Param("m2") String m2, 
+			@Param("m1") int m1, 
+			@Param("m2") int m2, 
 			@Param("since") int since 
 			);
 	List<ChatDTO> chatHistory_recent( // 두 회원 사이의 채팅 읽어오기 (최신 몇 개만)
-			@Param("m1") String m1, 
-			@Param("m2") String m2
+			@Param("m1") int m1, 
+			@Param("m2") int m2
 			);
 	
 	

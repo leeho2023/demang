@@ -63,7 +63,7 @@ public class SjhController {
 	//// 게시글에 좋아요 (좋아요 버튼 누르면 ajax로)
 	@PostMapping("likeToPost")
 	@ResponseBody
-	public String likeToPost(@RequestParam("p_id")String l_postNo, HttpSession session ) {
+	public String likeToPost(@RequestParam("p_id") Integer l_postNo, HttpSession session ) {
 		postService.addLike( loginId(session), l_postNo);
 		return "";
 	}
@@ -71,7 +71,7 @@ public class SjhController {
 	//// 게시글에 좋아요 취소 (좋아요 취소 버튼 누르면 ajax로)
 	@PostMapping("unlikeToPost")
 	@ResponseBody
-	public String unlikeToPost(@RequestParam("p_id")String l_postNo, HttpSession session ) {
+	public String unlikeToPost(@RequestParam("p_id") Integer l_postNo, HttpSession session ) {
 		postService.removeLike( loginId(session), l_postNo);
 		return "";
 	}
@@ -80,14 +80,14 @@ public class SjhController {
 	// 좋아요 여부 확인
 	@PostMapping("likeCheck")
 	@ResponseBody
-	public boolean likeCheck(@RequestParam("p_id")String l_postNo, HttpSession session) {
-		return postService.likeCheck( session.getAttribute("login")+"", l_postNo ); 
+	public boolean likeCheck(@RequestParam("p_id") Integer l_postNo, HttpSession session) {
+		return postService.likeCheck( loginId(session), l_postNo ); 
 	}
 	
 	// 좋아요 갯수 불러오기
 	@PostMapping("likeCount")
 	@ResponseBody
-	public String likeCount(@RequestParam("p_id")String l_postNo) {
+	public String likeCount(@RequestParam("p_id") Integer l_postNo) {
 		return postService.likeCount(l_postNo); 
 	}
 	
@@ -111,14 +111,14 @@ public class SjhController {
 	// 리뷰 목록 개수 가져오기
 	@PostMapping("reViewList")
 	@ResponseBody
-	public int reViewList(@RequestParam("p_id")String p_origin) {
+	public int reViewList(@RequestParam("p_id") Integer p_origin) {
 		return postService.postReviewList(p_origin);
 	}
 	
 	// 리뷰 목록 불러오기
 	@PostMapping("reViewShow")
 	@ResponseBody
-	public List<PostDTO> reViewShow(@RequestParam("p_id")String p_origin) {
+	public List<PostDTO> reViewShow(@RequestParam("p_id") Integer p_origin) {
 		
 		List<PostDTO> dto = postService.postReviewShow(p_origin);
 		
@@ -126,10 +126,11 @@ public class SjhController {
 		
 		return dto;
 	}
-	
-	//// 현재 로그인한 회원 번호(문자열로) 가져오기
-	private static String loginId( HttpSession session ) {
-		return session.getAttribute("login")+"";
+
+	//// 현재 로그인한 회원 번호(정수) 가져오기 // 비로그인 상태일 경우 0으로
+	private static int loginId( HttpSession session ) {
+		if( session.getAttribute("login") == null ) return 0;
+		return Integer.parseInt( session.getAttribute("login")+"" );
 	}
 	
 	//// 댓글 삭제하기

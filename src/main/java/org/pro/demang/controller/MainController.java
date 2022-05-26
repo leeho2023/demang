@@ -64,7 +64,7 @@ public class MainController {
 
     // 댓글 보기
 	@PostMapping("/CommentShow")
-	public String commentShow(@RequestParam("p_id")String p_id, Model model){
+	public String commentShow(@RequestParam("p_id") Integer p_id, Model model){
 		List<CommentDTO> list = mapper.getCommentList(p_id);
 		model.addAttribute("commentList",list);
 		return "post/commentList";
@@ -143,7 +143,7 @@ public class MainController {
 	//세션으로 사용자 정보를 호출
 	@PostMapping("/memberCheck")
 	@ResponseBody
-	public String memberCheck(@RequestParam("m_id")String m_id, Model model) {
+	public String memberCheck(@RequestParam("m_id") Integer m_id, Model model) {
 		
 		MemberDTO dto = memberService.getMember_no(m_id);
 		System.out.println("회원 불러오기");
@@ -185,7 +185,20 @@ public class MainController {
 				);
 		return "post/postItem_album";
 	}
-
+	//// 게시글 한 개 가져오기(ajax용, list식으로 표시할 용도)
+	@PostMapping("/getPost_list")
+	public String postItem_forList( @RequestParam("no") int no, Model model ) {
+		//// 번호로 게시글 찾아서 DTO 받아오기
+		PostDTO dto = postService.getPost( no );
+		model.addAttribute("post", dto);
+		//// 게시글의 이미지 한 개만
+		model.addAttribute(
+				"image",
+				mapper.getPostImage( no )
+				);
+		return "post/postItem_list";
+	}
+	
     //// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
@@ -198,12 +211,16 @@ public class MainController {
 		model.addAttribute("postType", "stack");
 		return "post/postList";
 	}
-
+	
 	//// 개인 페이지
 	@GetMapping("/vip")
-	public String profile( @RequestParam(value="p", required=false) String no, Model model, HttpSession session ) {
-		//// 회원번호 지정되어있지 않으면 자신(현재로그인)의 번호로 지정
-		if( no == null ) no = loginId(session);
+	public String profile( @RequestParam(value="p", required=false) Integer no, Model model, HttpSession session ) {
+		//// 회원번호 지정되어있지 않으면 자신(현재로그인)의 번호로 지정, 로그인도 안 돼있으면 로그인 페이지로
+		if( no == null ) {
+			no = loginId(session);
+			if( loginId(session) == 0 )// 로그인 안 돼있으면
+				return "redirect:/loginMove?red=vip";// 로그인 페이지로
+		} 
 		//// 식별코드로 회원정보 찾기
 		MemberDTO dto = memberService.getMember_no(no);
 		//// 찾는 회원이 없는 경우 회원 없다는 페이지로 이동
@@ -215,6 +232,19 @@ public class MainController {
 		model.addAttribute("postType", "stack");
 		model.addAttribute("additional", "profile");
 		model.addAttribute("dto", dto);// 해당 회원 정보
+		return "post/postList";
+	}
+	
+    //// 내가 좋아한 게시글들 보기 페이지
+	@GetMapping("/mylike")
+	public String mylike( Model model, HttpSession session ) {
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=mylike";// 비회원인 경우 로그인하러 가기
+		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
+		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
+				"postList", 
+				postService.getPostList_like( loginId(session) )
+				);
+		model.addAttribute("postType", "list");
 		return "post/postList";
 	}
 	
@@ -246,24 +276,31 @@ public class MainController {
 	//// 팔로우 하기
 	@PostMapping("/func/doFollow")
 	@ResponseBody
-	public String doFollow( String m2, HttpSession session ) {
-		mapper.doFollow(
-				loginId(session),
-				m2);
+	public String doFollow( int m2, HttpSession session ) {
+		if( m2 == loginId(session) ) return "";// 나 자신을 팔로우하려는 시도: 아무것도 안 함
+		if( followCheck( m2, session ) ) {// 이미 팔로우 되어있는 경우
+			mapper.unFollow(// 팔로우 해제
+					loginId(session),
+					m2);
+		}else {// 아니면
+			mapper.doFollow(// 팔로우 하기
+					loginId(session),
+					m2);
+		}
 		return "";
 	}
 	
-	//// 팔로우 확인
+	//// 팔로우 확인 // true: 팔로우중 / false: 팔로우 안하고있음
 	@GetMapping("/func/followCheck")
 	@ResponseBody
-	public String followCheck( String m2, HttpSession session ) {
+	public boolean followCheck( int m2, HttpSession session ) {
 		if( mapper.followCheck(
 				loginId(session), 
 				m2
 				) != 0 ) {
-			return "O";
+			return true;
 		}
-		return "X";
+		return false;
 	}
 
 	//// 검색 페이지
@@ -311,9 +348,10 @@ public class MainController {
 	}
 	
 	
-	//// 현재 로그인한 회원 번호(문자열로) 가져오기
-	private static String loginId( HttpSession session ) {
-		return session.getAttribute("login")+"";
+	//// 현재 로그인한 회원 번호(정수) 가져오기
+	private static int loginId( HttpSession session ) {
+		if( session.getAttribute("login") == null ) return 0;
+		return Integer.parseInt( session.getAttribute("login")+"" );
 	}
 	
 }

@@ -36,7 +36,7 @@ public class PostServiceImpl implements PostService{
 	}
 	//// 번호로 게시글 찾기
 	@Override
-	public PostDTO getPost( String no ) {
+	public PostDTO getPost( int no ) {
 		PostDTO dto = mapper.getPost(no);// 게시글 읽어오기
 		List<String> tags = mapper.getHashTags(no);//// 해시태그 읽어오기
 		// 본문의 해시태그를 <a>로 감싸기
@@ -49,28 +49,21 @@ public class PostServiceImpl implements PostService{
 		}
 		return dto;
 	}
-	@Override
-	public PostDTO getPost( int no ) {
-		return getPost( no+"" );
-	}
 	
 	//// 회원 번호로; 해당 회원의 게시글 목록(게시글번호만)(최신순)
-	@Override
-	public List<Integer> getPostList_writer( String no ){
-		return mapper.getPostList_writer(no);
-	}
 	@Override
 	public List<Integer> getPostList_writer( int no ){
 		return mapper.getPostList_writer(no);
 	}
 	//// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 게시글 목록(게시글번호만)(최신순)
 	@Override
-	public List<Integer> getPostList_followee( String no ){
+	public List<Integer> getPostList_followee( int no ){
 		return mapper.getPostList_followee(no);
 	}
+	//// 회원 번호로; 해당 회원이 좋아한 게시글 목록(게시글번호만)
 	@Override
-	public List<Integer> getPostList_followee( int no ){
-		return getPostList_followee(""+no);
+	public List<Integer> getPostList_like( int no ){
+		return mapper.getPostList_like(no);
 	}
 	
 	// 이미지
@@ -82,21 +75,21 @@ public class PostServiceImpl implements PostService{
 	
 	// 좋아요
 	@Override
-	public void addLike(String l_id, String l_postNo) {
+	public void addLike(int l_id, int l_postNo) {
 		mapper.addLike(l_id, l_postNo);
 	}
 	@Override
-	public void removeLike(String l_id, String l_postNo) {
+	public void removeLike(int l_id, int l_postNo) {
 		mapper.removeLike(l_id, l_postNo);
 	}
 	@Override
-	public boolean likeCheck(String l_id, String l_postNo) {
+	public boolean likeCheck(int l_id, int l_postNo) {
 		if( mapper.likeCheck(l_id, l_postNo) > 0 ) return true;
 		return false;
 	}
 	//// 게시글의 좋아요 개수. null이면 0으로 변환해 반환
 	@Override
-	public String likeCount(String l_postNo) {
+	public String likeCount(int l_postNo) {
 		String count = mapper.likeCount(l_postNo);
 		if( count == null ) return "0";
 		return count;
@@ -121,10 +114,6 @@ public class PostServiceImpl implements PostService{
 	
 	//// 게시글 번호로 해당 게시글의 댓글들 찾기
 	@Override
-	public List<CommentDTO> getCommentList(String no) {
-		return mapper.getCommentList(no);
-	}
-	@Override
 	public List<CommentDTO> getCommentList(int no) {
 		return mapper.getCommentList(no);
 	}
@@ -134,7 +123,7 @@ public class PostServiceImpl implements PostService{
 	
 	// 리뷰 작성 전 구매자 확인
 	@Override
-	public boolean reViewCheck(int ord_target, String ord_buyer) {
+	public boolean reViewCheck(int ord_target, int ord_buyer) {
 		return mapper.reViewCheck(ord_target, ord_buyer);
 	}
 	public int postSearchCount(String search) {
@@ -146,12 +135,12 @@ public class PostServiceImpl implements PostService{
 	}
 	// 글에 있는 리뷰 개수 불러오기
 	@Override
-	public int postReviewList(String p_origin) {
+	public int postReviewList(int p_origin) {
 		return mapper.postReviewList(p_origin);
 	}
 	// 리뷰 불러오기
 	@Override
-	public List<PostDTO> postReviewShow(String p_origin) {
+	public List<PostDTO> postReviewShow(int p_origin) {
 		return mapper.postReviewShow(p_origin);
 	}
 	

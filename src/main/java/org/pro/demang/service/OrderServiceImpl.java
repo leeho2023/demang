@@ -5,7 +5,6 @@ import java.util.List;
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.OrderDTO;
-import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpEntity;
@@ -45,14 +44,14 @@ public class OrderServiceImpl implements OrderService{
 	
 	//// 새 주문 생성
 	@Override
-	public void newOrder( OrderDTO dto, String loginId ) {
+	public void newOrder( OrderDTO dto, int loginId ) {
 		int mer_id = dto.getOrd_target();// 상품 번호
 		MerchandiseDTO merdto = mapper.getMerchandise( mer_id );// 주문할 상품
 		//// 주문 시도 횟수 +1
 		mapper.merCountUp( mer_id );
 		//// 주문 dto 완성
 		dto.setOrd_id("ord-"+dto.getOrd_target()+"-"+mapper.getMerCount(mer_id));// 주문 번호 만들기
-		dto.setOrd_target_name( merdto.getMer_name() );// 주문 정보에 상품 이름 넣기
+		dto.setTargetDTO( merdto );// 주문 정보에 상품 정보 넣기
 		dto.setOrd_price( merdto.getMer_price() * dto.getOrd_amount() );// 가격 = 해당 상품의 단가 * 구매자가 입력한 수량 ???
 		dto.setOrd_buyer( loginId );// 구매자 회원번호
 		// 주문 시각은 DB에서 자동 생성

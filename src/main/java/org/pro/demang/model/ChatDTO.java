@@ -16,10 +16,10 @@ public class ChatDTO {
 	private String h_content;
 	private Timestamp h_datetime;
 	
-	
-	public ChatDTO( String m1, String m2, String h_content ) {
-		this.h_speaker = Integer.parseInt(m1);
-		this.h_listener = Integer.parseInt(m2);
+
+	public ChatDTO(int h_speaker, int h_listener, String h_content) {
+		this.h_speaker = h_speaker;
+		this.h_listener = h_listener;
 		this.h_content = h_content;
 	}
 }
