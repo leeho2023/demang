@@ -17,6 +17,7 @@ public interface PostService {
 	public List<CommentDTO> getCommentList( int no );
 	public List<Integer> getPostList_writer( int no );
 	public List<Integer> getPostList_followee( int no );
+	public List<Integer> getPostList_like( int no );
 	void addLike(int l_id, int l_postNo); // 좋아요 누르기
 	void removeLike(int loginId, int l_postNo);// 좋아요 취소
 	boolean likeCheck(int l_id, int l_postNo); // 좋아요 불러오기

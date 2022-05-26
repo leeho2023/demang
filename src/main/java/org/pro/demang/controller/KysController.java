@@ -71,6 +71,13 @@ public class KysController {
 		}
 	}
 	
+	//// 주문 내역 확인 페이지
+	@GetMapping("/orderlist")
+	String orderlist() {
+		
+		return "order/orderList";
+	}
+	
 	
 	
 	//// 채팅 페이지

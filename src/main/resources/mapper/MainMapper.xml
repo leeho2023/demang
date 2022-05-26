@@ -263,7 +263,8 @@
 
 	<!-- 해당 번호의 회원의 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_writer" resultType="Integer">
-	SELECT * FROM postTBL WHERE p_writer=#{no} ORDER BY p_id DESC</select>
+	SELECT * FROM postTBL WHERE p_writer=#{no} ORDER BY p_id DESC
+	</select>
 		
 	<!-- 해당 번호의 회원이 팔로우한 회원들이 쓴 게시글들(게시글번호만)(최신순) -->
 	<select id="getPostList_followee" resultType="Integer">
@@ -273,6 +274,11 @@
 		ON f.followee = p.p_writer
 		WHERE f.follower = #{no}
 		ORDER BY p.p_id DESC;
+	</select>
+	
+	<!-- 해당 번호의 회원이 좋아한 게시글들(게시글번호만) -->
+	<select id="getPostList_like" resultType="Integer">
+		SELECT l_postNo From likeTBL WHERE l_id = #{l_id}
 	</select>
 
 

@@ -60,6 +60,11 @@ public class PostServiceImpl implements PostService{
 	public List<Integer> getPostList_followee( int no ){
 		return mapper.getPostList_followee(no);
 	}
+	//// 회원 번호로; 해당 회원이 좋아한 게시글 목록(게시글번호만)
+	@Override
+	public List<Integer> getPostList_like( int no ){
+		return mapper.getPostList_like(no);
+	}
 	
 	// 이미지
 	//// 게시글 이미지 등록하기

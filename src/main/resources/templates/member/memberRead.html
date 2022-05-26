@@ -4,13 +4,25 @@
 <head>
 <meta charset="UTF-8">
 <title>개인정보수정</title>
-<link rel="stylesheet" href="css/memberRead.css"type="text/css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- 이 페이지 --><script type="text/javascript" src="js/memberRead.js"></script>
 
+<!-- css -->
+<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 이 페이지 --><link rel="stylesheet" href="css/memberRead.css"type="text/css">
 </head>
 <body>
+
+<header th:replace="other/homeNav">메인메뉴</header>
+
+<main>
 <button onclick="location.href='/logout'">로그아웃</button>
-    
+<a th:href="'/vip?p='+${dto.m_id}">내 페이지</a>
+<a href="/orderlist">주문 내역 확인</a>
+<a href="/mylike">내가 좋아한 게시글들</a>
+
    
    <div class="div2"><p class="p1"> <a th:href="@{/feed}">DEMANG</a></p>  </div>
      <div class="div4">
@@ -46,7 +58,14 @@
    </div>
 </div>
    <br>
-   
-   <script type="text/javascript" src="js/memberRead.js"></script>
+</main>
+
+<div id="globalSidebar">
+	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
+<div id="chatModals"></div>
 </body>
 </html>

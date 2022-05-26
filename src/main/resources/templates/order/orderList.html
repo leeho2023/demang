@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>주문 내역 확인</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+
+<!-- css -->
+<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+
+<header th:replace="other/homeNav">메인메뉴</header>
+
+<main>
+여기 주문 내역
+</main>
+
+<div id="globalSidebar">
+	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
+<div id="chatModals"></div>
+
+</body>
+</html>

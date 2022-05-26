@@ -185,7 +185,20 @@ public class MainController {
 				);
 		return "post/postItem_album";
 	}
-
+	//// 게시글 한 개 가져오기(ajax용, list식으로 표시할 용도)
+	@PostMapping("/getPost_list")
+	public String postItem_forList( @RequestParam("no") int no, Model model ) {
+		//// 번호로 게시글 찾아서 DTO 받아오기
+		PostDTO dto = postService.getPost( no );
+		model.addAttribute("post", dto);
+		//// 게시글의 이미지 한 개만
+		model.addAttribute(
+				"image",
+				mapper.getPostImage( no )
+				);
+		return "post/postItem_list";
+	}
+	
     //// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
@@ -198,7 +211,7 @@ public class MainController {
 		model.addAttribute("postType", "stack");
 		return "post/postList";
 	}
-
+	
 	//// 개인 페이지
 	@GetMapping("/vip")
 	public String profile( @RequestParam(value="p", required=false) Integer no, Model model, HttpSession session ) {
@@ -219,6 +232,19 @@ public class MainController {
 		model.addAttribute("postType", "stack");
 		model.addAttribute("additional", "profile");
 		model.addAttribute("dto", dto);// 해당 회원 정보
+		return "post/postList";
+	}
+	
+    //// 내가 좋아한 게시글들 보기 페이지
+	@GetMapping("/mylike")
+	public String mylike( Model model, HttpSession session ) {
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=mylike";// 비회원인 경우 로그인하러 가기
+		//// 피드에 나올 글 목록 번호를 model에 붙이고 feed 화면으로
+		model.addAttribute(// 현재 로그인한 회원의 팔로들의 글 목록(번호만)
+				"postList", 
+				postService.getPostList_like( loginId(session) )
+				);
+		model.addAttribute("postType", "list");
 		return "post/postList";
 	}
 	
