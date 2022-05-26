@@ -3,13 +3,12 @@
 		<div class="etc">
 			<div class="nickcode">
 				<h1><span th:text="${dto.m_nickname}"></span>#<span th:text="${dto.m_code}"></span></h1>
-				<button th:onclick="location.href='chat?to=[[${dto.m_id}]]'">채팅</button>
-				<button th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우</button>
-				<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberRead'">내 정보</button>
-<!-- 				<div th:if="${session.login != null}" id="followDiv">
-					<button th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우</button>js/doFollow.js에서 팔로우 여부 확인 후 내용 바꿈 
-					<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberUpdate'">개인정보수정</button>
-				</div> -->
+				<div id="memberFunctions" th:if="${session.login}"><!--/* 로그인 했을 때만 쓸 수 있는 기능 */-->
+					<button th:onclick="location.href='chat?to=[[${dto.m_id}]]'">채팅</button>
+					<button th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberRead'">내 정보</button>
+					<button th:if="${session.login} == ${dto.m_id}" id="logoutBtn" onclick="location.href='/logout'">로그아웃</button>
+					<button th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우</button>
+				</div>
 			</div>
 			<div class="introduce" th:text="${dto.m_introduce}"></div>
 			<div class="followNum">

@@ -50,19 +50,6 @@ public class LwkController {
 				return "redirect:/loginMove";
 			}
 		}
-		
-	}
-	
-	//// 로그아웃
-	//// 세션을 삭제한다.
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		System.out.println("lwk controller ~ LOG OUT");
-		HttpSession session = request.getSession();
-		session.invalidate();
-		System.out.println("lwk controller ~ LOG OUT");
-		
-		return "redirect:/";
 	}
 	
 	// 회원 정보보기창

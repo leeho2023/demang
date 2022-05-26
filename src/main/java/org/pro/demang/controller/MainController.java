@@ -143,7 +143,7 @@ public class MainController {
 	//세션으로 사용자 정보를 호출
 	@PostMapping("/memberCheck")
 	@ResponseBody
-	public String memberCheck(@RequestParam("m_id")String m_id, Model model) {
+	public String memberCheck(@RequestParam("m_id") Integer m_id, Model model) {
 		
 		MemberDTO dto = memberService.getMember_no(m_id);
 		System.out.println("회원 불러오기");
