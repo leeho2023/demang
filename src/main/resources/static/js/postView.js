@@ -39,7 +39,7 @@ function postDivInitialize( postDiv, p_id ){
 }
 
 //// 댓글 삭제
-function deleteComment(c_id){
+function deleteComment( button, c_id ){
 	// 가져오는 c_id = comment.html의 th:c_id = ${comment.c_id}를 가져온다
 	
 	$.ajax({
@@ -49,7 +49,7 @@ function deleteComment(c_id){
 		data:{
 			c_id : c_id
 		},success: function(){
-			// 삭제 후 새로고침 구현필요
+			$(button).parents('li').remove();
 		},error: function(){
 			console.log('댓글 삭제 실패');
 		}
