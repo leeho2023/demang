@@ -8,6 +8,7 @@ import org.pro.demang.model.PostDTO;
 public interface PostService {
 
 	void postInsert( PostDTO dto ); // 게시글 등록
+	void postDelete(String p_id); // 게시글 삭제
 	boolean reViewCheck(int ord_target, String ord_buyer); // 리뷰 작성 전 구매자 확인
 	void postInsertImg(int p_id, byte[] bytes); // 게시물에 달릴 이미지 등록
 	void commentInsert(CommentDTO dto); // 댓글 등록하기

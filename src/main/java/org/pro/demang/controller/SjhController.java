@@ -139,4 +139,13 @@ public class SjhController {
 		postService.commentDelete(c_id);
 		return "";
 	}
+	
+	//// 게시글 삭제하기
+	@PostMapping("deletePost")
+	@ResponseBody
+	public String deletePost(@RequestParam("p_id")String p_id) {
+		postService.postDelete(p_id);
+		return "";
+	}
+	
 }

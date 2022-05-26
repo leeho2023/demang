@@ -128,7 +128,24 @@ function likeCount( postDiv, p_id ){
 	});
 };
 
-
+//// 게시글 삭제
+function deletePost( p_id ){
+	// 가져오는 p_id = postView.html의 th:p_id = ${post.p_id}를 가져온다
+	
+	$.ajax({
+		type: 'post',
+		url: 'deletePost', // SjhController
+		async: true,
+		data:{
+			p_id : p_id
+		},success: function(){
+			alert('게시글 삭제 완료');
+			$(location).attr('href', "vip");
+		},error: function(){
+			console.log('댓글 삭제 실패');
+		}
+	});
+}
 
 // $(function(){
 

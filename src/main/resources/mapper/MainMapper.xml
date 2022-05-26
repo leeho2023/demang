@@ -154,6 +154,10 @@
 		INSERT INTO postTBL (p_type, p_writer, p_content) VALUES(#{p_type}, #{p_writer}, #{p_content})
 	</insert>
 	
+	<delete id="postDelete">
+		DELETE FROM postTBL WHERE p_id = #{p_id};
+	</delete>
+	
 	
 	
 	<!-- 리뷰 작성 시 구매자 확인 -->

@@ -34,6 +34,13 @@ public class PostServiceImpl implements PostService{
 			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
 		}
 	}
+	
+	//// 게시글 삭제하기
+	@Override
+	public void postDelete(String p_id) {
+		mapper.postDelete(p_id);
+	}
+	
 	//// 번호로 게시글 찾기
 	@Override
 	public PostDTO getPost( String no ) {
