@@ -10,6 +10,7 @@ import org.pro.demang.model.ContactUsImgDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.PostDTO;
+import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PagingServiceImpl;
@@ -66,75 +67,14 @@ public class LhhController {
 		
 		return "other/fList";
 	}
-/*
-	//유저 검색
-	@GetMapping("/userSearch")
-	public String userSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
-		System.out.println("유저 검색 발동!! : " + reSearchVal);
-
-		List<MemberDTO> memList = memberService.memberSearch(reSearchVal);
-
-		for(MemberDTO dto : memList){
-			System.out.println(dto.toString());
-		}
-
-		model.addAttribute("list", memList);
 
 
-		return "other/searchUser";
-	}
-
-	//입력된 정보로 게시글 번호 리스트로 받기
-	@GetMapping("/postSearch")
-	public String postSearch(@RequestParam("searchVal")String searchVal, Model model) {
-		System.out.println("게시물 검색 발동!! : " + searchVal);
+	@GetMapping("/serviceCenter")
+	public String serviceCenter() {
 		
-
-		List<Integer> postNoList = postService.getPostNO(searchVal);
-		
-		// for(PostDTO dto : postList){
-		// 	System.out.println(dto.toString());
-		// }
-		// List<String> pImgList = new ArrayList<>();
-		// for(int i = 0;  i < postList.size(); i++){
-		// 	pImgList.add("data:image/;base64," + Base64.getEncoder().encodeToString(postList.get(i).getPostImgDTO().getI_image()));
-		// }
-		// model.addAttribute("pImgList", pImgList);
-		model.addAttribute("postNoList", postNoList);
-
-		return "other/searchPost";
+		return "other/serviceCenter";
 	}
 
-	// 게시글 가져오기
-	@PostMapping("/getPostForSearch")
-	public String getPost( @RequestParam("no") int no, Model model ) {
-		//// 번호로 게시글 찾아서 DTO 받아오기
-		PostDTO dto = postService.getPost( no );
-		model.addAttribute("post", dto);
-		//// 게시글의 이미지 정보
-		model.addAttribute(
-				"image",
-				mapper.getImage( no )
-				);
-		return "other/searchResult_post";
-	}
-
-	// 입력된 태그로 게시글 번호 리스트 받아오기!
-	@GetMapping("/tagSearch")
-	public String tagSearch(@RequestParam("reSearchVal")String reSearchVal, Model model) {
-		System.out.println("태그 검색 발동!! : " + reSearchVal);
-
-		List<Integer> tagForPostNoList = postService.tagForGetPostNO(reSearchVal);
-		
-		// for(TagDTO dto : postList){
-		// 	System.out.println(dto.toString());
-		// }
-
-		model.addAttribute("tagForPostNoList", tagForPostNoList);
-
-		return "other/searchTag";
-	}
-*/
 	// 회원 코드 생성 테스트
 	@GetMapping("/createCode")
 	public String createCode(){
@@ -226,22 +166,48 @@ public class LhhController {
 	return "admin/messages";
 	}
 
-//	c_check 업데이트
-	@GetMapping("/updateC_checked")
-	public String updateC_checked(@RequestParam("c_id") String c_id, Model model) throws Exception {
-		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
-		
-		memberService.updateC_checked(c_id);
-		
-		return "redirect:/contactUsList";
-	}
 	
 //	messageOneSelect 하나만 상세 보기
-	@GetMapping("/messageOneSelect")
+	@PostMapping("/messageOneSelect")
 	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
-		ContactUsDTO dto = memberService.messageOneSelect(c_id);
-		model.addAttribute("dto", dto);
-		return "";
+		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
+		ContactUsDTO cDto = memberService.messageOneSelect(c_id);
+		AnswerDTO aDto = memberService.answerSelect(c_id);
+		
+		System.out.println(aDto);
+		memberService.updateC_checked(c_id);
+		model.addAttribute("cDto", cDto);
+		model.addAttribute("aDto", aDto);
+		return "admin/appendMessage";
+	}
+	
+//	문의 메일 폼 나타내기
+	@PostMapping("/sendMailForm")
+	public String sendMailForm(
+			@RequestParam("m_email") String m_email,
+			@RequestParam("c_id") String c_id, Model model) {
+		System.out.println("LHHController### 선택한 m_email 값 = " + m_email);
+		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
+		model.addAttribute("m_email", m_email);
+		model.addAttribute("c_id", c_id);
+		return "admin/sendMailForm";
+	}
+	
+//	문의 답변하기
+	@PostMapping("answerInsert")
+	public String answerInsert(AnswerDTO dto,
+			@RequestParam("m_email") String m_email) {
+		
+		System.out.println("m_email 값 : " + m_email);
+		System.out.println("===================");
+		
+		try {
+			mailService.answerInsert(m_email, dto);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/contactUsList";
 	}
 
 //	admin 페이지에서 검색 하는거

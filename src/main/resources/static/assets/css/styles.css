@@ -461,4 +461,214 @@ a{
   width: 7%;
 }
 
+/* message one css */
+#messageOneSelect{
+  /* border: 3px solid red; */
+  width: 100%;
+  height: 85vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+#messageOneSelect #messageOnewrap{
+  border: 2px solid var(--text-color);
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 2px 5px 5px 1px rgba(34, 36, 38, 0.5);
+  width: 50%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#messageOnewrap #messageOneInfo{
+  /* border: 1px solid red; */
+  width: 90%;
+  height: 60vh;
+}
+
+div.messageOneTitle{
+  /* border: 1px solid red; */
+  height: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.oneInfo{
+  height: 50px;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+
+
+
+/* 답변하기 모달 */
+
+.answerModalBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+}
+
+.answerModalBack .answerModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50vw;
+  height: 80vh;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 2px 5px 5px 1px rgba(34, 36, 38, 0.5);
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mailwrap{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.answerTitle{
+    /* border: 1px solid red; */
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+div.fromEmail{
+    /* border: 1px solid blue; */
+    width: 80%;
+    height: 5%;
+}
+
+
+div.contentTitle{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 10%;   
+}
+
+div.contentTitleWrap{
+    /* border: 1px solid blue; */
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+input.title{
+    border: 2px solid black;
+    width: 420px;
+    height: 35px;
+}
+
+
+div.content{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 50vh;
+}
+
+div.contentwrap{
+    /* border: 1px solid blue; */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#content{
+    border: 2px solid black;
+    width: 98%;
+    height: 100%;
+    resize: none;
+    font-size: 1em;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+span.subtext{
+    font-weight: 700;
+}
+
+/* 버튼 css */
+
+input,
+input:visited {
+  text-decoration: none;
+}
+
+input.button {
+    display: block;
+    position: relative;
+    float: left;
+    width: 120px;
+    padding: 0;
+    margin: 10px 20px 10px 0;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    color: #FFF;
+    border: 0;
+    border-radius: 5px;
+    transition: all 0.2s ;
+}
+
+.btnBlueGreen {
+    background: #2E3C7E;
+}
+.btnBlueGreen.btnPush {
+    box-shadow: 0px 5px 0px 0px #192146;
+}
+
+.btnOrange {
+    background: #7e2e2e;
+}
+.btnOrange.btnPush {
+    box-shadow: 0px 5px 0px 0px #4a1c1c;
+}
+
+.btnPush:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+  
+.btnBlueGreen.btnPush:hover {
+    box-shadow: 0px 0px 0px 0px #007144;
+}
+
+.btnOrange.btnPush:hover {
+    box-shadow: 0px 0px 0px 0px #A66615;
+}
+
 /*# sourceMappingURL=styles.css.map */

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.PostDTO;
-import org.pro.demang.model.MerchandiseDTO;
 
 public interface PostService {
 

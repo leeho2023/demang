@@ -1,7 +1,25 @@
-<ul id="messageInfo" th:each="dto : ${dtoList}">
-    <li class="infoItem">[[${dto.c_id}]]</li>
-    <li class="infoItem">[[${dto.m_email}]]</li>
-    <li class="infoItem">[[${dto.c_contentTitle}]]</li>
-    <li class="infoItem">[[${dto.c_contactUsValues}]]</li>
-    <li class="infoItem">[[${dto.c_regDate}]]</li>
-</ul>
+<div id="messageOnewrap">
+    <div class="messageOneTitle">문의 내용</div>
+    <div id="messageOneInfo">
+        <hr>
+        <input type="hidden" id="m_email" th:value="${cDto.m_email}">
+        <input type="hidden" id="c_id" th:value="${cDto.c_id}">
+        <div class="oneInfo">제목 : [[${cDto.c_contentTitle}]]</div>
+        <div class="oneInfo">문의한 이메일 : [[${cDto.m_email}]]</div>
+        <div class="oneInfo">문의 종류 : [[${cDto.c_contactUsValues}]]</div>
+        <div class="oneInfo">문의 내용 : [[${cDto.c_content}]]</div>
+        <div class="oneInfo">문의 날짜 : [[${#dates.format(cDto.c_regDate, 'yyyy년 MM월 dd일 HH:mm:ss')}]]</div>
+    </div>
+    <div th:if="${aDto}" class="messageOneTitle">답변 내용</div>
+    <div th:if="${aDto}" id="messageOneInfo">
+        <hr>
+        <div class="oneInfo">문의한 이메일 : [[${cDto.m_email}]]</div>
+        <div class="oneInfo">문의 종류 : [[${cDto.c_contactUsValues}]]</div>
+        <div class="oneInfo">답변 내용 : [[${aDto.a_content}]]</div>
+        <div class="oneInfo">답변 날짜 : [[${#dates.format(aDto.a_regDate, 'yyyy년 MM월 dd일 HH:mm:ss')}]]</div>
+    </div>
+    <div class="messageOneConBtn">
+        <input th:unless="${aDto}" type="button" value="답변하기" title="Button ush blue/green" class="button btnPush btnBlueGreen sendBtn" onclick="writeMail()">
+        <input type="button" value="뒤로가기" title="Button push orange" class="button btnPush btnOrange close" onclick="messageClose()">
+    </div>
+</div>

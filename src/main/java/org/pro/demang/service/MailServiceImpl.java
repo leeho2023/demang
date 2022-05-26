@@ -10,6 +10,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.EmailCheckDTO;
+import org.pro.demang.model.AnswerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,9 @@ public class MailServiceImpl implements MailService{
 
 
 	    MimeMessage message = javaMailSender.createMimeMessage();
-	    message.setSubject("메일 테스트 5");
+	    message.setSubject("demang 회원 가입 인증 코드");
 	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
-	    message.setText("이메일 인증 코드는 잘 가나요? ==>" + emailCheckCode);
+	    message.setText("이메일 인증 코드 ==>" + emailCheckCode);
 	    message.setSentDate(new Date());
 	    javaMailSender.send(message);
 	    return "";
@@ -66,6 +67,29 @@ public class MailServiceImpl implements MailService{
 		
 		return mapper.reEmailCheck(dto);
 	}
+	
+	@Override
+	public String answerInsert(String m_email, AnswerDTO dto) throws MessagingException {
+
+		System.out.println("Impl 값 : " + m_email);
+		System.out.println("===================");
+		System.out.println(dto.toString());
+		
+		mapper.answerInsert(dto);
+		
+		System.out.println("mailServiceImpl DB 입력 완료");
+		
+//		MimeMessage message = javaMailSender.createMimeMessage();
+//	    message.setSubject("고객님 문의하신 내용은 확인 했습니다.");
+//	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
+//	    message.setText(dto.getA_content());
+//	    message.setSentDate(new Date());
+//	    javaMailSender.send(message);
+		
+		
+		return null;
+	}
+
 
 	// 이메일 인증 코드 생성
 	public String createCode(){
@@ -89,6 +113,7 @@ public class MailServiceImpl implements MailService{
 		return code;
 	}
 
+	
 	
 
 	

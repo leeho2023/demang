@@ -96,6 +96,13 @@
 		<result column="c_id" property="c_id"/>
 		<result column="i_image" property="i_image"/>
 	</resultMap>
+
+	<resultMap id="answerDTO" type="org.pro.demang.model.AnswerDTO">
+		<result column="a_no" property="a_no"/>
+		<result column="c_id" property="c_id"/>
+		<result column="a_content" property="a_content"/>
+		<result column="a_regDate" property="a_regDate"/>
+	</resultMap>
 	
 
 	<!-- 특정 회원이 팔로우한 회원 목록 -->
@@ -130,9 +137,11 @@
 	<select id="searchPost" resultType="Integer">
 		select p_id from postTBL where p_content like '%' #{searchVal} '%'
 	</select>
+	
 	<!-- 검색태그가 있는 게시글 검색 (글번호 목록) -->
 	<select id="searchTag" resultType="Integer">
 		SELECT t_postNo FROM tagOnPostTBL WHERE t_tag = #{searchVal}
+
 	</select>
 
 	<!-- 게시글 관련 -->
@@ -429,9 +438,12 @@
 		limit 3
 	</select>
 
-	<!-- <select id="messageOneSelect" resultMap="contactUsDTO">
-		select *
-	</select> -->
+	<select id="messageOneSelect" resultMap="contactUsDTO">
+		select * from contactUsTBL c
+		left join contactUsImgTBL ci
+		on c.c_id = ci.c_id
+		where c.c_id = #{c_id}
+	</select>
 	
 	<!-- 관리자 페이지 검색된 게시글 수 -->
 	<select id="postSearchCount" resultType="Integer">
@@ -455,6 +467,19 @@
 		SET c_checked=true
 		WHERE c_id=#{c_id}
 	</update>
+
+	<!-- 문의 답변 등록 -->
+	<insert id="answerInsert">
+		INSERT INTO answerTBL
+		(c_id, a_content, a_regDate)
+		VALUES(#{c_id}, #{a_content}, curtime())
+	</insert>
+	<!-- 해당 문의 답변 가져오기 -->
+	<select id="answerSelect" resultMap="answerDTO">
+		select *
+		from answerTBL
+		where c_id = #{c_id}
+	</select>
 	
 	
 	<!-- 관리자 홈에 나오는 것들 -->
@@ -481,6 +506,7 @@
 		select count(c_id) from contactUsTBL
 	</select>
 	
+	<!-- message 페이징 -->
 	<select id="selectContactList" parameterType="org.pro.demang.model.ContactUsDTO" resultType="org.pro.demang.model.ContactUsDTO">
 		SELECT
 			*

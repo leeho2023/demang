@@ -2,9 +2,9 @@ package org.pro.demang.service;
 
 import java.util.List;
 
-import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.AnswerDTO;
 
 public interface MemberService {
 
@@ -29,6 +29,7 @@ public interface MemberService {
 	List<ContactUsDTO> contactSearchAdmin(String search);
     void updateC_checked(String c_id);
 	ContactUsDTO messageOneSelect(String c_id);
+	AnswerDTO answerSelect(String c_id);
 
 
 

@@ -1,0 +1,26 @@
+<div class="answerModal">
+    <form action="answerInsert" method="post" id="answerInsert">
+        <div class="mailwrap">
+            <div class="answerTitle">
+                답변하기
+            </div>
+            <div class="fromEmail">
+                <hr>
+                <span class="subtext">
+                    회원 이메일 : [[${m_email}]]<input type="hidden" name="m_email" class="m_email" th:value="${m_email}">
+                </span>
+            </div>
+            <div class="content">
+                <div class="contentwrap">
+                    <p><span class="subtext">내용 : </span></p>
+                    <textarea name="a_content" id="content" rows="15"></textarea>
+                </div>
+            </div>
+            <div class="controBtn">
+                <input type="hidden" name="c_id" class="c_id" th:value="${c_id}">
+                <input type="button" value="보내기" title="Button push blue/green" class="button btnPush btnBlueGreen sendBtn" onclick="sendMail()">
+                <input type="button" value="취소" title="Button push orange" class="button btnPush btnOrange" onclick="closeBtn()">
+            </div>
+        </div>
+    </form>
+</div>
