@@ -3,5 +3,5 @@
 	<span class="nickname">[[${comment.memberDTO.m_nickname}]]</span>
 	<span class="content">[[${comment.c_content}]]</span>
 	<span class="regdate">[[${comment.regDate}]]</span>
-	<span>X</span>
+	<button th:c_id="${comment.c_id}" th:onclick="deleteComment(this.getAttribute('c_id'))" id="delete" th:if="${comment.c_writer} == ${session.login}">X</button>
 </li>

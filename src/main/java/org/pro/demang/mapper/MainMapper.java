@@ -67,6 +67,7 @@ public interface MainMapper {
 	String likeCount(String l_postNo); // 게시물 좋아요 갯수
 	//// 댓글
 	void commentInsert( CommentDTO dto ); // 댓글 등록
+	void commentDelete(String c_id); // 댓글 삭제하기
 	List<CommentDTO> getCommentList(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList(int no); // 게시글 번호로 해당 게시글의 댓글들 찾기
 	List<CommentDTO> getCommentList_recent(String no); // 게시글 번호로 해당 게시글의 댓글들 찾기(최신 몇 개)

@@ -38,6 +38,24 @@ function postDivInitialize( postDiv, p_id ){
 	});
 }
 
+//// 댓글 삭제
+function deleteComment(c_id){
+	// 가져오는 c_id = comment.html의 th:c_id = ${comment.c_id}를 가져온다
+	
+	$.ajax({
+		type: 'post',
+		url: 'deleteComment', // SjhController
+		async: true,
+		data:{
+			c_id : c_id
+		},success: function(){
+			// 삭제 후 새로고침 구현필요
+		},error: function(){
+			console.log('댓글 삭제 실패');
+		}
+	});
+}
+
 //// 새 댓글 작성
 function newComment( form ){// form: 댓글을 제출할 html form 요소
 	var contentNode = $(form).find('.c_content');// 댓글 내용 적는 input 요소

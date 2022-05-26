@@ -112,6 +112,13 @@ public class PostServiceImpl implements PostService{
 						dto.getC_writer()
 						) );
 	}
+	
+	//// 댓글 삭제하기
+	@Override
+	public void commentDelete(String c_id) {
+		mapper.commentDelete(c_id);
+	}
+	
 	//// 게시글 번호로 해당 게시글의 댓글들 찾기
 	@Override
 	public List<CommentDTO> getCommentList(String no) {

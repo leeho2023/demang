@@ -11,6 +11,7 @@ public interface PostService {
 	boolean reViewCheck(int ord_target, String ord_buyer); // 리뷰 작성 전 구매자 확인
 	void postInsertImg(int p_id, byte[] bytes); // 게시물에 달릴 이미지 등록
 	void commentInsert(CommentDTO dto); // 댓글 등록하기
+	void commentDelete(String c_id); // 댓글 삭제하기
 	int postReviewList(String p_origin); // 글에 있는 리뷰 개수 불러오기
 	List<PostDTO> postReviewShow(String p_origin); // 리뷰 불러오기
 	public PostDTO getPost( String no );

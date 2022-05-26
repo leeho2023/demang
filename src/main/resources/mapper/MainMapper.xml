@@ -304,6 +304,11 @@
 		INSERT INTO commentTBL (c_writer, c_content, c_postNo) VALUES (#{c_writer}, #{c_content}, #{c_postNo})
 	</insert>
 	
+	<!-- 댓글 삭제 -->
+	<delete id="commentDelete">
+		DELETE FROM commentTBL WHERE c_id = #{c_id}
+	</delete>
+	
 	<!-- 회원정보수정 -->
 	<update id="memberUpdate">
 		UPDATE memberTBL

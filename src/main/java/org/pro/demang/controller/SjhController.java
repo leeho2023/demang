@@ -131,4 +131,12 @@ public class SjhController {
 	private static String loginId( HttpSession session ) {
 		return session.getAttribute("login")+"";
 	}
+	
+	//// 댓글 삭제하기
+	@PostMapping("deleteComment")
+	@ResponseBody
+	public String deleteComment(@RequestParam("c_id")String c_id) {
+		postService.commentDelete(c_id);
+		return "";
+	}
 }
