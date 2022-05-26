@@ -109,11 +109,10 @@ public class LwkController {
 	}
 	@GetMapping("/adminUser")
     public String adminMember(Model model) {
-       System.out.println("aa");
-     List<MemberDTO> list =   MemberService.userList();
-       model.addAttribute("list",list);
+		List<MemberDTO> list =   MemberService.userList();
+		model.addAttribute("list",list);
      
-       return "admin/user";
+		return "admin/user";
     }
 }
 
