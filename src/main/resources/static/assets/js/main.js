@@ -90,6 +90,33 @@ $('.messages').click(function(){
 });
 
 
+// 경고 관련 ajax
+
+function warnCountUp(m_id, elem){
+    $.ajax({
+        type: "post",
+        url: "warnCountUp",
+        data: {
+            m_id : m_id
+        },
+        success: function ( data ) {
+            $(elem).parents('li').children('.m_warnCount').text(data);
+        }
+    });
+};
+
+function warnCountDown(m_id, elem){
+    $.ajax({
+        type: "post",
+        url: "warnCountDown",
+        data: {
+            m_id : m_id
+        },
+        success: function ( data ) {
+            $(elem).parents('li').children('.m_warnCount').text(data);
+        }
+    });
+};
 
 
 function closeBtn(){

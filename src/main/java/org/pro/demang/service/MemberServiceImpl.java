@@ -224,26 +224,42 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.contactSearchAdmin(search);
 	}
 
+	// 문의 확인 했는지 업데이트
 	@Override
 	public void updateC_checked(String c_id) {
 		mapper.updateC_checked(c_id);
 	}
 
+	// 문의 내용 하나만 가져오기
 	@Override
 	public ContactUsDTO messageOneSelect(String c_id) {
 		
 		return mapper.messageOneSelect(c_id);
 	}
 
+	// 문의에 답변한거 가져오기
 	@Override
 	public AnswerDTO answerSelect(String c_id) {
 		return mapper.answerSelect(c_id);
 	}
-	//관리자 페이지 회원목록
+
+	// 회원 경고 1회 추가
 	@Override
-	public List<MemberDTO> userList() {
-		
-		return mapper.userList();
+	public void warnCountUp(String m_id) {
+		mapper.warnCountUp(m_id);
 	}
+	
+	// 해당 회원 경고 횟수 가져오기
+	@Override
+	public int getWarnCount(String m_id) {
+		return mapper.getWarnCount(m_id);
+	}
+
+	// 회원 경고 1회 감소
+	@Override
+	public void warnCountDown(String m_id) {
+		mapper.warnCountDown(m_id);
+	}
+	
 
 }

@@ -126,8 +126,9 @@ public interface MainMapper {
 	ContactUsDTO messageOneSelect(String c_id);
 	void answerInsert(AnswerDTO dto); // 문의 답변 등록
 	AnswerDTO answerSelect(String c_id); // 해당 문의의 답변 가져오기
-	public List<MemberDTO> userList();	//관리자 페이지 회원목록
-	
+	void warnCountUp(String m_id);
+	int getWarnCount(String m_id);
+	void warnCountDown(String m_id);
 	
 	   
 }

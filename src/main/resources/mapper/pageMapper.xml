@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
                   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.pro.demang.mapper.PagingMapper">
+
+	<resultMap id="memberDTO" type="org.pro.demang.model.MemberDTO">
+		<result column="m_id" property="m_id"/>
+		<result column="m_code" property="m_code"/>
+		<result column="m_email" property="m_email"/>
+		<result column="m_nickname" property="m_nickname"/>
+		<result column="m_profilePic" property="m_profilePic"/>
+	</resultMap>
+	<resultMap id="postDTO" type="org.pro.demang.model.PostDTO">
+		<result column="p_id" property="p_id"/>
+		<result column="p_origin" property="p_origin"/>
+		<result column="p_type" property="p_type"/>
+		<result column="p_writer" property="p_writer"/>
+		<result column="p_content" property="p_content"/>
+		<result column="p_likeCount" property="p_likeCount"/>
+		<result column="p_regDate" property="p_regDate"/>
+		<collection property="memberDTO" resultMap="memberDTO"/>
+	</resultMap>
+
+
     <select id="findContact" resultType="org.pro.demang.model.ContactUsDTO">
         SELECT *
         FROM contactUsTBL
@@ -19,6 +39,20 @@
         SELECT *
         FROM memberTBL
         WHERE 1=1
+        <!-- <if test="keyword == 'name'">
+            AND name LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test="keyword == 'email'">
+            AND email LIKE CONCAT('%',#{search},'%')
+        </if> -->
+    </select>
+    
+    <select id="findPost" resultMap="postDTO">
+        select * 
+		from postTBL p
+		join memberTBL m
+		on p.p_writer = m.m_id
+		where 1=1
         <!-- <if test="keyword == 'name'">
             AND name LIKE CONCAT('%',#{search},'%')
         </if>
