@@ -15,7 +15,9 @@
 <!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
 </head>
 <body>
-	<header th:include="other/homeNav"></header>
+
+<header th:replace="other/homeNav">메인메뉴</header>
+
 <main><form action="/postInsert" id="postForm" method="Post" enctype="multipart/form-data">
 	
 	<div>
