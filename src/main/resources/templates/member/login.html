@@ -19,32 +19,28 @@
 <header th:replace="other/homeNav">메인메뉴</header>
 	
 <main>
-	<form action="/login" method="post">
-		<div class="div1">
-			<img src="img/DEMANG.png" class="img1">
-			<br>
-			<br>
-			<p>
+	<form class="loginForm" action="/login" method="post">
+		<input type="hidden" th:value="${red}" name="red">
+	
+		<img src="img/DEMANG.png" class="logo">
+		
+		<div class="inputs">
+			<p class="inputCell">
 				<input type="text" name="m_email" id="m_email" autocomplete="off" required>
 				<label for="user_name"><span>ID</span></label>
 			</p>
-			<br>
-			<p>
+			<p class="inputCell">
 				<input type="password" name="m_password" id="m_password" autocomplete="off" required>
 				<label for="user_name"><span>PASSWORD</span></label>
 			</p>
-			<br>
-			<br>
-			<input type="hidden" th:value="${red}" name="red">
-			<button class="custom-btn btn-1" type="submit"><span>LOGIN</span></button>
-			<!-- 새버튼 -->
 		</div>
+		
+		<div class="buttons">
+			<button type="submit" class="custom-btn btn-1">LOGIN</button>
+			<button type="button" class="custom-btn btn-1" onclick="location.href='/signUp'">Sign Up</button>
+		</div>
+		
 	</form>
-	<div class="div2">
-		<div class="frame">
-			<a href="/signUp"><button class="custom-btn btn-1" ><span>Sign Up</span></button></a>
-		</div>
-	</div >
 </main>
 
 <div id="globalSidebar">
