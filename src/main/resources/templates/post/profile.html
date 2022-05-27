@@ -3,12 +3,13 @@
 	<div class="propicDiv"><img class="profilePic" th:src="${dto.profileImage}" height=200 alt="프로필 사진"></div>
 	<div class="etc">
 		<div class="nickcode">
+			<input type="hidden" id="m_id" th:value="${dto.m_id}">
 			<h1><span th:text="${dto.m_nickname}"></span>#<span th:text="${dto.m_code}"></span></h1>
 			<div id="memberFunctions" th:if="${session.login}"><!--/* 로그인 했을 때만 쓸 수 있는 기능 */-->
-				<button class="button" th:onclick="location.href='chat?to=[[${dto.m_id}]]'">채팅</button>
-				<button class="button" th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberRead'">내 정보</button>
-				<button class="button" th:if="${session.login} == ${dto.m_id}" id="logoutBtn" onclick="location.href='/logout'">로그아웃</button>
-				<button class="button" th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우 하기</button>
+				<button class="tinyButton" th:onclick="location.href='chat?to=[[${dto.m_id}]]'">채팅</button>
+				<button class="tinyButton" th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberRead'">내 정보</button>
+				<button class="tinyButton" th:if="${session.login} == ${dto.m_id}" id="logoutBtn" onclick="location.href='/logout'">로그아웃</button>
+				<button class="tinyButton" th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우 하기</button>
 			</div>
 		</div>
 		<div class="introduce" th:text="${dto.m_introduce}"></div>
@@ -20,4 +21,32 @@
 	</div>
 </section>
 <script src="js/profile.js"></script>
-<script th:inline="javascript">followCheck( [[${dto.m_id}]] );/* 최초 팔로우 여부 확인 */</script>
+<script th:inline="javascript">
+	//// 최초 팔로우 여부 확인
+	followCheck( [[${dto.m_id}]] );
+	
+	
+	//// 팔로잉, 팔로워 수 가져오기
+	$.ajax({
+		type: 'get',
+		url: '/func/followingNum',
+		async: true,
+		data:{ m_id: [[${dto.m_id}]] },
+		success: function( data ){// 동작 성공시
+			$('#following_count').text( data );// 팔로잉 수 표시
+		},error: function(){
+			console.log('팔로잉 수 가져오기 실패');
+		}
+	});
+	$.ajax({
+		type: 'get',
+		url: 'func/followerNum',
+		async: true,
+		data:{ m_id: [[${dto.m_id}]] },
+		success: function( data ){// 동작 성공시
+			$('#follower_count').text( data );// 팔로잉 수 표시
+		},error: function(){
+			console.log('팔로워 수 가져오기 실패');
+		}
+	});
+</script>

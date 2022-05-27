@@ -1,4 +1,7 @@
 @charset "UTF-8";
+main {
+	/*background-color: yellow;*/
+}
 /*
 body
 ├상단바#globalHeader
@@ -19,54 +22,60 @@ body
 　├접기펴기버튼
 　└푸터#globalFooter
 */
-/* 시작하기 전 */
-* {
-	margin: 0;
-	padding: 0;
-}
-ol , ul {
-	list-style-type: none;
-}
-:root {/* 테마색 */
-	--backCol: white;
-	--themeCol: rgb(42, 36, 29);
-	--foreCol: white;
-}
 
-/* */
-.button {
-	background-color: var(--themeCol);
-	color: var(--foreCol);
-	border: none;
-	padding: 4px 8px;
-	border-radius: 20px;
-	font-weight: bold;
-}
-
-/* 공통 - 전체 틀 */
+/* 공통 */
 body {
 	position: relative;
 }
-#globalHeader {/* 300px * auto */
+#globalHeader , main , #globalFList {/* 배경색 */
+	background-color: var(--backCol);
+}
+#globalHeader {/* 좁은 화면에서 푸터등과 겹친 메인메뉴가 그 아래에 깔리지 않고 위로 나오도록 */
 	z-index: 1;
 }
-#globalHeader .menuList > * {
+#globalHeader .logo {/* 로고 이미지 */
+	height: 50px;
+	max-width: 20vw;
+}
+
+#globalHeader #searchBar {/* 검색창 */
+	border: 2px var(--themeCol2) solid;
+	border-radius: 5px;
+	padding: 5px;
+	flex-grow: 1;/* 나머지 모든 영역을 차지 */
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: stretch;
+}
+#globalHeader #searchBar > * {
+	border: none;
+	background-color: inherit;
+	
+}
+#globalHeader #searchBar > #search {
+	width: 1px;
+	flex-grow: 1;/* 검색 버튼을 제외한 나머지 모든 영역을 차지 */
+	font-size: 1.2em;
+}
+#globalHeader #searchBar > #search:not(:focus) {
+	font-size: 16px;
+}
+#globalHeader #searchBar > .search-icon {
+	font-size: 2em;
+}
+
+#globalHeader .menuList > * {/* 메인메뉴 */
 	margin: 5px;
 	padding: 10px;
-	border: 2px #ddd solid;
+	border: 2px var(--themeCol2) solid;
 	border-radius: 5px;
 	background-color: white;
 }
 #globalHeader .menuList > *:hover {
-	background-color: #eee;
+	background-color: var(--light2);
 }
-#globalFooter {
-	text-align: center;
-}
-#globalHeader , main , #globalFList {
-	background-color: white;
-}
-#globalFooter {
+
+#globalFooter {/* 푸터 */
 	text-align: center;
 	color: #888;
 }
@@ -76,7 +85,7 @@ body {
 /* 전체 틀 */
 /* 넓은 화면 */
 @media (min-width: 1800px){
-	body {
+	body {/* 최대크기 제한 */
 		width: 1800px;
 		margin-left: auto;
 		margin-right: auto;
@@ -89,7 +98,7 @@ body {
 		grid-template-columns: 300px 1fr 300px;
 	}
 	/* 메인  */
-	main {
+	main:not([class]) {
 		grid-column: 2/3;
 		grid-row: 1/2;
 	}
@@ -102,6 +111,10 @@ body {
 		display: flex;
 		flex-flow: column nowrap;
 		justify-content: start;
+	}
+	#globalHeader .logo {
+		display: block;
+		margin: 30px auto;
 	}
 	#globalHeader > * {
 		margin: 10px;
@@ -136,7 +149,7 @@ body {
 		grid-template-columns: 1fr 300px;
 	}
 	/* 메인  */
-	main {
+	main:not([class]) {
 		grid-row: 2/3;
 		grid-column: 1/2;
 	}
@@ -151,6 +164,9 @@ body {
 		flex-flow: row nowrap;
 		justify-content: space-around;
 		align-items: center;
+	}
+	#globalHeader #searchBar {/* 검색창 */
+		margin: 0 5vw;
 	}
 	#globalHeader > * {
 		background-color: white;
@@ -189,7 +205,7 @@ body {
 		grid-template-columns: 1fr;
 	}
 	/* 메인  */
-	main {
+	main:not([class]) {
 		grid-row: 2/3;
 		grid-column: 1/2;
 	}

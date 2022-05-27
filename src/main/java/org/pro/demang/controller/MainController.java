@@ -35,7 +35,8 @@ public class MainController {
 
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
-	public String loginMove( @Param("red") String red, Model model ) {
+	public String loginMove( @Param("red") String red, Model model, HttpSession session ) {
+		if( loginId(session) != 0 ) return "redirect:/";// 이미 로그인 돼있는 경우 홈으로
 		model.addAttribute("red", red);
 		return "member/login";
 	}
@@ -257,14 +258,14 @@ public class MainController {
 	//// 팔로잉 수 가져오기
 	@GetMapping("/func/followingNum")
 	@ResponseBody
-	public String followingNum( int m_id ) {
-		return ""+mapper.followingCount(m_id);
+	public int followingNum( int m_id ) {
+		return mapper.followingCount(m_id);
 	}
 	//// 팔로워 수 가져오기
 	@GetMapping("/func/followerNum")
 	@ResponseBody
-	public String followerNum( int m_id ) {
-		return ""+mapper.followerCount(m_id);
+	public int followerNum( int m_id ) {
+		return mapper.followerCount(m_id);
 	}
 	
 	//// 팔로우 하기

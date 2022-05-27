@@ -10,55 +10,47 @@
 <!-- 이 페이지 --><script type="text/javascript" src="js/memberRead.js"></script>
 
 <!-- css -->
-<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 이 페이지 --><link rel="stylesheet" href="css/memberRead.css"type="text/css">
 </head>
 <body>
 
 <header th:replace="other/homeNav">메인메뉴</header>
 
-<main>
-<button onclick="location.href='/logout'">로그아웃</button>
-<a th:href="'/vip?p='+${dto.m_id}">내 페이지</a>
-<a href="/orderlist">주문 내역 확인</a>
-<a href="/mylike">내가 좋아한 게시글들</a>
-
-   
-   <div class="div2"><p class="p1"> <a th:href="@{/feed}">DEMANG</a></p>  </div>
-     <div class="div4">
-     <div class="div3">
-     <br><br>
-   
-     
-     </div>
-      <div class="div1">
-      <br><br><br>
-       <div class="input1"> <h1 style="display:inline;"> [[${dto.m_nickname}]]</h1><p class="p3" style="display:inline;">님의 개인정보페이지입니다.</p></div>
-    <br>
-    <h4 class="imgH4">프로필사진</h4>  <img th:src="${dto.profileImage}"class="input10"><br>
-     <div class="input2"> <h4 style="display:inline;">이메일</h4>   [[${dto.m_email}]]</div> <br>
-   
-   <div class="input3"> <h4 style="display:inline;">생년월일</h4> [[${dto.m_birth}]]</div> <br>
-   <div class="input5"><h4 style="display:inline;">성별</h4>  [[${dto.m_gender}]]</div> <br>
-   <div class="input4"> <h4 style="display:inline;">자기소개</h4> [[${dto.m_introduce}]]</div> <br>
-   <div class="input6">  <h4 style="display:inline;">판매자 등록여부 </h4>[[${dto.m_licensed}]]</div> <br>
-   <div class="input7"><h4 style="display:inline;">누적경고 횟수</h4> [[${dto.m_warnCount}]]</div> <br>
-   <div class="input8"><h4 style="display:inline;">활동가능 여부</h4> [[${dto.m_available}]]</div> <br>
-   <div class="input9"> <h4 style="display:inline;">가입일</h4> [[${dto.m_regDate}]]</div>
-   
-  
-     <br>
-   <a th:href="@{/memberUpdate}" class="animated-button1">
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-     GO TO EDIT
-</a>
-   </div>
-</div>
-   <br>
-</main>
+<main><div class="wrap">
+	<div class="face"><!--/* 상단 영역 */-->
+		<div class="profilePicBox"><img class="profilePic" th:src="${dto.profileImage}"></div>
+		<div>
+			<h1>
+				<span th:text="${dto.m_nickname}"></span>
+				#<span th:text="${dto.m_code}"></span>
+				<span>님의 회원정보</span>
+			</h1>
+			<div class="buttons">
+				<a class="tinyButton" th:href="'/vip?p='+${dto.m_id}">내 페이지</a>
+				<a class="tinyButton" href="/orderlist">주문 내역 확인</a>
+				<a class="tinyButton" href="/mylike">내가 좋아한 게시글들</a>
+				<a class="tinyButton" href="/logout">로그아웃</a>
+			</div>
+		</div>
+	</div>
+	
+	<table class="details"><tbody>
+		<tr><th>별명</th><td th:text="${dto.m_nickname}"></td></tr>
+		<tr><th>회원 코드</th><td th:text="${dto.m_code}"></td></tr>
+		<tr><th>이메일</th><td th:text="${dto.m_email}"></td></tr>
+		<tr><th>생년월일</th><td th:text="${dto.m_birth}"></td></tr>
+		<tr><th>성별</th><td th:text="${dto.m_gender}"></td></tr>
+		<tr><th>자기소개</th><td th:text="${dto.m_introduce}"></td></tr>
+		<tr><th>판매자 등록여부</th><td th:text="${dto.m_licensed}"></td></tr>
+		<tr><th>누적경고 횟수</th><td th:text="${dto.m_warnCount}"></td></tr>
+		<tr><th>활동가능 여부</th><td th:text="${dto.m_available}"></td></tr>
+		<tr><th>가입일</th><td th:text="${dto.m_regDate}"></td></tr>
+	</tbody></table>
+	
+	<button th:href="@{/memberUpdate}" class="largeButton">GO TO EDIT</button>
+	
+</div></main>
 
 <div id="globalSidebar">
 	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
@@ -67,5 +59,6 @@
 </div>
 
 <div id="chatModals"></div>
+
 </body>
 </html>

@@ -26,7 +26,7 @@ additional은 없어도 되지만 있다 하면 해당되는 html, css 파일이
 <!-- 이미지 슬라이더 --><script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <!-- css -->
-<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 <!-- 게시글 --><link rel="stylesheet" href="css/post.css"><link rel="stylesheet" th:href="'css/postList_'+${postType}+'.css'">
 <!-- additional --><th:block th:if="${additional}"><link rel="stylesheet" th:href="'css/'+${additional}+'.css'"></th:block>

@@ -1,0 +1,93 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/* 시작하기 전 */
+:root {/* 테마색 정의 */
+	--backCol: white;
+	--themeCol1: rgb(42, 36, 29);
+	--themeCol2: rgb(132, 114, 92);
+	--light1: white;
+	--light2: rgb(226, 220, 211);
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ol , ul {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+}
+button {
+	font-size: 0.9em;
+}
+
+/* 작은 버튼 */
+.tinyButton {
+	background-color: var(--themeCol1);
+	color: var(--light1);
+	border: none;
+	padding: 4px 8px;
+	border-radius: 20px;
+	font-weight: bold;
+}
+/* 작고 연한 버튼 */
+.tinyLightButton {
+	background-color: var(--themeCol2);
+	color: var(--light1);
+	border: none;
+	padding: 4px 8px;
+	border-radius: 20px;
+	font-weight: bold;
+}
+/* 큰 버튼 */
+.largeButton {
+	border-radius: 6px;
+	border: none;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	background-color: var(--themeCol1);
+	color: var(--light2);
+	transition: all 0.1s ease;
+	position: relative;
+	outline: none;
+	font-size: 1.8em;
+	width: 235px;
+	height: 60px;
+	line-height: 42px;
+}
+.largeButton:hover {
+	background-color: var(--light2);
+	color: var(--themeCol1);
+	box-shadow:none;
+}
+.largeButton:before,
+.largeButton:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: var(--themeCol1);
+	transition: 0.3s ease all;
+}
+.largeButton:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.largeButton:hover:before,
+.largeButton:hover:after{
+	width:100%;
+	transition: 0.3s ease all;
+}
+
+
+/* 프사 둥글게 */
+img.profilePic {
+	border-radius: 50%;
+	vertical-align: middle;/* 높이가 서로다른 프사와 닉네임글자를 세로정렬 */
+}
