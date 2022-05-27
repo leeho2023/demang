@@ -1,4 +1,7 @@
 @charset "UTF-8";
+main {
+	/*background-color: yellow;*/
+}
 /*
 body
 ├상단바#globalHeader
@@ -33,7 +36,7 @@ ol , ul {
 	--foreCol: white;
 }
 
-/* */
+/* 작은 버튼 */
 .button {
 	background-color: var(--themeCol);
 	color: var(--foreCol);
@@ -41,6 +44,11 @@ ol , ul {
 	padding: 4px 8px;
 	border-radius: 20px;
 	font-weight: bold;
+}
+/* 프사 둥글게 */
+img.profilePic {
+	border-radius: 50%;
+	vertical-align: middle;/* 높이가 서로다른 프사와 닉네임글자를 세로정렬 */
 }
 
 /* 공통 - 전체 틀 */
@@ -76,7 +84,7 @@ body {
 /* 전체 틀 */
 /* 넓은 화면 */
 @media (min-width: 1800px){
-	body {
+	body {/* 최대크기 제한 */
 		width: 1800px;
 		margin-left: auto;
 		margin-right: auto;
@@ -89,7 +97,7 @@ body {
 		grid-template-columns: 300px 1fr 300px;
 	}
 	/* 메인  */
-	main {
+	main:not([class]) {
 		grid-column: 2/3;
 		grid-row: 1/2;
 	}
@@ -136,7 +144,7 @@ body {
 		grid-template-columns: 1fr 300px;
 	}
 	/* 메인  */
-	main {
+	main:not([class]) {
 		grid-row: 2/3;
 		grid-column: 1/2;
 	}
@@ -189,7 +197,7 @@ body {
 		grid-template-columns: 1fr;
 	}
 	/* 메인  */
-	main {
+	main:not([class]) {
 		grid-row: 2/3;
 		grid-column: 1/2;
 	}

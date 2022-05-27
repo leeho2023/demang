@@ -35,7 +35,8 @@ public class MainController {
 
 	// 로그인 페이지로 이동
 	@GetMapping("/loginMove")
-	public String loginMove( @Param("red") String red, Model model ) {
+	public String loginMove( @Param("red") String red, Model model, HttpSession session ) {
+		if( loginId(session) != 0 ) return "redirect:/";// 이미 로그인 돼있는 경우 홈으로
 		model.addAttribute("red", red);
 		return "member/login";
 	}

@@ -85,16 +85,6 @@ html, body, main {
 	padding: 0;
 	border: none;
 }
-.inputCell label span {
-	position:absolute;
-	left:0; bottom:5px;
-	transition:all .2s ease;
-}
-.inputCell input:focus + label span ,/* 포커스된 항목의 라벨이 위로 올라가는 효과 */
-.inputCell input:valid + label span {
-	transform:translateY(-100%);
-}/* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
-
 .inputCell label:after {/* 포커스된 항목의 밑줄 효과 */
 	content:"";
 	position:absolute;
@@ -114,35 +104,22 @@ html, body, main {
 
 
 .custom-btn {
-	width: 130px;
-	height: 40px;
-	color: rgb(0, 0, 0);
-	border-radius: 5px;
-	padding: 10px 25px;
+	border-radius: 6px;
+	border: none;
 	font-family: 'Lato', sans-serif;
 	font-weight: 500;
-	background: transparent;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	position: relative;
-	display: inline-block;
-	box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-	7px 7px 20px 0px rgba(0,0,0,.1),
-	4px 4px 5px 0px rgba(0,0,0,.1);
 	outline: none;
 	font-size: 1.8em;
-}
-.custom-btn {
 	width: 235px;
 	height: 60px;
 	line-height: 42px;
 	padding: 0;
-	border: none;
-	background: rgb(255, 255, 255);
-	background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+	background-color: var(--themeCol);
 }
 .custom-btn:hover {
-	color: #000000;
 	background: transparent;
 	box-shadow:none;
 }
@@ -172,6 +149,7 @@ html, body, main {
 	width:100%;
 	transition:800ms ease all;
 }
+
 
 .toLoginMove {
 	border: 2px solid black;
