@@ -2,84 +2,83 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/signUp.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>회원가입</title>
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script> -->
+
+
+<!-- css -->
+<!-- 이 페이지 --><link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
-<form action="/signUp" method="POST" id="signUp">
-   <div class="div1">
 
-  <br>
-         
-         <!-- memberServiceImpl에서 유효성검사를 해서 반환받는 값에 따라 메시지 출력 -->
-   		<div class="rerecheck">
-   			<div th:if="${result == 2}">이메일이 잘못되었습니다.</div>
-   			<div th:if="${result == 3}">닉네임이 잘못되었습니다.</div>
-   			<div th:if="${result == 4}">비밀번호가 잘못되었습니다.</div>
-   		</div>
-        <div id="wrapper" class="wrapper">
-            <!-- 이메일 입력과 메일로 인증코드 받는 버튼 -->
-				<p class="p1"><input type="text" name="m_email" class="m_email" id="m_email" autocomplete="off" required><label for="user_name"><span>E-MAIL</span></label></p>
-				<input type="button" id="sendMail" value="인증코드받기">
-            <div class="email regex"></div>
-
-            <p class="p1"><input type="text" name="e_code" id="e_code" autocomplete="off" required><label for="user_name"><span>인증코드</span></label></p>
-	          <div class="code regex"></div>
-				
-				<p class="p1"><input type="text" name="m_nickname"class="m_nickname" id="m_nickname" autocomplete="off" required><label for="user_name"><span>NAME</span></label></p>
-            <div class="name regex"></div>
-          
-				<p class="p1"><input type="password" name="m_password" class="m_password" id="m_password" autocomplete="off" required><label for="user_name"><span>PASSWORD</span></label></p>
-				<div class="pw regex"></div>
-      			<p class="p1"><input type="password" name="m_re_password" class="m_re_password"id="m_re_password" autocomplete="off" required><label for="user_name"><span>RE_PASSWORD</span></label></p>
-
-            <div class="repw regex"></div>
-           
-            BirthDay : <input type="date" name="m_birth" id="m_birth" class="birth" min="1900-01-01" required="required"><br>
-            <div class="birth regex"></div>
-            <br>
-            <br>
-       
-            <div class="frame1"id="signup">
-   			   <button type="button" class ="custom-btn btn-1" name="signup" id="signupbtn"><span>JOIN</span></button><br>
-  		      </div> 
-           
-         </div>
-  	</div>
-</form>
- 
-
+<main><div class="wrap signup">
+	<h1>회원가입</h1>
 	
-  <!--  <div class="frame1">
-   <button class="custom-btn btn-1"><span>JOIN</span></button></a><br>
-  </div>  -->
+	<form class="mainForm" action="/signUp" method="POST" id="signUp">
+			
+		<div class="inputs">
+			<!--/* 이메일 입력과 메일로 인증코드 받는 버튼 */-->
+			
+			<p class="inputCell">
+				<input type="text" name="m_email" class="m_email" id="m_email" autocomplete="off" required>
+				<label for="user_name">E-MAIL</label>
+			</p>
+			<div class="email regex"></div>
+			
+			<button type="button" id="sendMail">인증코드받기</button>
 
-
-   <div class="box bg-2">
-          <a href="/loginMove"><button class="button button--rayen button--border-medium button--text-thin 
-          button--size-l button--inverted" data-text="Let's login!"><span>Do you have an account?</span></button></a>
-			</div>
-
-
-
-<!--   <a href="/loginMove">로그인하러가기</a> -->
-
-
-<a href="/memberRead">멤버리드가기</a>
+			<p class="inputCell">
+				<input type="text" name="e_code" id="e_code" autocomplete="off" required>
+				<label for="user_name">인증코드</label>
+			</p>
+			<div class="code regex"></div>
+			
+			<p class="inputCell">
+				<input type="text" name="m_nickname"class="m_nickname" id="m_nickname" autocomplete="off" required>
+				<label for="user_name">NAME</label>
+			</p>
+			<div class="name regex"></div>
+			
+			<p class="inputCell">
+				<input type="password" name="m_password" class="m_password" id="m_password" autocomplete="off" required>
+				<label for="user_name">PASSWORD</label>
+			</p>
+			<div class="pw regex"></div>
+			
+			<p class="inputCell">
+				<input type="password" name="m_re_password" class="m_re_password"id="m_re_password" autocomplete="off" required>
+				<label for="user_name">RE_PASSWORD</label>
+			</p>
+			<div class="repw regex"></div>
+			
+			<p class="">
+				BirthDay : 
+				<input type="date" name="m_birth" id="m_birth" class="birth" min="1900-01-01" required="required">
+			</p>
+			<div class="birth regex"></div>
+		</div>
+		
+		<div class="buttons" id="signup">
+			<button type="button" class ="custom-btn" name="signup" id="signupbtn">JOIN</button>
+		</div>
+	</form>
+	
+	 <div class="">
+		<button class="toLoginMove" onclick="location.href='/loginMove'">I already have an account</button>
+	</div>
+</div>
 
 <div class="mailCheckModalBack2">
-   <div class="mailCheckModal2">
-       <div>
-           이메일이 중복됩니다.
-           <input type="button" class="cancel" value="확인">
-       </div>
-   </div>
+	<div class="mailCheckModal2">
+		<div>이메일이 중복됩니다.
+		<input type="button" class="cancel" value="확인">
+		</div>
+	</div>
 </div>
- 
+<!-- 이 페이지 --><script type="text/javascript" src="js/signUp.js"></script>
 
-<script type="text/javascript" src="js/signUp.js"></script>
+</main>
 </body>
 </html>
