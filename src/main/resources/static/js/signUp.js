@@ -2,7 +2,7 @@ var emailCheckresult = 0;
 var m_email
 $(function(){
     //email유효성 검사
-document.getElementById('m_birth').value = new Date().toISOString().substring(0, 10);;
+	document.getElementById('m_birth').value = new Date().toISOString().substring(0, 10);;
     $("#m_email").on("input",function(){
 				var m_email = $("#m_email").val();
          var regex = /.+@[a-z]+(\.[a-z]+){1,2}$/;

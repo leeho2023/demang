@@ -1,135 +1,68 @@
 @charset "UTF-8";
-html, body {
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/* 상단바 등 사용하지 않음 (하지만 메시지 출력 기능 쓰려고 존재는 함) */
+#globalHeader {
+	display: none !important;
+}
+
+button {
+	font-size: inherit;
+}
+
+/* 전체적 */
+html, body, main {
 	margin: 0;
 	padding: 0;
 	height: 100vh;
 }
-
-main {
-	background-color: pink;
-}
-
-/* 전체 틀 */
-main {
+.wrap {
 	height: 100%;
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
+	justify-content: center;
+	text-align: center;
+	overflow: auto;
 }
-.loginForm {
-	margin: auto;
-	margin-top: auto;
+@media (max-height: 850px){/* 화면 세로길이가 작을 경우 세로 가운데 정렬하면 위쪽은 걍 잘리고 아래쪽만 스크롤 생기기 때문에 세로 위쪽 정렬으로 바꿔서 전체가 다 스크롤 되며 보이도록 */
+	.wrap.signup {
+		justify-content: start;
+	}
+}
+@media (max-height: 595px){
+	.wrap.login {
+		justify-content: start;
+	}
+}
+.wrap > * {
+	margin: 20px auto;
+}
+.mainForm {
+	width: 100%;
 	max-width: 500px;
 	flex-basis: 500px;
 	border: 2px solid black;
-	padding: 20px 0;
+	padding: 10px 0;
 	text-align: center;
 }
-.loginForm > * {
+.mainForm > * {
 	margin: 50px auto;
 	display: block;
 }
-.loginForm > .inputs > * ,
-.loginForm > .buttons > * {
+.mainForm > .inputs > * ,
+.mainForm > .buttons > * {
 	margin: 20px auto;
 	display: block;
 }
 
-/* 버튼 */
-.buttons > button {
-	width: 130px;
-	height: 40px;
-	border-radius: 5px;
-	padding: 10px 25px;
-	font-family: 'Lato', sans-serif;
-	font-weight: 500;
-	background: transparent;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	position: relative;
-	box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
-		7px 7px 20px 0px rgba(0,0,0,.1),
-		4px 4px 5px 0px rgba(0,0,0,.1);
-	outline: none;
-	font-size: 1.8em;
-}
-.buttons > button {
-	background: rgb(0,172,238);
-	background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
-	width: 240px;
-	height: 60px;
-	line-height: 60px;
-	padding: 0;
-	border: none;
-}
-.buttons > button span {
-	position: relative;
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-.buttons > button:before,
-.buttons > button:after {
-	position: absolute;
-	content: "";
-	right: 0;
-	top: 0;
-	background: rgb(0, 0, 0);
-	transition: all 0.3s ease;
-}
-.buttons > button:before {
-	height: 0%;
-	width: 2px;
-}
-.buttons > button:after {
-	width: 0%;
-	height: 2px;
-}
-.buttons > button:hover{
-	background: transparent;
-	box-shadow: none;
-}
-.buttons > button:hover:before {
-	height: 100%;
-}
-.buttons > button:hover:after {
-	width: 100%;
-}
-.buttons > button span:before ,
-.buttons > button span:after {
-	position: absolute;
-	content: "";
-	left: 0;
-	bottom: 0;
-	background: rgb(0, 0, 0);
-	transition: all 0.3s ease;
-}
-.buttons > button span:before {
-	width: 2px;
-	height: 0%;
-}
-.buttons > button span:after {
-	width: 0%;
-	height: 2px;
-}
-.buttons > button span:hover:before {
-	height: 100%;
-}
-.buttons > button span:hover:after {
-	width: 100%;
-}
-/* form과 fieldset은 선택자로 사용하지 않는다. */
 
 
-
-/* 스타일 */
+/* 입력항목들 */
 .inputCell {
-	margin-right: auto;
-	margin-left: auto;
 	position:relative;
 	width:300px;
 	height:50px;
 }
-/* 기본세팅 */
 .inputCell input {
 	box-sizing:border-box;
 	padding:20px 0 0;
@@ -147,6 +80,10 @@ main {
 	border-bottom:1px solid #000;
 	text-align:left;
 	pointer-events:none;
+}
+#sendMail {
+	padding: 0;
+	border: none;
 }
 .inputCell label span {
 	position:absolute;
@@ -172,4 +109,123 @@ main {
 .inputCell input:valid + label::after {
 	width:300px;
 	transform:translateX(0);
+}
+
+
+
+.custom-btn {
+	width: 130px;
+	height: 40px;
+	color: rgb(0, 0, 0);
+	border-radius: 5px;
+	padding: 10px 25px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+	7px 7px 20px 0px rgba(0,0,0,.1),
+	4px 4px 5px 0px rgba(0,0,0,.1);
+	outline: none;
+	font-size: 1.8em;
+}
+.custom-btn {
+	width: 235px;
+	height: 60px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	background: rgb(255, 255, 255);
+	background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+}
+.custom-btn:hover {
+	color: #000000;
+	background: transparent;
+	box-shadow:none;
+}
+.custom-btn:before,
+.custom-btn:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: #000000;
+	box-shadow:
+	-1px -1px 5px 0px #fff,
+	7px 7px 20px 0px #0003,
+	4px 4px 5px 0px #0002;
+	transition:400ms ease all;
+}
+.custom-btn:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.custom-btn:hover:before,
+.custom-btn:hover:after{
+	width:100%;
+	transition:800ms ease all;
+}
+
+.toLoginMove {
+	border: 2px solid black;
+}
+
+
+
+
+
+/* 이메일 인증 모달창 */
+.mailCheckModalBack {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mailCheckModal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 30vw;
+	height: 45vh;
+	padding: 0;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 2px 5px 5px 1px rgba(34, 36, 38, 0.5);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.mailCheckModalBack2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.mailCheckModal2 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 20vw;
+	height: 20vh;
+	padding: 0;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 2px 5px 5px 1px rgba(34, 36, 38, 0.5);
+	transform: translateX(-50%) translateY(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

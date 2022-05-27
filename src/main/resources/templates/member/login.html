@@ -14,9 +14,11 @@
 </head>
 
 <body>
+
+<header th:replace="other/homeNav">메인메뉴</header>
 	
-<main>	
-	<form class="loginForm" action="/login" method="post">
+<main><div class="wrap login">
+	<form class="mainForm" action="/login" method="post">
 		<input type="hidden" th:value="${red}" name="red">
 	
 		<img src="img/DEMANG.png" class="logo">
@@ -24,20 +26,20 @@
 		<div class="inputs">
 			<p class="inputCell">
 				<input type="text" name="m_email" id="m_email" autocomplete="off" required>
-				<label for="user_name"><span>ID</span></label>
+				<label for="user_name">ID</label>
 			</p>
 			<p class="inputCell">
 				<input type="password" name="m_password" id="m_password" autocomplete="off" required>
-				<label for="user_name"><span>PASSWORD</span></label>
+				<label for="user_name">PASSWORD</label>
 			</p>
 		</div>
 		
 		<div class="buttons">
-			<button type="submit" class="custom-btn btn-1">LOGIN</button>
-			<button type="button" class="custom-btn btn-1" onclick="location.href='/signUp'">Sign Up</button>
+			<button type="submit" class="custom-btn">LOGIN</button>
+			<button type="button" class="custom-btn" onclick="location.href='/signUp'">Sign Up</button>
 		</div>
 		
 	</form>
-</main>
+</div></main>
 </body>
 </html>
