@@ -10,7 +10,7 @@
 <!-- 이 페이지 --><script type="text/javascript" src="js/memberRead.js"></script>
 
 <!-- css -->
-<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 이 페이지 --><link rel="stylesheet" href="css/memberRead.css"type="text/css">
 </head>
 <body>
@@ -27,10 +27,10 @@
 				<span>님의 회원정보</span>
 			</h1>
 			<div class="buttons">
-				<a class="button" th:href="'/vip?p='+${dto.m_id}">내 페이지</a>
-				<a class="button" href="/orderlist">주문 내역 확인</a>
-				<a class="button" href="/mylike">내가 좋아한 게시글들</a>
-				<a class="button" href="/logout">로그아웃</a>
+				<a class="tinyButton" th:href="'/vip?p='+${dto.m_id}">내 페이지</a>
+				<a class="tinyButton" href="/orderlist">주문 내역 확인</a>
+				<a class="tinyButton" href="/mylike">내가 좋아한 게시글들</a>
+				<a class="tinyButton" href="/logout">로그아웃</a>
 			</div>
 		</div>
 	</div>

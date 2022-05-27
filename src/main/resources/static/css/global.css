@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+/* 시작하기 전 */
+:root {/* 테마색 정의 */
+	--backCol: white;
+	--themeCol1: rgb(42, 36, 29);
+	--themeCol2: rgb(132, 114, 92);
+	--light1: white;
+	--light2: rgb(226, 220, 211);
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+ol , ul {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+}
+button {
+	font-size: 0.9em;
+}
+
+/* 작은 버튼 */
+.tinyButton {
+	background-color: var(--themeCol1);
+	color: var(--light1);
+	border: none;
+	padding: 4px 8px;
+	border-radius: 20px;
+	font-weight: bold;
+}
+
+/* 프사 둥글게 */
+img.profilePic {
+	border-radius: 50%;
+	vertical-align: middle;/* 높이가 서로다른 프사와 닉네임글자를 세로정렬 */
+}

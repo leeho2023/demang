@@ -9,8 +9,8 @@
 <!-- 이 페이지 전용 --><script src="/js/PostInsert.js"></script>
 
 <!-- css -->
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 이 페이지 전용 --><link rel="stylesheet" href="/css/PostInsert.css">
-<!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 <!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
 </head>
@@ -27,7 +27,7 @@
 			<label for="p_type_r" th:if="${p_type} == 'R'"><input type="radio" id="p_type_r" name="p_type" value="R" checked="checked">리뷰·답글</label>
 		</div>
 		
-		<button type="submit">작성완료</button>
+		<button type="submit" class="tinyButton">작성완료</button>
 	</div>
 	
 	<!--/* 상품 정보 */-->

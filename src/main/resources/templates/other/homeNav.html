@@ -1,12 +1,12 @@
 <th:block th:if="${alert}"><script th:inline="javascript">alert([[${alert}]]);</script></th:block>
 <header id="globalHeader">
 <div>
-	<a class="a2" th:href="@{/}" >DEMANG</a>
+	<a class="a2" th:href="@{/}" ><img src="img/DEMANG.png" class="logo"></a>
 </div>
 
 <form id="searchBar" onsubmit="homeNavSearch(); return false;">
     <input type="text" id="search" name="val" placeholder="일반검색 #태그검색 @회원검색" autocomplete=off> 
-	<button class="search-icon"  id="searchBtn"><span>검색</span></button>
+	<button class="search-icon" id="searchBtn"><span>🔍</span></button>
 </form>
 
 <div id="mainMenu">
