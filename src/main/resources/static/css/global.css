@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 /* 시작하기 전 */
 :root {/* 테마색 정의 */
@@ -40,6 +41,50 @@ button {
 	border-radius: 20px;
 	font-weight: bold;
 }
+/* 큰 버튼 */
+.largeButton {
+	border-radius: 6px;
+	border: none;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	background-color: var(--themeCol1);
+	color: var(--light2);
+	transition: all 0.1s ease;
+	position: relative;
+	outline: none;
+	font-size: 1.8em;
+	width: 235px;
+	height: 60px;
+	line-height: 42px;
+}
+.largeButton:hover {
+	background-color: var(--light2);
+	color: var(--themeCol1);
+	box-shadow:none;
+}
+.largeButton:before,
+.largeButton:after{
+	content:'';
+	position:absolute;
+	top:0;
+	right:0;
+	height:2px;
+	width:0;
+	background: var(--themeCol1);
+	transition: 0.3s ease all;
+}
+.largeButton:after{
+	right:inherit;
+	top:inherit;
+	left:0;
+	bottom:0;
+}
+.largeButton:hover:before,
+.largeButton:hover:after{
+	width:100%;
+	transition: 0.3s ease all;
+}
+
 
 /* 프사 둥글게 */
 img.profilePic {

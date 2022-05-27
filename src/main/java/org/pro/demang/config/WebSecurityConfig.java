@@ -23,6 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	         .formLogin().disable()
 	         .headers().frameOptions().disable();
 	      
-	      http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
+	      http.logout().logoutUrl("/logout").logoutSuccessUrl("/loginMove");
 	   }
 }
