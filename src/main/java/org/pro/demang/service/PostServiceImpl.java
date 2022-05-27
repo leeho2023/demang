@@ -35,6 +35,12 @@ public class PostServiceImpl implements PostService{
 		}
 	}
 	
+	//// 게시글 수정(본문만)
+	@Override
+	public void postUpdate(String p_id, String p_content) {
+		mapper.postUpdate(p_id, p_content);
+	}
+	
 	//// 게시글 삭제하기
 	@Override
 	public void postDelete(String p_id) {
@@ -84,6 +90,9 @@ public class PostServiceImpl implements PostService{
 	//// 게시글 이미지 등록하기
 	@Override
 	public void postInsertImg(int p_id, byte[] bytes) {
+		
+		System.out.println("Inner Service : " + bytes);
+		
 		mapper.postInsertImg(p_id, bytes);
 	}
 	

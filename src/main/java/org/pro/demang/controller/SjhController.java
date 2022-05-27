@@ -1,6 +1,7 @@
 package org.pro.demang.controller;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import org.pro.demang.model.PostImgDTO;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,20 +33,28 @@ public class SjhController {
 	public String postInsert( 
 			PostDTO pdto,
 			String[] mer_name, int[] mer_price, int[] mer_amount, // MerDTO를 배열로 못 받아서 그만….
-			@RequestParam(value="p_image", required = false)MultipartFile[] files, HttpSession session ) {
-		
+			@RequestParam(value="p_image", required = false)MultipartFile[] files, HttpSession session 
+			) {
+//		try {
+////			System.out.println("날 3 : "+files[1]);
+////			System.out.println("바이트 3 : "+files[1].getBytes());
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 		//// 게시글 등록
 		pdto.setP_writer( loginId(session) );// 글쓴이 = 현재 로그인한 회원
 		postService.postInsert( pdto ); // DB에 게시글 넣기
 		int p_id = pdto.getP_id(); // 생성 된 게시글의 이미지, 판매정보 등 등록시 참조하기 위해 p_id값을 가져옴
 		
 		//// 이미지 등록
-		for(int i = 0; i < Math.min(5, files.length); i++) {// 이미지 개수만큼 반복 (최대 다섯 개)
+		for(int i = 0; i < files.length; i++) {// 이미지 개수만큼 반복 (최대 다섯 개)
 			try {
+				System.out.println("푸린 값 1 : "+files[i]);
+				System.out.println("푸린 값 2 : "+files[i].getSize());
 				PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
 				imgDTO.setI_image(files[i].getBytes());// 이미지를 byte변환하여 이미지DTO 안에 넣기
 				postService.postInsertImg(p_id, imgDTO.getI_image()); // DB에 이미지 삽입
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -58,6 +69,59 @@ public class SjhController {
 		}
 		
 		return "redirect:/postView?p_id="+p_id;// 방금 작성한 그 게시글 보기 페이지로 리다이렉트
+	}
+	
+	//// 게시글 삭제하기
+	@PostMapping("deletePost")
+	@ResponseBody
+	public String deletePost(@RequestParam("p_id")String p_id) {
+		postService.postDelete(p_id);
+		return "";
+	}
+	
+	//// 게시글 수정하기
+	@GetMapping("postUpdate")
+	public String postUpdateRoute( 
+			@RequestParam(value="p_type", required = false) String p_type,//  게시물 종류
+			@RequestParam(value="to", required = false) Integer to,// 리뷰·답글 대상
+			@RequestParam("p_id")String p_id,
+			HttpSession session, Model model ) {
+		
+		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=postInsert";// 비회원인 경우 로그인하러 가기
+		
+		if( p_type == null ) p_type = "N";// 게시물 종류 기본값 N(일반인데 html 파싱 시에는 N, S를 포괄하는 거로 취급)
+		if( to == null ) to = 0;// 리뷰답글 대상 기본값 0 (DB에 넣을 때 null로)
+
+		//// 리뷰글인데 리뷰 대상이 지정되지 않음: 오류
+		if( p_type.equals("R") && to == 0 ) {
+			// ??? 처리방법 아직 없음
+		}
+		
+		PostDTO post = postService.getPost(p_id);
+		
+		model.addAttribute("p_type", p_type);
+		model.addAttribute("to", to);
+		model.addAttribute("post", post);
+		
+		List<PostImgDTO> imageList = mapper.getImageList(p_id);
+		if( imageList.size() > 0 ) {// 이미지가 있을 때만
+			model.addAttribute(
+					"imageList",
+					imageList
+					);
+		}
+		
+		System.out.println(post.toString());
+		
+		return "post/PostUpdate";
+	}
+	
+	@PostMapping("postUpdate")
+	public String postUpdate(@RequestParam("p_id")String p_id, @RequestParam("p_content")String p_content) {
+		
+		postService.postUpdate(p_id, p_content);
+		
+		return "redirect:/postView?p_id="+p_id;
 	}
 	
 	//// 게시글에 좋아요 (좋아요 버튼 누르면 ajax로)
@@ -137,14 +201,6 @@ public class SjhController {
 	@ResponseBody
 	public String deleteComment(@RequestParam("c_id")String c_id) {
 		postService.commentDelete(c_id);
-		return "";
-	}
-	
-	//// 게시글 삭제하기
-	@PostMapping("deletePost")
-	@ResponseBody
-	public String deletePost(@RequestParam("p_id")String p_id) {
-		postService.postDelete(p_id);
 		return "";
 	}
 	

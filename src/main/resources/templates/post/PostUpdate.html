@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>게시글 작성</title>
+<meta charset="UTF-8">
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- 이 페이지 전용 --><script src="/js/PostUpdate.js"></script>
+
+<!-- css -->
+<!-- 이 페이지 전용 --><link rel="stylesheet" href="/css/PostInsert.css">
+<!-- global frame --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
+<!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
+</head>
+<body>
+	<header th:include="other/homeNav"></header>
+<main><form action="/postUpdate" id="postForm" method="Post" enctype="multipart/form-data">
+	
+	<div th:if="${session.login} == ${post.p_writer}">
+		<!--/* 게시글 종류 */-->
+		<div id="p_type">
+			<input type="hidden" name="p_id" th:value="${post.p_id}">	
+			<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰/답글 대상 게시글 번호">
+			<label for="p_type_n" th:if="${post.p_type} == 'N'"><input type="radio" id="p_type_n" name="p_type" value="N" checked="checked">일반</label>
+			<label for="p_type_s" th:if="${post.p_type} == 'S'"><input type="radio" id="p_type_s" name="p_type" value="S" checked="checked">판매</label>
+			<label for="p_type_r" th:if="${post.p_type} == 'R'"><input type="radio" id="p_type_r" name="p_type" value="R" checked="checked">리뷰·답글</label>
+		</div>
+		<button type="submit">수정하기</button>
+	</div>
+		
+	<div id="postBody"><!--/* 게시글 내용 */-->
+		<!--/* 이미지 첨부 */-->
+		<ul id="selectedImg" class="selectedImg">
+		
+			<li th:each="image : ${imageList}"> <!-- 이미지 있을때만 -->
+				<img class="innerImg" th:src="${image.image}" />
+			</li>
+			
+		</ul>
+		
+		<!--/* 본문 */-->
+		<textarea id="p_content" name="p_content" class="textInput" placeholder="본문 내용을 입력하세요">[[${post.p_content}]]</textarea>
+	</div>
+	
+</form></main>
+
+<div id="globalSidebar">
+	<th:block th:if="${session.login}"><nav th:replace="other/fList">팔로목록</nav></th:block>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
+<div id="chatModals"></div>
+
+</body>
+</html>
