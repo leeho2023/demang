@@ -24,15 +24,9 @@
         <header class="header">
             <div class="header__container">
 
-                <a href="/admin" class="header__logo home">Demang Admin</a>
-                <span>[[${#dates.format(#dates.createNow(), 'yyyy년 MM월 dd일')}]] <span id="dayOfWeekBox"></span></span>
+                <a href="/admin" class="header__logo home">Demang Admin Messages</a>
+                <span>[[${#dates.format(#dates.createNow(), 'yyyy년 MM월 dd일')}]] <span id="dayOfWeekBox"></span></span> 
                 
-                
-                <div class="header__search">
-                    <input type="search" placeholder="Search" form="adminSearch" name="search" id="header_input" class="header__input" onkeyup="if(window.event.keyCode==13){search()}">
-                    <i class='bx bx-search header__icon'></i>
-                </div>
-    
                 <div class="header__toggle">
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
@@ -58,7 +52,7 @@
                             </a>
                             
                             <div class="nav__dropdown">
-                                <a href="#" class="nav__link profile">
+                                <a href="/userListPage" class="nav__link profile">
                                     <i class='bx bx-user nav__icon' ></i>
                                     <span class="nav__name">Profile</span>
                                     <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
@@ -66,7 +60,7 @@
 
                                 <div class="nav__dropdown-collapse">
                                     <div class="nav__dropdown-content">
-                                        <a href="adminUser" class="nav__dropdown-item user">User</a>
+                                        <a href="/userListPage" class="nav__dropdown-item user">User</a>
                                         <a href="#" class="nav__dropdown-item post">Post</a>
                                         <!-- <a href="#" class="nav__dropdown-item">test</a>
                                         <a href="#" class="nav__dropdown-item">test</a> -->
@@ -96,14 +90,14 @@
 
                             </div> -->
 
-                            <a href="#" class="nav__link search">
+                            <!--<a href="#" class="nav__link search">
                                 <i class='bx bx-compass nav__icon' ></i>
                                 <span class="nav__name">Search</span>
                             </a>
                             <a href="#" class="nav__link log">
                                 <i class='bx bx-bookmark nav__icon' ></i>
                                 <span class="nav__name">Log</span>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                 </div>
@@ -118,7 +112,6 @@
         <!--========== CONTENTS ==========-->
         <main>
             <section id="messages">
-                <span>문의[[${search}]]</span>
                 <div id="messagewrap">
                     <div id="messageInfoBar">
                         <ul id="infoBar">

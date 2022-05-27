@@ -672,4 +672,110 @@ input.button {
 }
 
 
+/* 관리자 user 페이지 css */
+
+#userwrap{
+  /* border: 2px solid red; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#userwrap #userInfoBar{
+  /* border: 2px solid black; */
+  margin-bottom: 0.5%;
+  width: 98%;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#userInfoBar #infoBar{
+  /* border: 2px solid blue; */
+  padding: 0;
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+}
+
+#userInfoBar #infoBar .infoItem{
+  /* border: 2px solid green; */
+  border-bottom: 2px solid rgb(42, 36, 29);
+}
+
+/* 목록 너비 맞춤 */
+#userInfoBar ul>li:nth-child(1){
+  width: 5%;
+}
+#userInfoBar ul>li:nth-child(2){
+  width: 5%;
+}
+#userInfoBar ul>li:nth-child(3){
+  width: 20%;
+}
+#userInfoBar ul>li:nth-child(4){
+  width: 25%;
+}
+#userInfoBar ul>li:nth-child(5){
+  width: 10%;
+}
+#userInfoBar ul>li:nth-child(6){
+  width: 5%;
+}
+#userInfoBar ul>li:nth-child(7){
+  width: 14%;
+}
+
+#userwrap #userInfoList{
+  /* border: 2px solid #6923D0; */
+  width: 98%;
+}
+
+#userInfoList #userInfo{
+  margin: 0;
+  padding: 0;
+  /* border: 2px solid #2E3C7E; */
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#userInfo .infoItem{
+  /* border: 2px solid green; */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.3%;
+  padding-bottom: 0.3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#userInfoList ul>li:nth-child(1){
+  width: 5%;
+}
+#userInfoList ul>li:nth-child(2){
+  width: 5%;
+}
+#userInfoList ul>li:nth-child(3){
+  width: 20%;
+}
+#userInfoList ul>li:nth-child(4){
+  width: 25%;
+}
+#userInfoList ul>li:nth-child(5){
+  width: 10%;
+}
+#userInfoList ul>li:nth-child(6){
+  width: 5%;
+}
+#userInfoList ul>li:nth-child(7){
+  width: 14%;
+}
+
 /*# sourceMappingURL=styles.css.map */
