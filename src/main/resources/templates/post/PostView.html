@@ -61,7 +61,7 @@ $(document).ready(function(){
 		</h1>
 		
 		<div th:if="${imageList}" class="postImgs"><!--/* 이미지 (있을 때만) */-->
-			<ul class="bxSlider postImgDiv">
+			<ul class="bxSlider">
 				<li th:each="image : ${imageList}">
 					<img class="imgBox" th:src="${image.image}" />
 				</li>

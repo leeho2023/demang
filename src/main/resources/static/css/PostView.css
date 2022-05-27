@@ -115,9 +115,28 @@
 }
 /* 게시물 - 이미지 */
 .post > .postView > .postImgs {
+	margin: 0 auto;
+	text-align: center;
 }
+
+.post > .postView > .postImgs > ul{
+	text-align: center;
+}
+
+.bxSlider > li{
+	overflow: hidden;
+	position: relative;
+}
+
+.bxSlider > li > img{ 
+	display: block;
+	margin: 0 auto;
+}
+
+
 .post > .postView > .postImgs  img {
 	height: 50vh;
+	display: block;
 }
 /* 게시물 - 본문 */
 .post > .postView .content {
@@ -169,6 +188,4 @@
 .commentList .regdate {
 	color: grey;
 }
-
-
 

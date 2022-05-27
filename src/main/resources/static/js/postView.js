@@ -33,7 +33,7 @@ function postDivInitialize( postDiv, p_id ){
 	});
 	
 	//// 이미지 슬라이더 적용
-	$( postDiv ).find('.bxSlider').bxSlider({
+	$( postDiv ).find('.bxSlider').bxSlider({	
 		captions: true
 	});
 }
@@ -146,6 +146,12 @@ function deletePost( p_id ){
 		}
 	});
 }
+
+$(function(){
+	if($('.bxSlider').children('li').length == 1){
+		$('.bxSlider').attr('class', 'None')
+	}
+})
 
 // $(function(){
 
