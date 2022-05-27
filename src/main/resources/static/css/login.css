@@ -1,215 +1,163 @@
 @charset "UTF-8";
-body{
-    margin: 0;
-    padding: 0ch;
-}
-.div1{
-    border: 2px solid black;
-    text-align: center;
-    width: 500px;
-    height: 400px;
-    margin-left: 36.5%;
-    margin-top: 10%;
-	border-bottom: none;
-     
-}
-.div2{
-	 border: 2px solid black;
-	 text-align: center;
-	 width: 500px;
-	   height: 120px;
-	   margin-left: 36.5%;
-	   border-top: none;
-	  padding-top: 10px;
-	
-}
-.ID{
-    height: 30px;
-    width: 235px;
-    margin-top: 20px;
-    border-top: none;
-        border-left: none;
-        border-right: none;
-        text-align: center;
-    
-}
-.PW{
-    height: 30px;
-    width: 235px;
-    margin-top: 10px;
-    border-top: none;
-        border-left: none;
-        border-right: none;
-        text-align: center;
-}
-.img1{
-    margin-top: 60px;
-}
-.img2{
-    width:150px ;
-}
-.frame {
-    width: 90%;
-    margin: 30px auto;
-    text-align: center;
-    margin-top: 30px;
-  }
-  button {
-    margin: 20px;
-    margin-top: -30px;
-  }
-  .custom-btn {
-	
-    width: 130px;
-    height: 40px;
-    color: rgb(0, 0, 0);
-    border-radius: 5px;
-    padding: 10px 25px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-     7px 7px 20px 0px rgba(0,0,0,.1),
-     4px 4px 5px 0px rgba(0,0,0,.1);
-    outline: none;
-    font-size: 30px;
-  }
-  
-  
-  
-  
-  /* 3 */
-  .btn-1 {
-    background: rgb(0,172,238);
-  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
-    width: 240px;
-    height: 60px;
-    line-height: 60px;
-    padding: 0;
-    border: none;
-    margin-top: -5px;
-    
-  }
-  .btn-1 span {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .btn-1:before,
-  .btn-1:after {
-    position: absolute;
-    content: "";
-    right: 0;
-    top: 0;
-     background: rgb(0, 0, 0);
-    transition: all 0.3s ease;
-  }
-  .btn-1:before {
-    height: 0%;
-    width: 2px;
-  }
-  .btn-1:after {
-    width: 0%;
-    height: 2px;
-  }
-  .btn-1:hover{
-     background: transparent;
-    box-shadow: none;
-  }
-  .btn-1:hover:before {
-    height: 100%;
-  }
-  .btn-1:hover:after {
-    width: 100%;
-  }
-  .btn-1 span:hover{
-     color: rgb(0, 0, 0);
-  }
-  .btn-1 span:before,
-  .btn-1 span:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-     background: rgb(0, 0, 0);
-    transition: all 0.3s ease;
-  }
-  .btn-1 span:before {
-    width: 2px;
-    height: 0%;
-  }
-  .btn-1 span:after {
-    width: 0%;
-    height: 2px;
-  }
-  .btn-1 span:hover:before {
-    height: 100%;
-  }
-  .btn-1 span:hover:after {
-    width: 100%;
-  }
-  
-  p { margin:10px auto 0; 
 
+main {
+	background-color: pink;
+}
+
+/* 전체 틀 */
+.loginForm {
+	margin: 0 auto;
+	max-width: 500px;
+	border: 2px solid black;
+	padding: 20px 0;
+	text-align: center;
+}
+.loginForm > * {
+	margin: 50px auto;
+	display: block;
+}
+.loginForm > .inputs > * ,
+.loginForm > .buttons > * {
+	margin: 20px auto;
+	display: block;
+}
+
+/* 버튼 */
+.buttons > button {
+	width: 130px;
+	height: 40px;
+	border-radius: 5px;
+	padding: 10px 25px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+		7px 7px 20px 0px rgba(0,0,0,.1),
+		4px 4px 5px 0px rgba(0,0,0,.1);
+	outline: none;
+	font-size: 1.8em;
+}
+.buttons > button {
+	background: rgb(0,172,238);
+	background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+	width: 240px;
+	height: 60px;
+	line-height: 60px;
+	padding: 0;
+	border: none;
+}
+.buttons > button span {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.buttons > button:before,
+.buttons > button:after {
+	position: absolute;
+	content: "";
+	right: 0;
+	top: 0;
+	background: rgb(0, 0, 0);
+	transition: all 0.3s ease;
+}
+.buttons > button:before {
+	height: 0%;
+	width: 2px;
+}
+.buttons > button:after {
+	width: 0%;
+	height: 2px;
+}
+.buttons > button:hover{
+	background: transparent;
+	box-shadow: none;
+}
+.buttons > button:hover:before {
+	height: 100%;
+}
+.buttons > button:hover:after {
+	width: 100%;
+}
+.buttons > button span:before ,
+.buttons > button span:after {
+	position: absolute;
+	content: "";
+	left: 0;
+	bottom: 0;
+	background: rgb(0, 0, 0);
+	transition: all 0.3s ease;
+}
+.buttons > button span:before {
+	width: 2px;
+	height: 0%;
+}
+.buttons > button span:after {
+	width: 0%;
+	height: 2px;
+}
+.buttons > button span:hover:before {
+	height: 100%;
+}
+.buttons > button span:hover:after {
+	width: 100%;
 }
 /* form과 fieldset은 선택자로 사용하지 않는다. */
 
 
 
 /* 스타일 */
-p {
-position:relative; 
-width:300px; 
-height:50px; 
-} /* 기본세팅 */
-p input {
-
-box-sizing:border-box; 
-padding:20px 0 0; 
-width:100%;
-height:100%; 
-border:0 none; 
-color:#595f63; 
-outline:none; 
+.inputCell {
+	margin-right: auto;
+	margin-left: auto;
+	position:relative;
+	width:300px;
+	height:50px;
 }
-p label { 
-position:absolute; 
-left:0%; 
-bottom:0; 
-width:300px; 
-height:100%; 
-border-bottom:1px solid #000; 
-text-align:left; 
-pointer-events:none; 
-   }
-   p label:after { 
-content:""; 
-position:absolute; 
-left:0; 
-bottom:-1px;
-width:0;
- height:100%; 
- border-bottom:3px solid rgb(0, 0, 0);
- transition:all .6s ease; 
- } /* 파란색 가로줄 */
-p label span { 
-position:absolute; 
-left:0; bottom:5px; 
-transition:all .2s ease; 
-   }
-p input:focus + label span, 
-p input:valid + label span { 
-transform:translateY(-150%); 
-font-size:14px; 
-color:rgb(0, 0, 0); }  /* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
-/* 포커스 될 때 label span(name)이 위로 올라감 */
-p input:focus + label::after,
-p input:valid + label::after { 
-width:300px; 
-transform:translateX(0); } 
-/* 포커스 될 때 파란색 가로줄이 생김 */
+/* 기본세팅 */
+.inputCell input {
+	box-sizing:border-box;
+	padding:20px 0 0;
+	width:100%;
+	height:100%;
+	border:0 none;
+	outline:none;
+}
+.inputCell label {
+	position:absolute;
+	left:0%;
+	bottom:0;
+	width:300px;
+	height:100%;
+	border-bottom:1px solid #000;
+	text-align:left;
+	pointer-events:none;
+}
+.inputCell label span {
+	position:absolute;
+	left:0; bottom:5px;
+	transition:all .2s ease;
+}
+.inputCell input:focus + label span ,/* 포커스된 항목의 라벨이 위로 올라가는 효과 */
+.inputCell input:valid + label span {
+	transform:translateY(-100%);
+}/* input에 글을 입력하고 포커스가 지나간 상태에서 제어하려면 valid 선택자를 써야한다. */
+
+.inputCell label:after {/* 포커스된 항목의 밑줄 효과 */
+	content:"";
+	position:absolute;
+	left:0;
+	bottom:-1px;
+	width:0;
+	height:100%;
+	border-bottom:3px solid rgb(0, 0, 0);
+	transition:all .6s ease;
+}
+.inputCell input:focus + label::after,
+.inputCell input:valid + label::after {
+	width:300px;
+	transform:translateX(0);
+}
