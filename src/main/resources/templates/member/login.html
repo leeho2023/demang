@@ -9,16 +9,13 @@
 <script src="js/login.js"></script>
 	
 <!-- css -->
-<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 이 페이지 --><link rel="stylesheet" type="text/css" href="css/login.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
 </head>
 
 <body>
-
-<header th:replace="other/homeNav">메인메뉴</header>
 	
-<main>
+<main>	
 	<form class="loginForm" action="/login" method="post">
 		<input type="hidden" th:value="${red}" name="red">
 	
@@ -42,10 +39,5 @@
 		
 	</form>
 </main>
-
-<div id="globalSidebar">
-	<footer th:replace="other/footer">푸터</footer>
-</div>
-
 </body>
 </html>

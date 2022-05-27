@@ -1,13 +1,25 @@
 @charset "UTF-8";
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+}
 
 main {
 	background-color: pink;
 }
 
 /* 전체 틀 */
+main {
+	height: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+}
 .loginForm {
-	margin: 0 auto;
+	margin: auto;
+	margin-top: auto;
 	max-width: 500px;
+	flex-basis: 500px;
 	border: 2px solid black;
 	padding: 20px 0;
 	text-align: center;
