@@ -19,12 +19,12 @@
 
 /* 게시물 영역 */
 .post {
-	margin: 15px;
+	margin: 30px 15px;
 	padding: 20px;
 	border: var(--themeCol1) solid 3px;
 	border-radius: 10px;
 	background-color: white;
-	box-shadow: #aaa 0 0 5px
+	box-shadow: var(--themeCol2) 0 0 5px
 }
 
 /* 게시물 - 글쓴이 정보 */
@@ -108,6 +108,9 @@
 }
 .commentList .regdate {
 	color: grey;
+}
+.commentList > * {
+	margin: 7px 0;
 }
 
 

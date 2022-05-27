@@ -264,14 +264,14 @@ public class MainController {
 	//// 팔로잉 수 가져오기
 	@GetMapping("/func/followingNum")
 	@ResponseBody
-	public String followingNum( int m_id ) {
-		return ""+mapper.followingCount(m_id);
+	public int followingNum( int m_id ) {
+		return mapper.followingCount(m_id);
 	}
 	//// 팔로워 수 가져오기
 	@GetMapping("/func/followerNum")
 	@ResponseBody
-	public String followerNum( int m_id ) {
-		return ""+mapper.followerCount(m_id);
+	public int followerNum( int m_id ) {
+		return mapper.followerCount(m_id);
 	}
 	
 	//// 팔로우 하기

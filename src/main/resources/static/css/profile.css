@@ -42,8 +42,8 @@ section.memberInfo > .etc > .introduce {
 }
 /* 팔로잉, 팔로워 수 */
 section.memberInfo > .etc > .followNum .point {
-	color: dodgerblue;
+	color: var(--themeCol1);
 	font-weight: bold;
-	font-size: 1.1em;
+	font-size: 1.2em;
 }
 
