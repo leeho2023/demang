@@ -46,12 +46,6 @@ public class MainController {
 		return "member/signUp";
 	}
 
-    // 관리자 페이지 이동
-    @GetMapping("/admindex")
-	public String admindex(){
-		return "admin/index";
-	}
-
     // 친구 목록 불러오기(해당 유저의 회원코드 사용) 
 	@PostMapping("/fList")
 	public String fList(@RequestParam("follower")int follower, Model model) {

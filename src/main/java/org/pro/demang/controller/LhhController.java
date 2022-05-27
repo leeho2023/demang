@@ -3,6 +3,7 @@ package org.pro.demang.controller;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.AnswerDTO;
@@ -51,13 +52,18 @@ public class LhhController {
 	}
     
     @GetMapping("/admin")
-	public String admin(Model model) {
+	public String admin(Model model, HttpSession session) {
 		
-		model.addAttribute("userCount", mapper.userCount());
+		String email = session.getAttribute("email")+"";
+		if(email.equals("admin")){
+			model.addAttribute("userCount", mapper.userCount());
 		model.addAttribute("postCount", mapper.postCount());
 		model.addAttribute("postTOP", mapper.postTOP());
 
 		return "admin/index";
+		}
+
+		return "other/error";
 	}
 
 	

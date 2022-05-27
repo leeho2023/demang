@@ -30,7 +30,7 @@ public class LwkController {
 		// 들어온 dto의 이메일이 admin일 때 
 		if(dto.getM_email().equals("admin")) {
 			HttpSession session = request.getSession();
-			session.setAttribute("login", dto.getM_email());
+			session.setAttribute("email", dto.getM_email());
 			return "redirect:/admin";
 		}else { // admin이 아닐 때 로그인하기
 			MemberDTO member = MemberService.login(dto);// 입력된 정보(dto)로 디비에서 회원정보 찾아오기
