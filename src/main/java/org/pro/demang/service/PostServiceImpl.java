@@ -34,6 +34,19 @@ public class PostServiceImpl implements PostService{
 			mapper.hashtagOnTableInsert( dto.getP_id(), temp );// 디비에 해시태그 등록
 		}
 	}
+	
+	//// 게시글 수정(본문만)
+	@Override
+	public void postUpdate(String p_id, String p_content) {
+		mapper.postUpdate(p_id, p_content);
+	}
+	
+	//// 게시글 삭제하기
+	@Override
+	public void postDelete(String p_id) {
+		mapper.postDelete(p_id);
+	}
+	
 	//// 번호로 게시글 찾기
 	@Override
 	public PostDTO getPost( int no ) {
@@ -70,6 +83,9 @@ public class PostServiceImpl implements PostService{
 	//// 게시글 이미지 등록하기
 	@Override
 	public void postInsertImg(int p_id, byte[] bytes) {
+		
+		System.out.println("Inner Service : " + bytes);
+		
 		mapper.postInsertImg(p_id, bytes);
 	}
 	
@@ -187,4 +203,5 @@ public class PostServiceImpl implements PostService{
 		//// 태그 목록 중 있는 부분까지만 잘라 보내줌
 		return Arrays.copyOfRange(tags, 0, tagsN);
 	}
+
 }

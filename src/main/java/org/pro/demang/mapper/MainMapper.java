@@ -44,6 +44,8 @@ public interface MainMapper {
 	// 게시글 관련
     //// 순수 게시물
 	void postInsert( PostDTO dto ); // 게시글 작성
+	void postDelete(String p_id); // 게시글 삭제
+	void postUpdate(String p_id, String p_content); // 게시글 수정 (본문만)
 	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
 	List<Integer> getPostList_writer( int no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_followee( int no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)

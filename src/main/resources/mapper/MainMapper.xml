@@ -155,6 +155,15 @@
 		INSERT INTO postTBL (p_type, p_writer, p_content) VALUES(#{p_type}, #{p_writer}, #{p_content})
 	</insert>
 	
+	<!-- 게시글 삭제 -->
+	<delete id="postDelete">
+		DELETE FROM postTBL WHERE p_id = #{p_id};
+	</delete>
+	<!-- 게시글 수정 (본문만) -->
+	<update id="postUpdate">
+		UPDATE postTBL SET p_content= #{p_content}, p_regDate=curtime() WHERE p_id = #{p_id}
+	</update>
+	
 	
 	
 	<!-- 리뷰 작성 시 구매자 확인 -->
