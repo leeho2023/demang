@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
-import com.github.pagehelper.PageInfo;
-
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.model.ContactUsDTO;
@@ -25,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageInfo;
 
 @Controller
 public class LhhController {
@@ -164,6 +164,16 @@ public class LhhController {
        	return "admin/userPage";
     }
 	
+// 관리자 post 페이징
+	@GetMapping("/postListPage")
+    public String postListPage(
+		@RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
+		PageInfo<PostDTO> p = new PageInfo<>(pagingServiceImpl.getPostList(pageNum), 10);
+    	model.addAttribute("postListPaging", p);
+     
+       	return "admin/postPage";
+    }
+	
 	
 	
 //	admin messages 페이징 
@@ -218,38 +228,24 @@ public class LhhController {
 		
 		return "redirect:/contactUsList";
 	}
-
-//	admin 페이지에서 검색 하는거
-	@GetMapping("/adminSearch")
-	public String adminSearch(@RequestParam("search")String search, Model model){
-		
-		System.out.println("LHHController### admin 페이지 검색 = " + search);
-		int memCount = memberService.memberSearchCount(search); // 검색어로 검색된 유저수 
-		int postCount = postService.postSearchCount(search); // 검색어로 검색된 게시글 수
-		int contactCount = memberService.contactSearchCount(search); // 검색어로 검색된 문의 수
-		List<MemberDTO> memList = memberService.memberSearchAdmin(search); // 검색어로 검색된 유저
-		List<PostDTO> postList = postService.postSearchAdmin(search); // 검색어로 검색된 게시글
-		List<ContactUsDTO> contactList = memberService.contactSearchAdmin(search); // 검색어로 검색된 문의글
-		
-		System.out.println(memCount);
-		System.out.println(postCount);
-		System.out.println(contactCount);
-		System.out.println(memList);
-		System.out.println(postList);
-		System.out.println(contactList);
-		
-		model.addAttribute("search", search);
-		model.addAttribute("memCount", memCount);
-		model.addAttribute("postCount", postCount);
-		model.addAttribute("contactCount", contactCount);
-		model.addAttribute("memList", memList);
-		model.addAttribute("postList", postList);
-		model.addAttribute("contactList", contactList);
-		
-		
-		return "admin/adminSearchTotal";
+	
+//	유저 경고 주기 ajax
+	@PostMapping("/warnCountUp")
+	@ResponseBody
+	public int warnCountUp(@RequestParam("m_id") String m_id, Model model) {
+		memberService.warnCountUp(m_id);
+		int result = memberService.getWarnCount(m_id);
+		return result;
 	}
 	
+//	유저 경고 빼기 ajax
+	@PostMapping("/warnCountDown")
+	@ResponseBody
+	public int warnCountDown(@RequestParam("m_id") String m_id, Model model) {
+		memberService.warnCountDown(m_id);
+		int result = memberService.getWarnCount(m_id);
+		return result;
+	}
 
 
 

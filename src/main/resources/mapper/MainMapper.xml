@@ -556,11 +556,27 @@
 			contactUsTBL
 	</select>
 	
+	<!-- 유저 경고 횟수만 가져오기-->
+	<select id="getWarnCount" resultType="Integer">
+		select m_warnCount from memberTBL where m_id = #{m_id}
+	</select>
 	
-	<!-- 관리자 페이지 회원목록 -->
-	<select id="userList" resultType="org.pro.demang.model.MemberDTO">
-        SELECT * FROM memberTBL
-     </select>
+	
+	<!-- 유저 경고 1회 증가-->
+	<update id="warnCountUp">
+		UPDATE memberTBL
+		SET m_warnCount=m_warnCount+1
+		WHERE m_id=#{m_id}
+	</update>
+	
+	<!-- 유저 경고 1회 감소-->
+	<update id="warnCountDown">
+		UPDATE memberTBL
+		SET m_warnCount=m_warnCount-1
+		WHERE m_id=#{m_id}
+	</update>
+
+	
 
 	<!-- ############################################################# -->
 

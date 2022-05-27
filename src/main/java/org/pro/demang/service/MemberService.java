@@ -21,7 +21,7 @@ public interface MemberService {
 	void contactUsImgInsert(int c_id, byte[] i_image);
 
 	
-	// admin 검색 관련
+	// admin 페이지 관련
 	int memberSearchCount(String search);
 	int contactSearchCount(String search);
 	List<ContactUsDTO> contactSearch(String search);
@@ -30,7 +30,9 @@ public interface MemberService {
     void updateC_checked(String c_id);
 	ContactUsDTO messageOneSelect(String c_id);
 	AnswerDTO answerSelect(String c_id);
-	List<MemberDTO> userList(); //관리자 페이지 회원목록
+	void warnCountUp(String m_id);
+	int getWarnCount(String m_id);
+	void warnCountDown(String m_id);
 
 
 

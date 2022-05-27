@@ -61,7 +61,7 @@
                                 <div class="nav__dropdown-collapse">
                                     <div class="nav__dropdown-content">
                                         <a href="/userListPage" class="nav__dropdown-item user">User</a>
-                                        <a href="#" class="nav__dropdown-item post">Post</a>
+                                        <a href="/postListPage" class="nav__dropdown-item post">Post</a>
                                         <!-- <a href="#" class="nav__dropdown-item">test</a>
                                         <a href="#" class="nav__dropdown-item">test</a> -->
                                     </div>
@@ -131,8 +131,11 @@
                             <li class="infoItem">[[${dto.m_nickname}]] #[[${dto.m_code}]]</li>
                             <li class="infoItem">[[${dto.m_email}]]</li>
                             <li class="infoItem">
-                                [[${dto.m_warnCount}]]
-                                <input type="button" value="경고주기">
+                                <span class="m_warnCount">[[${dto.m_warnCount}]]</span>
+                                <div>
+                                    <input type="button" value="경고주기" th:onclick="'javascript:warnCountUp('+ ${dto.m_id} + ', this);'">
+                                    <input type="button" value="취소" th:onclick="'javascript:warnCountDown('+ ${dto.m_id} + ', this);'">
+                                </div>
                             </li>
                             <li class="infoItem" th:if="${dto.m_available}">활동중</li>
                             <li class="infoItem" th:unless="${dto.m_available}">정지됨</li>
