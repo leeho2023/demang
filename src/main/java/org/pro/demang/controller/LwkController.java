@@ -1,7 +1,6 @@
 package org.pro.demang.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -94,14 +93,6 @@ public class LwkController {
 			return "good";
 		}
 	}
-	@GetMapping("/adminUser")
-    public String adminMember(Model model) {
-       System.out.println("aa");
-     List<MemberDTO> list =   MemberService.userList();
-       model.addAttribute("list",list);
-     
-       return "admin/user";
-    }
 	
 
 	//// 현재 로그인한 회원 번호(정수) 가져오기 // 비로그인 상태일 경우 0으로
