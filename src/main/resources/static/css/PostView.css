@@ -116,6 +116,17 @@
 .post > .postView > .postImgs  img {
 	height: 50vh;
 }
+
+.bxSlider > li{
+	overflow: hidden;
+	position: relative;
+}
+
+.bxSlider > li > img{ 
+	display: block;
+	margin: 0 auto;
+}
+
 /* 게시물 - 본문 */
 .post > .postView .content {
 	padding: 20px;
