@@ -83,9 +83,6 @@ public class PostServiceImpl implements PostService{
 	//// 게시글 이미지 등록하기
 	@Override
 	public void postInsertImg(int p_id, byte[] bytes) {
-		
-		System.out.println("Inner Service : " + bytes);
-		
 		mapper.postInsertImg(p_id, bytes);
 	}
 	
