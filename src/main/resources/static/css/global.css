@@ -32,6 +32,15 @@ button {
 	border-radius: 20px;
 	font-weight: bold;
 }
+
+.clickBtn:hover {background-color: black}
+
+.clickBtn:active {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 /* 작고 연한 버튼 */
 .tinyLightButton {
 	background-color: var(--themeCol2);
@@ -84,7 +93,6 @@ button {
 	width:100%;
 	transition: 0.3s ease all;
 }
-
 
 /* 프사 둥글게 */
 img.profilePic {

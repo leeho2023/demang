@@ -87,7 +87,7 @@ function deleteImg(e){
 };
 
 function filechange(){ // 업로드 버튼에 마우스가 올려지면 요소가 변함(reader로 읽어옴)
-   if( $('.selectedImg > li').length > 5 ){
+   if( $('.selectedImg > li').length > 8 ){
       return;
    }
    var parent = $('.selectedImg'); //이미지가 보여질 위치

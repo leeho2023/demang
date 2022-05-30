@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>게시글 작성</title>
 <meta charset="UTF-8">
@@ -14,6 +14,7 @@
 <!-- 이 페이지 전용 --><link rel="stylesheet" href="/css/PostInsert.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 <!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
+<!--  부트 스트랩 --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -21,7 +22,7 @@
 
 <main><form action="/postInsert" id="postForm" method="Post" enctype="multipart/form-data">
 	
-	<div>
+	<div class="space">
 		<!--/* 게시글 종류 */-->
 		<div id="p_type">
 			<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰/답글 대상 게시글 번호">
@@ -29,7 +30,6 @@
 			<label for="p_type_s" th:if="${p_type} == 'N'"><input type="radio" id="p_type_s" name="p_type" value="S">판매</label>
 			<label for="p_type_r" th:if="${p_type} == 'R'"><input type="radio" id="p_type_r" name="p_type" value="R" checked="checked">리뷰·답글</label>
 		</div>
-		
 		<button type="submit" class="tinyButton">작성완료</button>
 	</div>
 	
@@ -39,7 +39,7 @@
 			<!-- merAdd()에서도 똑같이 li를 append  -->
 			<li>
 				<label for="mer_name">상품명: <input type="text" id="mer_name" name="mer_name"></label>
-				<label for="mer_price">단가: <input type="number" id="mer_price" name="mer_price" max="100000000" min="0"></label>
+				<label for="mer_price">단가(원): <input type="number" id="mer_price" name="mer_price" max="100000000" min="0"></label>
 				<label for="mer_amount">수량: <input type="number" id="mer_amount" name="mer_amount" value="1"> </label>
 				<button class="xbutton" onclick="deleteImg(this)">X</button>
 			</li>
@@ -57,7 +57,7 @@
 		</ul>
 		
 		<!--/* 본문 */-->
-		<textarea id="p_content" name="p_content" class="textInput" placeholder="본문 내용을 입력하세요">본문예시 ???</textarea>
+		<textarea id="p_content" name="p_content" class="textInput" placeholder="본문 내용을 입력하세요"></textarea>
 	</div>
 	
 </form></main>

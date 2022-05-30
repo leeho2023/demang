@@ -47,6 +47,16 @@
 	padding: 20px;
 }
 
+.bxSlider > li{
+	overflow: hidden;
+	position: relative;
+}
+
+.bxSlider > li > img{ 
+	display: block;
+	margin: 0 auto;
+}
+
 /* 메뉴 */
 .post > .menubar {
 	margin: 20px 0;

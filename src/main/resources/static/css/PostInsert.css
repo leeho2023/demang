@@ -37,6 +37,29 @@
    display: inline-block;
 }
 
+/* 일반/판매/리뷰 선택 */
+
+#p_type > label > input[type="radio"]{
+	display: none;
+}
+
+#p_type > label {
+	display:inline-block;
+	background:none;
+	border:1px solid #dfdfdf;  
+	padding:0px 10px;
+	text-align:center;
+	height:35px;
+	line-height:33px;
+	font-weight:500;
+	cursor:pointer;
+}
+
+#p_type > label:hover {
+	background:#9b9b9b;;
+	color:#fff;
+}
+
 /* 상품 정보 */
 #postForm:not(.p_type_s) #mer {/* 판매글이 아니면 상품목록 숨김 */
    display: none;
@@ -57,10 +80,17 @@
    top: 0px;
    right: 0px;
    border: none;
-   height: 40px;
+   height: 50px;
    width: 40px;
    background-color: #ccc;
    color: white;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 /* 게시글 내용 */
@@ -98,14 +128,14 @@
 }
 
 #selectedImg .file_label {/* input 대신 눌릴 라벨 */
-   background-image: url(../img/plus.png);
+   background-image: url(../img/photo-camera.png);
    background-size: cover;
    display: inline-block; 
    width: 150px;
    height: 150px;
    cursor: auto;
-   border: 1px solid black;
 }
+
 #selectedImg input[type="file"] {/* input은 눌리지 않게 표시 안함 */
    display: none
 }
@@ -113,6 +143,6 @@
    width: 150px;
    height: 150px;
 }
-#selectedImg > li:nth-child(6) {/* 이미지는 5개까지만 첨부 가능: 6번째 input을 숨김 */
+#selectedImg > li:nth-child(9) {/* 이미지는 8개까지만 첨부 가능: 9번째 input을 숨김 */
    display: none;
 }
