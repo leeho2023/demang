@@ -13,7 +13,10 @@ public interface MemberService {
 	public MemberDTO getMember_no( int no );
 
 	MemberDTO login(MemberDTO dto);
-	void memberUpdate(MemberDTO dto);
+	void memberUpdate_nickname(int loginId, String m_nickname);
+	void memberUpdate_password(int loginId, String m_password);
+	void memberUpdate_gender(int loginId, String m_gender);
+	void memberUpdate_introduce(int loginId, String m_introduce);
 
     List<MemberDTO> memberSearch(String reSearchVal);
 	public String emailCheck(String m_email);

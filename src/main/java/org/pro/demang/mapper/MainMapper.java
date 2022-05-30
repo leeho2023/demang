@@ -29,9 +29,15 @@ public interface MainMapper {
     int reEmailCheck(EmailCheckDTO dto);
 	public String emailCheck(String m_email);
 	//// 회원정보
-	void memberUpdate(MemberDTO dto);
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
 	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기
+	//// 회원정보 수정
+	void memberUpdate_nickname(int m_id, String m_nickname);// 닉네임 수정
+	void memberUpdate_password(int m_id, String m_password);// 비밀번호 수정
+	void memberUpdate_gender(int m_id, String m_gender);// 성별 수정
+	void memberUpdate_introduce(int m_id, String m_introduce);// 자기소개 수정
+	void memberUpdate_profilePic(int m_id, byte[] m_profilePic);// 프사 수정
+	void memberUpdate_eraseProfilePic(int m_id);// 프사 지우기
 	//// 팔로우
 	void doFollow( int m1, int m2 );// m1이 m2를 팔로우하기
 	void unFollow(int m1, int m2);// m1이 m2를 팔로우 취소

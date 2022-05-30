@@ -88,14 +88,34 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 	}
-
-
+	
+	
+	
+	//// 회원정보 수정
+	////// 닉네임
 	@Override
-	public void memberUpdate(MemberDTO dto) {
-		String encodedPassword = passwordEncoder.encode(dto.getM_password());
-		dto.setM_password(encodedPassword);
-		mapper.memberUpdate(dto);
-		
+	public void memberUpdate_nickname(int loginId, String m_nickname) {
+		mapper.memberUpdate_nickname(loginId, m_nickname.trim());// 입력값 trim
+	}
+	////// 비밀번호
+	@Override
+	public void memberUpdate_password(int loginId, String m_password) {
+		String encodedPassword = passwordEncoder.encode(m_password);
+		mapper.memberUpdate_password(
+				loginId, 
+				passwordEncoder.encode(// 암호화된 비밀번호
+						m_password.trim())// 입력값 trim
+				);
+	}
+	////// 성별
+	@Override
+	public void memberUpdate_gender(int loginId, String m_gender) {
+		mapper.memberUpdate_gender(loginId, m_gender);
+	}
+	////// 자기소개
+	@Override
+	public void memberUpdate_introduce(int loginId, String m_introduce) {
+		mapper.memberUpdate_introduce(loginId, m_introduce.trim());// 입력값 trim
 	}
 	
 	
@@ -260,6 +280,4 @@ public class MemberServiceImpl implements MemberService {
 	public void warnCountDown(String m_id) {
 		mapper.warnCountDown(m_id);
 	}
-	
-
 }

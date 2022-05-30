@@ -2,77 +2,88 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/memberUpdate.css"type="text/css">
-<link rel="stylesheet" href="css/homeNav.css"type="text/css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>개인정보 수정</title>
+<!-- script -->
+<!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- 이 페이지 --><script type="text/javascript" src="js/memberUpdate.js"></script>
 
+<!-- css -->
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
+<!-- 이 페이지 --><link rel="stylesheet" href="css/memberUpdate.css"type="text/css">
 </head>
 <body>
 
- <header th:include="other/homeNav"></header> 
+<header th:replace="other/homeNav">메인메뉴</header>
 
+<main><div class="wrap update">
+	<h1>개인정보 수정</h1>
+	<div>빈칸으로 제출 시 해당 항목은 변경되지 않습니다.</div>
 	
-
- <form action="/memberUpdate" method="post" id=signUp enctype="multipart/form-data">
-
-
-     <div class="div4">
-     <div class="div3">
-     <br><br>
-  
-     
-     </div>
-      <div class="div1">
-      <br><br><br>
-       <div class="input1"> <h1 style="display:inline;"> [[${dto.m_nickname}]]</h1><p class="p3" style="display:inline;">님의 개인정보 수정페이지입니다.</p></div><br>
-       <div class="div5">
-        
-       <div class="input2"> <h4 style="display:inline;">이름</h4> <input type="text"id="m_nickname"name="m_nickname" class="input22"th:value="${dto.m_nickname}"></div>
-       <div class="name regex"></div><br>
-       
-     <div class="input3"><h4 style="display:inline;">비밀번호</h4><input type="password"id="m_password" name="m_password" class="input33"></div>
-     <div class="pw regex"></div>
-     <br>
-     <div class="input4"><h4 style="display:inline;">생년월일</h4> <input type="date"name="m_birth" th:value="${dto.m_birth}" class="input44"></div> <br>
-        <div class="input6">
-         <fieldset class="fieldset1">
-         <legend class="legend1"><h4 style="display:inline;">성별</h4></legend>
-        <p style="display:inline;" class="p55">남성</p><input type="radio"name="m_gender" value="M" class="input66">
-	 <p style="display:inline;"class="p55">여성</p> <input type="radio"name="m_gender" value="F"class="input66">
-	 <p style="display:inline;"class="p55">중성</p> <input type="radio"name="m_gender" checked="checked" value="X"class="input66">
-	</fieldset><br>
-	
-         </div>	
-        <div class="input5"> <h4 style="display:inline;"><div>자기소개</div> </h4><textarea name="m_introduce" class="input55">[[${dto.m_introduce}]]</textarea></div><br>
-         </div>
-         
-         
-     
-         <label class="input-file-button" for="input-file">
-  		프로필사진 업로드
+	<form class="mainForm" action="memberUpdate" method="POST" id="signUp" enctype="multipart/form-data" onsubmit="memberUpdateSubmit()">
+		<div class="profilePicInput">
+			<label for="m_profilePic" id="profilePicLabel" class="current">
+				<img id="profilePicDefault" class="profilePic" src="/img/defaultProfilePic.png" alt="기본 프로필사진" height=300>
+				<img id="profilePicCurrent" class="profilePic" th:src="${dto.profileImage}" alt="기존 프로필사진" height=300>
+				<img id="profilePicPreview" class="profilePic" src="" alt="등록프사 미리보기" height=300>
 			</label>
-         <input type="file" name="propic" class="input77"  id="input-file" style="display: none;" > <br>
-	
-	
-	
+			<input type="file" name="m_profilePic" id="m_profilePic">
+			<input type="checkbox" name="isTherePropic" id="isTherePropic" style="display: none !important;">
+			<div>
+				<input type="checkbox" id="eraseProfilepic" name="eraseProfilepic" onchange="easePropicChange(this)">
+				<label for="eraseProfilepic">프로필사진 지우기</label>
+				<button type="button" class="tinyButton" onclick="propicMode_current()">프사 복원</button>
+			</div>
+		</div>
+		<div class="inputs">
+			<div class="inputCell"><!--/* 이름 */-->
+				<input type="text" name="m_nickname" id="m_nickname" 
+					th:value="${dto.m_nickname}" 
+					th:placeholder="${dto.m_nickname}" autocomplete="off">
+				<label for="user_name">이름</label>
+			</div>
+			<div class="nickname regex"></div>
 			
-	
- 	
- <!-- 	<div class="wrap">
-  <button type="button" class="button123"name="signup" id="signupbtn">APPLY</button>
-</div> -->
-<button type="button" class="button2"name="signup" id="signupbtn"><a class="btn" >적용</a></button>
- 		</div>
-</div>
- 	</form> 
- 	
+			<div class="inputCell"><!--/* 비밀번호 */-->
+				<input type="text" name="m_password" id="m_password" 
+					value="" autocomplete="off">
+				<label for="user_name">비밀번호</label>
+			</div>
+			<div class="password regex"></div>
+			
+			<fieldset class="inputCell"><!--/* 성별 */-->
+				<legend class="legend1">성별</legend>
+				<label for="user_name">남성</label>
+				<input type="radio" name="m_gender" value="M" th:if="${dto.m_gender}=='M'" checked><!--/* 기존 값으로 초기 선택 */-->
+				<input type="radio" name="m_gender" value="M" th:if="${dto.m_gender}!='M'">
+				<label for="user_name">여성</label>
+				<input type="radio" name="m_gender" value="F" th:if="${dto.m_gender}=='F'" checked>
+				<input type="radio" name="m_gender" value="F" th:if="${dto.m_gender}!='F'">
+				<label for="user_name">미공개</label>
+				<input type="radio" name="m_gender" value="X" th:if="${dto.m_gender}=='X'" checked>
+				<input type="radio" name="m_gender" value="X" th:if="${dto.m_gender}!='X'">
+			</fieldset>
+			<div class="password regex"></div>
+			
+			<textarea name="m_introduce" class="input55" th:text="${dto.m_introduce}"></textarea>
+			
+		</div>
+		
+		<div class="buttons">
+			<button type="reset" class ="largeButton">초기화</button>
+			<button type="submit" class ="largeButton" id="signupbtn">수정완료</button>
+		</div>
+	</form>
+</div></main>
 
-<footer th:include="other/footer"></footer>
-	<script type="text/javascript" src="js/memberUpdate.js">
-	
-	
-	</script>
-	<script type="text/javascript"src="js/homeNav.js"></script>
+<div id="globalSidebar">
+	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
+<div id="chatModals"></div>	
 </body>
 </html>

@@ -314,9 +314,3 @@ body {
 	text-align: left;
 }
 
-/* 프사 둥글게 */
-img.profilePic {
-	border-radius: 50%;
-	vertical-align: middle;/* 높이가 서로다른 프사와 닉네임글자를 세로정렬 */
-}
-

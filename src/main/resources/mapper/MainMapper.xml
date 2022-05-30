@@ -244,6 +244,20 @@
 		resultType="org.pro.demang.model.MemberDTO">select * from memberTBL WHERE m_email = #{m_email};
 	</select>
 	
+	<!-- 회원정보 수정 -->
+	<update id="memberUpdate_nickname"><!-- 닉네임 -->
+	UPDATE memberTBL SET m_nickname = #{m_nickname} WHERE m_id = #{m_id};</update>
+	<update id="memberUpdate_password"><!-- 비밀번호 -->
+	UPDATE memberTBL SET m_password = #{m_password} WHERE m_id = #{m_id};</update>
+	<update id="memberUpdate_gender"><!-- 성별 -->
+	UPDATE memberTBL SET m_gender = #{m_gender} WHERE m_id = #{m_id};</update>
+	<update id="memberUpdate_introduce"><!-- 자기소개 -->
+	UPDATE memberTBL SET m_introduce = #{m_introduce} WHERE m_id = #{m_id};</update>
+	<update id="memberUpdate_profilePic"><!-- 프사 수정 -->
+	UPDATE memberTBL SET m_profilePic = #{m_profilePic} WHERE m_id = #{m_id};</update>
+	<update id="memberUpdate_eraseProfilePic"><!-- 프사 지우기 -->
+	UPDATE memberTBL SET m_profilePic = null WHERE m_id = #{m_id};</update>
+	
 	<!-- 팔로잉 수, 팔로워 수 (회원번호로) -->
 	<select id="followingCount" resultType="Integer">
 	SELECT COUNT(follower) from followTBL WHERE follower = #{no}</select>
