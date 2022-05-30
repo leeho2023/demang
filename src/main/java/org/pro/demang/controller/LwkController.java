@@ -29,9 +29,11 @@ public class LwkController {
 	public String login( MemberDTO dto, @Param("red") String red, HttpServletRequest request, RedirectAttributes rttr) {
 		// 들어온 dto의 이메일이 admin일 때 
 		if(dto.getM_email().equals("admin")) {
+			MemberDTO member = MemberService.login(dto);
 			HttpSession session = request.getSession();
-			session.setAttribute("email", dto.getM_email());
-			return "redirect:/admin";
+			session.setAttribute("login", member.getM_id());
+			session.setAttribute("email", member.getM_email());
+			return "redirect:/feed";
 		}else { // admin이 아닐 때 로그인하기
 			MemberDTO member = MemberService.login(dto);// 입력된 정보(dto)로 디비에서 회원정보 찾아오기
 			if( member != null ) {// 일치하는 회원 있음: 로그인 성공

@@ -91,7 +91,7 @@ $('.messages').click(function(){
 
 
 // 경고 관련 ajax
-
+// 경고 주기
 function warnCountUp(m_id, elem){
     $.ajax({
         type: "post",
@@ -104,7 +104,7 @@ function warnCountUp(m_id, elem){
         }
     });
 };
-
+// 경고 취소
 function warnCountDown(m_id, elem){
     $.ajax({
         type: "post",
@@ -117,6 +117,10 @@ function warnCountDown(m_id, elem){
         }
     });
 };
+
+
+
+
 
 
 function closeBtn(){

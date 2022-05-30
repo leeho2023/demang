@@ -132,7 +132,7 @@ public class LhhController {
 		return result;
 	}
 
-
+// 문의 사진과 같이 등록하기
 	@PostMapping("/contactUsInsert")
 	public String contactUsInsert(ContactUsDTO dto,
 	        @RequestParam("files") MultipartFile[] files) {
@@ -163,21 +163,31 @@ public class LhhController {
 // 관리자 user 페이징
 	@GetMapping("/userListPage")
     public String userListPage(
-		@RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
-		PageInfo<MemberDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
-    	model.addAttribute("userListPaging", p);
-     
-       	return "admin/userPage";
+		@RequestParam(required = false, defaultValue = "1") int pageNum, Model model, HttpSession session) throws Exception {
+		
+		String email = session.getAttribute("email")+"";
+		if(email.equals("admin")){
+			PageInfo<MemberDTO> p = new PageInfo<>(pagingServiceImpl.getUserList(pageNum), 10);
+    		model.addAttribute("userListPaging", p);
+    
+    	   	return "admin/userPage";
+		}
+       	return "other/error";
     }
 	
 // 관리자 post 페이징
 	@GetMapping("/postListPage")
     public String postListPage(
-		@RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
-		PageInfo<PostDTO> p = new PageInfo<>(pagingServiceImpl.getPostList(pageNum), 10);
-    	model.addAttribute("postListPaging", p);
-     
-       	return "admin/postPage";
+		@RequestParam(required = false, defaultValue = "1") int pageNum,
+		Model model, HttpSession session) throws Exception {
+			String email = session.getAttribute("email")+"";
+			if(email.equals("admin")){
+				PageInfo<PostDTO> p = new PageInfo<>(pagingServiceImpl.getPostList(pageNum), 10);
+				model.addAttribute("postListPaging", p);
+		
+				return "admin/postPage";
+			}
+		return "other/error";
     }
 	
 	
@@ -185,10 +195,15 @@ public class LhhController {
 //	admin messages 페이징 
 	@GetMapping("/contactUsList")
 	public String page(
-            @RequestParam(required = false, defaultValue = "1") int pageNum, Model model) throws Exception {
-	PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getContactList(pageNum), 10);
-	model.addAttribute("contactUsList", p);
-	return "admin/messages";
+            @RequestParam(required = false, defaultValue = "1") int pageNum,
+			Model model, HttpSession session) throws Exception {
+				String email = session.getAttribute("email")+"";
+				if(email.equals("admin")){
+					PageInfo<ContactUsDTO> p = new PageInfo<>(pagingServiceImpl.getContactList(pageNum), 10);
+					model.addAttribute("contactUsList", p);
+					return "admin/messages";
+				}
+			return "other/error";
 	}
 
 	
@@ -219,7 +234,7 @@ public class LhhController {
 	}
 	
 //	문의 답변하기
-	@PostMapping("answerInsert")
+	@PostMapping("/answerInsert")
 	public String answerInsert(AnswerDTO dto,
 			@RequestParam("m_email") String m_email) {
 		

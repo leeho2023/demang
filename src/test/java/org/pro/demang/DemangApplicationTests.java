@@ -7,6 +7,7 @@ import org.pro.demang.service.OrderService;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootTest
 class DemangApplicationTests {
@@ -19,6 +20,8 @@ class DemangApplicationTests {
     OrderService orderService;
 	@Autowired
 	private MainMapper mapper;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 //
 //	@Test
@@ -31,5 +34,11 @@ class DemangApplicationTests {
 	public void followingNum() {
 		System.out.println( mapper.followingCount(1) );
 	}
+	
+//	@Test
+//	public void adminpassword() {
+//		String encodedPassword = passwordEncoder.encode("admin");
+//		System.out.println(encodedPassword);
+//	}
 
 }

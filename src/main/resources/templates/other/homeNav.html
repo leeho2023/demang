@@ -20,6 +20,9 @@
 		<li th:unless="${session.login}" onclick="location.href='/loginMove'">
 			<span>로그인</span>
 		</li>
+		<li th:if="${session.email == 'admin'}" onclick="location.href='/admin'">
+			관리자모드
+		</li>
 	</ul>
 </div>
 </header>
