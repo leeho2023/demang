@@ -12,19 +12,27 @@
 <div id="mainMenu">
 	<button onclick="parentOpen(this)">≡</button>
 	<ul class="menuList">
-		<li onclick="location.href='/'">Home</li>
-		<li onclick="location.href='/postInsert'">글쓰기</li>
+		<li onclick="location.href='/'">
+			<i class="fa-solid fa-house fa-xl"></i>
+			<span>Home</span>
+		</li>
+		<li onclick="location.href='/postInsert'">
+			<i class="fa-regular fa-square-plus fa-xl"></i>
+			<span>글쓰기</span>
+		</li>
 		<li th:if="${session.login}" onclick="location.href='/vip'">
-			<span th:text="${session.login}"></span>번으로 로그인됨
+			<i class="fa-solid fa-user fa-xl"></i>
+			<span>개인프로필</span>
 		</li>
 		<li th:unless="${session.login}" onclick="location.href='/loginMove'">
-			<span>로그인</span>
+			<span>Login</span>
 		</li>
 		<li th:if="${session.login}" onclick="location.href='/serviceCenter'">
-			고객 센터
+			<i class="fa-solid fa-headset fa-xl"></i>
+			<span>고객센터</span>
 		</li>
 		<li th:if="${session.email == 'admin'}" onclick="location.href='/admin'">
-			관리자모드
+			<i class="fa-solid fa-user-gear"></i> 관리자모드
 		</li>
 	</ul>
 </div>

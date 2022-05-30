@@ -1,27 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 body{
-    padding: 0;
-    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-main div{
-    border: 1px solid black;
-    width: auto;
-    height: auto;
-}
-
-main{
-    border: 2px solid blue;
-    display: flex;
-    justify-content: center;
-}
 
 .mainwrap{
-    width: 70vw;
-    height: auto;
+    /* border: 2px solid blue; */
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .subwrap{
-    width: 70vw;
     height: auto;
     display: flex;
     justify-content: center;
@@ -29,24 +21,40 @@ main{
 }
 
 .notice{
-    width: 400px;
-    height: auto;
+    border: 3px solid var(--themeCol1);
+    border-radius: 5px;
     display: flex;
+    width: 22vw;
+    height: 20vh;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    
 }
 
+.notice p{
+    /* border: 1px solid red; */
+    text-align: center;
+}
 
+div#contactUsBtn{
+    display: flex;
+    justify-content: center;
+}
+
+div.contactUs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* 문의 하기 모달 css */
 .contactUsModalBack {
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
 }
   
@@ -93,7 +101,7 @@ main{
     align-items: center;
 }
 
-form{
+form#contactInsert {
     padding: 0;
     margin: 0;
     width: 100%;
