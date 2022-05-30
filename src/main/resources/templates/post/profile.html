@@ -8,7 +8,6 @@
 			<div id="memberFunctions" th:if="${session.login}"><!--/* 로그인 했을 때만 쓸 수 있는 기능 */-->
 				<button class="tinyButton" th:onclick="location.href='chat?to=[[${dto.m_id}]]'">채팅</button>
 				<button class="tinyButton" th:if="${session.login} == ${dto.m_id}" id="memberEditBtn" onclick="location.href='memberRead'">내 정보</button>
-				<button class="tinyButton" th:if="${session.login} == ${dto.m_id}" id="logoutBtn" onclick="location.href='/logout'">로그아웃</button>
 				<button class="tinyButton" th:if="${session.login} != ${dto.m_id}" id="followBtn" th:onclick="doFollow([[${dto.m_id}]])">팔로우 하기</button>
 			</div>
 		</div>

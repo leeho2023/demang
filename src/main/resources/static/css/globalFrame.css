@@ -179,6 +179,10 @@ body {
 		flex-flow: row nowrap;
 		justify-content: center;
 	}
+	#globalHeader .menuList .menuName {
+		display: none;
+	}
+	
 	/* 사이드바 */
 	#globalSidebar {
 		position: fixed;
