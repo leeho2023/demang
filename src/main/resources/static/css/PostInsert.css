@@ -98,14 +98,14 @@
 }
 
 #selectedImg .file_label {/* input 대신 눌릴 라벨 */
-   background-image: url(../img/plus.png);
+   background-image: url(../img/photo-camera.png);
    background-size: cover;
    display: inline-block; 
    width: 150px;
    height: 150px;
    cursor: auto;
-   border: 1px solid black;
 }
+
 #selectedImg input[type="file"] {/* input은 눌리지 않게 표시 안함 */
    display: none
 }
