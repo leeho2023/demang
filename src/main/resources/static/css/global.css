@@ -4,6 +4,8 @@
 /* 시작하기 전 */
 :root {/* 테마색 정의 */
 	--backCol: white;
+	--textCol: black;
+	--lightTextCol: rgb(98, 95, 90);
 	--themeCol1: rgb(42, 36, 29);
 	--themeCol2: rgb(132, 114, 92);
 	--light1: white;
@@ -21,6 +23,12 @@ a {
 }
 button {
 	font-size: 0.9em;
+}
+em {
+	font-weight: bold;
+	color: var(--themeCol1);
+	font-size: 1.2em;
+	font-style: normal;
 }
 
 /* 작은 버튼 */
