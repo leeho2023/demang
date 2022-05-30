@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /* 검색 후 유저정보와 post 정보 css 부분 */
 .contentBox{
@@ -174,3 +175,113 @@ figure img{
     font-size: 0.8em;
     font-weight: 700;
 }
+=======
+
+
+
+
+.content2{
+	border: 2px solid cadetblue;
+	width: 60vw;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.post{
+	/* border: 1px solid red; */
+	margin-bottom: 2%;
+	width: 32%;
+	height: 33vh;
+	display: flex;
+}
+.imgBox{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 34vh;
+	overflow: hidden;
+}
+
+
+.postBlank{
+	background-color: rgba(0, 0, 0, 0.7);
+	width: 20vw;
+	height: 40vh;
+}
+.contentImg{
+	width: 100%;
+	height: 100%;
+}
+Box{
+	background-color: black;
+	width: 19.2vw;
+	height: 34vh;
+	display: flex;
+	align-items: flex-end;
+	opacity: 0;
+	position: absolute;
+	transition-property: opacity, background-color;
+	transition-duration: 0.2s;
+	transition-timing-function: linear;
+}
+
+.post:hover > .userInfoBox{
+	opacity: 1;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+figure{
+	width: 100%;
+	height: 35vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+figure img{
+	width: 100%;
+	height: 100%;
+}
+
+.imgBox figure img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.post:hover .imgBox figure img {
+	-webkit-transform: scale(1.2);
+	transform: scale(1.2);
+}
+
+.imgBox figure .p_content {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.post:hover .imgBox figure .p_content {
+	-webkit-transform: scale(1.2);
+	transform: scale(1.2);
+}
+
+.userInfo{
+	width: 100%;
+	height: 10vh;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding-top: 1%;
+	padding-left: 1%;
+	position: absolute;
+	float: left;
+	width: 19vw;
+	height: 8vh;
+	display: flex;
+	align-items: center;
+	padding-left: 7%;
+}
+>>>>>>> refs/remotes/origin/searchUserPageLink

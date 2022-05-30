@@ -204,7 +204,7 @@ public class MainController {
 				postService.getPostList_followee( loginId(session) )
 				);
 		model.addAttribute("postType", "stack");
-		return "post/postList";
+		return "post/postList";// 게시글 목록 페이지
 	}
 	
 	//// 개인 페이지
@@ -227,7 +227,7 @@ public class MainController {
 		model.addAttribute("postType", "stack");
 		model.addAttribute("additional", "profile");
 		model.addAttribute("dto", dto);// 해당 회원 정보
-		return "post/postList";
+		return "post/postList";// 게시글 목록 페이지
 	}
 	
     //// 내가 좋아한 게시글들 보기 페이지
@@ -312,8 +312,10 @@ public class MainController {
 			return "redirect:/search?type=post&val="+searchVal;
 		//// 회원 검색
 		if( searchType.equals("member") ) {
-			
-			return "post/ ???";// ??? 회원 검색 결과용 페이지 따로 있어야..
+			List<MemberDTO> memList = memberService.memberSearch(searchVal);
+			model.addAttribute("memList", memList);
+			model.addAttribute("searchVal", searchVal);
+			return "other/searchUser";// 유저 검색 결과 페이지
 		}
 		//// 해시태그 검색
 		if( searchType.equals("hashtag") ) {
@@ -324,7 +326,7 @@ public class MainController {
 			model.addAttribute("postType", "album");// 이 페이지는 앨범식으로 표시
 			model.addAttribute("additional", "searchInfo");// 이 페이지에서 searchInfo.html을 추가로 표시
 			model.addAttribute("searchVal", searchVal);
-			return "post/postList";
+			return "post/postList";// 게시글 목록 페이지
 		}
 		//// 게시글 검색
 		if( searchType.equals("post") ) {
@@ -336,7 +338,7 @@ public class MainController {
 			model.addAttribute("postType", "album");// 이 페이지는 앨범식으로 표시
 			model.addAttribute("additional", "searchInfo");// 이 페이지에서 searchInfo.html을 추가로 표시
 			model.addAttribute("searchVal", searchVal);
-			return "post/postList";
+			return "post/postList";// 게시글 목록 페이지
 		}
 		//// 다른 엉뚱한 유형: 게시글 검색으로 리다이렉트
 		return "redirect:/search?type=post&val="+searchVal;

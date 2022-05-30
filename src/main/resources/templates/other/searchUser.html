@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UserSearch</title>
-    <link rel="stylesheet" href="css/homeNav.css">
-    <link rel="stylesheet" href="css/postSearch.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원 검색 결과</title>
+<!-- script -->
+<!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- 스크롤 내려 글 부르기 --><script th:inline="javascript">postList = [[${postList}]]; postType = [[${postType}]]</script><script src="js/postFromListByScrolling.js"></script> 
+<!-- 게시글 관련 --><script src="js/postView.js"></script>
+<!-- 이미지 슬라이더 --><script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<!-- css -->
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
+<!-- additional --><th:block th:if="${additional}"><link rel="stylesheet" th:href="'css/'+${additional}+'.css'"></th:block>
+<link rel="stylesheet" href="css/searchUser.css">
 </head>
 <body>
-    <header id="homeNav" th:include="other/homeNav"></header>
-    <div class="contentBox">
-        <div class="content1">
-            <div class="userBox" th:each="user : ${list}">
-                <div class="userProfile">
-                    <div class="profileImg">
-                        <img th:src="${user.profileImage}">
-                    </div>
-                    <div class="email_nickName">
-                        <span class="nickName">
-                            [[${user.m_nickname}]]
-                            <span class="nickCode">
-                                 #[[${user.m_code}]]
-                            </span>
-                        </span>
-                        <span class="email">
-                            [[${user.m_email}]]
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer th:include="other/footer"></footer>
-    <script src="js/homeNav.js"></script>
-    <script src="js/postSearch.js"></script>
+
+<header th:replace="other/homeNav">메인메뉴</header>
+
+<!-- 
+div.wrap
+└검색 결과 유저 항목들 div.userBox
+　├프사 div.profileImg - img.profilePic
+　└정보 div.details
+　　├닉네임과코드 div.nickNameCode
+　　└이메일 div.email
+ -->
+<main>
+	<section id="searchInfo">
+		<h1><em th:text="${searchVal}"></em>회원 검색 결과입니다.</h1>
+	</section>
+	
+	
+	<section class="wrap">
+		<div class="userBox" th:onclick="'location.href=\'/vip?v='+${user.m_id}+'\''" th:each="user : ${memList}">
+			<div class="profileImg">
+				<img class="profilePic" th:src="${user.profileImage}">
+			</div>
+			<div class="details">
+				<div class="nickNameCode">
+					<span class="nickname" th:text="${user.m_nickname}"></span>
+					<span class="nickcode">#[[${user.m_code}]]</span>
+				</div>
+				<div class="email">[[${user.m_email}]]</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+<div id="globalSidebar">
+	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
+	<button onclick="parentOpen(this)">≡</button>
+	<footer th:replace="other/footer">푸터</footer>
+</div>
+
+<div id="chatModals"></div>
+
 </body>
 </html>

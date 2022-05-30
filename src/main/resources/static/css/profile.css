@@ -40,10 +40,4 @@ section.memberInfo > .etc > .nickcode > h1 {
 section.memberInfo > .etc > .introduce {
 	padding: 10px;
 }
-/* 팔로잉, 팔로워 수 */
-section.memberInfo > .etc > .followNum .point {
-	color: var(--themeCol1);
-	font-weight: bold;
-	font-size: 1.2em;
-}
 
