@@ -93,6 +93,7 @@ public interface MainMapper {
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회
 	List<OrderDTO> getOrderList(int loginId);// 회원의 주문 목록 조회
+	void paymentWaiting( String event_id, String ord_id );// 결제 대기 시간 지났는데 결제 안 됐으면 결제취소 상태로 바꾸기 이벤트 스케줄러
 	
 	
 	// 검색 관련
