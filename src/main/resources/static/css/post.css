@@ -37,3 +37,9 @@
 .post > .menubar > .likeDiv:not(.liked) > .unlike {
 	display: none;
 }
+
+/* 아무것도 없을 때 */
+.ppp{
+	text-align: center;
+}
+
