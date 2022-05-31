@@ -1,14 +1,31 @@
 @charset "UTF-8";
+/*
+로그인, 회원가입, 회원정보수정 페이지 셋에 공통 사용
+*/
 
-/* 상단바 등 사용하지 않음 (하지만 메시지 출력 기능 쓰려고 존재는 함) */
+/* globalFrame 사용하지 않음 (하지만 메시지 출력 기능 쓰려고 상단바는 존재는 함) */
 #globalHeader {
 	display: none !important;
 }
 
-button {
-	font-size: inherit;
-}
-
+/*
+main - div.wrap
+├설명 div.info
+│├개인정보 수정 h1
+│└빈칸으로 제출시 어쩌구
+│
+└입력폼 form.mainForm
+　│
+　├입력창 모음 div.inputs
+　│├입력 한 개에 해당하는 기타 형식
+　│└입력 한 개에 해당하는 div.inputCell
+　│　├표지 label
+　│　├입력 .input - 쳌밗이나 라디오버튼은 div.input 안에 input요소. 아니면 input.input
+　│　├장식용 밑줄 hr.underlineForUnput
+　│　└메시지 div.regex
+　│
+　└버튼 모음 div.buttons
+*/
 /* 전체적 */
 html, body, main {
 	margin: 0;
@@ -24,7 +41,7 @@ html, body, main {
 	overflow: auto;
 }
 @media (max-height: 850px){/* 화면 세로길이가 작을 경우 세로 가운데 정렬하면 위쪽은 걍 잘리고 아래쪽만 스크롤 생기기 때문에 세로 위쪽 정렬으로 바꿔서 전체가 다 스크롤 되며 보이도록 */
-	.wrap.signup {
+	.wrap.signup {/* 페이지별로 세로길이 다르니까 클래스명으로 구분 */
 		justify-content: start;
 	}
 }
@@ -33,16 +50,22 @@ html, body, main {
 		justify-content: start;
 	}
 }
+@media (max-height: 1370px){
+	.wrap.update {
+		justify-content: start;
+	}
+}
+
 .wrap > * {
 	margin: 20px auto;
 }
 .mainForm {
+	box-sizing: border-box;
 	width: 100%;
-	max-width: 500px;
-	flex-basis: 500px;
+	max-width: 600px;
 	border: 2px solid var(--themeCol1);
 	box-shadow: var(--themeCol2) 0 0 10px;
-	padding: 10px 0;
+	padding: 25px;
 	text-align: center;
 }
 .mainForm > * {
@@ -57,52 +80,75 @@ html, body, main {
 
 
 
-/* 입력항목들 */
+
+/* inputCell식 입력항목들 */
 .inputCell {
 	position:relative;
-	width:300px;
-	height:50px;
 }
-.inputCell input {
-	box-sizing:border-box;
-	padding:20px 0 0;
-	width:100%;
-	height:100%;
-	border:0 none;
-	outline:none;
+.inputCell > * {
+	box-sizing: border-box;
+	width: 100%;
 }
-.inputCell label {
-	position:absolute;
-	left:0%;
-	bottom:0;
-	width:300px;
-	height:100%;
-	border-bottom:1px solid #000;
-	text-align:left;
-	pointer-events:none;
+.inputCell > label {
+	display: block;
+	text-align: left;
+	font-weight: bold;
+	font-size: 1.2em;
 }
-#sendMail {
-	padding: 0;
+.inputCell > .input {
 	border: none;
+	border-left: 4px solid var(--themeCol1);
+	padding: 10px;
+	font-size: 1em;
+	background-color: var(--light1);
 }
-.inputCell label:after {/* 포커스된 항목의 밑줄 효과 */
-	content:"";
-	position:absolute;
-	left:0;
-	bottom:-1px;
-	width:0;
-	height:100%;
-	border-bottom:3px solid rgb(0, 0, 0);
-	transition:all .6s ease;
+.inputCell > .input:focus {
+	border-left-color: var(--themeCol2);
 }
-.inputCell input:focus + label::after,
-.inputCell input:valid + label::after {
-	width:300px;
-	transform:translateX(0);
+.inputCell > .input + .underlineForInput {
+	transform: translateY(-3px);
+	width: 0;
+	border: 1px solid transparent;
+	transition-duration: 0.3s;
+}
+.inputCell > .input:focus + .underlineForInput {
+	width: 100%;
+	border: 1px solid var(--themeCol1);
+}
+.inputCell .regex {
+	color: red;
+}
+
+
+/* 프사 입력 */
+input#m_profilePic {/* 프사 업로드 input 숨기기 (라벨로 대신 클릭) */
+	display: none;
+}
+#profilePicLabel > img {
+	height: 250px;
+	width: 250px;
+}
+/* 업로드한 프사 미리보기 */
+#profilePicLabel:not(.default) > #profilePicDefault {
+	display: none;
+}
+#profilePicLabel:not(.current) > #profilePicCurrent {
+	display: none;
+}
+#profilePicLabel:not(.preview) > #profilePicPreview {
+	display: none;
+}
+/* 프로필사진 지우기 체크박스 숨기고 그 동생 라벨을 체크 여부에 따라 색 바꾸기 */
+#eraseProfilepic {
+	display: none;
+}
+#eraseProfilepic:checked + label {
+	background-color: var(--themeCol1);
 }
 
 
 
+/* 가입 페이지에서 로그인으로 가는 버튼 */
 .toLoginMove {
 	border: 2px solid var(--themeCol2);
 }

@@ -12,7 +12,6 @@ $(function(){
            $(".email.regex").html("");  
         }else{
             $(".email.regex").html("올바른 이메일이 아닙니다");
-            $(".email.regex").css("color","red");
             return;
         }
                     

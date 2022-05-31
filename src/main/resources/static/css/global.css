@@ -8,7 +8,7 @@
 	--textCol: black;
 	--lightTextCol: rgb(98, 95, 90);
 	--themeCol2: rgb(132, 114, 92);
-	--light1: white;
+	--light1: #eee;
 	--light2: rgb(226, 220, 211);
 }
 * {
@@ -21,14 +21,23 @@ ol , ul {
 a {
 	text-decoration: none;
 }
-button {
-	font-size: 0.9em;
+button , input {
+	font-size: 1em;
 }
 em {
 	font-weight: bold;
 	color: var(--themeCol1);
 	font-size: 1.2em;
 	font-style: normal;
+}
+
+
+.clickBtn:hover {background-color: black}
+
+.clickBtn:active {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 /* 작은 버튼 */
@@ -39,16 +48,8 @@ em {
 	padding: 4px 8px;
 	border-radius: 20px;
 	font-weight: bold;
+	font-size: 0.9em;
 }
-
-.clickBtn:hover {background-color: black}
-
-.clickBtn:active {
-  background-color: black;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
 /* 작고 연한 버튼 */
 .tinyLightButton {
 	background-color: var(--themeCol2);
@@ -57,6 +58,7 @@ em {
 	padding: 4px 8px;
 	border-radius: 20px;
 	font-weight: bold;
+	font-size: 0.9em;
 }
 /* 큰 버튼 */
 .largeButton {
@@ -102,8 +104,9 @@ em {
 	transition: 0.3s ease all;
 }
 
-/* 프사 둥글게 */
+/* 프사 */
 img.profilePic {
 	border-radius: 50%;
 	vertical-align: middle;/* 높이가 서로다른 프사와 닉네임글자를 세로정렬 */
+	box-shadow: 0 0 5px #0004;
 }

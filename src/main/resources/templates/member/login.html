@@ -19,20 +19,28 @@
 <header th:replace="other/homeNav">메인메뉴</header>
 	
 <main><div class="wrap login">
+	<div class="info">
+		<h1><img src="img/DEMANG.png" class="logo"></h1>
+	</div>
+	
 	<form class="mainForm" action="/login" method="post">
 		<input type="hidden" th:value="${red}" name="red">
-	
-		<img src="img/DEMANG.png" class="logo">
 		
 		<div class="inputs">
-			<p class="inputCell">
-				<input type="text" name="m_email" id="m_email" autocomplete="off" required>
-				<label for="user_name">ID</label>
-			</p>
-			<p class="inputCell">
-				<input type="password" name="m_password" id="m_password" autocomplete="off" required>
-				<label for="user_name">PASSWORD</label>
-			</p>
+			<div class="inputCell">
+				<label for="user_name">이메일</label>
+				<input type="text" name="m_email" 
+					id="m_email" class="input" 
+					autocomplete="off" required>
+				<hr class="underlineForInput">
+			</div>
+			<div class="inputCell">
+				<label for="m_password">비밀번호</label>
+				<input type="password" name="m_password" 
+					id="m_password" class="input" 
+					autocomplete="off" required>
+				<hr class="underlineForInput">
+			</div>
 		</div>
 		
 		<div class="buttons">

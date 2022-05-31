@@ -13,61 +13,75 @@
 </head>
 <body>
 
+<header th:replace="other/homeNav">메인메뉴</header>
+
+<!-- 
+main - div.wrap
+├설명 div.info
+│└회원가입 h1
+│
+└입력폼 form.mainForm
+　├입력창 모음 div.inputs
+　└버튼 모음 div.buttons
+ -->
 <main><div class="wrap signup">
-	<h1>회원가입</h1>
+	<div class="info">	
+		<h1>회원가입</h1>
+	</div>
 	
 	<form class="mainForm" action="/signUp" method="POST" id="signUp">
 			
 		<div class="inputs">
-			<!--/* 이메일 입력과 메일로 인증코드 받는 버튼 */-->
-			
 			<div class="inputCell">
-				<input type="text" name="m_email" class="m_email" id="m_email" autocomplete="off" required>
-				<label for="user_name">E-MAIL</label>
+				<label for="m_email">이메일</label>
+				<input type="text" name="m_email" class="m_email input" id="m_email" autocomplete="off" required>
+				<hr class="underlineForInput">
+				<div class="email regex"></div>
 			</div>
-			<div class="email regex"></div>
 			
-			<button type="button" id="sendMail">인증코드받기</button>
+			<button type="button" id="sendMail" class="tinyButton">인증코드받기</button><!--/* 이메일 입력과 메일로 인증코드 받는 버튼 */-->
 
 			<div class="inputCell">
-				<input type="text" name="e_code" id="e_code" autocomplete="off" required>
-				<label for="user_name">인증코드</label>
+				<label for="e_code">인증코드</label>
+				<input type="text" name="e_code" id="e_code" class="input" autocomplete="off" required>
+				<hr class="underlineForInput">
+				<div class="code regex"></div>
 			</div>
-			<div class="code regex"></div>
 			
 			<div class="inputCell">
-				<input type="text" name="m_nickname"class="m_nickname" id="m_nickname" autocomplete="off" required>
-				<label for="user_name">NAME</label>
+				<label for="m_nickname">이름</label>
+				<input type="text" name="m_nickname" class="m_nickname input" id="m_nickname" autocomplete="off" required>
+				<hr class="underlineForInput">
+				<div class="name regex"></div>
 			</div>
-			<div class="name regex"></div>
 			
 			<div class="inputCell">
-				<input type="password" name="m_password" class="m_password" id="m_password" autocomplete="off" required>
-				<label for="user_name">PASSWORD</label>
+				<label for="m_password">비밀번호</label>
+				<input type="password" name="m_password" class="m_password input" id="m_password" autocomplete="off" required>
+				<hr class="underlineForInput">
+				<div class="pw regex"></div>
 			</div>
-			<div class="pw regex"></div>
 			
 			<div class="inputCell">
-				<input type="password" name="m_re_password" class="m_re_password"id="m_re_password" autocomplete="off" required>
-				<label for="user_name">RE_PASSWORD</label>
+				<label for="m_re_password">비밀번호 확인</label>
+				<input type="password" name="m_re_password" class="m_re_password input" id="m_re_password" autocomplete="off" required>
+				<hr class="underlineForInput">
+				<div class="repw regex"></div>
 			</div>
-			<div class="repw regex"></div>
 			
-			<div class="">
-				BirthDay : 
-				<input type="date" name="m_birth" id="m_birth" class="birth" min="1900-01-01" required="required">
+			<div class="inputCell">
+				<label for="m_birth">생일</label>
+				<input type="date" name="m_birth" id="m_birth" class="birth input" min="1900-01-01" required="required">
+				<hr class="underlineForInput">
+				<div class="birth regex"></div>
 			</div>
-			<div class="birth regex"></div>
 		</div>
 		
 		<div class="buttons" id="signup">
 			<button type="button" class ="largeButton" id="signupbtn">JOIN</button>
+			<button class="toLoginMove" onclick="location.href='/loginMove'">I already have an account</button>
 		</div>
-	</form>
-	
-	 <div class="">
-		<button class="toLoginMove" onclick="location.href='/loginMove'">I already have an account</button>
-	</div>
+	</form>	
 </div>
 
 <div class="mailCheckModalBack2">
