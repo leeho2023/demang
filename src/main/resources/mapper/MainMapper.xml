@@ -418,12 +418,22 @@
 	<!-- 디비에 주문 넣기 -->
 	<insert id="orderInsert">
 	INSERT INTO orderTBL 
-	(ord_id, ord_buyer, ord_target, ord_amount, ord_buyer_name, ord_buyer_email, ord_buyer_tel, ord_buyer_address, ord_buyer_postcode, ord_price) 
-	VALUES(#{ord_id}, #{ord_buyer}, #{ord_target}, #{ord_amount}, #{ord_buyer_name}, #{ord_buyer_email}, #{ord_buyer_tel}, #{ord_buyer_address}, #{ord_buyer_postcode}, #{ord_price});
+	(ord_id, ord_buyer, ord_target, ord_target_name, ord_amount, ord_buyer_name, ord_buyer_email, ord_buyer_tel, ord_buyer_address, ord_buyer_postcode, ord_price) 
+	VALUES(#{ord_id}, #{ord_buyer}, #{ord_target}, #{ord_target_name}, #{ord_amount}, #{ord_buyer_name}, #{ord_buyer_email}, #{ord_buyer_tel}, #{ord_buyer_address}, #{ord_buyer_postcode}, #{ord_price});
 	</insert>
 	<!-- 주문의 금액 조회 -->
 	<select id="getOrderPrice" resultType="Integer">
 	 SELECT ord_price FROM orderTBL WHERE ord_id = #{ord_id}
+	</select>
+	<!-- 결제 대기 시간 지났는데 결제 안 됐으면 결제취소 상태로 바꾸기 이벤트 스케줄러 -->
+	<select id="paymentWaiting">
+	 CREATE event IF NOT EXISTS ${event_id}
+		ON SCHEDULE
+		AT DATE_ADD(NOW(), INTERVAL 10 MINUTE)
+		ON COMPLETION NOT PRESERVE
+		    ENABLE
+		    COMMENT '결제 대기 시간 만료를 기다림'
+		    DO CALL paymemtWaitingExpire( #{ord_id} );
 	</select>
 
 	<!-- 주문 상태를 결제 완료로 바꾸기 -->
