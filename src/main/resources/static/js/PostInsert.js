@@ -1,6 +1,6 @@
 //// 상품 항목 추가
 function merAdd(){
-   $('#merList').append('<li><label for="mer_name">상품명: <input type="text" id="mer_name" name="mer_name"></label><label for="mer_price">단가: <input type="number" id="mer_price" name="mer_price" ></label><label for="mer_amount">수량: <input type="number" id="mer_amount" name="mer_amount" value="1"> </label><button class="xbutton" onclick="deleteImg(this)">X</button></li>');
+   $('#merList').append('<li><label for="mer_name">상품명: <input type="text" id="mer_name" name="mer_name"></label><label for="mer_price"> 단가(원): <input type="number" id="mer_price" name="mer_price" max="100000000" min="0" ></label><label for="mer_amount">수량: <input type="number" id="mer_amount" name="mer_amount" value="1"> </label><button class="xbutton" onclick="deleteImg(this)">X</button></li>');
 }
 
 $(function(){

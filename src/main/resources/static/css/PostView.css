@@ -10,6 +10,7 @@
 	display: grid;
 	grid-template-rows: 1fr 50px;
 	grid-template-columns: 1fr 300px;
+	margin-top: 5vh;
 }
 .post > .postView {/* 게시물 */
 		grid-row: 1/2;
@@ -156,13 +157,6 @@
 .post > .menubar > .report {
 	float: right;
 }
-
-/* 좋아요 */
-.unlike > d path: svg > path:nth-of-type(1){
-	fill: green;
-}
-
-
 
 /*
 댓글 목록 ul.commentList
