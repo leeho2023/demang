@@ -28,6 +28,7 @@
 #postForm {
    display: flex;
    flex-flow: column nowrap;
+   margin-top: 5vh;
 }
 #postForm > * {
    margin-top: 30px;
