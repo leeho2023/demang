@@ -5,6 +5,7 @@
 <title>주문 페이지 만드는 중</title>
 <!-- jQuery --><script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
+<!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
 <!-- 이 페이지 전용 --><script>
 	function adjustMaxAmount( max ){// 수량 최대치 조정
 		$('#amount').attr('max', max);
@@ -13,7 +14,7 @@
 </script>
 
 <!-- css -->
-<!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 <style>
 form {

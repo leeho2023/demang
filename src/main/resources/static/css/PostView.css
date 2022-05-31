@@ -169,10 +169,24 @@
 */
 
 /* 댓글 목록 */
+
+.comments{
+	margin-left: 10px;
+}
+
+.commentForm > .c_content {
+	padding: 8px;
+	background-color: white;
+}
+
 .commentList .profilePic {
 	height: 30px;
 	width: 30px;
 }
 .commentList .regdate {
 	color: grey;
+}
+
+.commentList > .comment{
+	margin-top: 5px;
 }
