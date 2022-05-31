@@ -26,7 +26,7 @@
 			<span class="code">#[[${post.memberDTO.m_code}]]</span>
 		</h1>
 		
-		<div th:if="${imageList}" class="postImgs"><!--/* 이미지 (있을 때만) */-->
+		<div th:if="${imageList.size} > 0" class="postImgs"><!--/* 이미지 (있을 때만) */-->
 			<ul class="bxSlider postImgDiv">
 				<li th:each="image : ${imageList}">
 					<img class="imgBox" th:src="${image.image}" />
