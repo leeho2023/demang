@@ -5,6 +5,7 @@ main {
 .wrap {
 	border: 2px solid black;
 	margin: 0 auto;
+	margin-top: 5vh;
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: start;
@@ -32,14 +33,11 @@ main {
 	display: inline-block;
 }
 
-
+.buttons{
+	width: 15vw;
+}
 
 /* 상세정보 표 */
-.details {
-	border: 2px solid black;
-	border-collapse: separate;
-	border-spacing: 2px;
-}
 .details th ,
 .details td {
 	padding: 5px;
@@ -51,9 +49,6 @@ main {
 .details td {
 	text-align: left;
 }
-.details tr:nth-child(even) td {
-	background-color: pink;
+.details tr:nth-child(even) td{
+	background-color: skyblue;
 }
-
-
-
