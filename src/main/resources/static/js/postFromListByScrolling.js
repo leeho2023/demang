@@ -4,13 +4,17 @@
 <section id="postList"></> 뒤에 <hr id="endOfPostListPosCheck">
 */
 
+// $('section#postList').append("<div>게시글이 없습니다.</div>");
+
 //// 게시글의 id가 적힌 목록을 처음에 가지고 있다. 스크롤을 끝까지 내리면 그 목록에서 꺼낸 숫자로 게시글 정보를 ajax로 가져와서 화면에 내보낸다.
 num = 0;// 다음에 불러올 인덱스
 
 //// 맨 처음 게시글 몇 개 불러오기
 $(function(){
 	if( postList.length == 0 ){// 불러올 게시글이 없는 경우
-		$('section#postList').append("<div>게시글이 없습니다.</div>");
+		$.get("noPost", function(data){
+			$('section#postList').append(data);
+		});
 	}
 	//// ??? 화면 끝까지 닿일 때까지 반복하기
 	showPost();

@@ -52,6 +52,7 @@ public class SjhController {
 			}
 		}
 		
+		
 		//// 판매글일 경우; 상품 정보 등록
 		if( pdto.getP_type().equals("S")) {
 			for( int i=0; i < mer_name.length; i++ ) {// 상품 개수 만큼

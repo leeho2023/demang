@@ -195,6 +195,7 @@ figure img{
 	height: 33vh;
 	display: flex;
 }
+
 .imgBox{
 	margin: 0;
 	padding: 0;
@@ -202,7 +203,6 @@ figure img{
 	height: 34vh;
 	overflow: hidden;
 }
-
 
 .postBlank{
 	background-color: rgba(0, 0, 0, 0.7);

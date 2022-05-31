@@ -1,9 +1,9 @@
 package org.pro.demang.controller;
 
-import java.util.List;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+
+import com.github.pagehelper.PageInfo;
 
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.AnswerDTO;
@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.github.pagehelper.PageInfo;
 
 @Controller
 public class LhhController {
@@ -66,7 +64,11 @@ public class LhhController {
 		return "other/error";
 	}
 
-	
+    @GetMapping("/noPost")
+	public String noPost() {
+		return "other/noPost";
+	}
+    
     
 	@GetMapping("/fList")
 	public String fList() {

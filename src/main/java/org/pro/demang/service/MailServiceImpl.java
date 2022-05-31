@@ -37,9 +37,9 @@ public class MailServiceImpl implements MailService{
 
 
 	    MimeMessage message = javaMailSender.createMimeMessage();
-	    message.setSubject("demang 회원 가입 인증 코드");
+	    message.setSubject("demang 가입을 환영합니다.");
 	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
-	    message.setText("이메일 인증 코드 ==>" + emailCheckCode);
+	    message.setText("demang 회원 가입 인증 코드 ==>" + emailCheckCode);
 	    message.setSentDate(new Date());
 	    javaMailSender.send(message);
 	    return "";

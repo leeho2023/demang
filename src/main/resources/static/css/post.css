@@ -52,3 +52,10 @@
 .post > .menubar > button:hover  {
 	transform: scale(1, 1);
 }
+
+/* 아무것도 없을 때 */
+.postTextCenter{
+	width: 100%;
+	text-align: center;
+}
+
