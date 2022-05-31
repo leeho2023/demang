@@ -70,10 +70,10 @@ function endOfChatCheck( chatDiv ){// 채팅 내역 상자에서 스크롤 끝�
 현재 페이지가 채팅 페이지가 아니면 채팅 모달 띄우기
  */
 function newChat( listener ){
-	if( window.location.pathname == '/chat' ){
-		window.location.href = '/chat?to='+listener 
-	}else{
-		chat_modal( listener )
+	if( window.location.pathname == '/chat' ){// 현재 채팅페이지이면
+		window.location.href = '/chat?to='+listener // 그 회원과의 채팅 페이지
+	}else{// 채팅페이지 말고 다른 페이지이면
+		chat_modal( listener )// 채팅모달
 	}
 }
 
@@ -100,7 +100,7 @@ function chat_modal( listener ){// 회원번호 → body 하위에 그 회원과
 			//// 닫기 버튼
 			var xbutton = document.createElement('button');// 요소 만들기
 			modal.appendChild( xbutton );
-			xbutton.className = 'xButton';// 클래스
+			xbutton.className = 'xButton tinyButton';// 클래스
 			xbutton.innerText = 'X';
 			xbutton.addEventListener('click', function(){ this.parentNode.remove() });// 버튼 누르면 모달 닫기
 			//// 채팅Div 붙이기

@@ -45,47 +45,92 @@ main
 .chatModal > .chatDiv {
 	width: 300px;
 	height: 50vh;
-	display: flex;
-	flex-flow: column nowrap;
+	min-height: 200px;
 	background-color: #fff8;
 }
-
-.chatModal > .chatDiv > .chatListener {
-	flex-basis: 70px;
+.chatModal .chatListener h1 {
+	font-size: 1.2em;
 }
-.chatModal > .chatDiv > .chatHistory_box {
-	flex-basis: 0px;
-	flex-grow: 1;
-	overflow: auto;
-}
-.chatModal > .chatDiv > .chatForm {
-	flex-basis: 50px;
-}
-
 .chatModal > .chatDiv .date {/* 채팅모달에서는 간략히 보이려고 날짜 표시 안 함*/
 	display: none;
 }
 
 
 
+/* 채팅상자 한 개의 전체적 틀 */
+.chatDiv {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+}
+.chatHistory_box {
+	height: 0px;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
+
+/* 상대 정보 */
+.chatListener {
+	height: 10%;
+	min-height: 50px;
+	max-height: 100px;
+	padding: 1.5vh 10px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: start;
+	align-items: center;
+}
+.chatListener .profilePic{
+	height: 100%;
+}
+.chatListener h1 {
+	margin-left: 10px;
+	display: inline;
+}
+
+
+
 /* 채팅 내역 */
+.chatHistory_box {
+	overflow: auto;
+}
 .chatHistory {
 	display: flex;
 	flex-flow: column nowrap;
-	overflow: auto;
 }
 .chatHistory > * {
 	display: inline-block;
 	margin-bottom: 10px;
 	word-break: break-all;/* 넘치는 단어 무조건 줄내림 */
 }
-
 .chatHistory > .me {
-	background-color: #ffd;
-	align-self: flex-end;
+	background-color: #ffa;/* 말상자 색*/
+	align-self: flex-end;/* 오른쪽으로 붙임 */
+}
+.chatHistory > .you {
+	background-color: #def;/* 말상자 색*/
+	align-self: flex-start;/* 왼쪽으로 붙임 */
 }
 
-.chatHistory > .you {
-	background-color: #def;
-	align-self: flex-start;
+
+
+/* 채팅 입력 폼 */
+.chatForm {
+	display: flex;
+}
+.chatForm > input {
+	width: 0;
+	background-color: var(--light2);
+	border: none;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+.chatForm > button.chat_send {
+	border: none;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 10px;
+	background-color: var(--themeCol1);
+	color: var(--light1);
 }

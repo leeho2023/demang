@@ -5,15 +5,14 @@
 <title>[[${listener.m_nickname}]]#[[${listener.m_code}]]님과 채팅</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- script -->
+<!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
 <!-- 채팅방 초기 설정 --><script>$(function(){ chat_initialize( $('.chatDiv') ) });</script>
 
 <!-- css -->
-<!-- 이 페이지 전용 --><link rel="stylesheet" href="css/chattingPage.css">
-<!-- global frame --><link rel="stylesheet" href="css/globalFrame2.css">
-<!-- 검색창 --><link rel="stylesheet" href="css/search.css">
-<!-- 채팅(모달과 공통사항) --><link rel="stylesheet" href="css/chat.css">
+<!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chattingPage.css"><link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
 

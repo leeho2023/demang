@@ -1,10 +1,12 @@
-<!--/* ajax용 채팅 메시지 한 개 */-->
+<!--/* ajax용 채팅 메시지 */-->
 <th:block th:each="chat: ${chatList}" th:switch="${chat.h_speaker}">
+
 	<!--/* 나의 발언 */-->
 	<div th:case="${session.login}" class="me">
 		<p class="content" th:text="${chat.h_content}"></p>
 		<span class="date" th:text="${chat.h_datetime}"></span>
 	</div>
+	
 	<!--/* 상대의 발언 */-->
 	<div th:case="*" class="you">
 		<p class="content" th:text="${chat.h_content}"></p>

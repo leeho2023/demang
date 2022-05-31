@@ -7,13 +7,11 @@
 │
 ├상품 정보 div#mer
 │├상품 정보 ul#merList
-││├항목 li
-│││├상품명 label, input
-│││├단가 label, input
-│││├수랑 label, input
-│││└삭제 버튼 button
-││├항목 li
-││└항목 li …
+││└항목 li 여럿
+││　├상품명 label, input
+││　├단가 label, input
+││　├수랑 label, input
+││　└삭제 버튼 button
 ││
 │└상품 추가 button#merAddBtn
 │
@@ -39,15 +37,14 @@
 }
 
 /* 일반/판매/리뷰 선택 */
-
-#p_type > label > input[type="radio"]{
+#p_type > input[type="radio"]{
 	display: none;
 }
 
 #p_type > label {
 	display:inline-block;
 	background:none;
-	border:1px solid #dfdfdf;  
+	border:1px solid var(--light2);  
 	padding:0px 10px;
 	text-align:center;
 	height:35px;
@@ -56,9 +53,10 @@
 	cursor:pointer;
 }
 
-#p_type > label:hover {
-	background:#9b9b9b;;
-	color:#fff;
+#p_type > input:checked + label ,/* 선택된 선택지의 라벨 */
+#p_type > label:hover {/* 마우스 올려본 라벨 */
+	background: var(--themeCol1);
+	color: var(--light1);
 }
 
 /* 상품 정보 */
@@ -72,8 +70,8 @@
    box-sizing: border-box;
    width: 100%;
    padding: 13px;
-   border: #ccc solid 2px;
-   background-color: white;
+   border: var(--light2) solid 2px;
+   background-color: var(--backCol);
    display: block;
 }
 #postForm #merList > li > .xbutton {
@@ -83,8 +81,8 @@
    border: none;
    height: 50px;
    width: 40px;
-   background-color: #ccc;
-   color: white;
+   background-color: var(--themeCol1);
+   color: var(--light1);
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -99,15 +97,6 @@ input[type="number"]::-webkit-inner-spin-button {
    display: grid;
    grid-template-columns: 1fr 1fr;
    grid-template-rows: auto;
-}
-
-/* 이미지 첨부 */
-#postForm #selectedImgs {
-   border: 1px solid black;
-}
-#postForm #selectedImgs img {/* ??? */
-   height: 50px;
-   width: 50px;
 }
 
 /* 본문 */
@@ -137,7 +126,7 @@ input[type="number"]::-webkit-inner-spin-button {
    cursor: auto;
 }
 
-#selectedImg input[type="file"] {/* input은 눌리지 않게 표시 안함 */
+#selectedImg input[type="file"] {/* input은 눌리지 않게 표시 안함 (대신 라벨을 누름) */
    display: none
 }
 #selectedImg .innerImg {

@@ -64,16 +64,6 @@ body {
 	font-size: 2em;
 }
 
-#globalHeader .menuList > * {/* 메인메뉴 */
-	margin: 5px;
-	padding: 10px;
-	border: 2px var(--themeCol2) solid;
-	border-radius: 5px;
-	background-color: white;
-}
-#globalHeader .menuList > *:hover {
-	background-color: var(--light2);
-}
 
 #globalFooter {/* 푸터 */
 	text-align: center;
@@ -85,7 +75,7 @@ body {
 /* 전체 틀 */
 /* 넓은 화면 */
 @media (min-width: 1800px){
-	body {/* 최대크기 제한 */
+	body {/* 최대너비 제한 */
 		width: 1800px;
 		margin-left: auto;
 		margin-right: auto;
@@ -122,6 +112,16 @@ body {
 	}
 	#globalHeader #mainMenu > button {
 		display: none;
+	}
+	#globalHeader .menuList > * {/* 메인메뉴 */
+		margin: 5px;
+		padding: 10px;
+		border: 2px var(--themeCol2) solid;
+		border-radius: 5px;
+		background-color: white;
+	}
+	#globalHeader .menuList > *:hover {
+		background-color: var(--light2);
 	}
 	/* 사이드바 */
 	#globalSidebar {
@@ -182,6 +182,17 @@ body {
 	#globalHeader .menuList .menuName {
 		display: none;
 	}
+	#globalHeader .menuList > * {/* 메인메뉴 */
+		margin: 5px;
+		padding: 10px;
+		border: none;
+		border-radius: 5px;
+		border: 2px var(--light2) solid;
+		background-color: var(--light2);
+	}
+	#globalHeader .menuList > *:hover {
+		border-color: var(--themeCol2);
+	}
 	
 	/* 사이드바 */
 	#globalSidebar {
@@ -240,6 +251,16 @@ body {
 		position: absolute;
 		top: 60px;
 		right: 0px;
+	}
+	#globalHeader .menuList > * {/* 메인메뉴 */
+		margin: 5px;
+		padding: 10px;
+		border: 2px var(--themeCol2) solid;
+		border-radius: 5px;
+		background-color: white;
+	}
+	#globalHeader .menuList > *:hover {
+		background-color: var(--light2);
 	}
 	#globalHeader #mainMenu:not(.open) .menuList {
 		display: none;

@@ -1,12 +1,55 @@
 @charset "UTF-8";
 
+/* 전체적 틀 */
+.chatDiv {
+	height: 100vh;
+}
+
+
+/* 상대 정보 */
+.chatListener {
+	font-size: 1.5em;
+}
+
+/* 채팅 내역 */
 .chatHistory_box {
 	border: 2px grey solid;
 	border-radius: 1vw;
 	padding: 1vw;
-	overflow: auto;
+	flex-basis: 200px;
+	flex-grow: 1;
+	flex-shrink: 0;
 }
-.chatHistory > * {
+.chatHistory > * {/* 말주머니 한 개 */
+	position: relative;
 	margin: 20px;
+	padding: 10px;
+	border-radius: 8px;
+}
+.chatHistory > * .date {
+	position: absolute;
+	bottom: -18px;
+	width: 200px;/* 대충 문자열이 다 들어갈만한 크기 */
+	display: none;
+	color: var(--lightTextCol);
+}
+.chatHistory > .me .date {
+	text-align: right;
+	right: 0;
+}
+.chatHistory > .you .date {
+	text-align: left;
+	left: 0;
+}
+.chatHistory > *:hover .date {
+	display: block;
 }
 
+
+/* 채팅 입력 폼 */
+.chatForm {
+	margin-top: 20px;
+}
+.chatForm > input {
+	padding: 10px;
+}

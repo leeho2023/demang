@@ -25,10 +25,17 @@
 	<div class="space">
 		<!--/* 게시글 종류 */-->
 		<div id="p_type">
-			<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰/답글 대상 게시글 번호">
-			<label for="p_type_n" th:if="${p_type} == 'N'"><input type="radio" id="p_type_n" name="p_type" value="N" checked="checked">일반</label>
-			<label for="p_type_s" th:if="${p_type} == 'N'"><input type="radio" id="p_type_s" name="p_type" value="S">판매</label>
-			<label for="p_type_r" th:if="${p_type} == 'R'"><input type="radio" id="p_type_r" name="p_type" value="R" checked="checked">리뷰·답글</label>
+			<th:block th:if="${p_type} == 'N'">
+				<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰 대상 게시글 번호">
+				<input type="radio" id="p_type_n" name="p_type" value="N" checked>
+				<label for="p_type_n">일반</label>
+				<input type="radio" id="p_type_s" name="p_type" value="S">
+				<label for="p_type_s">판매</label>
+			</th:block>
+			<th:block th:if="${p_type} == 'R'">
+				<input type="radio" id="p_type_r" name="p_type" value="R" checked>
+				<label for="p_type_r">리뷰</label>
+			</th:block>
 		</div>
 		<button type="submit" class="tinyButton">작성완료</button>
 	</div>
