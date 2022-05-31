@@ -42,15 +42,18 @@ public class SjhController {
 		int p_id = pdto.getP_id(); // 생성 된 게시글의 이미지, 판매정보 등 등록시 참조하기 위해 p_id값을 가져옴
 		
 		//// 이미지 등록
-		for(int i = 0; i < files.length; i++) {// 이미지 개수만큼 반복 (최대 다섯 개)
-			try {
-				PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
-				imgDTO.setI_image(files[i].getBytes());// 이미지를 byte변환하여 이미지DTO 안에 넣기
-				postService.postInsertImg(p_id, imgDTO.getI_image()); // DB에 이미지 삽입
-			} catch (Exception e) {
-				e.printStackTrace();
+		if(files != null){
+			for(int i = 0; i < Math.min(files.length, 8); i++) {// 이미지 개수만큼 반복 (최대 다섯 개)
+				try {
+					PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
+					imgDTO.setI_image(files[i].getBytes());// 이미지를 byte변환하여 이미지DTO 안에 넣기
+					postService.postInsertImg(p_id, imgDTO.getI_image()); // DB에 이미지 삽입
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
+		
 		
 		//// 판매글일 경우; 상품 정보 등록
 		if( pdto.getP_type().equals("S")) {

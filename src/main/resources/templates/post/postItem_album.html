@@ -5,19 +5,25 @@
 └본문 div.content
 이미지와 본문 둘 중 하나만
 -->
-<div class="post" th:onclick="'location.href=\'/postView?p_id='+${post.p_id}+'\''">
-	<h1 class="writerInfo"><!--/* 작성자 */-->
+<div class="post ppp2" th:onclick="'location.href=\'/postView?p_id='+${post.p_id}+'\''">
+	<div class="writerInfo"><!--/* 작성자 */-->
 		<img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=50>
-		<span class="nickname" th:text="${post.memberDTO.m_nickname}"></span>
-		<span class="code">#[[${post.memberDTO.m_code}]]</span><br>
-		<span class="email" th:text="${post.memberDTO.m_email}"></span>
-	</h1>
-	
-	<div th:if="${image}" class="content"><!--/* 이미지 (있을 때만) */-->
-		<img class="imgBox" th:src="${image.image}" />
+		<div class="writerInfoText">
+			<span class="nickname" th:text="${post.memberDTO.m_nickname}"></span>
+			<span class="code">#[[${post.memberDTO.m_code}]]</span><br>
+			<span class="email" th:text="${post.memberDTO.m_email}"></span>
+		</div>
 	</div>
 	
-	<div th:unless="${image}" class="content"><!--/* 이미지 없으면 본문 표시 */-->
-		<span th:utext="${post.p_content}"></span>
+	<div th:if="${image}" class="content"><!--/* 이미지 (있을 때만) */-->
+		<figure>
+			<img class="imgBox" th:src="${image.image}" />
+		</figure>
+	</div>
+	
+	<div th:unless="${image}" class="content contentText"><!--/* 이미지 없으면 본문 표시 */-->
+		<figure>
+			<span th:utext="${post.p_content}"></span>
+		</figure>
 	</div>
 </div>
