@@ -22,13 +22,15 @@
 		</li>
 		<li th:if="${session.login}" onclick="location.href='/vip'">
 			<i class="fa-solid fa-user fa-xl"></i>
-			<span class="menuName">내 페이지</span>
+			<span class="menuName">마이 페이지</span>
 		</li>
 		<li th:unless="${session.login}" onclick="location.href='/loginMove'">
-			<span class="menuName">Login</span>
+
+			<span class="menuName">로그인</span>
 		</li>
 		<li th:if="${session.login}" onclick="location.href='/logout'">
-			<span class="menuName">Logout</span>
+			<i class="fa-solid fa-door-open fa-xl"></i>
+			<span class="menuName">로그아웃</span>
 		</li>
 		<li th:if="${session.login}" onclick="location.href='/serviceCenter'">
 			<i class="fa-solid fa-headset fa-xl"></i>
