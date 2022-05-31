@@ -5,8 +5,8 @@
 </div>
 
 <form id="searchBar" onsubmit="homeNavSearch(); return false;">
-    <input type="text" id="search" name="val" placeholder="일반검색 #태그검색 @회원검색" autocomplete=off> 
-	<button class="search-icon" id="searchBtn"><span>🔍</span></button>
+    <input type="text" id="search" name="val" placeholder="검색 #태그 @회원" autocomplete=off> 
+	<button class="search-icon" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
 
 <div id="mainMenu">
@@ -25,9 +25,11 @@
 			<span class="menuName">내 페이지</span>
 		</li>
 		<li th:unless="${session.login}" onclick="location.href='/loginMove'">
+			<i class="fa-solid fa-arrow-left-long"></i>
 			<span class="menuName">Login</span>
 		</li>
 		<li th:if="${session.login}" onclick="location.href='/logout'">
+			<i class="fa-solid fa-arrow-right-from-bracket"></i>
 			<span class="menuName">Logout</span>
 		</li>
 		<li th:if="${session.login}" onclick="location.href='/serviceCenter'">

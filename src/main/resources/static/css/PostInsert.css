@@ -109,8 +109,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 
-
-
 /* 이미지 첨부 */
 #selectedImg {
    display: flex;

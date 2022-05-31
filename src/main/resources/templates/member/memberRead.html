@@ -7,11 +7,12 @@
 <!-- script -->
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
-<!-- 이 페이지 --><script type="text/javascript" src="js/memberRead.js"></script>
+<!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
 
 <!-- css -->
 <!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 이 페이지 --><link rel="stylesheet" href="css/memberRead.css"type="text/css">
+<!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
 
@@ -22,15 +23,12 @@
 		<div class="profilePicBox"><img class="profilePic" th:src="${dto.profileImage}"></div>
 		<div>
 			<h1>
-				<span th:text="${dto.m_nickname}"></span>
-				#<span th:text="${dto.m_code}"></span>
-				<span>님의 회원정보</span>
+				<span th:text="${dto.m_nickname}"></span>#<span th:text="${dto.m_code}"></span>
 			</h1>
 			<div class="buttons">
-				<a class="tinyButton" th:href="'/vip?p='+${dto.m_id}">내 페이지</a>
-				<a class="tinyButton" href="/orderlist">주문 내역 확인</a>
-				<a class="tinyButton" href="/mylike">내가 좋아한 게시글들</a>
-				<a class="tinyButton" href="/logout">로그아웃</a>
+				<a class="tinyButton" th:href="'/vip?p='+${dto.m_id}"><i class="fa-solid fa-user fa-xl"></i></a>
+				<a class="tinyButton" href="/orderlist"><i class="fa-solid fa-cart-shopping"></i></a>
+				<a class="tinyButton" href="/mylike"><i class="fa-solid fa-heart"></i></a>
 			</div>
 		</div>
 	</div>
@@ -40,15 +38,18 @@
 		<tr><th>회원 코드</th><td th:text="${dto.m_code}"></td></tr>
 		<tr><th>이메일</th><td th:text="${dto.m_email}"></td></tr>
 		<tr><th>생년월일</th><td th:text="${dto.m_birth}"></td></tr>
-		<tr><th>성별</th><td th:text="${dto.m_gender}"></td></tr>
+		<tr><th>성별</th><td th:if="${dto.m_gender} == M">남성</td><td th:if="${dto.m_gender} == F">여성</td><td th:if="${dto.m_gender} == X">중성</td></tr>
 		<tr><th>자기소개</th><td th:text="${dto.m_introduce}"></td></tr>
-		<tr><th>판매자 등록여부</th><td th:text="${dto.m_licensed}"></td></tr>
+		<tr><th>판매자 등록여부</th><td th:if="${dto.m_licensed}">O</td><td th:unless="${dto.m_licensed}">X</td></tr>
 		<tr><th>누적경고 횟수</th><td th:text="${dto.m_warnCount}"></td></tr>
-		<tr><th>활동가능 여부</th><td th:text="${dto.m_available}"></td></tr>
-		<tr><th>가입일</th><td th:text="${dto.m_regDate}"></td></tr>
+		<tr><th>활동가능 여부</th><td th:if="${dto.m_available}">O</td><td th:unless="${dto.m_available}">X</td></tr>
+		<tr><th>가입일</th><td th:text="${#dates.format(dto.m_regDate, 'yyyy-MM-dd')}"></td></tr>
 	</tbody></table>
 	
+	<div>
 	<button onclick="location.href='/memberUpdate'" class="largeButton">수정하기</button>
+	<button onclick="location.href='/logout'" class="largeButton">로그아웃</button>
+	</div>
 	
 </div></main>
 
