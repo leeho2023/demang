@@ -16,12 +16,17 @@ main
 	margin-bottom: 20px;
 }
 
-#postList > .ppp{
+#postList > .post{
 	width: 301px;
 	height: 300px;
 }
 
-#postList > .ppp3 {
+
+.post{
+	box-shadow: var(--themeCol2) 0 0 5px
+}
+
+.noPost {
 	margin: 30px 15px;
 	padding: 20px;
 	border: var(--themeCol1) solid 3px;
@@ -31,12 +36,7 @@ main
 }
 
 
-.ppp2{
-	box-shadow: var(--themeCol2) 0 0 5px
-}
-
-
-.ppp .writerInfo{
+.post .writerInfo{
 	display: flex;
 	width: 100%;
 	background-color: black;
@@ -45,7 +45,7 @@ main
 	z-index: 1;
 }
 
-.ppp .content{
+.post .content{
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
@@ -53,7 +53,7 @@ main
 	top: -16.5%;
 }
 
-.ppp .contentText{
+.post .contentText{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -90,19 +90,19 @@ figure span{
     transition: .3s ease-in-out;
 }
 
-.ppp:hover .content figure img {
+.post:hover .content figure img {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
 }
 
-.ppp .writerInfo{
+.post .writerInfo{
 	opacity: 0;
 	transition-property: opacity, background-color;
 	transition-duration: 0.2s;
 	transition-timing-function: linear;
 }
 
-.ppp:hover > .writerInfo{
+.post:hover > .writerInfo{
 	opacity: 1;
 	background-color: rgba(255, 255, 255, 0.7);
 }

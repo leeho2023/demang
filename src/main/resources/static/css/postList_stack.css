@@ -27,6 +27,15 @@
 	box-shadow: var(--themeCol2) 0 0 5px
 }
 
+.noPost {
+	margin: 30px 15px;
+	padding: 20px;
+	border: var(--themeCol1) solid 3px;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: var(--themeCol2) 0 0 5px
+}
+
 /* 게시물 - 글쓴이 정보 */
 .post > .postView > .writerInfo {
 	display: flex;
