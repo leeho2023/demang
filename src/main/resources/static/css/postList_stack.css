@@ -73,28 +73,7 @@
 	float: right;
 }
 
-/* 메뉴 */
-.post > .menubar {
-	margin: 20px 0;
-	border-top: var(--themeCol1) solid 2px;
-}
-.post > .menubar > button {
-	border: none;
-	background-color: inherit;
-	font-size: inherit;
-	font-weight: bold;
-	color: var(--themeCol1);
-	transform: scale(0.9, 0.9);
-}
-.post > .menubar > button:hover {
-	transform: scale(1, 1);
-}
-.post > .menubar > .buy {
-	display: none;
-}
-.post > .menubar > .report {
-	float: right;
-}
+/* 메뉴: post.css에 */
 
 
 /*

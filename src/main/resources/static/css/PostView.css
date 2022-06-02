@@ -101,12 +101,7 @@
 /* 댓글 목록 */
 
 .comments{
-	margin-left: 10px;
-}
-
-.commentForm > .c_content {
-	padding: 8px;
-	background-color: white;
+	padding: 2px 10px;
 }
 
 .commentList .profilePic {

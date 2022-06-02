@@ -116,7 +116,8 @@ em {
 	display: flex;
 }
 .simpleinputForm > input {
-	width: 0;
+	width: 0;/* 버튼이 차지하고 남은 부분만 자동으로 */
+	padding: 2px 5px;
 	background-color: var(--light2);
 	border: none;
 	flex-grow: 1;
