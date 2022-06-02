@@ -10,7 +10,14 @@
 </form>
 
 <div id="mainMenu">
-	<button onclick="parentOpen(this)">≡</button>
+	<!-- 메뉴바 부분 시작 -->
+	<button id="mainMenu" onclick="parentOpen(this)">
+		<a class="menu-trigger" href="#">
+			<span></span>
+			<span></span>
+			<span></span>
+		  </a>
+	</button>
 	<ul class="menuList">
 		<li onclick="location.href='/'">
 			<i class="fa-solid fa-house fa-xl"></i>

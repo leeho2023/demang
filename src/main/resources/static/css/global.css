@@ -28,6 +28,10 @@ ol , ul {
 button , input {
 	font-size: 1em;
 }
+button {
+	background-color: inherit;
+	border: none;
+}
 em {
 	font-weight: bold;
 	color: var(--themeCol1);

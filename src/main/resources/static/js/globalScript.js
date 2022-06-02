@@ -1,3 +1,12 @@
+$(function(){
+	// 햄버거 메뉴바
+	const menuTrigger = document.querySelector('.menu-trigger');
+
+	menuTrigger.addEventListener('click', (event) => {
+		event.currentTarget.classList.toggle('active-1');
+	});
+})
+
 /* 부모요소의 클래스에 open을 넣었다 뺐다하는 함수 */
 function parentOpen( me ){// 누를 요소에서 onclick="이함수(this)"
 	if( me.parentNode.classList.contains('open') ){// 부모가 열려있으면 
@@ -73,5 +82,3 @@ function search() {
 	location.href = "postSearch?searchVal="+searchVal;
     return;
 }
-
-
