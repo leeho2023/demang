@@ -158,6 +158,11 @@
 	float: right;
 }
 
+/* 그냥 깡마진 주는 css */
+.br{
+	margin-bottom: 5px;
+}
+
 /*
 댓글 목록 ul.commentList
 └댓글 한 개 li
