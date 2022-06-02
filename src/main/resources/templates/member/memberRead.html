@@ -38,7 +38,10 @@
 		<tr><th>회원 코드</th><td th:text="${dto.m_code}"></td></tr>
 		<tr><th>이메일</th><td th:text="${dto.m_email}"></td></tr>
 		<tr><th>생년월일</th><td th:text="${dto.m_birth}"></td></tr>
-		<tr><th>성별</th><td th:if="${dto.m_gender} == M">남성</td><td th:if="${dto.m_gender} == F">여성</td><td th:if="${dto.m_gender} == X">중성</td></tr>
+		<tr><th>성별</th>
+			<td th:if="${dto.m_gender} == M">남성</td>
+			<td th:if="${dto.m_gender} == F">여성</td>
+			<td th:if="${dto.m_gender} == X">미공개</td></tr>
 		<tr><th>자기소개</th><td th:text="${dto.m_introduce}"></td></tr>
 		<tr><th>판매자 등록여부</th><td th:if="${dto.m_licensed}">O</td><td th:unless="${dto.m_licensed}">X</td></tr>
 		<tr><th>누적경고 횟수</th><td th:text="${dto.m_warnCount}"></td></tr>
@@ -55,7 +58,6 @@
 
 <div id="globalSidebar">
 	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
-	<button onclick="parentOpen(this)">≡</button>
 	<footer th:replace="other/footer">푸터</footer>
 </div>
 

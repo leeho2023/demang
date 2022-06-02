@@ -269,7 +269,7 @@ main {
 	#globalHeader #mainMenu:not(.open) .menuList {
 		display: none;
 	}
-	/* 메뉴 펴고접기 버튼 >>햄버거메뉴바 */
+	/* 메인메뉴 펴고접기 버튼 >>햄버거메뉴바 */
 	/* 사이드바 */
 	#globalSidebar {
 		position: fixed;
@@ -277,32 +277,35 @@ main {
 		left: 0px;
 		width: 100%;
 	}
-	/**//* 접힌 상태 */
-	#globalSidebar:not(.open) {
+	#globalFList #fListOpenBtn {
+		height: 40px;
+		width: 100%;
+	}
+	/*** 접힌 상태 */
+	#globalFList:not(.open) {
 		height: 40px;
 	}
-	#globalSidebar #globalFooter {/* 푸터 안 보임 */
-		display: none;
-	}
-	#globalSidebar:not(.open) > button {
+	#globalFList:not(.open) #fListOpenBtn {/* 펴고접기버튼 위치 */
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 40px;
-		width: 40px;
+		background-color: transparent;
 	}
-	#globalSidebar:not(.open) #globalFList {
+	#globalFList:not(.open) #globalFList {/* 팔로우 목록 접혀서 안 보임 */
 		display: none;
 	}
-	/**//* 펼친 상태 */
-	#globalSidebar.open {
+	/*** 펼친 상태 */
+	#globalFList.open {
 		height: auto;
 	}
-	#globalSidebar.open > button {
-		width: 100%;
-		height: 30px;
+	#globalFList.open > #fListOpenBtn {
+		background-color: var(--themeCol2);
 	}
-	#globalSidebar.open #globalFooter{
+	#globalFList.open > #fListOpenBtn::before {
+		content: '\2191 FOLD\2191';
+	}
+	/* 푸터 안 보임 */
+	#globalSidebar #globalFooter {
 		display: none;
 	}
 }
