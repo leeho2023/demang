@@ -4,13 +4,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.github.pagehelper.PageInfo;
+
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.ChatDTO;
-import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.service.ChatService;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.OrderService;
+import org.pro.demang.service.PagingServiceImpl;
 import org.pro.demang.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,7 @@ public class KysController {
 	@Autowired private ChatService chatService;
 	@Autowired private OrderService orderService;
 	@Autowired private MainMapper mapper;
+	@Autowired private PagingServiceImpl pagingServiceImpl;
 	
 	//// 주문 페이지
 	@GetMapping("/order")
@@ -73,12 +76,11 @@ public class KysController {
 	
 	//// 주문 내역 확인 페이지
 	@GetMapping("/orderlist")
-	String orderlist( Model model, HttpSession session ) {
+	String orderlist(@RequestParam(required = false, defaultValue = "1") int pageNum,
+		Model model, HttpSession session ) {
 		if( loginId(session) == 0 ) return "redirect:/loginMove?red=orderlist";// 비회원인 경우 로그인하러 가기
-		model.addAttribute(
-				"orderList",
-				mapper.getOrderList( loginId(session) ) 
-				);
+		PageInfo<OrderDTO> p = new PageInfo<>(pagingServiceImpl.getOrderList(pageNum, loginId(session)), 10);
+		model.addAttribute("orderList", p);
 		return "order/orderList";
 	}
 	

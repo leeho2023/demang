@@ -3,14 +3,13 @@ package org.pro.demang.controller;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
-import com.github.pagehelper.PageInfo;
-
 import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.ContactUsImgDTO;
 import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
@@ -24,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.github.pagehelper.PageInfo;
 
 @Controller
 public class LhhController {
@@ -208,7 +209,19 @@ public class LhhController {
 			return "other/error";
 	}
 
-	
+	// orderList 페이징
+	@GetMapping("/testOrderList")
+	public String testOrderList(
+		@RequestParam(required = false, defaultValue = "1") int pageNum,
+		Model model, HttpSession session) throws Exception {
+			if(loginId(session) == 0) return "redirect:/loginMove?red=orderlist";
+
+			PageInfo<OrderDTO> p = new PageInfo<>(pagingServiceImpl.getOrderList(pageNum, loginId(session)), 10);
+			model.addAttribute("orderList", p);
+
+			return "order/testOrderList";
+		}
+
 //	messageOneSelect 하나만 상세 보기
 	@PostMapping("/messageOneSelect")
 	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
@@ -270,6 +283,12 @@ public class LhhController {
 		return result;
 	}
 
+
+	//// 현재 로그인한 회원 번호(정수) 가져오기 // 비로그인 상태일 경우 0으로
+	private static int loginId( HttpSession session ) {
+		if( session.getAttribute("login") == null ) return 0;
+		return Integer.parseInt( session.getAttribute("login")+"" );
+	}
 
 
 	// #########################################################################################

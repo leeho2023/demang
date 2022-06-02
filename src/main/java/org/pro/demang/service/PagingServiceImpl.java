@@ -3,6 +3,7 @@ package org.pro.demang.service;
 import org.pro.demang.mapper.PagingMapper;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class PagingServiceImpl {
 	public Page<PostDTO> getPostList(int pageNo) throws Exception {
 		PageHelper.startPage(pageNo, 10);
         return mapper.findPost();
+	}
+
+	public Page<OrderDTO> getOrderList(int pageNo, int loginId) {
+		PageHelper.startPage(pageNo, 10);
+		return mapper.findOrder(loginId);
 	}
 
 }

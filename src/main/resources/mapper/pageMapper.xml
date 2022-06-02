@@ -20,6 +20,29 @@
 		<result column="p_regDate" property="p_regDate"/>
 		<collection property="memberDTO" resultMap="memberDTO"/>
 	</resultMap>
+	<resultMap id="OrderDTO" type="org.pro.demang.model.OrderDTO">
+		<result column="ord_id" property="ord_id"/>
+		<result column="ord_buyer" property="ord_buyer"/>
+		<result column="ord_target" property="ord_target"/>
+		<result column="ord_amount" property="ord_amount"/>
+		<result column="ord_buyer_name" property="ord_buyer_name"/>
+		<result column="ord_buyer_email" property="ord_buyer_email"/>
+		<result column="ord_buyer_tel" property="ord_buyer_tel"/>
+		<result column="ord_buyer_address" property="ord_buyer_address"/>
+		<result column="ord_buyer_postcode" property="ord_buyer_postcode"/>
+		<result column="ord_price" property="ord_price"/>
+		<result column="ord_date" property="ord_date"/>
+		<result column="ord_state" property="ord_state"/>
+		<collection property="targetDTO" resultMap="MerchandiseDTO"/>
+	</resultMap>
+	<resultMap id="MerchandiseDTO" type="org.pro.demang.model.MerchandiseDTO">
+		<result column="mer_id" property="mer_id"/>
+		<result column="mer_target" property="mer_target"/>
+		<result column="mer_name" property="mer_name"/>
+		<result column="mer_price" property="mer_price"/>
+		<result column="mer_amount" property="mer_amount"/>
+		<result column="mer_count" property="mer_count"/>
+	</resultMap>
 
 
     <select id="findContact" resultType="org.pro.demang.model.ContactUsDTO">
@@ -47,7 +70,7 @@
         </if> -->
     </select>
     
-    <select id="findPost" resultMap="postDTO">
+    <select id="findPost" resultMap="OrderDTO">
         select * 
 		from postTBL p
 		join memberTBL m
@@ -59,5 +82,12 @@
         <if test="keyword == 'email'">
             AND email LIKE CONCAT('%',#{search},'%')
         </if> -->
+    </select>
+    
+    <select id="findOrder" resultMap="OrderDTO">
+        SELECT * FROM orderTBL o
+        JOIN merchandiseTBL m
+        ON o.ord_target = m.mer_id
+        WHERE o.ord_buyer = #{no}
     </select>
 </mapper>

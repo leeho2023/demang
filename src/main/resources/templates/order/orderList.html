@@ -37,7 +37,7 @@
 			<th>주소</th>
 			<th>우편번호</th>
 		</tr>
-		<tr th:each="order: ${orderList}">
+		<tr th:each="order: ${orderList.getList()}">
 			<td th:text="${order.ord_id}"></td>
 			<td><a th:href="'postView?p_id='+${order.targetDTO.mer_target}">[[${order.targetDTO.mer_name}]]</a></td>
 			<td th:text="${order.targetDTO.mer_price}"></td>
@@ -55,6 +55,26 @@
 		</tr>
 	</table>
 </main>
+<!-- 페이징 -->
+<nav>
+    <ul>
+        <!-- getPrePage : 이전 페이지 -->
+        <li th:classappend="${orderList.getPrePage() == 0} ? 'disabled'">
+            <!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
+            <a th:href="@{/testOrderList(pageNum=${orderList.getPrePage()})}">Previous</a>
+        </li>
+        <!-- getNavigateFirstPage() : 페이징의 처음 숫자 getNavigateLastPage : 페이징의 마지막 숫자를 이용해 페이징 숫자 출력 -->
+        <!-- href : /page?pageNum=선택한 페이지&keyword=검색분류&search=검색어 -->
+        <li th:each="page: ${#numbers.sequence(orderList.getNavigateFirstPage(), orderList.getNavigateLastPage())}" th:classappend="${page == orderList.getPageNum()} ? 'active'">
+            <a th:text="${page}" th:href="@{/testOrderList(pageNum=${page})}"></a>
+        </li>
+        <!-- getPrePage : 다음 페이지 -->
+        <li th:classappend="${orderList.getNextPage() == 0} ? 'disabled'">
+            <!-- href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 -->
+            <a th:href="@{/testOrderList(pageNum=${orderList.getNextPage()})}">Next</a>
+        </li>
+    </ul>
+</nav>
 
 <div id="globalSidebar">
 	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>
