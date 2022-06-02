@@ -1,10 +1,8 @@
-<!-- postList.html에서 main 안에 들어갈, 게시글 하나에 해당하는 항목을 나타내는 html 요소. (album 스타일로 표시될 용도)
+<!--/* postList.html에서 main 안에 들어갈, 게시글 하나에 해당하는 항목을 나타내는 html 요소. (album 스타일로 표시될 용도)
 게시물영역 div.post
 ├글쓴이 정보 h1.writerInfo
-├이미지 div.postImg
-└본문 div.content
-이미지와 본문 둘 중 하나만
--->
+└이미지혹은본문 div.content
+*/-->
 <div class="post" th:onclick="'location.href=\'/postView?p_id='+${post.p_id}+'\''">
 	<div class="writerInfo"><!--/* 작성자 */-->
 		<img class="profilePic" alt="프로필 사진" th:src="${post.memberDTO.profileImage}" height=50>

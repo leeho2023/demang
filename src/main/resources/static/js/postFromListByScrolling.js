@@ -33,7 +33,7 @@ $(function(){
 $(window).scroll(function(){// 스크롤 움직일 때마다 확인
 	//// 스크롤을; 현재 화면에 나온 게시글 목록 끝까지 다 내리면
 	if( $(window).height() + $(document).scrollTop()// 화면 맨아래의 위치 = 스크롤위치 + 화면세로크기
-			>= $('#endOfPostListPosCheck').offset().top - 100 // 화면상 게시글 목록 끝 (메인 바로뒤의 요소의 위치) (100만큼 여분 추가)
+			>= $('#endOfPostListPosCheck').offset().top - 600 // 화면상 게시글 목록 끝 (메인 바로뒤의 요소의 위치) (여분 추가)
 			){
 		showPost();}// 게시글 더 불러오기
 	//// 그런데 왜 글이 한 개씩이 아니라 꼭 여러 개씩 불러지는지 모르겠는걸
