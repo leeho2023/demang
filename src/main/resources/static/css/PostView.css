@@ -61,28 +61,6 @@
 	display: none;
 }
 
-/* 메뉴 */
-.post > .menubar {
-	border-top: #ddd solid 2px;
-}
-.post > .menubar button  {
-	border: none;
-	background-color: inherit;
-	font-size: inherit;
-	font-weight: bold;
-	color: #aaa;
-	transform: scale(0.9, 0.9);
-}
-.post > .menubar > button:hover  {
-	transform: scale(1, 1);
-}
-.post > .menubar > .comment {
-	display: none;
-}
-.post > .menubar > .report {
-	float: right;
-}
-
 /* 그냥 깡마진 주는 css */
 .br{
 	margin-bottom: 5px;
