@@ -1,5 +1,6 @@
 package org.pro.demang.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -204,6 +205,11 @@ public class MainController {
 				postService.getPostList_followee( loginId(session) )
 				);
 		model.addAttribute("postType", "stack");
+		model = postList( // 현재 로그인한 회원의 팔로들의 글 목록을 stack 방식으로 보여주기
+				model, 
+				"stack", 
+				postService.getPostList_followee( loginId(session) ), 
+				null );
 		return "post/postList";// 게시글 목록 페이지
 	}
 	
@@ -220,12 +226,7 @@ public class MainController {
 		MemberDTO dto = memberService.getMember_no(no);
 		//// 찾는 회원이 없는 경우 회원 없다는 페이지로 이동
 		if( dto == null ) return "post/profile_noMember";
-		model.addAttribute(// 글 목록 (이 페이지 주인이 쓴 글 목록)
-				"postList", 
-				mapper.getPostList_writer( dto.getM_id() )
-				);
-		model.addAttribute("postType", "stack");
-		model.addAttribute("additional", "profile");
+		model = postList( model, "stack", mapper.getPostList_writer( dto.getM_id() ), "profile" );// 해당 회원이 쓴 글 목록을 stack 방식으로 profile과 함께 보여주기
 		model.addAttribute("dto", dto);// 해당 회원 정보
 		return "post/postList";// 게시글 목록 페이지
 	}
@@ -246,12 +247,13 @@ public class MainController {
 	//// 댓글 등록 (ajax용)
 	@PostMapping("func/newComment")
 	public String newComment( CommentDTO dto, HttpSession session, Model model ) {
+		//// 내용 없으면 아무것도 하지 않음
+		if( dto.getC_content().trim().equals("") ) return "empty";
+		//// 댓글 등록
 		dto.setC_writer( loginId(session)  );
 		postService.commentInsert(dto);// 디비에 댓글 넣기
-		model.addAttribute(
-				"comment",
-				dto
-				);
+		//// (단 댓글 표시용) 방금 단 댓글에 해당하는 html 요소를 만들어서 반환 
+		model.addAttribute( "comment", dto );
 		return "post/comment";
 	}
 
@@ -304,14 +306,18 @@ public class MainController {
 			@RequestParam(value="type", required=false) String searchType, // hashtag, member, post, null이거나 엉뚱한 값인 경우 post
 			@RequestParam("val") String searchVal, 
 			Model model) {
-		//// 검색어가 없는 경우 ???
-		
+		List<Integer> postList;
 		//// searchType에 따라 검색 유형 나뉜다
 		//// 유형 없는 경우: 게시글 검색으로 리다이렉트
 		if( searchType == null ) 
 			return "redirect:/search?type=post&val="+searchVal;
 		//// 회원 검색
 		if( searchType.equals("member") ) {
+			if( searchVal.equals("") ) {// 검색어 없는 경우 결과 없음
+				model.addAttribute("memList", new ArrayList<MemberDTO>() );
+				model.addAttribute("searchVal", "");
+				return "other/searchUser";
+			}
 			List<MemberDTO> memList = memberService.memberSearch(searchVal);
 			model.addAttribute("memList", memList);
 			model.addAttribute("searchVal", searchVal);
@@ -319,29 +325,36 @@ public class MainController {
 		}
 		//// 해시태그 검색
 		if( searchType.equals("hashtag") ) {
-			model.addAttribute(
-					"postList", 
-					mapper.searchTag(searchVal)// 검색결과 게시글 목록
-					);
-			model.addAttribute("postType", "album");// 이 페이지는 앨범식으로 표시
-			model.addAttribute("additional", "searchInfo");// 이 페이지에서 searchInfo.html을 추가로 표시
+			if( searchVal.equals("") ) {// 검색어 없는 경우 결과 없음
+				postList = new ArrayList<Integer>();
+			}else {
+				postList = mapper.searchTag(searchVal);// 검색결과 게시글 목록
+			}
+			model = postList( model, "album", postList, "searchInfo" );
 			model.addAttribute("searchVal", searchVal);
 			return "post/postList";// 게시글 목록 페이지
 		}
 		//// 게시글 검색
 		if( searchType.equals("post") ) {
-			System.out.println("main con ~ post list: "+mapper.searchPost(searchVal));
-			model.addAttribute(
-					"postList", 
-					mapper.searchPost(searchVal)// 검색결과 게시글 목록
-					);
-			model.addAttribute("postType", "album");// 이 페이지는 앨범식으로 표시
-			model.addAttribute("additional", "searchInfo");// 이 페이지에서 searchInfo.html을 추가로 표시
+			if( searchVal.equals("") ) {// 검색어 없는 경우 결과 없음
+				postList = new ArrayList<Integer>();
+			}else {
+				postList = mapper.searchPost(searchVal);// 검색결과 게시글 목록
+			}
+			model = postList( model, "album", postList, "searchInfo" );
 			model.addAttribute("searchVal", searchVal);
 			return "post/postList";// 게시글 목록 페이지
 		}
 		//// 다른 엉뚱한 유형: 게시글 검색으로 리다이렉트
 		return "redirect:/search?type=post&val="+searchVal;
+	}
+	
+	//// postList return 공통사항
+	private Model postList( Model model, String postType, List<Integer> postList, String additional ) {
+		model.addAttribute("postList", postList);
+		model.addAttribute("postType", postType);// 이 페이지에서 게시글 목록을 보여줄 방식
+		model.addAttribute("additional", additional);// 이 페이지에서 [additional].html, css을 추가로 표시
+		return model;
 	}
 	
 	

@@ -112,6 +112,7 @@ public class PostServiceImpl implements PostService{
 	//// 댓글 등록하기
 	@Override
 	public void commentInsert(CommentDTO dto) {
+		dto.setC_content( dto.getC_content().trim() );// 댓글 내용 앞뒤 공백 제거
 		mapper.commentInsert(dto);
 		dto.setMemberDTO( // 회원정보
 				mapper.getMember_no( 
