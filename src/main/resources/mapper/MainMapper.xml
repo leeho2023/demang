@@ -418,8 +418,8 @@
 	<!-- 디비에 주문 넣기 -->
 	<insert id="orderInsert">
 	INSERT INTO orderTBL 
-	(ord_id, ord_buyer, ord_target, ord_target_name, ord_amount, ord_buyer_name, ord_buyer_email, ord_buyer_tel, ord_buyer_address, ord_buyer_postcode, ord_price) 
-	VALUES(#{ord_id}, #{ord_buyer}, #{ord_target}, #{ord_target_name}, #{ord_amount}, #{ord_buyer_name}, #{ord_buyer_email}, #{ord_buyer_tel}, #{ord_buyer_address}, #{ord_buyer_postcode}, #{ord_price});
+	(ord_id, ord_buyer, ord_target,ord_amount, ord_buyer_name, ord_buyer_email, ord_buyer_tel, ord_buyer_address, ord_buyer_postcode, ord_price) 
+	VALUES(#{ord_id}, #{ord_buyer}, #{ord_target}, #{ord_amount}, #{ord_buyer_name}, #{ord_buyer_email}, #{ord_buyer_tel}, #{ord_buyer_address}, #{ord_buyer_postcode}, #{ord_price});
 	</insert>
 	<!-- 주문의 금액 조회 -->
 	<select id="getOrderPrice" resultType="Integer">

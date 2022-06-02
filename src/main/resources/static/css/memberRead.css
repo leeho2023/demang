@@ -50,5 +50,5 @@ main {
 	text-align: left;
 }
 .details tr:nth-child(even) td{
-	background-color: skyblue;
+	background-color: var(--light2);
 }

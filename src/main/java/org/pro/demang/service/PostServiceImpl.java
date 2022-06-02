@@ -21,7 +21,7 @@ public class PostServiceImpl implements PostService{
 	public void postInsert( PostDTO dto ) {
 		//// 꺾쇠를 &lt;, $gt;로 변환하고
 		dto.setP_content(
-				dto.getP_content().replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+				dto.getP_content().replaceAll( "<", "&lt;" ).replaceAll( ">", "&gt;" )
 				);
 		
 		if( dto.getP_origin() == 0 )
@@ -57,7 +57,7 @@ public class PostServiceImpl implements PostService{
 			dto.setP_content(
 					dto.getP_content().replace(
 							"#"+tag
-							,"<a class=\"hashTag\" href=\"/search?type=hashtag&val="+tag+"\">" + "#"+tag + "</a>")
+							,"<a class=\"hashtag\" href=\"/search?type=hashtag&val="+tag+"\">" + "#"+tag + "</a>")
 					);
 		}
 		return dto;

@@ -51,19 +51,22 @@
 .post > .postView > .writerInfo .nickname {
 	margin-left: 13px;
 }
-/* 게시물 - 본문 */
-.post > .postView > .content {
-	padding: 20px;
-}
-
+/* 게시물 - 이미지 */
 .bxSlider > li{
 	overflow: hidden;
 	position: relative;
 }
-
 .bxSlider > li > img{ 
 	display: block;
 	margin: 0 auto;
+}
+/* 게시물 - 본문 */
+.post > .postView > .content .hashtag {
+	color: var(--themeCol1);
+	background-color: var(--light2);
+	border-radius: 10px;
+}.post > .postView > .content .hashtag:hover {
+	text-decoration: underline;
 }
 
 /* 메뉴 */
