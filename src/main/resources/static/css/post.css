@@ -44,3 +44,7 @@ postView와 postItem_* 공통
 	text-align: center;
 }
 
+#endOfPostListPosCheck {
+	border: none;
+	margin-bottom: 30px;
+}
