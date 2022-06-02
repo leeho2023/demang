@@ -52,7 +52,6 @@ public class OrderServiceImpl implements OrderService{
 		//// 주문 dto 완성
 		dto.setOrd_id("ord-"+dto.getOrd_target()+"-"+mapper.getMerCount(mer_id));// 주문 번호 만들기
 		dto.setTargetDTO( merdto );// 주문 정보에 상품 정보 넣기
-		dto.setOrd_target_name( merdto.getMer_name() );// 주문 정보에 상품 정보 넣기
 		dto.setOrd_price( merdto.getMer_price() * dto.getOrd_amount() );// 가격 = 해당 상품의 단가 * 구매자가 입력한 수량 ???
 		dto.setOrd_buyer( loginId );// 구매자 회원번호
 		System.out.println("ord ser ~ dto: "+dto+"################");

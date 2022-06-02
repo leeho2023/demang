@@ -45,11 +45,13 @@ em {
 	border-radius: 20px;
 	font-weight: bold;
 	font-size: 0.9em;
+  background-color: black;
+  box-shadow: 0 4px #666;
+  transform: translateY(-2px);
 }
 .tinyButton:active {
-  background-color: black;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  transform: translateY(1px);
+  box-shadow: 0 1px #666;
 }
 /* 작고 연한 버튼 */
 .tinyLightButton {

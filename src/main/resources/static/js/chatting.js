@@ -101,7 +101,7 @@ function chat_modal( listener ){// 회원번호 → body 하위에 그 회원과
 			var xbutton = document.createElement('button');// 요소 만들기
 			modal.appendChild( xbutton );
 			xbutton.className = 'xButton tinyButton';// 클래스
-			xbutton.innerText = 'X';
+			xbutton.innerHTML = 'X';
 			xbutton.addEventListener('click', function(){ this.parentNode.remove() });// 버튼 누르면 모달 닫기
 			//// 채팅Div 붙이기
 			$(modal).append( data );

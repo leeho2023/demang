@@ -39,7 +39,7 @@
 		</tr>
 		<tr th:each="order: ${orderList}">
 			<td th:text="${order.ord_id}"></td>
-			<td><a th:href="'postView?p_id='+${order.targetDTO.mer_target}">[[${order.targetDTO.mer_name}]]</a></td>
+			<td><a th:href="'postView?p_id='+${order.targetDTO.mer_target}" th:text="${order.targetDTO.mer_name}"></a></td>
 			<td th:text="${order.targetDTO.mer_price}"></td>
 			<td th:text="${order.ord_amount}"></td>
 			<td th:text="${order.ord_price}"></td>
