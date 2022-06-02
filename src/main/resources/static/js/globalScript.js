@@ -5,6 +5,7 @@ $(function(){
 	menuTrigger.addEventListener('click', (event) => {
 		event.currentTarget.classList.toggle('active-1');
 	});
+
 })
 
 /* 부모요소의 클래스에 open을 넣었다 뺐다하는 함수 */

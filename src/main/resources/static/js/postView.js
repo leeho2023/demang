@@ -75,6 +75,11 @@ function newComment( form ){// form: 댓글을 제출할 html form 요소
 	});
 }
 
+$('.heart-like-button').click(function(){
+	
+})
+
+
 //// 좋아요 버튼 누름
 function like( p_id, btn ){
 	postDiv = $(btn).parents('.post');// 누른 버튼에 해당하는 게시글 div 요소 찾기

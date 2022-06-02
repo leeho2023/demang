@@ -19,10 +19,6 @@ main
 #postList > .post{
 	width: 301px;
 	height: 300px;
-}
-
-
-.post{
 	box-shadow: var(--themeCol2) 0 0 5px
 }
 
@@ -39,7 +35,7 @@ main
 .post .writerInfo{
 	display: flex;
 	width: 100%;
-	background-color: black;
+	background-color: white;
 	position: relative;
 	top: 84%;
 	z-index: 1;
