@@ -37,7 +37,7 @@ div.wrap
 	
 	
 	<section class="wrap">
-		<div class="userBox" th:onclick="'location.href=\'/vip?v='+${user.m_id}+'\''" th:each="user : ${memList}">
+		<div class="userBox" th:onclick="'location.href=\'/vip?p='+${user.m_id}+'\''" th:each="user : ${memList}">
 			<div class="profileImg">
 				<img class="profilePic" th:src="${user.profileImage}">
 			</div>
