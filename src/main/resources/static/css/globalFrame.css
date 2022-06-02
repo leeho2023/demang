@@ -114,7 +114,7 @@ main {
 		margin: 10px;
 		background-color: white;
 	}
-	#globalHeader #mainMenu > button {
+	#globalHeader #mainMenu > button {/* 메뉴 펴고접기 버튼 없음 */
 		display: none;
 	}
 	#globalHeader .menuList > * {/* 메인메뉴 */
@@ -269,6 +269,7 @@ main {
 	#globalHeader #mainMenu:not(.open) .menuList {
 		display: none;
 	}
+	/* 메뉴 펴고접기 버튼 >>햄버거메뉴바 */
 	/* 사이드바 */
 	#globalSidebar {
 		position: fixed;
@@ -305,6 +306,35 @@ main {
 		display: none;
 	}
 }
+
+/* >>햄버거메뉴바 */
+.menu-trigger {
+	position: relative;
+	width: 30px;
+	height: 26px;
+}
+.menu-trigger span {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background-color: var(--themeCol1);
+	border-radius: 4px;
+	display: inline-block;
+	transition: all 0.3s;
+	box-sizing: border-box;
+}
+.menu-trigger span:nth-of-type(1) {top: 0;}/* 막대들의 세로위치 */
+.menu-trigger span:nth-of-type(2) {top: 11px;}
+.menu-trigger span:nth-of-type(3) {bottom: 0;}
+/* 열린 상태: 첫째, 세째 막대는 회전하며 x자 그림 . 둘째 막대는 사라짐 */
+#mainMenu.open .menu-trigger span:nth-of-type(1) {
+	transform: translateY(11px) rotate(-45deg);}
+#mainMenu.open .menu-trigger span:nth-of-type(3) {
+	transform: translateY(-11px) rotate(45deg);}
+#mainMenu.open .menu-trigger span:nth-of-type(2) {
+	opacity: 0;}
+
 
 /*
 팔로우 목록 nav#globalFList
@@ -343,56 +373,3 @@ main {
 	text-align: left;
 }
 
-/* 햄버거 메뉴바 */
-.menu-trigger{
-    left: 10px;
-    top: 10px;
-}
-
-.menu-trigger,
-.menu-trigger span {
-  display: inline-block;
-  transition: all 0.4s;
-  box-sizing: border-box;
-}
-
-.menu-trigger {
-    position: relative;
-    width: 50px;
-    height: 25px;
-}
-
-.menu-trigger span {
-    position: absolute;
-    left: 0;
-    width: 60%;
-    height: 4px;
-    background-color: var(--themeCol1);
-    border-radius: 4px;
-}
-
-.menu-trigger span:nth-of-type(1) {
-    top: 0;
-}
-  
-  .menu-trigger span:nth-of-type(2) {
-    top: 10px;
-}
-  
-  .menu-trigger span:nth-of-type(3) {
-    bottom: 0;
-}
-  
-  /* 2th bar 사라지고,  1st 3rd bar 회전하며 X  */
-  
-.menu-trigger.active-1 span:nth-of-type(1) {
-    transform: translateY(10.5px) rotate(-45deg);
-}
-  
-.menu-trigger.active-1 span:nth-of-type(2) {
-    opacity: 0;
-}
-  
-.menu-trigger.active-1 span:nth-of-type(3) {
-    transform: translateY(-10.5px) rotate(45deg);
-}
