@@ -46,15 +46,13 @@ em {
 	background-color: var(--themeCol1);
 	color: var(--light1);
 	border: none;
-	padding-left: 8px;
-	padding-right: 8px;
-	height: 35px;
+	padding: 4px 8px;
 	border-radius: 20px;
 	font-weight: bold;
 	font-size: 0.9em;
-  background-color: black;
-  box-shadow: 0 4px #666;
-  transform: translateY(-2px);
+	background-color: black;
+	box-shadow: 0 4px #666;
+	transform: translateY(-2px);
 }
 .tinyButton:active {
   transform: translateY(1px);
@@ -112,6 +110,25 @@ em {
 .largeButton:hover:after{
 	width:100%;
 	transition: 0.3s ease all;
+}
+/* 댓글, 채팅 등 입력창 */
+.simpleinputForm {
+	display: flex;
+}
+.simpleinputForm > input {
+	width: 0;
+	background-color: var(--light2);
+	border: none;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+.simpleinputForm > button[type=submit] {
+	border: none;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 10px;
+	background-color: var(--themeCol1);
+	color: var(--light1);
 }
 
 /* 프사 */

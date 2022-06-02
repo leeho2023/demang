@@ -116,21 +116,3 @@ main
 
 
 /* 채팅 입력 폼 */
-.chatForm {
-	display: flex;
-}
-.chatForm > input {
-	width: 0;
-	background-color: var(--light2);
-	border: none;
-	flex-grow: 1;
-	flex-shrink: 1;
-}
-.chatForm > button.chat_send {
-	border: none;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	padding: 10px;
-	background-color: var(--themeCol1);
-	color: var(--light1);
-}

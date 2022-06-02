@@ -59,6 +59,7 @@
 .bxSlider > li > img{ 
 	display: block;
 	margin: 0 auto;
+	height: 500px;
 }
 /* 게시물 - 본문 */
 .post > .postView > .content .hashtag {
@@ -67,6 +68,9 @@
 	border-radius: 10px;
 }.post > .postView > .content .hashtag:hover {
 	text-decoration: underline;
+}
+.post > .postView > .content .more {/* 더보기 버튼 */
+	float: right;
 }
 
 /* 메뉴 */

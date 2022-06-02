@@ -53,10 +53,10 @@
 	</div>
 	
 	<div class="comments">
-		<form class="commentForm" onsubmit="newComment(this); return false;">
+		<form class="commentForm simpleinputForm" onsubmit="newComment(this); return false;">
 			<input type="hidden" class="c_postNo" name="c_postNo" th:value="${post.p_id}">
 			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="댓글을 입력해주세요">
-			<button type="submit" class="tinyButton">전송</button>
+			<button type="submit">전송</button>
 		</form>
 		
 		<ul th:replace="post/commentList"></ul><!--/* 댓글 목록 */-->

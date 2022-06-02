@@ -37,6 +37,14 @@ section.memberInfo > .etc > .nickcode > *{
 section.memberInfo > .etc > .nickcode > h1 {
 	font-size: 50px;
 }
+section.memberInfo > .etc > .nickcode > #memberFunctions {
+	display: inline-flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+}
+section.memberInfo > .etc > .nickcode > #memberFunctions > * {
+	margin: 0 2px;
+}
 section.memberInfo > .etc > .introduce {
 	padding: 10px;
 }

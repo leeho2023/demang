@@ -28,7 +28,7 @@ form 메시지 보내기 폼
 		<hr class="endOfChat" style="border: 0"><!-- 스크롤 끝까지 내렸나 검사용 -->
 	</div>
 	
-	<form class="chatForm">
+	<form class="chatForm simpleinputForm">
 		<input type="hidden" class="chat_to" th:value="${listener.m_id}">
 		<input type="text" class="chat_content" name="h_content" autocomplete="off" placeholder="뭐라 칠려고 했더라?">
 		<button type="submit" class="chat_send">&gt;</button>
