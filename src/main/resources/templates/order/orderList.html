@@ -12,70 +12,85 @@
 <!-- css -->
 <!-- 공통 --><link rel="stylesheet" href="css/globalFrame.css"><link rel="stylesheet" href="css/global.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
+<!-- 이 페이지 --><link rel="stylesheet" href="css/orderList.css">
 </head>
 <body>
 
 <header th:replace="other/homeNav">메인메뉴</header>
 
 <main>
-	<table id="orderList" border=1>
-		<tr>
-			<th rowspan=2>주문번호</th>
-			<th colspan=2>상품</th>
-			<th rowspan=2>수량</th>
-			<th rowspan=2>결제가격</th>
-			<th rowspan=2>상태</th>
-			<th rowspan=2>주문 날짜</th>
-			<th colspan=3>구매자</th>
-			<th colspan=2>배송지</th>
-		</tr>
-		<tr>
-			<th>이름</th>
-			<th>단가</th>
-			<th>이름</th>
-			<th>이메일</th>
-			<th>전화번호</th>
-			<th>주소</th>
-			<th>우편번호</th>
-		</tr>
-		<tr th:each="order: ${orderList.getList()}">
-			<td th:text="${order.ord_id}"></td>
-			<td><a th:href="'postView?p_id='+${order.targetDTO.mer_target}" th:text="${order.targetDTO.mer_name}"></a></td>
-			<td th:text="${order.targetDTO.mer_price}"></td>
-			<td th:text="${order.ord_amount}"></td>
-			<td th:text="${order.ord_price}"></td>
-			<td class="A" th:if="${order.ord_state}=='A'">결제 대기</td>
-			<td class="O" th:if="${order.ord_state}=='O'">결제 완료</td>
-			<td class="X" th:if="${order.ord_state}=='X'">결제 실패</td>
-			<td th:text="${order.ord_date}"></td>
-			<td th:text="${order.ord_buyer_name}"></td>
-			<td th:text="${order.ord_buyer_email}"></td>
-			<td th:text="${order.ord_buyer_tel}"></td>
-			<td th:text="${order.ord_buyer_address}"></td>
-			<td th:text="${order.ord_buyer_postcode}"></td>
-		</tr>
-	</table>
+	<div class="wrap">
+		<table id="orderList" border=1>
+			<tr>
+				<th rowspan=2>주문번호</th>
+				<th colspan=2>상품</th>
+				<th rowspan=2>수량</th>
+				<th rowspan=2>결제가격</th>
+				<th rowspan=2>상태</th>
+				<th rowspan=2>동작</th>
+				<th rowspan=2>주문 시각</th>
+				<th colspan=3>구매자</th>
+				<th colspan=2>배송지</th>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<th>단가</th>
+				<th>이름</th>
+				<th>이메일</th>
+				<th>전화번호</th>
+				<th>주소</th>
+				<th>우편번호</th>
+			</tr>
+			<tr th:each="order: ${orderList.getList()}">
+				<td th:text="${order.ord_id}"></td>
+				<td><a th:href="'postView?p_id='+${order.targetDTO.mer_target}" th:text="${order.targetDTO.mer_name}"></a></td>
+				<td th:text="${order.targetDTO.mer_price}+'원'"></td>
+				<td th:text="${order.ord_amount}+'개'"></td>
+				<td th:text="${order.ord_price}+'원'"></td>
+				<th:block th:if="${order.ord_state}=='A'">
+					<td class="ordState_A">결제 대기</td>
+					<td class="function">
+						<a th:href="'/payment?order='+${order.ord_id}+'&backto='+${order.targetDTO.mer_target}">결제하기</a>
+					</td>
+				</th:block>
+				<th:block th:if="${order.ord_state}=='O'">
+					<td class="ordState_O">결제 완료</td>
+					<td class="function">
+						<a th:href="'/postInsert?p_type=R&to='+${order.targetDTO.mer_target}">리뷰작성</a>
+					</td>
+				</th:block>
+				<th:block th:if="${order.ord_state}=='X'">
+					<td class="ordState_X">결제 실패</td>
+					<td>-</td>
+				</th:block>
+				<td th:text="${order.ord_date}"></td>
+				<td th:text="${order.ord_buyer_name}"></td>
+				<td th:text="${order.ord_buyer_email}"></td>
+				<td th:text="${order.ord_buyer_tel}"></td>
+				<td th:text="${order.ord_buyer_address}"></td>
+				<td th:text="${order.ord_buyer_postcode}"></td>
+			</tr>
+		</table>
+	</div>
+	<!--/* 페이징 */-->
+	<nav class="pagingNav">
+		<ul>
+			<!--/* getPrePage : 이전 페이지 */-->
+			<li th:classappend="${orderList.getPrePage() == 0} ? 'disabled'">
+				<a class="pagingItem prev" th:href="@{/orderlist(pageNum=${orderList.getPrePage()})}">Previous</a><!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
+			</li>
+			<!-- getNavigateFirstPage() : 페이징의 처음 숫자 getNavigateLastPage : 페이징의 마지막 숫자를 이용해 페이징 숫자 출력 -->
+			<!-- href : /page?pageNum=선택한 페이지&keyword=검색분류&search=검색어 -->
+			<li th:each="page: ${#numbers.sequence(orderList.getNavigateFirstPage(), orderList.getNavigateLastPage())}" th:classappend="${page == orderList.getPageNum()} ? 'active'">
+				<a class="pagingItem middle" th:text="${page}" th:href="@{/orderlist(pageNum=${page})}"></a>
+			</li>
+			<!--/* getPrePage : 다음 페이지 */-->
+			<li th:classappend="${orderList.getNextPage() == 0} ? 'disabled'">
+				<a class="pagingItem next" th:href="@{/orderlist(pageNum=${orderList.getNextPage()})}">Next</a><!--/* href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 */-->
+			</li>
+		</ul>
+	</nav>
 </main>
-<!-- 페이징 -->
-<nav>
-    <ul>
-        <!-- getPrePage : 이전 페이지 -->
-        <li th:classappend="${orderList.getPrePage() == 0} ? 'disabled'">
-            <!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
-            <a th:href="@{/testOrderList(pageNum=${orderList.getPrePage()})}">Previous</a>
-        </li>
-        <!-- getNavigateFirstPage() : 페이징의 처음 숫자 getNavigateLastPage : 페이징의 마지막 숫자를 이용해 페이징 숫자 출력 -->
-        <!-- href : /page?pageNum=선택한 페이지&keyword=검색분류&search=검색어 -->
-        <li th:each="page: ${#numbers.sequence(orderList.getNavigateFirstPage(), orderList.getNavigateLastPage())}" th:classappend="${page == orderList.getPageNum()} ? 'active'">
-            <a th:text="${page}" th:href="@{/testOrderList(pageNum=${page})}"></a>
-        </li>
-        <!-- getPrePage : 다음 페이지 -->
-        <li th:classappend="${orderList.getNextPage() == 0} ? 'disabled'">
-            <!-- href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 -->
-            <a th:href="@{/testOrderList(pageNum=${orderList.getNextPage()})}">Next</a>
-        </li>
-    </ul>
-</nav>
 
 <div id="globalSidebar">
 	<nav th:if="${session.login}" th:replace="other/fList">팔로목록</nav>

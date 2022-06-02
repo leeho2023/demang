@@ -64,6 +64,10 @@ body {
 	font-size: 2em;
 }
 
+main {
+	overflow-x: auto;
+}
+
 
 #globalFooter {/* 푸터 */
 	text-align: center;

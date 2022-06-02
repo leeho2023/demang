@@ -89,6 +89,7 @@ public interface MainMapper {
 	
 	//// 주문 및 결제 관련
 	void orderInsert(OrderDTO dto);// 디비에 주문 넣기
+	OrderDTO getOrder(String ord_id);// 주문 정보 가져오기
 	void ordComplete(String ord_id);// 주문 정보를 결제 완료로 바꾸기
 	void merSubtract(String ord_id);// 주문한 수만큼 상품 수량 차감
 	int getOrderPrice( String ord_id );// 주문의 금액 조회

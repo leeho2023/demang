@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+#orderList {
+	word-break: keep-all;
+}
+
+.wrap {
+	overflow-x: auto;
+}
+
+/* 표 */
+#orderList {
+	border: 1px solid var(--themeCol2);
+}
+#orderList th ,
+#orderList td {
+	border: none;
+	padding: 5px;
+}
+#orderList tr:nth-child(even) {
+	background-color: var(--light1);
+}
+
+#orderList th {
+	background-color: var(--themeCol1);
+	color: var(--light1);
+}
+/* 주문 상태 */
+#orderList .ordState_A {
+	background-color: #fea;
+}
+#orderList .ordState_O {
+	background-color: #afb;
+}
+#orderList .ordState_X {
+	background-color: #faa;
+}
+#orderList .function {
+	background-color: var(--themeCol1);
+	color: var(--light2);
+}
+
+/* 페이징 바 */
+.pagingNav {
+	padding: 20px 0;
+}
+.pagingNav > ul {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+}
+.pagingNav > ul .pagingItem {
+	margin: 5px;
+	display: block;
+}
+.pagingNav > ul .prev , 
+.pagingNav > ul .next {
+	padding: 4px 12px;
+	background-color: var(--themeCol1);
+	color: var(--light2);
+}
+.pagingNav > ul .middle {
+	border: 2px solid var(--themeCol2);
+	padding: 2px 8px;
+	color: var(--textCol);
+}
