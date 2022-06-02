@@ -93,14 +93,17 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="comments">
-		<form class="commentForm simpleinputForm" onsubmit="newComment(this); return false;">
+		<form th:if="${session.login}" class="commentForm simpleinputForm" onsubmit="newComment(this); return false;">
 			<input type="hidden" class="c_postNo" name="c_postNo" th:value="${post.p_id}">
 			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="댓글을 입력해주세요">
 			<button type="submit">전송</button>
 		</form>
 		
+		<div th:unless="${session.login}">댓글을 작성하려면 로그인 하십시오.</div>
+		
 		<ul th:replace="post/commentList"></ul><!--/* 댓글 목록 */-->
 	</div>
+	
 		
 	<th:block th:if="${post.p_type}=='S'"><!--/* 판매글일 때만 상품 목록 보이기 */-->
 	항목을 누르면 해당 상품 주문 페이지로 이동합니다.
