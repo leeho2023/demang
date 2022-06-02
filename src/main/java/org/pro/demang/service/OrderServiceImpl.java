@@ -67,12 +67,22 @@ public class OrderServiceImpl implements OrderService{
 	private String ordIdConverter( String ord_id ) {// 문자열에서 -를 _로 바꿔서 반환
 		return ord_id.replace('-', '_');
 	}
-	
+	//// 주문 아이디로 주문 가져오기
+	public OrderDTO getOrder( String ord_id ) {
+		OrderDTO dto = mapper.getOrder( ord_id );
+		dto.setTargetDTO( // 상품정보 덧붙이기
+				mapper.getMerchandise(
+						dto.getOrd_target()
+						) );
+		return dto;
+	}
 
 	//// 결제 검증
 	@Override
 	public boolean paymentVerify(String imp_uid, String ord_id) {
-		///// 디비에 저장된 주문 금액이랑 실제 결제 금액을 비교 ??? 어려워서 생략 … 지금은 무조건 true 반환
+		//// 결제 취소상태인 주문에 대해 결제 시도하면 거부됨
+		if( mapper.getOrder(ord_id).getOrd_state() != 'A' ) return false;
+		//// 디비에 저장된 주문 금액이랑 실제 결제 금액을 비교 ??? 어려워서 생략 … 지금은 무조건 true 반환
 		return true;
 	}
 	

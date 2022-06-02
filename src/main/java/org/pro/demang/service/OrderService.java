@@ -10,6 +10,7 @@ public interface OrderService {
 	public MerchandiseDTO getMerchandise( int mer_id );
 	public List<MerchandiseDTO> getMerchandiseList( int mer_id );
 	
+	OrderDTO getOrder( String ord_id );
 	void newOrder(OrderDTO dto, int loginId );
 
 	void paymentValidate(String ord_id);

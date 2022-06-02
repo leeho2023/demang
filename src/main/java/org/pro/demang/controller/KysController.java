@@ -43,9 +43,9 @@ public class KysController {
 		model.addAttribute( "backto", p_id );// 결제 완료 후 돌아갈 게시글 상세보기 페이지의 게시글 번호
 		return "order/order";
 	}
-	//// 결제 페이지
+	//// 결제 페이지 (주문페이지에서 들어와서 새 주문 만들기)
 	@PostMapping("/payment")
-	String paymentPage( OrderDTO dto, @RequestParam("backto")int p_id, Model model, RedirectAttributes rttr, HttpSession session ) {
+	String paymentPage_newOrder( OrderDTO dto, @RequestParam("backto")int p_id, Model model, RedirectAttributes rttr, HttpSession session ) {
 		//// ??? 로그인 안 돼있으면
 		//// 주문 정보 저장
 		if( dto.getOrd_amount() > mapper.getMerAmount(dto.getOrd_target()) ) { // 주문할 수량이 남은 수량보다 크면
@@ -55,18 +55,25 @@ public class KysController {
 		}
 		orderService.newOrder( dto, loginId(session) );// 서비스에서 dto 완성
 		//// 주문 정보 model에 넣기
-		model.addAttribute("order", dto);
+		model.addAttribute("order", dto);// model에 주문 정보
 		model.addAttribute( "backto", p_id );// 결제 완료 후 돌아갈 게시글 상세보기 페이지의 게시글 번호
 		return "order/payment";
 	}
+	//// 결제 페이지 (주문 내역 페이지에서 결제 대기중인 주문 다시 결제하려고 들어옴)
+	@GetMapping("/payment")
+	String paymentPage_oldOrder( @RequestParam("order") String ord_id, @RequestParam("backto")int p_id, Model model, RedirectAttributes rttr, HttpSession session ) {
+		model.addAttribute(// model에 주문 정보
+				"order", 
+				mapper.getOrder(ord_id)
+				);
+		return "order/payment";
+	}
+	
 	/// 결제 시도 ???
 	@PostMapping("pay")
 	@ResponseBody
 	String pay( @RequestParam("imp_uid") String imp_uid, @RequestParam("merchant_uid") String ord_id  ) {
-		System.out.println("kys control ~ imp_uid: "+imp_uid);
-		System.out.println("kys control ~ ord_id:  "+ord_id);
-		
-		if( orderService.paymentVerify( imp_uid, ord_id ) ) {// 결제 검증
+		if( orderService.paymentVerify( imp_uid, ord_id ) ) {// 결제 검증 통과하면
 			orderService.paymentValidate( ord_id );// 디비에 결제 완료 표시
 			return "O";
 		}else {

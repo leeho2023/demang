@@ -401,6 +401,13 @@
 	<select id="getMerchandise" resultType="org.pro.demang.model.MerchandiseDTO">
 	SELECT * FROM merchandiseTBL WHERE mer_id = #{mer_id}
 	</select>
+	<!-- 주문 정보 가져오기 -->
+	<select id="getOrder" resultMap="OrderDTO">
+	SELECT * FROM orderTBL o 
+	JOIN merchandiseTBL m 
+		ON o.ord_target = m.mer_id 
+	WHERE o.ord_id = #{ord_id}
+	</select>
 	<!-- 주문 시도 횟수 +1 -->
 	<update id="merCountUp">
 	UPDATE merchandiseTBL SET mer_count = mer_count+1 WHERE mer_id = #{mer_id};
@@ -425,11 +432,11 @@
 	<select id="getOrderPrice" resultType="Integer">
 	 SELECT ord_price FROM orderTBL WHERE ord_id = #{ord_id}
 	</select>
-	<!-- 결제 대기 시간 지났는데 결제 안 됐으면 결제취소 상태로 바꾸기 이벤트 스케줄러 -->
+	<!-- 결제 대기 시간 지났는데 결제 안 됐으면 결제취소 상태로 바꾸기 이벤트 스케줄러 (테스트 쉽게 하려고 제한시간 30초밖에 안 됨) -->
 	<select id="paymentWaiting">
 	 CREATE event IF NOT EXISTS ${event_id}
 		ON SCHEDULE
-		AT DATE_ADD(NOW(), INTERVAL 10 MINUTE)
+		AT DATE_ADD(NOW(), INTERVAL 30 SECOND)
 		ON COMPLETION NOT PRESERVE
 		    ENABLE
 		    COMMENT '결제 대기 시간 만료를 기다림'
