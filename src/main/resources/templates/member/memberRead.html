@@ -26,9 +26,9 @@
 				<span th:text="${dto.m_nickname}"></span>#<span th:text="${dto.m_code}"></span>
 			</h1>
 			<div class="buttons">
-				<a class="tinyButton" th:href="'/vip?p='+${dto.m_id}"><i class="fa-solid fa-user fa-xl"></i></a>
-				<a class="tinyButton" href="/orderlist"><i class="fa-solid fa-cart-shopping"></i></a>
-				<a class="tinyButton" href="/mylike"><i class="fa-solid fa-heart"></i></a>
+				<button class="tinyButton" th:onclick="'location.href=\'/vip?p='+${dto.m_id}+'\''"><i class="fa-solid fa-user fa-xl"></i></button>
+				<button class="tinyButton" th:onclick="location.href='/orderlist'"><i class="fa-solid fa-cart-shopping"></i></button>
+				<button class="tinyButton" th:onclick="location.href='/mylike'"><i class="fa-solid fa-heart"></i></button>
 			</div>
 		</div>
 	</div>
