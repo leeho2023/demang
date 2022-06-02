@@ -105,8 +105,6 @@ public class SjhController {
 					);
 		}
 		
-		System.out.println(post.toString());
-		
 		return "post/PostUpdate";
 	}
 	
@@ -179,8 +177,6 @@ public class SjhController {
 	public List<PostDTO> reViewShow(@RequestParam("p_id") Integer p_origin) {
 		
 		List<PostDTO> dto = postService.postReviewShow(p_origin);
-		
-		System.out.println(dto);
 		
 		return dto;
 	}

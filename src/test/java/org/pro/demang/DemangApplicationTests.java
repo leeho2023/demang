@@ -23,22 +23,9 @@ class DemangApplicationTests {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-//
-//	@Test
-//	void contextLoads() {
-//		List<MemberDTO> list = memberService.fList(1);
-//		System.out.println("TESTTTTTTTTTTTTTTTTTTTT"+list);
-//		
-//	}
 	@Test
 	public void followingNum() {
 		System.out.println( mapper.followingCount(1) );
 	}
-	
-//	@Test
-//	public void adminpassword() {
-//		String encodedPassword = passwordEncoder.encode("admin");
-//		System.out.println(encodedPassword);
-//	}
 
 }

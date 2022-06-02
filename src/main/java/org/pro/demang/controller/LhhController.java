@@ -111,7 +111,6 @@ public class LhhController {
 	@ResponseBody
 	public int emailReduplicationCheck(@RequestParam("m_email")String m_email){
 		int emailCheckResult = mailService.emailCheck(m_email);
-		System.out.println(emailCheckResult);
 
 		return emailCheckResult;
 	}
@@ -129,7 +128,6 @@ public class LhhController {
 	@PostMapping("/reEmailCheck")
 	@ResponseBody
 	public int reEmailCheck(EmailCheckDTO dto){
-		System.out.println(dto.toString());
 		int result = mailService.reEmailCheck(dto);
 		
 		return result;
@@ -140,23 +138,17 @@ public class LhhController {
 	public String contactUsInsert(ContactUsDTO dto,
 	        @RequestParam("files") MultipartFile[] files) {
 		try {
-
-			System.out.println(dto.toString());
 			memberService.contactUsInsert( dto ); // 작동
 			int c_id = dto.getC_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
 			
-			// System.out.println(files.length); // 이미지 들어오는 files의 length 확인
 			// for(int i = 0; i < files.length; i++){
-			// 	System.out.println(files[i].getBytes()); // 들어오는 이미지 files의 바이트배열로 바꿔서 확인
 			// }
 
 			for(int i = 0; i < files.length; i++) {
 				ContactUsImgDTO imgDTO = new ContactUsImgDTO(); // 이미지가 들어갈 DTO를 생성
 				imgDTO.setI_image(files[i].getBytes()); // DTO안에 이미지를 byte변환하여 넘겨줌
 				memberService.contactUsImgInsert(c_id, imgDTO.getI_image()); // 작동
-				System.out.println(i + "번째 이미지 입력됨");
 			}
-			System.out.println(dto.getC_id()+"번 게시글로 작성된 거 확인하세요. ~ LHH controller ###########################");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -225,11 +217,9 @@ public class LhhController {
 //	messageOneSelect 하나만 상세 보기
 	@PostMapping("/messageOneSelect")
 	public String messageOneSelect(@RequestParam("c_id") String c_id, Model model) {
-		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
 		ContactUsDTO cDto = memberService.messageOneSelect(c_id);
 		AnswerDTO aDto = memberService.answerSelect(c_id);
 		
-		System.out.println(aDto);
 		memberService.updateC_checked(c_id);
 		model.addAttribute("cDto", cDto);
 		model.addAttribute("aDto", aDto);
@@ -241,8 +231,6 @@ public class LhhController {
 	public String sendMailForm(
 			@RequestParam("m_email") String m_email,
 			@RequestParam("c_id") String c_id, Model model) {
-		System.out.println("LHHController### 선택한 m_email 값 = " + m_email);
-		System.out.println("LHHController### 선택한 c_id 값 = " + c_id);
 		model.addAttribute("m_email", m_email);
 		model.addAttribute("c_id", c_id);
 		return "admin/sendMailForm";
@@ -254,7 +242,6 @@ public class LhhController {
 			@RequestParam("m_email") String m_email) {
 		
 		System.out.println("m_email 값 : " + m_email);
-		System.out.println("===================");
 		
 		try {
 			mailService.answerInsert(m_email, dto);

@@ -142,8 +142,6 @@ public class MainController {
 	public String memberCheck(@RequestParam("m_id") Integer m_id, Model model) {
 		
 		MemberDTO dto = memberService.getMember_no(m_id);
-		System.out.println("회원 불러오기");
-		System.out.println(dto.toString());
 		
 		model.addAttribute("member", dto);
 		

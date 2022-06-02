@@ -62,7 +62,6 @@ public class LwkController {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=memberRead";// 비회원인 경우 로그인하러 가기
 		MemberDTO dto = memberService.getMember_no( loginId(session) );
 		// 프사 인코딩
-		System.out.println("lwkController.memberRead ~ "+dto);
 		model.addAttribute("dto",dto);
 		return "member/memberRead";
 	}
@@ -126,11 +125,9 @@ public class LwkController {
 	public String emailCheck(@RequestParam("m_email") String m_email, RedirectAttributes rttr) {
 		String result = memberService.emailCheck(m_email);
 		if (result.equals("useUser_email")) {
-			System.out.println("lwkController.memberRead ~ user_emailbaaaaaaaaaaaad");
 			rttr.addFlashAttribute("bad", false);
 			return "bad";
 		} else {
-			System.out.println("lwkController.memberRead ~ user_emailgooooooooooooood");
 			rttr.addFlashAttribute("good", true);
 			return "good";
 		}

@@ -49,7 +49,6 @@ public class KysController {
 		//// ??? 로그인 안 돼있으면
 		//// 주문 정보 저장
 		if( dto.getOrd_amount() > mapper.getMerAmount(dto.getOrd_target()) ) { // 주문할 수량이 남은 수량보다 크면
-			System.out.println("ksy con ~ 주문 요청하신 수량이 현재 상품의 남은 수량보다 많습니다.");
 			rttr.addFlashAttribute("alert", "주문 요청하신 수량이 현재 상품의 남은 수량보다 많습니다.");// 수량 초과 메시지와 함께
 			return "redirect:/postView?p_id="+p_id;//이전 게시글로 돌아가기
 		}

@@ -54,7 +54,6 @@ public class OrderServiceImpl implements OrderService{
 		dto.setTargetDTO( merdto );// 주문 정보에 상품 정보 넣기
 		dto.setOrd_price( merdto.getMer_price() * dto.getOrd_amount() );// 가격 = 해당 상품의 단가 * 구매자가 입력한 수량 ???
 		dto.setOrd_buyer( loginId );// 구매자 회원번호
-		System.out.println("ord ser ~ dto: "+dto+"################");
 		// 주문 시각은 DB에서 자동 생성
 		//// 주문을 디비에 저장 (실제 결제 시 결제 정보 위변조 확인용)
 		mapper.orderInsert(dto);

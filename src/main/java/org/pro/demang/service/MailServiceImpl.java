@@ -70,14 +70,8 @@ public class MailServiceImpl implements MailService{
 	
 	@Override
 	public String answerInsert(String m_email, AnswerDTO dto) throws MessagingException {
-
-		System.out.println("Impl 값 : " + m_email);
-		System.out.println("===================");
-		System.out.println(dto.toString());
 		
 		mapper.answerInsert(dto);
-		
-		System.out.println("mailServiceImpl DB 입력 완료");
 		
 //		MimeMessage message = javaMailSender.createMimeMessage();
 //	    message.setSubject("고객님 문의하신 내용은 확인 했습니다.");
