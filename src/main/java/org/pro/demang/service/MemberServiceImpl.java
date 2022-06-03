@@ -343,7 +343,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//// 회원 정보 유효성 검사 - 이름
 	public static boolean signUpNicknameCheck(String m_nickname) {
-		String regex = "^[a-zA-Zㄱ-힣0-9-_.]{2,20}$";
+		String regex = "^[a-zA-Zㄱ-힣0-9-_.]{2,30}$";
 		Pattern p = Pattern.compile(regex); 
 		Matcher m = p.matcher(m_nickname); 
 		if(m.matches()) {
@@ -353,7 +353,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//// 회원 정보 유효성 검사 - 비밀번호
 	public static boolean signUpPasswordCheck(String m_password) {
-		String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,20}$";
+		String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,60}$";
 		Pattern p = Pattern.compile(regex); 
 		Matcher m = p.matcher(m_password); 
 		if(m.matches()) {

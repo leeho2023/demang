@@ -1,5 +1,43 @@
 $(function(){
-	$('#m_profilePic').on('change', filechange);
+	$('#m_profilePic').on('change', filechange);// 프사 업로드 시
+	
+	//// nickname 유효성검사
+	$("#m_nickname").on("input",function(){
+		//// 빈칸이면 검사 안 함
+		if( $("#m_nickname").val() == '' ){
+			$(".nickname.regex").text("");
+			return;
+		}
+		
+		//// 검사
+		if( !verify( 
+				$("#m_nickname").val(), 
+				regex_nickname ) 
+			){// 검사 탈락시
+			$(".nickname.regex").text("2자에서 30자, 한글과 영문, 숫자만 입력가능합니다.");// 경고메시지 띄우고
+			return;// 종료
+		}
+		$(".nickname.regex").text("");// 통과했으면 경고메시지 없애기
+	})
+	
+	//// 비밀번호 유효성검사
+	$("#m_password").on("input",function(){
+		//// 빈칸이면 검사 안 함
+		if( $("#m_password").val() == '' ){
+			$(".password.regex").text("");
+			return;
+		}
+		
+		//// 검사
+		if( !verify( 
+				$("#m_password").val(), 
+				regex_password ) 
+			){// 검사 탈락시
+			$(".password.regex").text("최소 8자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요.");// 경고메시지 띄우고
+			return;// 종료
+		}
+		$(".password.regex").text("");// 통과했으면 경고메시지 없애기
+	})
 });
 
 function filechange(){ // 이미지 업로드시 실행
@@ -11,6 +49,8 @@ function filechange(){ // 이미지 업로드시 실행
 			alert('이미지 파일만 업로드하십시오.');
 			return;
 		}
+		
+		//// 이미지 파일을 올린 경우: 그 프사 미리보기
 		var reader = new FileReader();
 		reader.onload = function(e){// 로딩 완료시 실행할 함수
 			$('#profilePicPreview').attr('src', e.target.result);
@@ -55,6 +95,10 @@ function propicMode_preview(){// 새프사 모드
 }
 
 function memberUpdateSubmit(){// 제출시
+	//// 제출값 유효성 검사 탈락시 제출 안 함
+	if( $(".name.regex").text()      != '' ){ alert('이름을 다시 확인하십시오.'); return false;}
+	if( $(".pw.regex").text()        != '' ){ alert('비밀번호를 다시 확인하십시오.'); return false;}
+	
 	// 전송 전 프사 선택 여부 체크
 	if( $('#profilePicLabel').hasClass('preview') ){
 		$('#isTherePropic').prop('checked', true);
@@ -64,102 +108,3 @@ function memberUpdateSubmit(){// 제출시
 	
 	return true;
 }
-
-
-/* var placeholderTarget = $('.textbox input[type="text"], .textbox input[type="password"]');
-//포커스시
-placeholderTarget.on('focus', function(){
-	 $(this).siblings('label').fadeOut('fast');
-});
-
-//포커스아웃시
-placeholderTarget.on('focusout', function(){
-	 if($(this).val() == ''){
-		$(this).siblings('label').fadeIn('fast');
-	 }
-});*/
-$(function(){
-	 /* 
-					 
-					//이름 유효성검사
-					 $("#m_nickname").on("input",function(){
-						var regex = /^[a-zA-Zㄱ-힣0-9-_.]{2,20}$/;
-						var result = regex.exec($("#m_nickname").val());
-						
-						if(result != null){
-							$(".name.regex").html("");
-						}else{
-								$(".name.regex").html("최소 2 자,한글과 영문,숫자만 입력가능합니다.");
-								 $(".name.regex").css("color","red")
-						}
-						
-					 })
-			
-				//비밀번호 유효성검사
-				$("#m_password").on("input",function(){
-					 var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,1000}$/;
-					 var result = regex.exec($("#m_password").val())
-					 
-					 if(result != null){
-						$(".pw.regex").html("");
-					 }else{
-						$(".pw.regex").html("최소 8 자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요. ");
-						$(".pw.regex").css("color","red")
-					 }
-				});
-				
-			 
-				$("#m_password").on("input",function(){
-					 var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,1000}$/;
-					 var result = regex.exec($("#m_password").val())
-					 
-					 if(result != null){
-						$(".pw.regex").html("");
-					 }else{
-						$(".pw.regex").html("최소 8 자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요. ");
-						$(".pw.regex").css("color","red");
-					 }
-				});
-				
-			
-
-						
-			 //회원가입 버튼 눌렀을 때, 빈칸 있으면 다시 유효성 검사진행
-			$("#signupbtn").on("click",function(){
-			
-				var name = $("#m_nickname").val();
-				var pw = $("#m_password").val();
-				
-			
-			
-				
-		
-				var nameregex = /^[a-zA-Zㄱ-힣0-9-_.]{2,20}$/;
-				var pwregex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,1000}$/;
-		
-			
-				
-			
-				 var nameregex = nameregex.exec(name);
-				if(nameregex == null){
-					alert("이름양식을 다시 확인해주세요");
-					retrun;
-				}
-				var pwregex = pwregex.exec(pw);
-				if(pwregex == null){
-					alert("비밀번호양식을 다시 확인해주세요");
-					retrun;
-				}
-				
-				
-				
-			
-				
-				 //빈칸 없을 때 제출.
-				$("#signUp").submit();
-						alert("적용 완료");
-			
-			})*/
-		})
-		
-		

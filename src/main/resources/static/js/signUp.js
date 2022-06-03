@@ -1,18 +1,7 @@
-//// 유효성 검사용 정규식들
-let regex_email = /.+@[a-z]+(\.[a-z]+){1,2}$/;
-let regex_nickname = /^[a-zA-Zㄱ-힣0-9-_.]{2,20}$/;
-let regex_password = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-
-//// 문자열 유효성 검사 (true, false)
-function verify( str, regex ){// str이 regex에 맞는가
-	return regex.test( str );
-}
-
-
 $(function(){
 	document.getElementById('m_birth').value = new Date().toISOString().substring(0, 10);;
 	
-	/* 각 항목에 경고 메시지가 없음이 검사통과를, 메시지가 있음이 탈락을 의미한다. */
+	/* 각 항목에 경고메시지가 없음이 검사통과를, 메시지가 있음이 탈락을 의미한다. */
 	
 	//// email 유효성 검사
 	$("#m_email").on("input",function(){// input에 입력될 때마다 검사
@@ -103,7 +92,7 @@ $(function(){
 				$("#m_nickname").val(), 
 				regex_nickname ) 
 			){// 검사 탈락시
-			$(".name.regex").text("최소 2 자,한글과 영문,숫자만 입력가능합니다.");// 경고메시지 띄우고
+			$(".name.regex").text("2자에서 30자, 한글과 영문,숫자만 입력가능합니다.");// 경고메시지 띄우고
 			return;// 종료
 		}
 		$(".name.regex").text("");// 통과했으면 경고메시지 없애기
@@ -117,7 +106,7 @@ $(function(){
 				$("#m_password").val(), 
 				regex_password ) 
 			){// 검사 탈락시
-			$(".pw.regex").text("최소 8 자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요.");// 경고메시지 띄우고
+			$(".pw.regex").text("최소 8자, 하나 이상의 특수문자,대문자,소문자,숫자를 입력해주세요.");// 경고메시지 띄우고
 			return;// 종료
 		}
 		$(".pw.regex").text("");// 통과했으면 경고메시지 없애기
