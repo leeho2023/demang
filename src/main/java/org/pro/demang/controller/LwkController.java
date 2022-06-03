@@ -2,6 +2,7 @@ package org.pro.demang.controller;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +26,33 @@ public class LwkController {
 	private MemberService memberService;
 	@Autowired
 	private MainMapper mapper;
+	
+	//// 회원가입 관련
+	//// 이메일 중복 검사
+	@PostMapping("/emailDuplicateCheck")
+	@ResponseBody
+	public boolean emailDuplicateCheck( @RequestParam("m_email") String m_email ){
+		return memberService.emailDuplicateCheck(m_email);
+	}
+	//// 인증코드 발송 요청
+	@PostMapping("/sendMailCode")
+	@ResponseBody
+	public String sendMailCode( @RequestParam("m_email") String m_email ){
+		try {
+			memberService.sendMailCode( m_email );
+		} catch (MessagingException e) {
+			System.out.println("인증코드 발송 실패");
+			e.printStackTrace();
+		}
+		return "";
+	}
+	//// 인증코드 검증
+	@PostMapping("/verifyEmail")
+	@ResponseBody
+	public boolean verifyEmail( @RequestParam("m_email") String m_email, @RequestParam("e_code") String e_code ){
+		return memberService.emailVerifyCheck(m_email, e_code);
+	}
+	
 	
 	//// 로그인
 	//// 로그인 성공시 세션 login 속성에 회원번호가 들어간다. 
@@ -118,19 +146,6 @@ public class LwkController {
 			}
 		}
 		return "redirect:/memberRead";// 업데이트 완료 후 회원정보 페이지로
-	}
-	
-	@PostMapping("/emailCheck")
-	@ResponseBody
-	public String emailCheck(@RequestParam("m_email") String m_email, RedirectAttributes rttr) {
-		String result = memberService.emailCheck(m_email);
-		if (result.equals("useUser_email")) {
-			rttr.addFlashAttribute("bad", false);
-			return "bad";
-		} else {
-			rttr.addFlashAttribute("good", true);
-			return "good";
-		}
 	}
 	
 

@@ -40,7 +40,7 @@ html, body, main {
 	text-align: center;
 	overflow: auto;
 }
-@media (max-height: 850px){/* 화면 세로길이가 작을 경우 세로 가운데 정렬하면 위쪽은 걍 잘리고 아래쪽만 스크롤 생기기 때문에 세로 위쪽 정렬으로 바꿔서 전체가 다 스크롤 되며 보이도록 */
+@media (max-height: 1030px){/* 화면 세로길이가 작을 경우 세로 가운데 정렬하면 위쪽은 걍 잘리고 아래쪽만 스크롤 생기기 때문에 세로 위쪽 정렬으로 바꿔서 전체가 다 스크롤 되며 보이도록 */
 	.wrap.signup {/* 페이지별로 세로길이 다르니까 클래스명으로 구분 */
 		justify-content: start;
 	}
@@ -115,7 +115,7 @@ html, body, main {
 	width: 100%;
 	border: 1px solid var(--themeCol1);
 }
-.inputCell .regex {
+.regex {
 	color: red;
 }
 

@@ -7,11 +7,9 @@ import org.pro.demang.mapper.MainMapper;
 import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.ContactUsImgDTO;
-import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
-import org.pro.demang.service.MailService;
 import org.pro.demang.service.MemberService;
 import org.pro.demang.service.PagingServiceImpl;
 import org.pro.demang.service.PostService;
@@ -37,9 +35,6 @@ public class LhhController {
 
 	@Autowired
 	private MainMapper mapper;
-	
-	@Autowired
-	private MailService mailService;
 	
 	@Autowired
 	private PagingServiceImpl pagingServiceImpl;
@@ -80,57 +75,7 @@ public class LhhController {
 
 	@GetMapping("/serviceCenter")
 	public String serviceCenter() {
-		
 		return "other/serviceCenter";
-	}
-
-	// 회원 코드 생성 테스트
-	@GetMapping("/createCode")
-	public String createCode(){
-
-
-
-		// String codeCheck = "";
-		// boolean check = true;
-		// while(check){
-		// 	codeCheck = memberService.codeCheck();
-		// 	if(codeCheck.equals("fail")){
-		// 		System.out.println("다시 회원 코드를 생성합니다.");
-		// 	}else{
-		// 		System.out.println("회원 코드 생성중...");
-		// 		break;
-		// 	}
-		// }
-		// System.out.println("생성된 회원 코드는 : " + codeCheck);
-
-		return "redirect:/";
-	}
-	
-	//메일 체크하기
-	@PostMapping("/emailReduplicationCheck")
-	@ResponseBody
-	public int emailReduplicationCheck(@RequestParam("m_email")String m_email){
-		int emailCheckResult = mailService.emailCheck(m_email);
-
-		return emailCheckResult;
-	}
-
-	// 메일 보내기
-	@PostMapping("/sendMail")
-	public String sendMail(@RequestParam("m_email")String m_email) throws MessagingException {
-
-		mailService.sendMail(m_email);
-		
-	    return "redirect:/";
-	}
-
-	// 이메일 체크
-	@PostMapping("/reEmailCheck")
-	@ResponseBody
-	public int reEmailCheck(EmailCheckDTO dto){
-		int result = mailService.reEmailCheck(dto);
-		
-		return result;
 	}
 
 // 문의 사진과 같이 등록하기
@@ -244,7 +189,7 @@ public class LhhController {
 		System.out.println("m_email 값 : " + m_email);
 		
 		try {
-			mailService.answerInsert(m_email, dto);
+			memberService.answerInsert(m_email, dto);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

@@ -2,6 +2,8 @@ package org.pro.demang.service;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.pro.demang.model.ContactUsDTO;
 import org.pro.demang.model.MemberDTO;
 import org.pro.demang.model.AnswerDTO;
@@ -9,8 +11,15 @@ import org.pro.demang.model.AnswerDTO;
 public interface MemberService {
 
 	List<MemberDTO> fList( int follower );
-	int memberInsert( MemberDTO dto );
-	public MemberDTO getMember_no( int no );
+	String memberInsert( MemberDTO dto, String e_code );
+	MemberDTO getMember_no( int no );
+	
+	void sendMailCode(String m_email) throws MessagingException;
+	boolean emailDuplicateCheck(String m_email);// 이메일 중복 체크 (중복 없으면 true 중복이면 false)
+	boolean tempEmailDuplicateCheck(String m_email);
+	boolean emailVerifyCheck( String email, String code );
+
+	String answerInsert(String m_email, AnswerDTO dto) throws MessagingException;
 
 	MemberDTO login(MemberDTO dto);
 	void memberUpdate_nickname(int loginId, String m_nickname);
@@ -19,7 +28,6 @@ public interface MemberService {
 	void memberUpdate_introduce(int loginId, String m_introduce);
 
     List<MemberDTO> memberSearch(String reSearchVal);
-	public String emailCheck(String m_email);
     void contactUsInsert(ContactUsDTO dto);
 	void contactUsImgInsert(int c_id, byte[] i_image);
 
