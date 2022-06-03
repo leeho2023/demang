@@ -34,6 +34,7 @@ $(document).ready(function(){
 <main><!--/* 게시글 */-->
 <!-- 
 게시물영역 div.post
+│
 ├게시물 article.postView
 │├글쓴이 정보 h1.writerInfo
 │├이미지들 div.postImgs
@@ -43,15 +44,14 @@ $(document).ready(function(){
 │├좋아요 혹은 좋아요취소 div.likeDiv
 ││├좋아요 버튼 button.like
 ││└좋아요 취소 버튼 button.unlike
-│├댓글
-│├삭제
-│└신고
+│├수정
+│└삭제
 │
 ├댓글 영역 div.comments
 │├댓글쓰기 div.myComment
 │└댓글목록 ul.commentList
 │
-└상품목록
+└상품목록 div.merchandises
 -->
 <div class="post">
 
@@ -104,16 +104,17 @@ $(document).ready(function(){
 	</div>
 	
 		
-	<th:block th:if="${post.p_type}=='S'"><!--/* 판매글일 때만 상품 목록 보이기 */-->
-	항목을 누르면 해당 상품 주문 페이지로 이동합니다.
-	<ul th:if="${merList.size} > 0">
-		<li th:each="mer: ${merList}" th:if="${mer.mer_amount} > 0" th:onclick="'location.href=\'/order?mer_id='+${mer.mer_id}+'&from='+${post.p_id}+'\''">
-			<button class="tinyButton br"><span th:text="${mer.mer_name}"></span><!--/* 상품 이름 */-->
-			<span><span th:text="${mer.mer_amount}"></span>개 남음</span></button><!--/* 주문가능 수량 */-->
-		</li>
-	</ul>
-	<div th:if="${merList.size} == 0"><h4>현재 주문 가능한 수량이 없습니다</h4></div>
-	</th:block>
+	<div class="merchandises" th:if="${post.p_type}=='S'"><!--/* 판매글일 때만 상품 목록 보이기 */-->
+		<p>항목을 누르면 해당 상품 주문 페이지로 이동합니다.</p>
+		<ul class="merList" th:if="${merList.size} > 0">
+			<li class="pointerCursor" th:each="mer: ${merList}" th:if="${mer.mer_amount} > 0" th:onclick="'location.href=\'/order?mer_id='+${mer.mer_id}+'&from='+${post.p_id}+'\''">
+				<span class="name" th:text="${mer.mer_name}"></span><!--/* 상품 이름 */-->
+				<span class="amount">&hellip; <span th:text="${mer.mer_amount}"></span>개 남음</span><!--/* 주문가능 수량 */-->
+			</li>
+		</ul>
+		
+		<p th:if="${merList.size} == 0">현재 주문 가능한 수량이 없습니다</p>
+	</div>
 </div>
 </main>
 

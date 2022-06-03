@@ -41,6 +41,10 @@ em {
 }
 
 
+/* 마우스 올리면 커서 바뀜 (a 외의 요소로 페이지 이동 만들었을 때에도 거기 링크가 있음을 표시 등) */
+.pointerCursor {
+	cursor: pointer;
+}
 
 /* 작은 버튼 */
 .tinyButton {
@@ -59,6 +63,7 @@ em {
   transform: translateY(1px);
   box-shadow: 0 1px #666;
 }
+
 /* 작고 연한 버튼 */
 .tinyLightButton {
 	background-color: var(--themeCol2);
@@ -69,6 +74,7 @@ em {
 	font-weight: bold;
 	font-size: 0.9em;
 }
+
 /* 큰 버튼 */
 .largeButton {
 	border-radius: 6px;
@@ -112,6 +118,7 @@ em {
 	width:100%;
 	transition: 0.3s ease all;
 }
+
 /* 댓글, 채팅 등 입력창 */
 .simpleinputForm {
 	display: flex;
