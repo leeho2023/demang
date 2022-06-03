@@ -88,7 +88,6 @@ $(document).ready(function(){
 		<span class="likeCount" th:text="${post.p_likeCount}">좋아요 수</span>
 		<button class="update" th:onclick="'location.href=\'/postUpdate?p_id='+${post.p_id}+'\''" th:if="${session.login} == ${post.p_writer}">수정</button><!--/* 게시글 작성자만 */-->
 		<button class="delete" th:p_id="${post.p_id}" th:onclick="deletePost(this.getAttribute('p_id'))" th:if="${session.login} == ${post.p_writer}">삭제</button><!--/* 게시글 작성자만 */-->
-		<button class="buy" th:if="${post.p_type} == 'S'" th:onclick="">구매</button>
 		<button class="report" th:unless="${session.login} == ${post.p_writer}">신고</button><!--/* 게시글 작성자 아닌 사람만 */-->
 	</div>
 	
