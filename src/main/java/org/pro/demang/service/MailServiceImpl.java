@@ -68,17 +68,18 @@ public class MailServiceImpl implements MailService{
 		return mapper.reEmailCheck(dto);
 	}
 	
+	// 문의 답변 하기
 	@Override
 	public String answerInsert(String m_email, AnswerDTO dto) throws MessagingException {
 		
 		mapper.answerInsert(dto);
 		
-//		MimeMessage message = javaMailSender.createMimeMessage();
-//	    message.setSubject("고객님 문의하신 내용은 확인 했습니다.");
-//	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
-//	    message.setText(dto.getA_content());
-//	    message.setSentDate(new Date());
-//	    javaMailSender.send(message);
+		MimeMessage message = javaMailSender.createMimeMessage();
+	    message.setSubject("고객님 문의하신 내용은 확인 했습니다.");
+	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
+	    message.setText(dto.getA_content());
+	    message.setSentDate(new Date());
+	    javaMailSender.send(message);
 		
 		
 		return null;
