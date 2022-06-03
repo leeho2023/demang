@@ -6,7 +6,8 @@
 <!-- script -->
 <!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<!-- 이 페이지 --><script type="text/javascript" src="js/memberUpdate.js"></script>
+<!-- 이 페이지 --><script src="js/memberUpdate.js"></script>
+<!-- 회원 정보 유효성 검사 함수 --><script src="js/memberInfoVerify.js"></script>
 
 <!-- css -->
 <!-- 공통 --><link rel="stylesheet" href="css/global.css">
@@ -83,11 +84,10 @@
 					<input type="radio" name="m_gender" value="X" th:if="${dto.m_gender}!='X'">
 				</div>
 			</div>
-			<div class="password regex"></div>
 			
 			<div class="inputCell">
 				<label for="m_introduce" class="fieldName">자기소개</label>
-				<textarea name="m_introduce" id="m_introduce" class="input" th:text="${dto.m_introduce}" style="resize: none;" rows=5></textarea>
+				<textarea name="m_introduce" id="m_introduce" class="input" max-length="500" th:text="${dto.m_introduce}" style="resize: none;" rows=5></textarea>
 				<hr class="underlineForInput">
 			</div>
 		</div>

@@ -4,16 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.pro.demang.model.AnswerDTO;
 import org.pro.demang.model.ChatDTO;
 import org.pro.demang.model.CommentDTO;
 import org.pro.demang.model.ContactUsDTO;
-import org.pro.demang.model.EmailCheckDTO;
 import org.pro.demang.model.MemberDTO;
+import org.pro.demang.model.MerchandiseDTO;
 import org.pro.demang.model.OrderDTO;
 import org.pro.demang.model.PostDTO;
 import org.pro.demang.model.PostImgDTO;
-import org.pro.demang.model.AnswerDTO;
-import org.pro.demang.model.MerchandiseDTO;
 
 @Mapper
 public interface MainMapper {
@@ -21,13 +20,13 @@ public interface MainMapper {
 	// 회원 관련
 	//// 회원가입
 	void memberInsert(MemberDTO dto); // 새 회원 등록
-    int codeCheck(String code);// 코드 중복 검사
-	void emailCodeInsert(EmailCheckDTO dto);// 이메일 인증코드 등록
+	Integer codeCheck(String code);// 코드 중복 검사
+	void emailCodeInsert( String m_email, String e_code );// 이메일 인증코드 등록
+	void emailCodeUpdate( String m_email, String e_code );// 해당 이메일의 인증코드 바꾸기
 	void emailAuthenticationDelete(String m_email);// 회원가입 완료 시 이메일 인증코드 삭제
-	void emailDelete(String m_email);
-	String emailAuthenticationCheck(String m_email);
-    int reEmailCheck(EmailCheckDTO dto);
-	public String emailCheck(String m_email);
+	Integer emailVerifyCheck( String email, String code );// 이메일과 이메일 인증 코드 일치 확인
+	Integer emailDuplicateCheck(String m_email);// 해당 이메일의 회원 존재 여부
+	Integer tempEmailDuplicateCheck(String m_email);// 해당 이메일에 인증코드를 이미 보냈는지 확인
 	//// 회원정보
 	MemberDTO getMember_no(int no);// 회원번호로 회원 찾기
 	MemberDTO getMember_email(String m_email);// 이메일로 회원찾기

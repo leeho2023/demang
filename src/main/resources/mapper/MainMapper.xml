@@ -228,10 +228,17 @@
 		 VALUES(#{m_code}, #{m_email},#{m_nickname},#{m_password},#{m_birth})
 	</insert>
 
-	<!-- 이메일 인증코드 등록 쿼리 -->
+	<!-- 이메일 인증코드 등록 -->
 	<insert id="emailCodeInsert">
 		INSERT INTO emailCheckTBL(m_email, e_code)
 		VALUES(#{m_email}, #{e_code})
+	</insert>
+	
+	<!-- 이메일 인증코드 교체 -->
+	<insert id="emailCodeUpdate">
+		UPDATE emailCheckTBL 
+		SET e_code = #{e_code} 
+		WHERE m_email = #{m_email};
 	</insert>
 
 	<!-- 회원 번호로 회원 찾기 -->
@@ -366,32 +373,27 @@
 	ORDER BY h_id ASC
 	</select>
 	
-	<!-- 검색결과 memberTBL의 이메일 정보 -->
-	<select id="emailCheck" resultType="String">
-		select m_email from memberTBL where m_email = #{m_email}
+	<!-- 해당 이메일의 회원 존재 여부 -->
+	<select id="emailDuplicateCheck" resultType="Integer">
+		select count(*) from memberTBL where m_email = #{m_email}
 	</select>
-
-	<!-- 검색 결과 emailCheckTBL의 이메일 정보 -->
-	<select id="emailAuthenticationCheck" resultType="String">
-		select m_email from emailCheckTBL where m_email = #{m_email}
+	
+	<!-- 해당 이메일에 인증코드 보냈는지 여부 -->
+	<select id="tempEmailDuplicateCheck" resultType="Integer">
+		select count(*) from emailCheckTBL where m_email = #{m_email}
 	</select>
-
-	<!-- memberTBL과 emailCheckTBL에 동시에 존재하지 않는 이메일 삭제하기 -->
+	
+	<!-- 이메일 인증 테이블에서 이메일 삭제 -->
 	<delete id="emailAuthenticationDelete">
 		DELETE FROM emailCheckTBL
 		WHERE m_email = #{m_email}
 	</delete>
-	<!-- memberTBL과 emailCheckTBL에 동시에 존재하지 않는 이메일 삭제하기 -->
-	<delete id="emailDelete">
-		DELETE FROM memberTBL
-		WHERE m_email = #{m_email}
-	</delete>
 
-	<!-- 검색 결과 이메일과 인증코드 -->
-	<select id="reEmailCheck" resultType="Integer">
+	<!-- 이메일과 이메일 인증코드 확인 -->
+	<select id="emailVerifyCheck" resultType="Integer">
 		SELECT count(*)
 		FROM emailCheckTBL
-		WHERE m_email = #{m_email} AND e_code = #{e_code}
+		WHERE m_email = #{email} AND e_code = #{code}
 	</select>
 	
 	

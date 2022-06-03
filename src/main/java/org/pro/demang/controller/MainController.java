@@ -21,16 +21,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MainController {
 
-    @Autowired
-    private MemberService memberService;
-    @Autowired
+	@Autowired
+	private MemberService memberService;
+	@Autowired
 	PostService postService;
-    @Autowired
-    OrderService orderService;
+	@Autowired
+	OrderService orderService;
 	@Autowired
 	private MainMapper mapper;
 
@@ -48,7 +49,7 @@ public class MainController {
 		return "member/signUp";
 	}
 
-    // 친구 목록 불러오기(해당 유저의 회원코드 사용) 
+	// 친구 목록 불러오기(해당 유저의 회원코드 사용) 
 	@PostMapping("/fList")
 	public String fList(@RequestParam("follower")int follower, Model model) {
 		model.addAttribute(
@@ -58,7 +59,7 @@ public class MainController {
 		return "other/fList";
 	}
 
-    // 댓글 보기
+	// 댓글 보기
 	@PostMapping("/CommentShow")
 	public String commentShow(@RequestParam("p_id") Integer p_id, Model model){
 		List<CommentDTO> list = mapper.getCommentList(p_id);
@@ -67,23 +68,20 @@ public class MainController {
 		
 	}
 
-    // 회원가입
-    @PostMapping("/signUp")
-    public String signUp(MemberDTO dto, Model model) {
-    		
-       int result = memberService.memberInsert(dto);
-       
-       if(result == 1) {
-    	   return "member/login";
-       }else {
-    	   model.addAttribute("result", result);
-    	   return "member/signUp";
-       }
-      
-    }
-    
+	// 회원가입
+	@PostMapping("/signUp")
+	public String signUp( MemberDTO dto, @RequestParam("e_code") String e_code, Model model, RedirectAttributes rttr ) {
+		String result = memberService.memberInsert( dto, e_code );// 회원가입(유효성검사 포함, 탈락시 값 반환)
+		if( result.equals("") ) {// 가입 완료
+			return "redirect:/loginMove";
+		}
+		//// 가입 실패시 오류메시지와 함께 다시 가입페이지로
+		rttr.addFlashAttribute("alert", result);
+		return "redirect:/signUp";
+	}
+	
 
-    // 게시글 입력페이지 이동
+	// 게시글 입력페이지 이동
 	@GetMapping("/postInsert")
 	public String postInsertRoute( 
 			@RequestParam(value="p_type", required = false) String p_type,//  게시물 종류
@@ -193,7 +191,7 @@ public class MainController {
 		return "post/postItem_list";
 	}
 	
-    //// 개인 피드
+	//// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=feed";// 비회원인 경우 로그인하러 가기
@@ -229,7 +227,7 @@ public class MainController {
 		return "post/postList";// 게시글 목록 페이지
 	}
 	
-    //// 내가 좋아한 게시글들 보기 페이지
+	//// 내가 좋아한 게시글들 보기 페이지
 	@GetMapping("/mylike")
 	public String mylike( Model model, HttpSession session ) {
 		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=mylike";// 비회원인 경우 로그인하러 가기
