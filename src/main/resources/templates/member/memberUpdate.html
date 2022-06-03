@@ -25,7 +25,7 @@
 		<p>빈칸으로 제출 시 해당 항목은 변경되지 않습니다.</p>
 	</div>
 	
-	<form class="mainForm" action="memberUpdate" method="POST" id="signUp" enctype="multipart/form-data" onsubmit="memberUpdateSubmit()">
+	<form class="mainForm" action="memberUpdate" method="POST" id="signUp" enctype="multipart/form-data" onsubmit="memberUpdateSubmit()" onReset="formInitialize()">
 		<div class="profilePicInput">
 			<label for="m_profilePic" id="profilePicLabel" class="current">
 				<img id="profilePicDefault" class="profilePic" src="/img/defaultProfilePic.png" alt="기본 프로필사진" height=300>

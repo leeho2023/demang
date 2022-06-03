@@ -94,6 +94,13 @@ function propicMode_preview(){// 새프사 모드
 	$('#profilePicLabel').addClass('preview');
 }
 
+
+function formInitialize(){// 폼 초기화 시
+	//// 경고메시지도 초기화
+	$(".nickname.regex").text("");
+	$(".password.regex").text("");
+}
+
 function memberUpdateSubmit(){// 제출시
 	//// 제출값 유효성 검사 탈락시 제출 안 함
 	if( $(".name.regex").text()      != '' ){ alert('이름을 다시 확인하십시오.'); return false;}
