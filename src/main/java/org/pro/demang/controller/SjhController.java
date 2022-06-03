@@ -35,13 +35,14 @@ public class SjhController {
 			String[] mer_name, int[] mer_price, int[] mer_amount, // MerDTO를 배열로 못 받아서 그만….
 			@RequestParam(value="p_image", required = false)MultipartFile[] files, HttpSession session 
 			) {
-		
+				
 		//// 게시글 등록
 		pdto.setP_writer( loginId(session) );// 글쓴이 = 현재 로그인한 회원
 		postService.postInsert( pdto ); // DB에 게시글 넣기
 		int p_id = pdto.getP_id(); // 생성 된 게시글의 이미지, 판매정보 등 등록시 참조하기 위해 p_id값을 가져옴
 		
 		//// 이미지 등록
+		if(files != null) {
 		for(int i = 0; i < Math.min( files.length, 8); i++) {// 이미지 개수만큼 반복 (최대 여덟 개)
 			try {
 				PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
@@ -51,7 +52,7 @@ public class SjhController {
 				e.printStackTrace();
 			}
 		}
-		
+	}
 		
 		//// 판매글일 경우; 상품 정보 등록
 		if( pdto.getP_type().equals("S")) {
