@@ -70,7 +70,7 @@
         </if> -->
     </select>
     
-    <select id="findPost" resultMap="OrderDTO">
+    <select id="findPost" resultMap="postDTO">
         select * 
 		from postTBL p
 		join memberTBL m

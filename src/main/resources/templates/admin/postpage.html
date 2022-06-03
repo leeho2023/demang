@@ -129,7 +129,7 @@
                             <li class="infoItem"><img th:src="${dto.memberDTO.profileImage}" alt="profileImage" width=60></li>
                             <li class="infoItem">[[${dto.memberDTO.m_nickname}]] #[[${dto.memberDTO.m_code}]]</li>
                             <li class="infoItem">[[${dto.memberDTO.m_email}]]</li>
-                            <li class="infoItem">[[${dto.p_content}]]</li>
+                            <li class="infoItem"><a class="uContent" th:onclick="'location.href=\'/postView?p_id='+${dto.p_id}+'\''">[[${dto.p_content}]]</a></li>
                             <li class="infoItem">[[${#dates.format(dto.p_regDate, 'yyyy년 MM월 dd일 HH:mm:ss')}]]</li>
                         </ul>
                     </div>
