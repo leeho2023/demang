@@ -58,6 +58,7 @@ em {
 	background-color: black;
 	box-shadow: 0 4px #666;
 	transform: translateY(-2px);
+	cursor: pointer;
 }
 .tinyButton:active {
   transform: translateY(1px);
@@ -73,6 +74,7 @@ em {
 	border-radius: 20px;
 	font-weight: bold;
 	font-size: 0.9em;
+	cursor: pointer;
 }
 
 /* 큰 버튼 */
@@ -90,6 +92,7 @@ em {
 	width: 235px;
 	height: 60px;
 	line-height: 42px;
+	cursor: pointer;
 }
 .largeButton:hover {
 	background-color: var(--light2);

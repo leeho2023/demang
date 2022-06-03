@@ -15,18 +15,23 @@ main {
 	margin: 30px 0;
 }
 
+/* 프사, 닉네임, 코드 등 */
 .face {
+	width: 100%;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: start;
+	justify-content: center;
 	align-items: center;
+	word-break: break-all;
 }
-.profilePicBox {
+.face .profilePicBox {
 	margin-right: 5%;
 }
 .face .profilePic {
 	height: 200px;
 	width: 200px;
+}
+.face h1 {
 }
 .face h1 span ,
 .face .buttons a {
