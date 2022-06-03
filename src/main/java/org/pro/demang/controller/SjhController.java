@@ -56,7 +56,7 @@ public class SjhController {
 		
 		//// 판매글일 경우; 상품 정보 등록
 		if( pdto.getP_type().equals("S")) {
-			for( int i=0; i < mer_name.length; i++ ) {// 상품 개수 만큼
+			for( int i=0; i < Math.min(mer_name.length, 5); i++ ) {// 상품 개수 만큼 (최대 다섯 개)(PostInsert.js에서도 같은 수만큼 제한)
 				mapper.merchandiseInsert( // 디비에 상품 등록
 						new MerchandiseDTO( p_id, mer_name[i], mer_price[i], mer_amount[i])// 인자로 상품 DTO 만들기
 						);

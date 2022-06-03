@@ -19,31 +19,31 @@
 		  </a>
 	</button>
 	<ul class="menuList">
-		<li onclick="location.href='/'">
+		<li class="pointerCursor" onclick="location.href='/'">
 			<i class="fa-solid fa-house fa-xl"></i>
 			<span class="menuName">Home</span>
 		</li>
-		<li onclick="location.href='/postInsert'">
+		<li class="pointerCursor" onclick="location.href='/postInsert'">
 			<i class="fa-regular fa-square-plus fa-xl"></i>
 			<span class="menuName">글쓰기</span>
 		</li>
-		<li th:if="${session.login}" onclick="location.href='/vip'">
+		<li class="pointerCursor" th:if="${session.login}" onclick="location.href='/vip'">
 			<i class="fa-solid fa-user fa-xl"></i>
 			<span class="menuName">마이 페이지</span>
 		</li>
-		<li th:unless="${session.login}" onclick="location.href='/loginMove'">
+		<li class="pointerCursor" th:unless="${session.login}" onclick="location.href='/loginMove'">
 			<i class="fa-solid fa-arrow-left-long"></i>
 			<span class="menuName">로그인</span>
 		</li>
-		<li th:if="${session.login}" onclick="location.href='/logout'">
+		<li class="pointerCursor" th:if="${session.login}" onclick="location.href='/logout'">
 			<i class="fa-solid fa-door-open fa-xl"></i>
 			<span class="menuName">로그아웃</span>
 		</li>
-		<li th:if="${session.login}" onclick="location.href='/serviceCenter'">
+		<li class="pointerCursor" th:if="${session.login}" onclick="location.href='/serviceCenter'">
 			<i class="fa-solid fa-headset fa-xl"></i>
 			<span class="menuName">고객센터</span>
 		</li>
-		<li th:if="${session.email == 'admin'}" onclick="location.href='/admin'">
+		<li class="pointerCursor" th:if="${session.email == 'admin'}" onclick="location.href='/admin'">
 			<i class="fa-solid fa-user-gear"></i>
 			<span class="menuName">관리자 모드</span>
 		</li>
