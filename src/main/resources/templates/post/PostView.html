@@ -95,7 +95,7 @@ $(document).ready(function(){
 	<div class="comments">
 		<form th:if="${session.login}" class="commentForm simpleinputForm" onsubmit="newComment(this); return false;">
 			<input type="hidden" class="c_postNo" name="c_postNo" th:value="${post.p_id}">
-			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="댓글을 입력해주세요">
+			<input type="text" class="c_content" name="c_content" autocomplete="off" placeholder="댓글을 입력해주세요 (최대 500자)" maxlength='500'>
 			<button type="submit">전송</button>
 		</form>
 		

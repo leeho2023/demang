@@ -30,7 +30,7 @@ form 메시지 보내기 폼
 	
 	<form class="chatForm simpleinputForm">
 		<input type="hidden" class="chat_to" th:value="${listener.m_id}">
-		<input type="text" class="chat_content" name="h_content" autocomplete="off" placeholder="뭐라 칠려고 했더라?">
+		<input type="text" class="chat_content" name="h_content" autocomplete="off" placeholder="내가 할 말은 …" maxlength='1000'>
 		<button type="submit" class="chat_send">&gt;</button>
 	</form>
 </div>
