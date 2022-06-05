@@ -1,7 +1,6 @@
 $(function(){
 	// 햄버거 메뉴바
 	const menuTrigger = document.querySelector('.menu-trigger');
-
 	menuTrigger.addEventListener('click', (event) => {
 		event.currentTarget.classList.toggle('active-1');
 	});
@@ -55,31 +54,4 @@ $(function(){
 			console.log('팔로우 목록 불러오기 실패');
 		}
 	});
-	
-	//// 로그인 정보 표시 (상단바에) 
-	//// ??? 미구현
 });
-
-
-
-
-// 검색
-function search() {
-
-    var searchVal = $('#search').val();
-    let first_char = searchVal.charAt(0);
-    let reSearchVal = searchVal.substring(1, searchVal.length);
-
-    if(first_char === '@'){
-        location.href = "userSearch?reSearchVal="+reSearchVal;
-        return;
-    }
-
-    if(first_char === '#'){
-        location.href = "tagSearch?reSearchVal="+reSearchVal;
-        return;
-    }
-
-	location.href = "postSearch?searchVal="+searchVal;
-    return;
-}

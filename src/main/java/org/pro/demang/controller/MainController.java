@@ -138,18 +138,6 @@ public class MainController {
 		return "post/PostView";
 	}
 	
-	//세션으로 사용자 정보를 호출
-	@PostMapping("/memberCheck")
-	@ResponseBody
-	public String memberCheck(@RequestParam("m_id") Integer m_id, Model model) {
-		
-		MemberDTO dto = memberService.getMember_no(m_id);
-		
-		model.addAttribute("member", dto);
-		
-		return "";
-	}
-	
 	//// 게시글 한 개 가져오기(ajax용, stack식으로 표시할 용도)
 	@PostMapping("/getPost_stack")
 	public String postItem_forStack( @RequestParam("no") int no, Model model ) {
