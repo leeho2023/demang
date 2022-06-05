@@ -21,7 +21,7 @@
 	
 	<div th:unless="${image}" class="content contentText"><!--/* 이미지 없으면 본문 표시 */-->
 		<figure>
-			<span th:utext="${post.p_content}"></span>
+			<span class="p_content" th:text="${post.p_content}"></span>
 		</figure>
 	</div>
 </div>

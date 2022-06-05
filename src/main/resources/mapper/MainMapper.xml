@@ -163,6 +163,10 @@
 	<update id="postUpdate">
 		UPDATE postTBL SET p_content= #{p_content}, p_regDate=curtime() WHERE p_id = #{p_id}
 	</update>
+	<!-- 게시글의 글쓴이 -->
+	<select id="getP_writer" resultType="Integer">
+		SELECT p_writer FROM postTBL WHERE p_id = #{p_id}
+	</select>
 	
 	
 	
@@ -216,6 +220,10 @@
 	<select id="getHashTags" resultType="String">
 		SELECT t_tag FROM tagOnPostTBL WHERE t_postNo = #{t_postNo}
 	</select>
+	<!-- 게시글의 해시태그들 삭제 -->
+	<delete id="deleteHashtags">
+		DELETE FROM tagOnPostTBL WHERE t_postNo = #{p_id};
+	</delete>
 
 	<!-- 검색 결과 회원 코드 중복 확인 -->
 	<select id="codeCheck" resultType="Integer">

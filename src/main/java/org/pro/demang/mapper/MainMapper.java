@@ -49,9 +49,10 @@ public interface MainMapper {
 	// 게시글 관련
     //// 순수 게시물
 	void postInsert( PostDTO dto ); // 게시글 작성
-	void postDelete(String p_id); // 게시글 삭제
-	void postUpdate(String p_id, String p_content); // 게시글 수정 (본문만)
+	void postDelete( int p_id); // 게시글 삭제
+	void postUpdate( int p_id, String p_content ); // 게시글 수정 (본문만)
 	void postInsert_noOrigin( PostDTO dto );// 게시글 작성 (원글 없음)
+	int getP_writer( int p_id );// 게시글의 작성자
 	List<Integer> getPostList_writer( int no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_followee( int no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
 	List<Integer> getPostList_like(int no);// 회원 번호로; 해당 회원이 좋아한 글 목록
@@ -63,6 +64,7 @@ public interface MainMapper {
 	void hashtagInsert( String hashtag );// 해시태그 테이블에 해시태그 등록
 	void hashtagOnTableInsert( int p_id, String hashtag );// 게시글의 해시태그 정보 등록
 	List<String> getHashTags( int p_id );// 게시글의 해시태그들 가져오기
+	void deleteHashtags( int p_id );// 게시글의 해시태그들 삭제
 	//// 좋아요
 	void addLike(int l_id, int l_postNo); // 좋아요 누르기
 	void removeLike(int l_id, int l_postNo);// 좋아요 취소

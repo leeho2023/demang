@@ -10,39 +10,36 @@
 <!-- 이 페이지 전용 --><script src="/js/PostUpdate.js"></script>
 
 <!-- css -->
-<!-- 이 페이지 전용 --><link rel="stylesheet" href="/css/PostInsert.css">
 <!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
 <!-- 채팅 --><link rel="stylesheet" href="css/chat.css">
-<!-- 게시글 목록 --><link rel="stylesheet" href="css/postList_stack.css">
+<!-- 이 페이지 --><link rel="stylesheet" href="/css/PostInsert.css">
 </head>
 <body>
-	<header th:include="other/homeNav"></header>
+
+<header th:replace="other/homeNav">메인메뉴</header>
+
 <main><form action="/postUpdate" id="postForm" method="Post" enctype="multipart/form-data">
 	
 	<div th:if="${session.login} == ${post.p_writer}">
-		<!--/* 게시글 종류 */-->
+		<!--/* 게시글 종류 입력 되신 수정이라고 보여주기만. 스타일 일치를 위해 요소는 그대로 쓴다. */-->
 		<div id="p_type">
 			<input type="hidden" name="p_id" th:value="${post.p_id}">	
-			<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰/답글 대상 게시글 번호">
-			<label for="p_type_n" th:if="${post.p_type} == 'N'"><input type="radio" id="p_type_n" name="p_type" value="N" checked="checked">일반</label>
-			<label for="p_type_s" th:if="${post.p_type} == 'S'"><input type="radio" id="p_type_s" name="p_type" value="S" checked="checked">판매</label>
-			<label for="p_type_r" th:if="${post.p_type} == 'R'"><input type="radio" id="p_type_r" name="p_type" value="R" checked="checked">리뷰·답글</label>
+			<input type="radio" checked>
+			<label>게시글 수정</label>
 		</div>
 		<button type="submit" class="tinyButton">수정하기</button>
 	</div>
 		
 	<div id="postBody"><!--/* 게시글 내용 */-->
-		<!--/* 이미지 첨부 */-->
+		<!--/* 이미지 수정 불가. 첨부된 이미지를 보여주기만 */-->
 		<ul id="selectedImg" class="selectedImg">
-		
-			<li th:each="image : ${imageList}"> <!-- 이미지 있을때만 -->
+			<li th:each="image : ${imageList}"><!-- 이미지 있을때만 -->
 				<img class="innerImg" th:src="${image.image}" />
 			</li>
-			
 		</ul>
 		
 		<!--/* 본문 */-->
-		<textarea id="p_content" name="p_content" class="textInput" placeholder="본문 내용을 입력하세요">[[${post.p_content}]]</textarea>
+		<textarea id="p_content" name="p_content" class="textInput" placeholder="본문 내용을 입력하세요" th:text="${post.p_content}"></textarea>
 	</div>
 	
 </form></main>

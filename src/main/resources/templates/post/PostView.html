@@ -10,6 +10,7 @@
 <!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script>
 <!-- 게시글 관련 --><script src="js/postView.js"></script>
+<!-- 게시글 div 초기설정 --><script th:inline="javascript">$(function(){postDivInitialize( $('.post')[0], [[${post.p_id}]] )});</script>
 <!-- 채팅 --><script src="js/chatting.js"></script>
 <!-- 이미지 슬라이더 --><script src="//cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <!-- 슬라이더 작동 Script -->
@@ -71,7 +72,7 @@ $(document).ready(function(){
 		</div>
 		
 		<div class="content"><!--/* 본문 */-->
-			<span th:utext="${post.p_content}"></span>
+			<span class="p_content" th:text="${post.p_content}"></span>
 		</div>
 		
 	</article>
@@ -86,8 +87,9 @@ $(document).ready(function(){
 			</button>
 		</div>
 		<span class="likeCount" th:text="${post.p_likeCount}">좋아요 수</span>
-		<button class="update" th:onclick="'location.href=\'/postUpdate?p_id='+${post.p_id}+'\''" th:if="${session.login} == ${post.p_writer}">수정</button><!--/* 게시글 작성자만 */-->
-		<button class="delete" th:p_id="${post.p_id}" th:onclick="deletePost(this.getAttribute('p_id'))" th:if="${session.login} == ${post.p_writer}">삭제</button><!--/* 게시글 작성자만 */-->
+		<a class="button" th:if="${post.p_type}=='S'">리뷰 보기<span th:text="'('+${reviewNum}+')'"></span></a>
+		<a class="update button" th:href="'/postUpdate?p_id='+${post.p_id}" th:if="${session.login} == ${post.p_writer}">수정</a><!--/* 게시글 작성자만 */-->
+		<button class="delete button" th:p_id="${post.p_id}" th:onclick="deletePost(this.getAttribute('p_id'))" th:if="${session.login} == ${post.p_writer}">삭제</button><!--/* 게시글 작성자만 */-->
 	</div>
 	
 	<div class="comments">

@@ -17,7 +17,7 @@
 	</div>
 	
 	<div class="content"><!--/* 이미지 없으면 본문 표시 */-->
-		<span th:utext="${post.p_content}"></span>
+		<span class="p_content" th:text="${post.p_content}"></span>
 	</div>
 	
 	<button class="more tinyButton" th:onclick="'location.href=\'/postView?p_id='+${post.p_id}+'\''">자세히</button>

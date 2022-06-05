@@ -1,12 +1,5 @@
 /*
-
-게시글 div.post
-├게시글 내용 article.postView
-├메뉴바div.menubar
-└댓글영역div.comments
-　├댓글 작성 form.commentForm
-　└댓글 목록 ul.commentList
-
+postView.html, postItem_*.html에서 공통 사용
 
 좋아요
 메뉴바 하위에 div 하위에 각각 좋아요 버튼, 취소 버튼
@@ -15,6 +8,7 @@
 좋아요 눌린 상태이면 취소 버튼만 표시된다: CSS
 
 */
+
 //// 게시글(div.post) 초기설정
 function postDivInitialize( postDiv, p_id ){
 	//// 좋아요 여부 확인
@@ -36,6 +30,25 @@ function postDivInitialize( postDiv, p_id ){
 	$( postDiv ).find('.bxSlider').bxSlider({
 		captions: true
 	});
+	
+	//// 해시태그 부분을 a 태그로 감싸기
+	hashtagLink( postDiv );
+}
+
+//// 해시태그 부분에 링크 적용
+function hashtagLink( postDiv ){
+	var p_content = $(postDiv).find('.p_content').html();
+	//// 서버에서 해시태그 부분을 표시한 것을 a 태그로 치환
+	p_content = p_content
+		.replaceAll('&lt;#&gt;', '<a class="hashtag">')
+		.replaceAll('&lt;/#&gt;', '</a>');
+	$(postDiv).find('.p_content').html(p_content);
+	//// 그 a 태그들에 href 속성 넣기
+	var hashtags = $(postDiv).find('.hashtag');
+	for( var i=0; i < hashtags.length; i++ ){
+		tagName = $(hashtags[i]).text().substr(1);// 맨앞의 #를 잘라냄
+		$(hashtags[i]).attr('href','/search?type=hashtag&val='+tagName);// href 속성 붙이기
+	}
 }
 
 //// 댓글 삭제

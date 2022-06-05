@@ -107,7 +107,7 @@ public class MainController {
 	//게시글 상세보기 페이지 이동
 	@GetMapping("/postView")
 	public String postViewRoute( @RequestParam("p_id") int p_id, HttpSession session, Model model) {
-		PostDTO dto = postService.getPost(p_id);
+		PostDTO dto = postService.getPost_view(p_id);
 		// 게시글 정보 받아서 넣기
 		model.addAttribute( "post", dto );
 		// 게시글의 이미지 정보
@@ -123,11 +123,15 @@ public class MainController {
 				"commentList",
 				mapper.getCommentList(p_id)
 				);
-		// 판매글일 경우 상품 목록
+		// 판매글일 경우 상품 목록 & 리뷰 개수
 		if( dto.getP_type().equals("S") ) {
 			model.addAttribute(
 					"merList",
 					orderService.getMerchandiseList(p_id)
+					);
+			model.addAttribute(
+					"reviewNum",
+					11// ??? 현재 그냥 11개로 고정
 					);
 		}
 		
@@ -150,7 +154,7 @@ public class MainController {
 	@PostMapping("/getPost_stack")
 	public String postItem_forStack( @RequestParam("no") int no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
-		PostDTO dto = postService.getPost( no );
+		PostDTO dto = postService.getPost_view( no );
 		model.addAttribute("post", dto);
 		//// 게시글의 이미지 정보
 		model.addAttribute(
@@ -168,7 +172,7 @@ public class MainController {
 	@PostMapping("/getPost_album")
 	public String postItem_forAlbum( @RequestParam("no") int no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
-		PostDTO dto = postService.getPost( no );
+		PostDTO dto = postService.getPost_view( no );
 		model.addAttribute("post", dto);
 		//// 게시글의 이미지 한 개만
 		model.addAttribute(
@@ -181,7 +185,7 @@ public class MainController {
 	@PostMapping("/getPost_list")
 	public String postItem_forList( @RequestParam("no") int no, Model model ) {
 		//// 번호로 게시글 찾아서 DTO 받아오기
-		PostDTO dto = postService.getPost( no );
+		PostDTO dto = postService.getPost_view( no );
 		model.addAttribute("post", dto);
 		//// 게시글의 이미지 한 개만
 		model.addAttribute(

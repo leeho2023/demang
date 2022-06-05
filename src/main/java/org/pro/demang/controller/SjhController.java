@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class SjhController {
@@ -43,16 +44,16 @@ public class SjhController {
 		
 		//// 이미지 등록
 		if(files != null) {
-		for(int i = 0; i < Math.min( files.length, 8); i++) {// 이미지 개수만큼 반복 (최대 여덟 개)
-			try {
-				PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
-				imgDTO.setI_image(files[i].getBytes());// 이미지를 byte변환하여 이미지DTO 안에 넣기
-				postService.postInsertImg(p_id, imgDTO.getI_image()); // DB에 이미지 삽입
-			} catch (Exception e) {
-				e.printStackTrace();
+			for(int i = 0; i < Math.min( files.length, 8); i++) {// 이미지 개수만큼 반복 (최대 여덟 개)
+				try {
+					PostImgDTO imgDTO = new PostImgDTO(); // 이미지가 들어갈 DTO를 생성
+					imgDTO.setI_image(files[i].getBytes());// 이미지를 byte변환하여 이미지DTO 안에 넣기
+					postService.postInsertImg(p_id, imgDTO.getI_image()); // DB에 이미지 삽입
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-	}
 		
 		//// 판매글일 경우; 상품 정보 등록
 		if( pdto.getP_type().equals("S")) {
@@ -69,7 +70,15 @@ public class SjhController {
 	//// 게시글 삭제하기
 	@PostMapping("deletePost")
 	@ResponseBody
-	public String deletePost(@RequestParam("p_id")String p_id) {
+	public String deletePost(
+			@RequestParam("p_id")Integer p_id,
+			HttpSession session, RedirectAttributes rttr ) {
+		
+		if( loginId(session) != mapper.getP_writer(p_id) ){// 삭제 시도하는 회원이 글쓴이와 불일치하는 경우 거부 
+			rttr.addFlashAttribute( "alert", "접근 시도가 거부되었습니다." );
+			return "redirect:/postView?p_id="+p_id;
+		}
+		
 		postService.postDelete(p_id);
 		return "";
 	}
@@ -77,25 +86,16 @@ public class SjhController {
 	//// 게시글 수정하기
 	@GetMapping("postUpdate")
 	public String postUpdateRoute( 
-			@RequestParam(value="p_type", required = false) String p_type,//  게시물 종류
-			@RequestParam(value="to", required = false) Integer to,// 리뷰·답글 대상
 			@RequestParam("p_id")int p_id,
-			HttpSession session, Model model ) {
+			HttpSession session, Model model, RedirectAttributes rttr ) {
 		
-		if( session.getAttribute("login") == null ) return "redirect:/loginMove?red=postInsert";// 비회원인 경우 로그인하러 가기
-		
-		if( p_type == null ) p_type = "N";// 게시물 종류 기본값 N(일반인데 html 파싱 시에는 N, S를 포괄하는 거로 취급)
-		if( to == null ) to = 0;// 리뷰답글 대상 기본값 0 (DB에 넣을 때 null로)
-
-		//// 리뷰글인데 리뷰 대상이 지정되지 않음: 오류
-		if( p_type.equals("R") && to == 0 ) {
-			// ??? 처리방법 아직 없음
+		if( loginId(session) == 0 ) return "redirect:/loginMove?red=postInsert";// 비회원인 경우 로그인하러 가기
+		if( loginId(session) != mapper.getP_writer(p_id) ){// 수정 시도하는 회원이 글쓴이와 불일치하는 경우 거부 
+			rttr.addFlashAttribute( "alert", "접근 시도가 거부되었습니다." );
+			return "redirect:/postView?p_id="+p_id;
 		}
 		
-		PostDTO post = postService.getPost(p_id);
-		
-		model.addAttribute("p_type", p_type);
-		model.addAttribute("to", to);
+		PostDTO post = postService.getPost_raw(p_id);
 		model.addAttribute("post", post);
 		
 		List<PostImgDTO> imageList = mapper.getImageList(p_id);
@@ -110,11 +110,19 @@ public class SjhController {
 	}
 	
 	@PostMapping("postUpdate")
-	public String postUpdate(@RequestParam("p_id")String p_id, @RequestParam("p_content")String p_content) {
-		
-		postService.postUpdate(p_id, p_content);
-		
-		return "redirect:/postView?p_id="+p_id;
+	public String postUpdate(
+			@RequestParam("p_id") Integer p_id, 
+			@RequestParam("p_content")String p_content, 
+			HttpSession session, RedirectAttributes rttr ) {
+		if( loginId(session) != mapper.getP_writer(p_id) ){// 수정 시도하는 회원이 글쓴이와 불일치하는 경우 거부 
+			rttr.addFlashAttribute( "alert", "접근 시도가 거부되었습니다." );
+			return "redirect:/postView?p_id="+p_id;
+		}
+		PostDTO dto = new PostDTO();
+		dto.setP_id(p_id);
+		dto.setP_content(p_content);
+		postService.postUpdate( dto );// 업데이트 후
+		return "redirect:/postView?p_id="+p_id;// 해당 게시글 보기 페이지로 리다이렉트
 	}
 	
 	//// 게시글에 좋아요 (좋아요 버튼 누르면 ajax로)
