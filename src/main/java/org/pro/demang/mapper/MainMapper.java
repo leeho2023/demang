@@ -44,6 +44,8 @@ public interface MainMapper {
 	int followingCount(int no);// 내가 팔로우한 사람 수
 	int followerCount(int no);// 나를 팔로우한 사람 수
 	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
+	//// 탈퇴
+	void memberWithdraw(int loginId);
 	
 	
 	// 게시글 관련

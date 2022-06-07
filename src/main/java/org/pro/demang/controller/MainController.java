@@ -355,6 +355,20 @@ public class MainController {
 		return "redirect:/search?type=post&val="+searchVal;
 	}
 	
+	//// 회원 탈퇴
+	@PostMapping("/withdraw")
+	public String withdraw( @RequestParam("password")String password, RedirectAttributes rttr, HttpSession session ) {
+		//// 비밀번호 일치 확인. 불일치시 거부, 일치시 탈퇴
+		if( memberService.memberPwmatch( loginId(session), password ) ) {
+			memberService.memberWithdraw( loginId(session) );// 탈퇴
+			return "redirect:/logout";
+		}else {
+			rttr.addFlashAttribute("alert", "비밀번호가 틀렸습니다.");
+			return "redirect:/memberRead";
+		}
+	}
+	
+	
 	//// postList return 공통사항
 	private void setPostListAttr( Model model, String postType, List<Integer> postList, String additional ) {
 		model.addAttribute("postList", postList);

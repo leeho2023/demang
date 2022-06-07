@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 		if( !pCheck )
 			errmsg += "비밀번호가 형식에 맞지 않습니다.\n";
 		
-		if( !errmsg.equals("") ) {// 오류메시지 있음: 유효성 검사 탈락
+		if( !errmsg.equals("") ) {// 오류메시지 있음 = 유효성 검사 탈락
 			return errmsg;
 		}
 		
@@ -126,24 +126,6 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 	}
 	
-	
-	
-	// 문의 답변 하기
-	@Override
-	public String answerInsert(String m_email, AnswerDTO dto) throws MessagingException {
-		
-		mapper.answerInsert(dto);
-		
-		MimeMessage message = javaMailSender.createMimeMessage();
-	    message.setSubject("고객님 문의하신 내용은 확인 했습니다.");
-	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
-	    message.setText(dto.getA_content());
-	    message.setSentDate(new Date());
-	    javaMailSender.send(message);
-		
-		
-		return null;
-	}
 
 	//// 회원번호로 회원 찾기
 	@Override
@@ -151,6 +133,8 @@ public class MemberServiceImpl implements MemberService {
 		MemberDTO dto = mapper.getMember_no(no);
 		return dto;
 	}
+	
+	
 	
 	//// 로그인
 	//// 이메일, 비밀번호만 들어있는 dto를 받아서 그에 해당하는 회원이 있는 경우 해당 회원의 dto반환, 아니면 null.
@@ -162,7 +146,7 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 			}
 		// 비밀번호가 일치하는 경우
-		if(pwEncoder.matches(dto.getM_password(), member.getM_password())) {
+		if( pwmatch(dto.getM_password(), member.getM_password()) ) {
 			return member;
 		}else {// 일치하지 않으면 null
 			return null;
@@ -198,6 +182,15 @@ public class MemberServiceImpl implements MemberService {
 		mapper.memberUpdate_introduce(loginId, m_introduce.trim());// 입력값 trim
 	}
 	
+
+	
+	
+	//// 탈퇴
+	@Override
+	public void memberWithdraw(int loginId) {
+		mapper.memberWithdraw(loginId);
+	}
+	
 	
 	
 	// 유저 검색
@@ -220,6 +213,25 @@ public class MemberServiceImpl implements MemberService {
 		mapper.contactUsImgInsert(c_id, i_image);
 	}
 
+	// 문의 답변 하기
+	@Override
+	public String answerInsert(String m_email, AnswerDTO dto) throws MessagingException {
+		
+		mapper.answerInsert(dto);
+		
+		MimeMessage message = javaMailSender.createMimeMessage();
+	    message.setSubject("고객님 문의하신 내용은 확인 했습니다.");
+	    message.setRecipient(Message.RecipientType.TO, new InternetAddress(m_email));
+	    message.setText(dto.getA_content());
+	    message.setSentDate(new Date());
+	    javaMailSender.send(message);
+		
+		
+		return null;
+	}
+	
+	
+	
 
 	// 회원 코드 중복 체크
 	public boolean codeCheck(String code) {
@@ -361,4 +373,16 @@ public class MemberServiceImpl implements MemberService {
 		} 
 		return false;
 	}
+	
+	//// 암호화된 비밀번호 일치 검사
+	@Override
+	public boolean pwmatch( String fromInput, String fromDB  ) {
+		return pwEncoder.matches(fromInput, fromDB);
+	}
+	//// 회원번호로 회원 찾고, 암호화된 비밀번호 일치 검사
+	@Override
+	public boolean memberPwmatch( int m_id, String inputPW ) {
+		return pwmatch( inputPW, mapper.getMember_no(m_id).getM_password() );
+	}
+
 }

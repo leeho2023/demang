@@ -13,6 +13,9 @@ public interface MemberService {
 	List<MemberDTO> fList( int follower );
 	String memberInsert( MemberDTO dto, String e_code );
 	MemberDTO getMember_no( int no );
+	boolean pwmatch( String fromInput, String fromDB  );
+	boolean memberPwmatch(int loginId, String password);
+	void memberWithdraw(int loginId);// 탈퇴
 	
 	void sendMailCode(String m_email) throws MessagingException;
 	boolean emailDuplicateCheck(String m_email);// 이메일 중복 체크 (중복 없으면 true 중복이면 false)

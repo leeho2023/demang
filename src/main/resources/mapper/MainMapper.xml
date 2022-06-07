@@ -288,11 +288,16 @@
 	<select id="followCheck" resultType="Integer">
 	SELECT COUNT(*)  FROM followTBL WHERE follower=#{m1} AND followee=#{m2}</select>
 	
+	<!-- DB에서 회원 삭제 -->
+	<delete id="memberWithdraw">
+	DELETE FROM memberTBL WHERE m_id = #{m_id}
+	</delete>
+	
 	<!-- 좋아요 누르기 -->
 	<insert id="addLike">INSERT INTO likeTBL (l_id, l_postNo) VALUES(#{l_id}, #{l_postNo})</insert>
 	
 	<!-- 좋아요 취소 -->
-	<delete id="removeLike">DELETE FROM DemangDB.likeTBL WHERE l_id = #{l_id} AND l_postNo = #{l_postNo}</delete>
+	<delete id="removeLike">DELETE FROM likeTBL WHERE l_id = #{l_id} AND l_postNo = #{l_postNo}</delete>
 	
 	<!-- 좋아요 누른 게시물인지 확인하기 -->
 	<select id="likeCheck" resultType="Integer">SELECT Count(*) FROM likeTBL WHERE l_id = #{l_id} AND l_postNo = #{l_postNo}</select>
