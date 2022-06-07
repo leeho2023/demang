@@ -315,6 +315,11 @@
 		ORDER BY p.p_id DESC;
 	</select>
 	
+	<!-- 가장 최근에 쓰인 게시물 몇 개 -->
+	<select id="getSomePostsInsteadOfFeed" resultType="Integer">
+		SELECT p_id FROM postTBL ORDER BY p_id DESC LIMIT 5;
+	</select>
+	
 	<!-- 해당 번호의 회원이 좋아한 게시글들(게시글번호만) -->
 	<select id="getPostList_like" resultType="Integer">
 		SELECT l_postNo From likeTBL WHERE l_id = #{l_id}

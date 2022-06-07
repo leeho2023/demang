@@ -34,11 +34,16 @@ public class KysController {
 	
 	//// 주문 페이지
 	@GetMapping("/order")
-	String orderPage( @RequestParam("mer_id")int mer_id, @RequestParam("from")int p_id, Model model ) {
-		//// ??? 로그인 안 돼있으면
+	String orderPage( @RequestParam("mer_id")int mer_id, @RequestParam("from")int p_id, Model model, HttpSession session ) {
+		if( loginId(session) == 0 ) return "redirect:/loginMove?red=postView?p_id="+p_id;// 비회원인 경우 로그인하러 가기
+		
 		model.addAttribute(// 주문할 상품 정보
 				"mer",
 				orderService.getMerchandise(mer_id)
+				);
+		model.addAttribute(// 로그인한 회원 정보 (입력칸 기본값용)
+				"loginmember", 
+				memberService.getMember_no( loginId(session) )
 				);
 		model.addAttribute( "backto", p_id );// 결제 완료 후 돌아갈 게시글 상세보기 페이지의 게시글 번호
 		return "order/order";
@@ -47,7 +52,8 @@ public class KysController {
 	//// 결제 페이지 (주문페이지에서 들어와서 새 주문 만들기)
 	@PostMapping("/payment")
 	String paymentPage_newOrder( OrderDTO dto, @RequestParam("backto")int p_id, Model model, RedirectAttributes rttr, HttpSession session ) {
-		//// ??? 로그인 안 돼있으면
+		if( loginId(session) == 0 ) return "redirect:/loginMove?red=postView?p_id="+p_id;// 비회원인 경우 로그인하러 가기
+		
 		//// 주문 정보 저장
 		if( dto.getOrd_amount() > mapper.getMerAmount(dto.getOrd_target()) ) { // 주문할 수량이 남은 수량보다 크면
 			rttr.addFlashAttribute("alert", "주문 요청하신 수량이 현재 상품의 남은 수량보다 많습니다.");// 수량 초과 메시지와 함께

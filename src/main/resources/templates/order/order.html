@@ -42,23 +42,23 @@ form > * {
 		</div>
 		<div>
 			<span>구매자 이름</span>
-			<input type="text"   id="buyer_name"     name="ord_buyer_name"     placeholder="구매자 이름" value="구매자 이름 예시">
+			<input type="text"   id="buyer_name"     name="ord_buyer_name"     placeholder="구매자 이름" th:value="${loginmember.m_nickname}">
 		</div>
 		<div>
 			<span>구매자 이메일</span>
-			<input type="email"  id="buyer_email"    name="ord_buyer_email"    placeholder="구매자 이메일" value="test@test.com">
+			<input type="email"  id="buyer_email"    name="ord_buyer_email"    placeholder="구매자 이메일" th:value="${loginmember.m_email}">
 		</div>
 		<div>
 			<span>구매자 연락처</span>
-			<input type="tel"    id="buyer_tel"      name="ord_buyer_tel"      placeholder="전화번호" value="1234567890">
+			<input type="tel"    id="buyer_tel"      name="ord_buyer_tel"      placeholder="전화번호" value="">
 		</div>
 		<div>
 			<span>배송지 주소</span>
-			<input type="text"   id="buyer_address"  name="ord_buyer_address"  placeholder="주소" value="???주소 예시">
+			<input type="text"   id="buyer_address"  name="ord_buyer_address"  placeholder="주소" value="">
 		</div>
 		<div>
 			<span>배송지 우편번호</span>
-			<input type="text"   id="buyer_postcode" name="ord_buyer_postcode" placeholder="우편번호" value="12345">
+			<input type="text"   id="buyer_postcode" name="ord_buyer_postcode" placeholder="우편번호" value="">
 		</div>
 		<button class="tinyButton">결제하러 가기</button>
 	</form>

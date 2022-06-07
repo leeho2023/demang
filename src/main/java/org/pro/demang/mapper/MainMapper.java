@@ -56,6 +56,7 @@ public interface MainMapper {
 	List<Integer> getPostList_writer( int no );// 회원 번호로; 해당 번호의 회원의 게시글들(최신순)
 	List<Integer> getPostList_followee( int no );// 회원 번호로; 해당 회원이 팔로우한 회원이 작성한 글 목록 (최신순)
 	List<Integer> getPostList_like(int no);// 회원 번호로; 해당 회원이 좋아한 글 목록
+	List<Integer> getSomePostsInsteadOfFeed();// 가장 최근 게시물 몇 개 (피드에 보여줄 게시물 0개일 때 대신할 게시물 목록);
 	PostDTO getPost( int no ); // 게시글 번호로 게시글 찾기
 	//// 이미지
 	void postInsertImg(int p_id, @Param("i_image")byte[] bytes); // 게시글 이미지 등록하기

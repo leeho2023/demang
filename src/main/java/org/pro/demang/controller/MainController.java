@@ -205,10 +205,16 @@ public class MainController {
 				postService.getPostList_followee( loginId(session) )
 				);
 		model.addAttribute("postType", "stack");
+		
+		//// 보여줄 게시글 목록
+		List<Integer> postlist = postService.getPostList_followee( loginId(session) );
+		if( postlist.size() == 0 )// 피드에 보여줄 게시글 없으면 다른 게시글 목록으로 대체
+			postlist = mapper.getSomePostsInsteadOfFeed();
+		
 		setPostListAttr( // 현재 로그인한 회원의 팔로들의 글 목록을 stack 방식으로 보여주기
 				model, 
 				"stack", 
-				postService.getPostList_followee( loginId(session) ), 
+				postlist, 
 				null );
 		return "post/postList";// 게시글 목록 페이지
 	}
