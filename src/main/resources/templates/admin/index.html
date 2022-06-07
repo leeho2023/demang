@@ -102,7 +102,7 @@
 
                 <a href="/feed" class="nav__link nav__logout">
                     <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Log Out</span>
+                    <span class="nav__name">Go Home</span>
                 </a>
             </nav>
         </div>
@@ -110,35 +110,13 @@
         <!--========== CONTENTS ==========-->
         <main>
             <section id="home">
-                <p>
-                    home
-                </p>
+            <p></p>
                 <div>
                     전체 유저 수 = [[${userCount}]]
                 </div>
                 <div>
                     전체 게시글 수 = [[${postCount}]]
                 </div>
-                <div>
-                    팔로워가 가장 많은 4명의 유저
-                </div>
-                <div>
-                    좋아요가 가장 많은 2개의 게시물
-                    <div th:each="post : ${postTOP}">
-                        <p>게시글 번호 : [[${post.p_id}]]</p>
-                        <p>게시글 내용 : [[${post.p_content}]]</p>
-                        <p>좋아요 갯수 : [[${post.p_likeCount}]]</p>
-                        <p>글 쓴 유저 [[${post.memberDTO.m_email}]]</p>
-                        <p>유저 코드 : [[${post.memberDTO.m_code}]]</p>
-                    </div>
-                </div>
-                <div>
-                    확인 안한 가장 늦은 문의 사항 2개
-                    <div>
-                        
-                    </div>
-                </div>
-
                 
             </section>
         </main>
