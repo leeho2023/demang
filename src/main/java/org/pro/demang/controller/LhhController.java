@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.pagehelper.PageInfo;
 
@@ -80,8 +81,11 @@ public class LhhController {
 
 // 문의 사진과 같이 등록하기
 	@PostMapping("/contactUsInsert")
-	public String contactUsInsert(ContactUsDTO dto,
-	        @RequestParam("files") MultipartFile[] files) {
+	public String contactUsInsert(
+			ContactUsDTO dto,
+	        @RequestParam("files") MultipartFile[] files, 
+	        RedirectAttributes rttr
+	        ) {
 		try {
 			memberService.contactUsInsert( dto ); // 작동
 			int c_id = dto.getC_id(); // 생성 된 게시글의 이미지 등록시 참조하기 위해 p_id값을 가져옴
@@ -97,7 +101,8 @@ public class LhhController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/";
+		rttr.addFlashAttribute("alert", "문의가 등록되었습니다.");
+		return "redirect:/serviceCenter";
 	}
 
 // 관리자 user 페이징
