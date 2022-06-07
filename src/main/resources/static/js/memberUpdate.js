@@ -99,6 +99,8 @@ function formInitialize(){// 폼 초기화 시
 	//// 경고메시지도 초기화
 	$(".nickname.regex").text("");
 	$(".password.regex").text("");
+	//// 프로필사진도 초기화
+	propicMode_current();
 }
 
 function memberUpdateSubmit(){// 제출시
