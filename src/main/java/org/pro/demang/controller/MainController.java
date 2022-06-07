@@ -131,12 +131,24 @@ public class MainController {
 					);
 			model.addAttribute(
 					"reviewNum",
-					11// ??? 현재 그냥 11개로 고정
+					mapper.getReviewNum(p_id)
 					);
 		}
 		
 		return "post/PostView";
 	}
+	
+	//// 게시글 상세보기 페이지 이동
+	@GetMapping("/reviewList")
+	public String reviewList( @RequestParam("p_id") int p_id, HttpSession session, Model model) {
+		setPostListAttr(
+				model, 
+				"list", 
+				mapper.getReviewList(p_id), 
+				null );
+		return "post/postList";
+	}
+	
 	
 	//// 게시글 한 개 가져오기(ajax용, stack식으로 표시할 용도)
 	@PostMapping("/getPost_stack")
@@ -193,7 +205,7 @@ public class MainController {
 				postService.getPostList_followee( loginId(session) )
 				);
 		model.addAttribute("postType", "stack");
-		model = postList( // 현재 로그인한 회원의 팔로들의 글 목록을 stack 방식으로 보여주기
+		setPostListAttr( // 현재 로그인한 회원의 팔로들의 글 목록을 stack 방식으로 보여주기
 				model, 
 				"stack", 
 				postService.getPostList_followee( loginId(session) ), 
@@ -214,7 +226,7 @@ public class MainController {
 		MemberDTO dto = memberService.getMember_no(no);
 		//// 찾는 회원이 없는 경우 회원 없다는 페이지로 이동
 		if( dto == null ) return "post/profile_noMember";
-		model = postList( model, "stack", mapper.getPostList_writer( dto.getM_id() ), "profile" );// 해당 회원이 쓴 글 목록을 stack 방식으로 profile과 함께 보여주기
+		setPostListAttr( model, "stack", mapper.getPostList_writer( dto.getM_id() ), "profile" );// 해당 회원이 쓴 글 목록을 stack 방식으로 profile과 함께 보여주기
 		model.addAttribute("dto", dto);// 해당 회원 정보
 		return "post/postList";// 게시글 목록 페이지
 	}
@@ -318,7 +330,7 @@ public class MainController {
 			}else {
 				postList = mapper.searchTag(searchVal);// 검색결과 게시글 목록
 			}
-			model = postList( model, "album", postList, "searchInfo" );
+			setPostListAttr( model, "album", postList, "searchInfo" );
 			model.addAttribute("searchVal", searchVal);
 			return "post/postList";// 게시글 목록 페이지
 		}
@@ -329,7 +341,7 @@ public class MainController {
 			}else {
 				postList = mapper.searchPost(searchVal);// 검색결과 게시글 목록
 			}
-			model = postList( model, "album", postList, "searchInfo" );
+			setPostListAttr( model, "album", postList, "searchInfo" );
 			model.addAttribute("searchVal", searchVal);
 			return "post/postList";// 게시글 목록 페이지
 		}
@@ -338,11 +350,10 @@ public class MainController {
 	}
 	
 	//// postList return 공통사항
-	private Model postList( Model model, String postType, List<Integer> postList, String additional ) {
+	private void setPostListAttr( Model model, String postType, List<Integer> postList, String additional ) {
 		model.addAttribute("postList", postList);
 		model.addAttribute("postType", postType);// 이 페이지에서 게시글 목록을 보여줄 방식
 		model.addAttribute("additional", additional);// 이 페이지에서 [additional].html, css을 추가로 표시
-		return model;
 	}
 	
 	

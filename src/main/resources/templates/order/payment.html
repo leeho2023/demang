@@ -101,7 +101,7 @@ function requestPay() {
 				}
 			}).done(function (data) {
 				if( data == 'O'){
-					window.location.href = "/memberRead"; // 결제 성공 시 가는 페이지 (지금은 회원정보읽기페이지로 가본다)
+					window.location.href = "/orderlist"; // 결제 성공 시 결제목록으로 이동
 				}else{
 					alert('결제 실패');
 				}

@@ -157,16 +157,6 @@ public class PostServiceImpl implements PostService{
 	public List<PostDTO> postSearchAdmin(String search) {
 		return mapper.postSearchAdmin(search);
 	}
-	// 글에 있는 리뷰 개수 불러오기
-	@Override
-	public int postReviewList(int p_origin) {
-		return mapper.postReviewList(p_origin);
-	}
-	// 리뷰 불러오기
-	@Override
-	public List<PostDTO> postReviewShow(int p_origin) {
-		return mapper.postReviewShow(p_origin);
-	}
 	
 	
 

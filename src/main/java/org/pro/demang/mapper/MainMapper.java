@@ -83,9 +83,9 @@ public interface MainMapper {
 	int getMerAmount( int mer_id );// 상품 판매가능 수량 확인
 	void merchandiseInsert(MerchandiseDTO merDTO); // 상품 정보 등록
 	//// 리뷰
-	int postReviewList(int p_origin); // 글에 있는 리뷰 개수 불러오기
-	List<PostDTO> postReviewShow(int p_origin); // 리뷰 불러오기
-	boolean reViewCheck(int ord_target, int ord_buyer); // 리뷰 작성 전 구매자 확인
+	int getReviewNum(int p_origin); // 글에 있는 리뷰 개수 불러오기
+	List<Integer> getReviewList(int p_origin); // 리뷰 불러오기
+	boolean reViewCheck(int ord_target, int ord_buyer); // 특정 상품의 구매자인지 여부 확인
 	
 	
 	//// 주문 및 결제 관련

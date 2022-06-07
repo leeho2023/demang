@@ -172,23 +172,6 @@ public class SjhController {
 //			return "not found";
 //		}
 //	}
-	
-	// 리뷰 목록 개수 가져오기
-	@PostMapping("reViewList")
-	@ResponseBody
-	public int reViewList(@RequestParam("p_id") Integer p_origin) {
-		return postService.postReviewList(p_origin);
-	}
-	
-	// 리뷰 목록 불러오기
-	@PostMapping("reViewShow")
-	@ResponseBody
-	public List<PostDTO> reViewShow(@RequestParam("p_id") Integer p_origin) {
-		
-		List<PostDTO> dto = postService.postReviewShow(p_origin);
-		
-		return dto;
-	}
 
 	//// 현재 로그인한 회원 번호(정수) 가져오기 // 비로그인 상태일 경우 0으로
 	private static int loginId( HttpSession session ) {

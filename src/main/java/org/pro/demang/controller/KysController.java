@@ -43,6 +43,7 @@ public class KysController {
 		model.addAttribute( "backto", p_id );// 결제 완료 후 돌아갈 게시글 상세보기 페이지의 게시글 번호
 		return "order/order";
 	}
+	
 	//// 결제 페이지 (주문페이지에서 들어와서 새 주문 만들기)
 	@PostMapping("/payment")
 	String paymentPage_newOrder( OrderDTO dto, @RequestParam("backto")int p_id, Model model, RedirectAttributes rttr, HttpSession session ) {
