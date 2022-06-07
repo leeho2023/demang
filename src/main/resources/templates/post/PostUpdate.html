@@ -21,12 +21,7 @@
 <main><form action="/postUpdate" id="postForm" method="Post" enctype="multipart/form-data">
 	
 	<div th:if="${session.login} == ${post.p_writer}">
-		<!--/* 게시글 종류 입력 되신 수정이라고 보여주기만. 스타일 일치를 위해 요소는 그대로 쓴다. */-->
-		<div id="p_type">
-			<input type="hidden" name="p_id" th:value="${post.p_id}">	
-			<input type="radio" checked>
-			<label>게시글 수정</label>
-		</div>
+		<input type="hidden" name="p_id" th:value="${post.p_id}">
 		<button type="submit" class="tinyButton">수정하기</button>
 	</div>
 		
