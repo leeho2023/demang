@@ -352,4 +352,5 @@ public class MainController {
 		return Integer.parseInt( session.getAttribute("login")+"" );
 	}
 	
+	
 }
