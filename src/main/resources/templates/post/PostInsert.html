@@ -26,13 +26,13 @@
 		<!--/* 게시글 종류 */-->
 		<div id="p_type">
 			<th:block th:if="${p_type} == 'N'">
-				<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰 대상 게시글 번호">
 				<input type="radio" id="p_type_n" name="p_type" value="N" checked>
 				<label for="p_type_n">일반</label>
 				<input type="radio" id="p_type_s" name="p_type" value="S">
 				<label for="p_type_s">판매</label>
 			</th:block>
 			<th:block th:if="${p_type} == 'R'">
+				<input type="hidden" name="p_origin" th:value="${to}" placeholder="리뷰 대상 게시글 번호">
 				<input type="radio" id="p_type_r" name="p_type" value="R" checked>
 				<label for="p_type_r">리뷰</label>
 			</th:block>

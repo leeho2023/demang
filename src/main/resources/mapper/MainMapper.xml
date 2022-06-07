@@ -170,19 +170,19 @@
 	
 	
 	
-	<!-- 리뷰 작성 시 구매자 확인 -->
-	<select id="reViewCheck" resultType="boolean">
+	<!-- 특정 상품의 구매자인지 여부 확인 -->
+	<select id="reViewCheck" resultType="Boolean">
 		SELECT if(count(*) = 1, 1, 0) FROM orderTBL ot WHERE ord_target = #{ord_target} AND ord_buyer = #{ord_buyer} AND ord_state = 'O';
 	</select>
 	
 	<!-- 리뷰개수 가져오기 -->
-	<select id="postReviewList" resultType="integer">
+	<select id="getReviewNum" resultType="Integer">
 		SELECT count(*) FROM postTBL WHERE p_type = 'R' AND p_origin = #{p_origin}
 	</select>
 	
-	<!-- 리뷰 읽어오기 -->
-	<select id="postReviewShow" resultType="org.pro.demang.model.PostDTO">
-		SELECT * FROM postTBL Where p_type = 'R' AND p_origin = #{p_origin};
+	<!-- 특정 판매글의 리뷰들 목록 -->
+	<select id="getReviewList" resultType="Integer">
+		SELECT p_id FROM postTBL Where p_type = 'R' AND p_origin = #{p_origin};
 	</select>
 	
 	<!-- 게시글의 상품 목록 불러오기 -->
