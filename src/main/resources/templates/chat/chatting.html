@@ -18,7 +18,7 @@ form 메시지 보내기 폼
 
 <div class="chatDiv">
 	<div class="chatListener"><!--/* 상대 정보 */-->
-		<img th:src="${listener.profileImage}" class="profilePic">
+		<a th:href="'/vip?p='+${listener.m_id}" class="profilePic"><img th:src="${listener.profileImage}" class="profilePic"></a>
 		<h1><span th:text="${listener.m_nickname}"></span>#<span th:text="${listener.m_code}"></span></h1>
 	</div>
 	
