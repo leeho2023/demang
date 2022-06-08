@@ -362,6 +362,87 @@ img {
   }
 }
 
+/* 관리자 메인 페이지 */
+
+#home .homewrap{
+  /* border: 2px solid red; */
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.homewrap .adminHI{
+  /* border: 2px solid red; */
+}
+
+p.typing-txt{
+  display: none;
+}
+
+.typing {  
+/*position: absolute;*/ 
+  display: inline-block; 
+  color: black;
+  font-size: 60pt;
+  animation-name: cursor; 
+  animation-duration: 0.5s; 
+  animation-iteration-count: infinite; 
+ } 
+ @keyframes cursor{ 
+  0%{border-right: 1px solid #fff} 
+  50%{border-right: 1px solid #000} 
+  100%{border-right: 1px solid #fff} 
+}
+
+.homewrap .countwrap{
+  /* border: 2px solid violet; */
+  width: 45vw;
+  font-size: 18pt;
+  display: flex;
+  justify-content: space-around;
+}
+
+.countwrap .userCountwrap{
+  /* border: 2px solid blue; */
+  width: 15vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.count{
+  color: black;
+  font-size: 22pt;
+  font-weight: 700;
+}
+
+.countwrap .postCountwrap{
+  /* border: 2px solid blue; */
+  width: 15vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
+  }
+}
+
+.test_obj {
+  position: relative;
+  animation: fadeInUp 1s;
+}
+
+
 /* messages page */
 #messagewrap{
   /* border: 1px solid black; */
