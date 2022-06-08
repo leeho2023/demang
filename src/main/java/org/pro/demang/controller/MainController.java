@@ -195,6 +195,16 @@ public class MainController {
 		return "post/postItem_list";
 	}
 	
+	//// 추천회원 불러오기
+	@PostMapping("/memberRecommend")
+	public String memberRecommend( Model model ) {
+		model.addAttribute(
+				"memList", 
+				mapper.memberRecommend()
+				);
+		return "other/memberRecommend";
+	}
+	
 	//// 개인 피드
 	@GetMapping("/feed")
 	public String feed( Model model, HttpSession session ) {

@@ -46,6 +46,8 @@ public interface MainMapper {
 	List<MemberDTO> fList(int follower); // 특정 회원(번호)이 팔로우한 회원 목록
 	//// 탈퇴
 	void memberWithdraw(int loginId);
+	//// 기타
+	List<MemberDTO> memberRecommend();// 피드에 보여줄 회원 예시 목록
 	
 	
 	// 게시글 관련

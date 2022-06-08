@@ -113,6 +113,11 @@
 		f.follower = #{follower}
 	</select>
 	
+	<!-- 피드에 보여줄 회원 예시 목록 -->
+	<select id="memberRecommend" resultType="org.pro.demang.model.MemberDTO">
+	select * from memberTBL where m_id = 1 or m_id = 2 or m_id = 3 or m_id = 4 or m_id = 5 or m_id = 6
+	</select>
+	
 	<!-- 유저 검색 기능 쿼리문 -->
 	<select id="memberSearch" resultType="org.pro.demang.model.MemberDTO">
 		select * from memberTBL m where m_email like '%' #{reSearchVal} '%' or m_nickname like '%' #{reSearchVal} '%'

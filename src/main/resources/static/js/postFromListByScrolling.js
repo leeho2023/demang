@@ -19,6 +19,7 @@ $(function(){
 	//// ??? 화면 끝까지 닿일 때까지 반복하기
 	showPost();
 	showPost();
+	showMemberRecommend();// 추천회원
 	showPost();
 	showPost();
 	showPost();
@@ -47,7 +48,8 @@ function showPost(){
 }
 
 //// 글 번호를 통해 게시글 한 개 불러오기
-function getPost( no ){$.ajax({// no: 게시글 번호 p_id
+function getPost( no ){// no: 게시글 번호 p_id
+	$.ajax({
 		type: 'post',
 		url: 'getPost_'+postType,
 		async: false,// 결과가 정확히 최신순(목록에 있는 순)으로 나오도록 동기
@@ -58,6 +60,20 @@ function getPost( no ){$.ajax({// no: 게시글 번호 p_id
 			postDivInitialize( $('.post').last(), no );// 새로 만든 post 초기설정 (postView.js에 있다)
 		},error: function( data ){
 			console.log('게시글 불러오는 중 문제 발생 ― postFromListByScrolling.js');
+		}
+	});
+}
+
+function showMemberRecommend(){
+	$.ajax({
+		type: 'post',
+		url: 'memberRecommend',
+		async: false,
+		data:{
+		},success: function( data ){
+			$('section#postList').append(data);// 불러온 정보 붙이기
+		},error: function( data ){
+			console.log('추천회원 불러오는 중 문제 발생 ― postFromListByScrolling.js');
 		}
 	});
 }
