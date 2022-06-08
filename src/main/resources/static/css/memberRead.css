@@ -53,3 +53,13 @@ main {
 .details tr:nth-child(even) td{
 	background-color: var(--light2);
 }
+
+
+
+/* 탈퇴 양식 */
+#withdrawPWInput {
+	margin: 10px auto;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 10px;
+}

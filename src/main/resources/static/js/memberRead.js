@@ -2,15 +2,13 @@
 
 //// 탈퇴하기 버튼을 눌렀을 때
 function withdraw(){
-	let password = prompt('확인을 위해 비밀번호를 한 번 더 입력해 주십시오.');
-	if( password == null ) return;// 취소 누르면 아무것도 안 함
-	
-	//// 비밀번호를 넘겨주며 탈퇴 시도
-	// post 방식으로 넘겨주기 용도로 form 태그 만들기
-	$('body').append('<form id="withdrawForm" action="/withdraw" method="post">'
-		+'<input type="text" name="password" value="'+password+'">'
-		+'</form>');
-	// 제출
-	$('#withdrawForm').submit();
+	if( $('#withdrawPWInput').val() === '' ){// 탈퇴하기 버튼 처음 눌러서 비밀번호 입력란 드러내기
+		alert('확인을 위해 비밀번호를 한 번 더 입력해 주십시오.');
+		$('#withdrawForm').css('display', 'block');
+	}else{
+		if( confirm('계정 정보가 영구삭제됩니다. 정말 탈퇴하시겠습니까?') == false ) return;// 취소 누르면 아무것도 안 함
+		
+		$('#withdrawForm').submit();// 탈퇴 요청 제출
+	}
 }
 
