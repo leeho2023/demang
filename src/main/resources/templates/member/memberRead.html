@@ -8,7 +8,7 @@
 <!-- jQuery --><script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- 공통 --><script th:inline="javascript">sessionLogin = [[${session.login}]];</script><script src="js/globalScript.js"></script><script src="js/chatting.js"></script>
 <!-- font awesome kit code --><script src="https://kit.fontawesome.com/a958411779.js" crossorigin="anonymous"></script>
-<!-- font awesome kit code --><script src="js/memberRead.js"></script>
+<!-- 이 페이지 --><script src="js/memberRead.js"></script>
 
 <!-- css -->
 <!-- 공통 --><link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/globalFrame.css">
@@ -50,10 +50,13 @@
 		<tr><th>가입일</th><td th:text="${#dates.format(dto.m_regDate, 'yyyy-MM-dd')}"></td></tr>
 	</tbody></table>
 	
-	<div>
+	<div class="buttons">
 	<button onclick="location.href='/memberUpdate'" class="largeButton">수정하기</button>
 	<button onclick="location.href='/logout'" class="largeButton">로그아웃</button>
-	<button onclick="withdraw();" class="tinyButton">탈퇴하기</button>
+	<button id="withdrawBtn" onclick="withdraw();" class="tinyButton">탈퇴하기</button>
+	<form id="withdrawForm" action="/withdraw" method="post" style="display: none;">
+		<input id="withdrawPWInput" type="password" name="password" placeholder="비밀번호 입력 후 탈퇴버튼 다시 클릭">
+	</form>
 	</div>
 	
 </div></main>
