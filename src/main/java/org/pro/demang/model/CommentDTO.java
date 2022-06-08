@@ -40,24 +40,24 @@ public class CommentDTO {
 				getYear()+"년 "
 				+getMonth()+"월 " 
 				+ getC_regDate().getDate()+"일 "
-				+getC_regDate().getHours()+"시 "
-				+getC_regDate().getMinutes()+"분 ";
+				+getC_regDate().getHours()+":"
+				+getC_regDate().getMinutes();
 		if( now.getMonth()+1 != getMonth() )// 년도 같음, 월 다름: 월부터
 			return 
 				getMonth()+"월 " 
 				+ getDate()+"일 "
-				+getHours()+"시 "
-				+getMinutes()+"분 ";
+				+getHours()+":"
+				+getMinutes();
 		if( now.getDate() != getDate() )// 년,월도 같음, 일 다름: 일부터
 			return 
 				getDate()+"일 "
-				+getHours()+"시 "
-				+getMinutes()+"분 ";
+				+getHours()+":"
+				+getMinutes();
 		else
 			return 
 				"오늘 "
-				+getHours()+"시 "
-				+getMinutes()+"분 ";
+				+getHours()+":"
+				+getMinutes();
 	}
 	
 	public int getYear() {

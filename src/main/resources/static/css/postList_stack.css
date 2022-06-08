@@ -104,6 +104,13 @@
 	height: 30px;
 	width: 30px;
 }
+.commentList .nickname {
+	font-weight: bold;
+	color: var(--themeCol1);
+}
+.commentList .nickname::after {
+	content: '\00a0';
+}
 .commentList .regdate {
 	color: grey;
 }
